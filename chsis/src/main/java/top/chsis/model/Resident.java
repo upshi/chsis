@@ -1,7 +1,7 @@
 package top.chsis.model;
 
 public class Resident {
-	private Integer id;//唯一标识一个居民，主键
+	private String uuid;//唯一标识一个居民，主键
 	private String name;//姓名
 	private String password;//密码
 	private String sex;//性别

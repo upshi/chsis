@@ -1,7 +1,7 @@
 package top.chsis.model;
 
 public class ImmuneRecord {
-	private Integer id;//唯一标识一条预防免疫记录，主键
+	private String uuid;//唯一标识一条预防免疫记录，主键
 	private String immuneTime;//接种时间
 	private String vaccine;//疫苗
 	private String disease;//预防哪种病症
