@@ -129,6 +129,6 @@
 	</dependencies>
 	
 	<build>
-		<finalName>core</finalName>
+		<finalName>chsis</finalName>
 	</build>
 </project>
