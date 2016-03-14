@@ -1,11 +1,61 @@
 package top.chsis.model;
 
-public class ImmuneRecord {
+import java.io.Serializable;
+
+public class ImmuneRecord implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String uuid;//唯一标识一条预防免疫记录，主键
+	private Resident patient;//接种病人
 	private String immuneTime;//接种时间
-	private String vaccine;//疫苗
-	private String disease;//预防哪种病症
-	private Hospital hospital;//就诊医院医院
-	private Doctor doctor;//负责接种的医生
-	private Resident resident;//接种居民
+	private Hospital hospital;//接种医院
+	private String vaccine;//疫苗名称
+	
+	public ImmuneRecord() {}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public Resident getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Resident patient) {
+		this.patient = patient;
+	}
+
+	public String getImmuneTime() {
+		return immuneTime;
+	}
+
+	public void setImmuneTime(String immuneTime) {
+		this.immuneTime = immuneTime;
+	}
+
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+	public String getVaccine() {
+		return vaccine;
+	}
+
+	public void setVaccine(String vaccine) {
+		this.vaccine = vaccine;
+	}
+
+	@Override
+	public String toString() {
+		return "ImmuneRecord [uuid=" + uuid + ", patient=" + patient + ", immuneTime=" + immuneTime + ", hospital=" + hospital + ", vaccine=" + vaccine + "]";
+	}
+	
 }
