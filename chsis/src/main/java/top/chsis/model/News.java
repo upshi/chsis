@@ -8,14 +8,14 @@ public class News implements Serializable {
 	private String uuid;//唯一标识一条新闻，主键
 	private String title;//新闻标题
 	private String author;//作者
-	private Integer type;//类型：新闻的板块
+	private Integer type;//类型：新闻的板块 0医生板块、1系统管理员板块、2医院管理员板块
 	private String Content;//新闻内容
 	private String commitTime;//提交时间
 	private String checkTime;//审核时间
 	private String publishTime;//发布时间
 	private Integer state;//新闻的状态
 	private IUser publisher;//发布者
-	private Integer publisherType;//发布者类型
+	private Integer publisherType;//发布者类型：0医生、1医院管理员、2系统管理员
 	
 	public News() {}
 

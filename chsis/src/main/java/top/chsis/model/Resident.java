@@ -10,7 +10,7 @@ public class Resident implements IUser,Serializable {
 	private String userName;//用户名
 	private String password;//密码
 	private String name;//姓名	
-	private Integer sex;//性别：1男、0女
+	private Integer sex;//性别：0男、1女
 	private String idNo;//身份证号
 	private String nation;//民族
 	private String birth;//出生日期
