@@ -8,7 +8,7 @@ public class News implements Serializable {
 	private String uuid;//唯一标识一条新闻，主键
 	private String title;//新闻标题
 	private String author;//作者
-	private String type;//类型：新闻的板块
+	private Integer type;//类型：新闻的板块
 	private String Content;//新闻内容
 	private String commitTime;//提交时间
 	private String checkTime;//审核时间
@@ -43,11 +43,12 @@ public class News implements Serializable {
 		this.author = author;
 	}
 
-	public String getType() {
+
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
@@ -111,5 +112,5 @@ public class News implements Serializable {
 	public String toString() {
 		return "News [uuid=" + uuid + ", title=" + title + ", author=" + author + ", type=" + type + ", Content=" + Content + ", commitTime=" + commitTime + ", checkTime=" + checkTime + ", publishTime=" + publishTime + ", state=" + state + ", publisher=" + publisher + ", publisherType=" + publisherType + "]";
 	}
-	
+
 }

@@ -9,10 +9,10 @@ public class Family implements Serializable {
 	private String uuid;//唯一标识一个家庭，主键
 	private String number;//家庭编号
 	private String phone;//家庭电话
-	private List<Resident> members;//家庭成员
 	private String address;//家庭住址
 	private Resident householder;//户主
 	private Community community;//属于哪个社区
+	private List<Resident> members;//家庭成员
 	
 	public Family() {}
 
@@ -40,14 +40,6 @@ public class Family implements Serializable {
 		this.phone = phone;
 	}
 
-	public List<Resident> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<Resident> members) {
-		this.members = members;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -72,9 +64,17 @@ public class Family implements Serializable {
 		this.community = community;
 	}
 
+	public List<Resident> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Resident> members) {
+		this.members = members;
+	}
+
 	@Override
 	public String toString() {
-		return "Family [uuid=" + uuid + ", number=" + number + ", phone=" + phone + ", members=" + members + ", address=" + address + ", householder=" + householder + ", community=" + community + "]";
+		return "Family [uuid=" + uuid + ", number=" + number + ", phone=" + phone + ", address=" + address + ", householder=" + householder + ", community=" + community + ", members=" + members + "]";
 	}
-	
+
 }

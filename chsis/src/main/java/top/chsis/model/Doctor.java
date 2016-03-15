@@ -12,11 +12,11 @@ public class Doctor implements IUser, Serializable {
 	private String number;// 医生编号
 	private String name;// 姓名
 	private String photo;// 医生照片
-	private String sex;// 性别
-	private String phoneNo;// 电话
+	private Integer sex;// 性别：0男、1女
+	private String phone;// 电话
 	private Integer diploma;// 学历：0专科、1本科、2硕士、3博士、4博士后
 	private String description;// 个人描述
-	private String title;// 医生职称：0护士、1医师、2主治医师、3副主任医师、4主任医师
+	private Integer title;// 医生职称：0护士、1医师、2主治医师、3副主任医师、4主任医师
 	private Hospital hospital;// 所在医院
 	private Department department;// 所在科室
 
@@ -70,20 +70,20 @@ public class Doctor implements IUser, Serializable {
 		this.photo = photo;
 	}
 
-	public String getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Integer getDiploma() {
@@ -102,11 +102,11 @@ public class Doctor implements IUser, Serializable {
 		this.description = description;
 	}
 
-	public String getTitle() {
+	public Integer getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(Integer title) {
 		this.title = title;
 	}
 
@@ -128,7 +128,7 @@ public class Doctor implements IUser, Serializable {
 
 	@Override
 	public String toString() {
-		return "Doctor [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", number=" + number + ", name=" + name + ", photo=" + photo + ", sex=" + sex + ", phoneNo=" + phoneNo + ", diploma=" + diploma + ", description=" + description + ", title=" + title + ", hospital=" + hospital + ", department=" + department + "]";
+		return "Doctor [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", number=" + number + ", name=" + name + ", photo=" + photo + ", sex=" + sex + ", phone=" + phone + ", diploma=" + diploma + ", description=" + description + ", title=" + title + ", hospital=" + hospital + ", department=" + department + "]";
 	}
-	
+
 }

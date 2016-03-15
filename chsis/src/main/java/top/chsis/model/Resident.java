@@ -9,20 +9,20 @@ public class Resident implements IUser,Serializable {
 	private String uuid;//唯一标识一个居民，主键
 	private String userName;//用户名
 	private String password;//密码
-	private String name;//姓名
+	private String name;//姓名	
 	private Integer sex;//性别：1男、0女
 	private String idNo;//身份证号
 	private String nation;//民族
 	private String birth;//出生日期
 	private Integer age;//年龄
 	private Integer period;//年龄段：0婴幼儿、1儿童、2青少年、3青年、4中年、5中老年、6老年
-	private String phoneNo;//电话
+	private String phone;//电话
 	private Integer marriage;//婚姻状况:0未婚、1已婚、2离异
 	private String height;//身高
 	private String weight;//体重
 	private String eyesight;//视力：<左眼 右眼>
 	private Integer bloodType;//血型：0A、1B、2AB、3O
-	private List<MedicalHistory> medicalHistories;
+	private List<MedicalHistory> medicalHistories;//疾病史：遗传病史、重大疾病史、手术史、过敏史
 	private Family family;//家庭
 	
 	public Resident() {
@@ -109,12 +109,12 @@ public class Resident implements IUser,Serializable {
 		this.period = period;
 	}
 
-	public String getPhoneNo() {
-		return phoneNo;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Integer getMarriage() {
@@ -175,7 +175,7 @@ public class Resident implements IUser,Serializable {
 
 	@Override
 	public String toString() {
-		return "Resident [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", nation=" + nation + ", birth=" + birth + ", age=" + age + ", period=" + period + ", phoneNo=" + phoneNo + ", marriage=" + marriage + ", height=" + height + ", weight=" + weight + ", eyesight=" + eyesight + ", bloodType=" + bloodType + ", medicalHistories=" + medicalHistories + ", family=" + family + "]";
+		return "Resident [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", nation=" + nation + ", birth=" + birth + ", age=" + age + ", period=" + period + ", phone=" + phone + ", marriage=" + marriage + ", height=" + height + ", weight=" + weight + ", eyesight=" + eyesight + ", bloodType=" + bloodType + ", medicalHistories=" + medicalHistories + ", family=" + family + "]";
 	}
-	
+
 }

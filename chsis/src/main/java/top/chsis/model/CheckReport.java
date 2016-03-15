@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class CheckReport implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private String uuid;//唯一标识一条就诊结果，主键
+	private String uuid;//唯一标识一条检查报告，主键
 	private String name;//报告名称
 	private String description;//病情描述
 	private String time;//诊察时间

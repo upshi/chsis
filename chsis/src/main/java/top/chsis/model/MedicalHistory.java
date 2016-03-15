@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class MedicalHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String uuid;//唯一标识一个疾病、主键
-	private String name;//
-	private String type;
-	private String startTime;
-	private String endTime;
-	private String description;
-	private Resident patient;
+	private String uuid;//唯一标识一种疾病类型、主键
+	private String name;//疾病名称
+	private Integer type;//疾病类型:0遗传病史、1重大疾病史、2手术史、3过敏史
+	private String startTime;//开始时间
+	private String endTime;//痊愈时间
+	private String description;//病情描述
+	private Resident patient;//病人
 	
 	public MedicalHistory() {}
 
@@ -31,11 +31,11 @@ public class MedicalHistory implements Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
@@ -75,5 +75,5 @@ public class MedicalHistory implements Serializable {
 	public String toString() {
 		return "MedicalHistory [uuid=" + uuid + ", name=" + name + ", type=" + type + ", startTime=" + startTime + ", endTime=" + endTime + ", description=" + description + ", patient=" + patient + "]";
 	}
-	
+
 }
