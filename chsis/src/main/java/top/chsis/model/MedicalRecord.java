@@ -15,6 +15,7 @@ public class MedicalRecord implements Serializable {
 	private List<CheckReport> reports;//检查报告
 	private String disease;//疾病名称
 	private String result;//就诊结果：描述，开了啥药~
+	private Integer state;//就诊记录的状态：0未检查、1检查中、2已检查
 	
 	public MedicalRecord() {}
 
@@ -90,9 +91,17 @@ public class MedicalRecord implements Serializable {
 		this.result = result;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", hospital=" + hospital + ", department=" + department + ", doctor=" + doctor + ", reports=" + reports + ", disease=" + disease + ", result=" + result + "]";
+		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", hospital=" + hospital + ", department=" + department + ", doctor=" + doctor + ", reports=" + reports + ", disease=" + disease + ", result=" + result + ", state=" + state + "]";
 	}
-	
+
 }

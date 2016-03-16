@@ -13,7 +13,7 @@ public class News implements Serializable {
 	private String commitTime;//提交时间
 	private String checkTime;//审核时间
 	private String publishTime;//发布时间
-	private Integer state;//新闻的状态
+	private Integer state;//新闻的状态：0已提交、1审核中、2审核通过、3审核不通过
 	private IUser publisher;//发布者
 	private Integer publisherType;//发布者类型：0医生、1医院管理员、2系统管理员
 	

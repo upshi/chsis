@@ -11,6 +11,7 @@ public class CheckReport implements Serializable{
 	private String time;//诊察时间
 	private Resident patient;//就诊病人
 	private Hospital hospital;//就诊医院
+	private Integer state;//检查报告的状态：0未检查、1检查中、2已检查
 	
 	public CheckReport() {}
 
@@ -62,9 +63,17 @@ public class CheckReport implements Serializable{
 		this.hospital = hospital;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + "]";
+		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + ", state=" + state + "]";
 	}
-	
+
 }

@@ -10,6 +10,7 @@ public class ImmuneRecord implements Serializable {
 	private String immuneTime;//接种时间
 	private Hospital hospital;//接种医院
 	private String vaccine;//疫苗名称
+	private Integer state;//预防免疫记录的状态：0未检查、1检查中、2已检查
 	
 	public ImmuneRecord() {}
 
@@ -53,9 +54,17 @@ public class ImmuneRecord implements Serializable {
 		this.vaccine = vaccine;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "ImmuneRecord [uuid=" + uuid + ", patient=" + patient + ", immuneTime=" + immuneTime + ", hospital=" + hospital + ", vaccine=" + vaccine + "]";
+		return "ImmuneRecord [uuid=" + uuid + ", patient=" + patient + ", immuneTime=" + immuneTime + ", hospital=" + hospital + ", vaccine=" + vaccine + ", state=" + state + "]";
 	}
-	
+
 }
