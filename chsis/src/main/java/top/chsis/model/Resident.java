@@ -3,7 +3,7 @@ package top.chsis.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Resident implements IUser,Serializable {
+public class Resident implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String uuid;//唯一标识一个居民，主键
@@ -22,7 +22,6 @@ public class Resident implements IUser,Serializable {
 	private String weight;//体重
 	private String eyesight;//视力：<左眼 右眼>
 	private Integer bloodType;//血型：0A、1B、2AB、3O
-	private List<MedicalHistory> medicalHistories;//疾病史：遗传病史、重大疾病史、手术史、过敏史
 	private Family family;//家庭
 	
 	public Resident() {
@@ -157,14 +156,6 @@ public class Resident implements IUser,Serializable {
 		this.bloodType = bloodType;
 	}
 
-	public List<MedicalHistory> getMedicalHistories() {
-		return medicalHistories;
-	}
-
-	public void setMedicalHistories(List<MedicalHistory> medicalHistories) {
-		this.medicalHistories = medicalHistories;
-	}
-
 	public Family getFamily() {
 		return family;
 	}
@@ -175,7 +166,7 @@ public class Resident implements IUser,Serializable {
 
 	@Override
 	public String toString() {
-		return "Resident [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", nation=" + nation + ", birth=" + birth + ", age=" + age + ", period=" + period + ", phone=" + phone + ", marriage=" + marriage + ", height=" + height + ", weight=" + weight + ", eyesight=" + eyesight + ", bloodType=" + bloodType + ", medicalHistories=" + medicalHistories + ", family=" + family + "]";
+		return "Resident [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", nation=" + nation + ", birth=" + birth + ", age=" + age + ", period=" + period + ", phone=" + phone + ", marriage=" + marriage + ", height=" + height + ", weight=" + weight + ", eyesight=" + eyesight + ", bloodType=" + bloodType + ", family=" + family + "]";
 	}
 
 }

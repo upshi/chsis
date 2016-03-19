@@ -1,7 +1,6 @@
 package top.chsis.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Family implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,9 +9,8 @@ public class Family implements Serializable {
 	private String number;//家庭编号
 	private String phone;//家庭电话
 	private String address;//家庭住址
-	private Resident householder;//户主
+	private String householderUUID;//户主
 	private Community community;//属于哪个社区
-	private List<Resident> members;//家庭成员
 	
 	public Family() {}
 
@@ -48,12 +46,12 @@ public class Family implements Serializable {
 		this.address = address;
 	}
 
-	public Resident getHouseholder() {
-		return householder;
+	public String getHouseholderUUID() {
+		return householderUUID;
 	}
 
-	public void setHouseholder(Resident householder) {
-		this.householder = householder;
+	public void setHouseholderUUID(String householderUUID) {
+		this.householderUUID = householderUUID;
 	}
 
 	public Community getCommunity() {
@@ -64,17 +62,9 @@ public class Family implements Serializable {
 		this.community = community;
 	}
 
-	public List<Resident> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<Resident> members) {
-		this.members = members;
-	}
-
 	@Override
 	public String toString() {
-		return "Family [uuid=" + uuid + ", number=" + number + ", phone=" + phone + ", address=" + address + ", householder=" + householder + ", community=" + community + ", members=" + members + "]";
+		return "Family [uuid=" + uuid + ", number=" + number + ", phone=" + phone + ", address=" + address + ", householderUUID=" + householderUUID + ", community=" + community + "]";
 	}
 
 }

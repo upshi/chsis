@@ -4,18 +4,21 @@ import java.io.Serializable;
 
 public class Log implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private String uuid;
-	private IUser user;
+	private String user;
 	private Integer userType;
 	private String time;
 	private String operation;
 	private String detail;
+	private Integer state;
 	
 	public Log() {
 		super();
 	}
 
-	public Log(String uuid, IUser user, Integer userType, String time, String operation, String detail) {
+	public Log(String uuid, String user, Integer userType, String time, String operation, String detail, Integer state) {
 		super();
 		this.uuid = uuid;
 		this.user = user;
@@ -23,6 +26,7 @@ public class Log implements Serializable{
 		this.time = time;
 		this.operation = operation;
 		this.detail = detail;
+		this.state = state;
 	}
 
 	public String getUuid() {
@@ -33,11 +37,11 @@ public class Log implements Serializable{
 		this.uuid = uuid;
 	}
 
-	public IUser getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(IUser user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 
@@ -73,9 +77,17 @@ public class Log implements Serializable{
 		this.detail = detail;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "Log [uuid=" + uuid + ", user=" + user + ", userType=" + userType + ", time=" + time + ", operation=" + operation + ", detail=" + detail + "]";
+		return "Log [uuid=" + uuid + ", user=" + user + ", userType=" + userType + ", time=" + time + ", operation=" + operation + ", detail=" + detail + ", state=" + state + "]";
 	}
-	
+
 }

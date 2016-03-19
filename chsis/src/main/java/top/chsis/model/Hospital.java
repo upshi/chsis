@@ -11,7 +11,6 @@ public class Hospital implements Serializable{
 	private String name;//医院名称
 	private String address;//医院地址
 	private String description;//医院描述
-	private List<Department> departments;//医院含有的科室
 	
 	public Hospital() {}
 
@@ -55,17 +54,9 @@ public class Hospital implements Serializable{
 		this.description = description;
 	}
 
-	public List<Department> getDepartments() {
-		return departments;
-	}
-
-	public void setDepartments(List<Department> departments) {
-		this.departments = departments;
-	}
-
 	@Override
 	public String toString() {
-		return "Hospital [uuid=" + uuid + ", number=" + number + ", name=" + name + ", address=" + address + ", description=" + description + ", departments=" + departments + "]";
+		return "Hospital [uuid=" + uuid + ", number=" + number + ", name=" + name + ", address=" + address + ", description=" + description +  "]";
 	}
 
 }

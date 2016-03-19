@@ -2,7 +2,7 @@ package top.chsis.model;
 
 import java.io.Serializable;
 
-public class MedicalHistory implements Serializable {
+public class DiseaseHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String uuid;//唯一标识一种疾病类型、主键
@@ -13,7 +13,7 @@ public class MedicalHistory implements Serializable {
 	private String description;//病情描述
 	private Resident patient;//病人
 	
-	public MedicalHistory() {}
+	public DiseaseHistory() {}
 
 	public String getUuid() {
 		return uuid;

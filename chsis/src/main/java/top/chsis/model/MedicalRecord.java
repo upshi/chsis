@@ -9,8 +9,6 @@ public class MedicalRecord implements Serializable {
 	private String uuid;//唯一标识一条就诊记录，主键
 	private Resident patient;//就诊病人
 	private String time;//就诊时间
-	private Hospital hospital;//就诊医院
-	private Department department;//所挂科室
 	private Doctor doctor;//主诊医生
 	private List<CheckReport> reports;//检查报告
 	private String disease;//疾病名称
@@ -43,21 +41,6 @@ public class MedicalRecord implements Serializable {
 		this.time = time;
 	}
 
-	public Hospital getHospital() {
-		return hospital;
-	}
-
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
-	}
-
-	public Department getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
 
 	public Doctor getDoctor() {
 		return doctor;
@@ -101,7 +84,7 @@ public class MedicalRecord implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", hospital=" + hospital + ", department=" + department + ", doctor=" + doctor + ", reports=" + reports + ", disease=" + disease + ", result=" + result + ", state=" + state + "]";
+		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", doctor=" + doctor + ", reports=" + reports + ", disease=" + disease + ", result=" + result + ", state=" + state + "]";
 	}
 
 }

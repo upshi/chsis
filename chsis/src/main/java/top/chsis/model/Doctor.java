@@ -1,9 +1,8 @@
 package top.chsis.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class Doctor implements IUser, Serializable {
+public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String uuid;// 唯一标识一个医生，主键
@@ -17,10 +16,26 @@ public class Doctor implements IUser, Serializable {
 	private Integer diploma;// 学历：0专科、1本科、2硕士、3博士、4博士后
 	private String description;// 个人描述
 	private Integer title;// 医生职称：0护士、1医师、2主治医师、3副主任医师、4主任医师
-	private Hospital hospital;// 所在医院
 	private Department department;// 所在科室
 
 	public Doctor() {}
+
+	public Doctor(String uuid, String userName, String password, String number, String name, String photo, Integer sex, String phone, Integer diploma, String description, Integer title, Department department) {
+		super();
+		this.uuid = uuid;
+		this.userName = userName;
+		this.password = password;
+		this.number = number;
+		this.name = name;
+		this.photo = photo;
+		this.sex = sex;
+		this.phone = phone;
+		this.diploma = diploma;
+		this.description = description;
+		this.title = title;
+		this.department = department;
+	}
+
 
 	public String getUuid() {
 		return uuid;
@@ -110,14 +125,6 @@ public class Doctor implements IUser, Serializable {
 		this.title = title;
 	}
 
-	public Hospital getHospital() {
-		return hospital;
-	}
-
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
-	}
-
 	public Department getDepartment() {
 		return department;
 	}
@@ -128,7 +135,7 @@ public class Doctor implements IUser, Serializable {
 
 	@Override
 	public String toString() {
-		return "Doctor [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", number=" + number + ", name=" + name + ", photo=" + photo + ", sex=" + sex + ", phone=" + phone + ", diploma=" + diploma + ", description=" + description + ", title=" + title + ", hospital=" + hospital + ", department=" + department + "]";
+		return "Doctor [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", number=" + number + ", name=" + name + ", photo=" + photo + ", sex=" + sex + ", phone=" + phone + ", diploma=" + diploma + ", description=" + description + ", title=" + title + ", department=" + department + "]";
 	}
 
 }

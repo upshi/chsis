@@ -5,13 +5,14 @@ import java.io.Serializable;
 public class CheckReport implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private String uuid;//唯一标识一条检查报告，主键
+	private String uuid;//唯一标识一条检查报告，主键 
 	private String name;//报告名称
 	private String description;//病情描述
 	private String time;//诊察时间
 	private Resident patient;//就诊病人
 	private Hospital hospital;//就诊医院
 	private Integer state;//检查报告的状态：0未检查、1检查中、2已检查
+	private String url;//检查报告单存放路径
 	
 	public CheckReport() {}
 
@@ -71,9 +72,17 @@ public class CheckReport implements Serializable{
 		this.state = state;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
-		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + ", state=" + state + "]";
+		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + ", state=" + state + ", url=" + url + "]";
 	}
 
 }

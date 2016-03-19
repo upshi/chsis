@@ -14,7 +14,7 @@ public class News implements Serializable {
 	private String checkTime;//审核时间
 	private String publishTime;//发布时间
 	private Integer state;//新闻的状态：0已提交、1审核中、2审核通过、3审核不通过
-	private IUser publisher;//发布者
+	private String publisherUUID;//发布者
 	private Integer publisherType;//发布者类型：0医生、1医院管理员、2系统管理员
 	
 	public News() {}
@@ -92,12 +92,12 @@ public class News implements Serializable {
 		this.state = state;
 	}
 
-	public IUser getPublisher() {
-		return publisher;
+	public String getPublisherUUID() {
+		return publisherUUID;
 	}
 
-	public void setPublisher(IUser publisher) {
-		this.publisher = publisher;
+	public void setPublisherUUID(String publisherUUID) {
+		this.publisherUUID = publisherUUID;
 	}
 
 	public Integer getPublisherType() {
@@ -110,7 +110,7 @@ public class News implements Serializable {
 
 	@Override
 	public String toString() {
-		return "News [uuid=" + uuid + ", title=" + title + ", author=" + author + ", type=" + type + ", Content=" + Content + ", commitTime=" + commitTime + ", checkTime=" + checkTime + ", publishTime=" + publishTime + ", state=" + state + ", publisher=" + publisher + ", publisherType=" + publisherType + "]";
+		return "News [uuid=" + uuid + ", title=" + title + ", author=" + author + ", type=" + type + ", Content=" + Content + ", commitTime=" + commitTime + ", checkTime=" + checkTime + ", publishTime=" + publishTime + ", state=" + state + ", publisherUUID=" + publisherUUID + ", publisherType=" + publisherType + "]";
 	}
 
 }
