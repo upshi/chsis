@@ -70,8 +70,8 @@
       <if test="state != null" >
         state,
       </if>
-      <if test="publisher_uuid != null" >
-        publisher_uuid,
+      <if test="publisherUUID != null" >
+        publisherUUID,
       </if>
       <if test="publisherType != null" >
         publisherType,
@@ -105,8 +105,8 @@
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
       </if>
-      <if test="publisher_uuid != null" >
-        #{publisher_uuid,jdbcType=VARCHAR},
+      <if test="publisherUUID != null" >
+        #{publisherUUID,jdbcType=VARCHAR},
       </if>
       <if test="publisherType != null" >
         #{publisherType,jdbcType=INTEGER},
@@ -140,8 +140,8 @@
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
       </if>
-      <if test="publisher_uuid != null" >
-        publisher_uuid = #{publisher_uuid,jdbcType=VARCHAR},
+      <if test="publisherUUID != null" >
+        publisher_uuid = #{publisherUUID,jdbcType=VARCHAR},
       </if>
       <if test="publisherType != null" >
         publisherType = #{publisherType,jdbcType=INTEGER},
@@ -150,20 +150,6 @@
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where uuid = #{uuid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.chsis.model.News" >
-    update t_news
-    set title = #{title,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      commitTime = #{commitTime,jdbcType=VARCHAR},
-      checkTime = #{checkTime,jdbcType=VARCHAR},
-      publishTime = #{publishTime,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      publisher_uuid = #{publisher_uuid,jdbcType=VARCHAR},
-      publisherType = #{publisherType,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="top.chsis.model.News" >
@@ -175,8 +161,9 @@
       checkTime = #{checkTime,jdbcType=VARCHAR},
       publishTime = #{publishTime,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
-      publisher_uuid = #{publisher_uuid,jdbcType=VARCHAR},
-      publisherType = #{publisherType,jdbcType=INTEGER}
+      publisher_uuid = #{publisherUUID,jdbcType=VARCHAR},
+      publisherType = #{publisherType,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

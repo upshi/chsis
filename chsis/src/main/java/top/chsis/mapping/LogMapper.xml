@@ -8,7 +8,7 @@
     <result column="operation" property="operation" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
-    <association column="user_uuid" property="user" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR"></association>
+    <result column="user_uuid" property="userUUID" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     uuid, user_uuid, userType, time, operation, state
@@ -32,7 +32,7 @@
     insert into t_log (uuid, user_uuid, userType, 
       time, operation, state, 
       detail)
-    values (#{uuid,jdbcType=VARCHAR}, #{user_uuid,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
+    values (#{uuid,jdbcType=VARCHAR}, #{userUUID,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
       #{time,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{detail,jdbcType=LONGVARCHAR})
   </insert>
@@ -42,8 +42,8 @@
       <if test="uuid != null" >
         uuid,
       </if>
-      <if test="user_uuid != null" >
-        user_uuid,
+      <if test="userUUID != null" >
+        userUUID,
       </if>
       <if test="userType != null" >
         userType,
@@ -65,8 +65,8 @@
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="user_uuid != null" >
-        #{user_uuid,jdbcType=VARCHAR},
+      <if test="userUUID != null" >
+        #{userUUID,jdbcType=VARCHAR},
       </if>
       <if test="userType != null" >
         #{userType,jdbcType=INTEGER},
@@ -88,8 +88,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="top.chsis.model.Log" >
     update t_log
     <set >
-      <if test="user_uuid != null" >
-        user_uuid = #{user_uuid,jdbcType=VARCHAR},
+      <if test="userUUID != null" >
+        user_uuid = #{userUUID,jdbcType=VARCHAR},
       </if>
       <if test="userType != null" >
         userType = #{userType,jdbcType=INTEGER},
@@ -109,23 +109,14 @@
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.chsis.model.Log" >
+  <update id="updateByPrimaryKey" parameterType="top.chsis.model.Log" >
     update t_log
-    set user_uuid = #{user_uuid,jdbcType=VARCHAR},
+    set user_uuid = #{userUUID,jdbcType=VARCHAR},
       userType = #{userType,jdbcType=INTEGER},
       time = #{time,jdbcType=VARCHAR},
       operation = #{operation,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       detail = #{detail,jdbcType=LONGVARCHAR}
-    where uuid = #{uuid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="top.chsis.model.Log" >
-    update t_log
-    set user_uuid = #{user_uuid,jdbcType=VARCHAR},
-      userType = #{userType,jdbcType=INTEGER},
-      time = #{time,jdbcType=VARCHAR},
-      operation = #{operation,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

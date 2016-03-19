@@ -52,7 +52,7 @@
       #{birth,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, 
       #{phone,jdbcType=VARCHAR}, #{marriage,jdbcType=INTEGER}, #{height,jdbcType=VARCHAR}, 
       #{weight,jdbcType=VARCHAR}, #{eyesight,jdbcType=VARCHAR}, #{bloodType,jdbcType=INTEGER}, 
-      #{family_uuid,jdbcType=VARCHAR})
+      #{family.uuid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.chsis.model.Resident" >
     insert into t_resident
@@ -105,8 +105,8 @@
       <if test="bloodType != null" >
         bloodType,
       </if>
-      <if test="family_uuid != null" >
-        family_uuid,
+      <if test="family != null" >
+        family.uuid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -158,8 +158,8 @@
       <if test="bloodType != null" >
         #{bloodType,jdbcType=INTEGER},
       </if>
-      <if test="family_uuid != null" >
-        #{family_uuid,jdbcType=VARCHAR},
+      <if test="family != null" >
+        #{family.uuid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,8 +211,8 @@
       <if test="bloodType != null" >
         bloodType = #{bloodType,jdbcType=INTEGER},
       </if>
-      <if test="family_uuid != null" >
-        family_uuid = #{family_uuid,jdbcType=VARCHAR},
+      <if test="family != null" >
+        family_uuid = #{family.uuid,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
@@ -234,7 +234,7 @@
       weight = #{weight,jdbcType=VARCHAR},
       eyesight = #{eyesight,jdbcType=VARCHAR},
       bloodType = #{bloodType,jdbcType=INTEGER},
-      family_uuid = #{family_uuid,jdbcType=VARCHAR}
+      family_uuid = #{family.uuid,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

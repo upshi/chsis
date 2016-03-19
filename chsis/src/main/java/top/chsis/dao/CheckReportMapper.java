@@ -17,6 +17,8 @@ public interface CheckReportMapper {
     List<CheckReport> selectCheckReportsByPatientUUID(String patientUUID);
 
     List<CheckReport> selectCheckReportsByHospitalUUID(String hospitalUUID);
+
+    List<CheckReport> selectCheckReportsByMedicalRecordUUID(String medicalrecordUUID);
     
     int updateByPrimaryKeySelective(CheckReport record);
 

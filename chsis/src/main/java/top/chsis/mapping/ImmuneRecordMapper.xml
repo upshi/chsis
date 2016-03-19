@@ -23,6 +23,12 @@
     from t_immunerecord
     where patient_uuid = #{patientUUID,jdbcType=VARCHAR}
   </select>
+  <select id="selectImmuneRecordsByHospitalUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_immunerecord
+    where hospital_uuid = #{hospitalUUID,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_immunerecord
     where uuid = #{uuid,jdbcType=VARCHAR}
@@ -30,8 +36,8 @@
   <insert id="insert" parameterType="top.chsis.model.ImmuneRecord" >
     insert into t_immunerecord (uuid, patient_uuid, immuneTime, 
       hospital_uuid, vaccine)
-    values (#{uuid,jdbcType=VARCHAR}, #{patient_uuid,jdbcType=VARCHAR}, #{immuneTime,jdbcType=VARCHAR}, 
-      #{hospital_uuid,jdbcType=VARCHAR}, #{vaccine,jdbcType=VARCHAR})
+    values (#{uuid,jdbcType=VARCHAR}, #{patient.uuid,jdbcType=VARCHAR}, #{immuneTime,jdbcType=VARCHAR}, 
+      #{hospital.uuid,jdbcType=VARCHAR}, #{vaccine,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.chsis.model.ImmuneRecord" >
     insert into t_immunerecord
@@ -39,14 +45,14 @@
       <if test="uuid != null" >
         uuid,
       </if>
-      <if test="patient_uuid != null" >
-        patient_uuid,
+      <if test="patient != null" >
+        patient.uuid,
       </if>
       <if test="immuneTime != null" >
         immuneTime,
       </if>
-      <if test="hospital_uuid != null" >
-        hospital_uuid,
+      <if test="hospital != null" >
+        hospital.uuid,
       </if>
       <if test="vaccine != null" >
         vaccine,
@@ -57,13 +63,13 @@
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="patient_uuid != null" >
-        #{patient_uuid,jdbcType=VARCHAR},
+        #{patient.uuid,jdbcType=VARCHAR},
       </if>
       <if test="immuneTime != null" >
         #{immuneTime,jdbcType=VARCHAR},
       </if>
       <if test="hospital_uuid != null" >
-        #{hospital_uuid,jdbcType=VARCHAR},
+        #{hospital.uuid,jdbcType=VARCHAR},
       </if>
       <if test="vaccine != null" >
         #{vaccine,jdbcType=VARCHAR},
@@ -73,14 +79,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="top.chsis.model.ImmuneRecord" >
     update t_immunerecord
     <set >
-      <if test="patient_uuid != null" >
-        patient_uuid = #{patient_uuid,jdbcType=VARCHAR},
+      <if test="patient != null" >
+        patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       </if>
       <if test="immuneTime != null" >
         immuneTime = #{immuneTime,jdbcType=VARCHAR},
       </if>
-      <if test="hospital_uuid != null" >
-        hospital_uuid = #{hospital_uuid,jdbcType=VARCHAR},
+      <if test="hospital != null" >
+        hospital_uuid = #{hospital.uuid,jdbcType=VARCHAR},
       </if>
       <if test="vaccine != null" >
         vaccine = #{vaccine,jdbcType=VARCHAR},
@@ -90,9 +96,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="top.chsis.model.ImmuneRecord" >
     update t_immunerecord
-    set patient_uuid = #{patient_uuid,jdbcType=VARCHAR},
+    set patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       immuneTime = #{immuneTime,jdbcType=VARCHAR},
-      hospital_uuid = #{hospital_uuid,jdbcType=VARCHAR},
+      hospital_uuid = #{hospital.uuid,jdbcType=VARCHAR},
       vaccine = #{vaccine,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>

@@ -48,8 +48,8 @@
     insert into t_medicalrecord (uuid, patient_uuid, time, 
       doctor_uuid, disease, state, 
       result)
-    values (#{uuid,jdbcType=VARCHAR}, #{patient_uuid,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
-      #{doctor_uuid,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+    values (#{uuid,jdbcType=VARCHAR}, #{patient.uuid,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{doctor.uuid,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{result,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.chsis.model.MedicalRecord" >
@@ -58,14 +58,14 @@
       <if test="uuid != null" >
         uuid,
       </if>
-      <if test="patient_uuid != null" >
-        patient_uuid,
+      <if test="patient != null" >
+        patient.uuid,
       </if>
       <if test="time != null" >
         time,
       </if>
-      <if test="doctor_uuid != null" >
-        doctor_uuid,
+      <if test="doctor != null" >
+        doctor.uuid,
       </if>
       <if test="disease != null" >
         disease,
@@ -81,14 +81,14 @@
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="patient_uuid != null" >
-        #{patient_uuid,jdbcType=VARCHAR},
+      <if test="patient != null" >
+        #{patient.uuid,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         #{time,jdbcType=VARCHAR},
       </if>
-      <if test="doctor_uuid != null" >
-        #{doctor_uuid,jdbcType=VARCHAR},
+      <if test="doctor != null" >
+        #{doctor.uuid,jdbcType=VARCHAR},
       </if>
       <if test="disease != null" >
         #{disease,jdbcType=VARCHAR},
@@ -104,14 +104,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="top.chsis.model.MedicalRecord" >
     update t_medicalrecord
     <set >
-      <if test="patient_uuid != null" >
-        patient_uuid = #{patient_uuid,jdbcType=VARCHAR},
+      <if test="patient != null" >
+        patient.uuid = #{patient_uuid,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         time = #{time,jdbcType=VARCHAR},
       </if>
-      <if test="doctor_uuid != null" >
-        doctor_uuid = #{doctor_uuid,jdbcType=VARCHAR},
+      <if test="doctor != null" >
+        doctor.uuid = #{doctor_uuid,jdbcType=VARCHAR},
       </if>
       <if test="disease != null" >
         disease = #{disease,jdbcType=VARCHAR},
@@ -125,23 +125,14 @@
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.chsis.model.MedicalRecord" >
+  <update id="updateByPrimaryKey" parameterType="top.chsis.model.MedicalRecord" >
     update t_medicalrecord
-    set patient_uuid = #{patient_uuid,jdbcType=VARCHAR},
+    set patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR},
-      doctor_uuid = #{doctor_uuid,jdbcType=VARCHAR},
+      doctor_uuid = #{doctor.uuid,jdbcType=VARCHAR},
       disease = #{disease,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       result = #{result,jdbcType=LONGVARCHAR}
-    where uuid = #{uuid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="top.chsis.model.MedicalRecord" >
-    update t_medicalrecord
-    set patient_uuid = #{patient_uuid,jdbcType=VARCHAR},
-      time = #{time,jdbcType=VARCHAR},
-      doctor_uuid = #{doctor_uuid,jdbcType=VARCHAR},
-      disease = #{disease,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

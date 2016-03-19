@@ -31,15 +31,70 @@ public class TestNews {
 		news.setAuthor("ranran");
 		news.setCheckTime("2016.03.16");
 		news.setCommitTime("2016.03.15");
-		news.setContent("很多事萨克大街上看见了深刻的尽快落实到进口商及付款了坚实的房间开");
+		news.setContent("坚实的房间开");
 		news.setPublisherUUID("1");
-		news.setPublishTime("20160318");
+		news.setPublishTime("20150318");
 		news.setPublisherType(0);
 		news.setState(2);
 		news.setType(2);
 		
 		int insert = newsMapper.insert(news);
 		System.out.println(insert);
+	}
+	@Test
+	public void testInsertSelective() {
+		News news = new News();
+		
+		news.setUuid(StringUtil.getUUID());
+		news.setTitle("外科新闻");
+		news.setAuthor("ranran");
+		news.setCheckTime("2016.03.16");
+		news.setCommitTime("2016.03.15");
+		news.setContent("坚实的房间开");
+		news.setPublisherUUID("1");
+		news.setPublishTime("20150318");
+		news.setPublisherType(0);
+		news.setState(2);
+		news.setType(2);
+		
+		int insert = newsMapper.insert(news);
+		System.out.println(insert);
+	}
+	
+	@Test
+	public void testUpdate() {
+		News news = newsMapper.selectByPrimaryKey("1");
+		news.setAuthor("王文静");
+		news.setCheckTime("2015.5");
+		news.setCommitTime("2015.4");
+		news.setContent("么有大事");
+		news.setPublisherType(1);
+		news.setPublisherUUID("1");
+		news.setPublishTime("2015.6");
+		news.setState(1);
+		news.setTitle("妇产科");
+		int update = newsMapper.updateByPrimaryKey(news);
+		System.out.println(update);
+	}
+	@Test
+	public void testupdateByPrimaryKeySelective() {
+		News news = newsMapper.selectByPrimaryKey("967ca9c416ee4c16ba9f473a18b8210e");
+		news.setAuthor("王文静");
+		news.setCheckTime("2015.5");
+		news.setCommitTime("2015.4");
+		news.setContent("么有大事");
+		news.setPublisherType(1);
+		news.setPublisherUUID("1");
+		news.setPublishTime("2015.6");
+		news.setState(1);
+		news.setTitle("妇产科");
+		int update = newsMapper.updateByPrimaryKey(news);
+		System.out.println(update);
+	}
+	@Test
+	public void testDelete() {
+		int delete = newsMapper.deleteByPrimaryKey("e8ae1b90d48843e9bcc11261c3fe8b1a");
+		System.out.println(delete);
 	}
 
 }

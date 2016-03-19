@@ -14,6 +14,8 @@ public interface ImmuneRecordMapper {
     ImmuneRecord selectByPrimaryKey(String uuid);
     
     List<ImmuneRecord> selectImmuneRecordsByPatientUUID(String patientUUID);
+    
+    List<ImmuneRecord> selectImmuneRecordsByHospitalUUID(String hospitalUUID);
 
     int updateByPrimaryKeySelective(ImmuneRecord record);
 

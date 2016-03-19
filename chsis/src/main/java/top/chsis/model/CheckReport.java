@@ -11,6 +11,7 @@ public class CheckReport implements Serializable{
 	private String time;//诊察时间
 	private Resident patient;//就诊病人
 	private Hospital hospital;//就诊医院
+	private MedicalRecord medicalRecord;//就诊记录：一个就诊记录对应多个检查报告
 	private Integer state;//检查报告的状态：0未检查、1检查中、2已检查
 	private String url;//检查报告单存放路径
 	
@@ -64,6 +65,14 @@ public class CheckReport implements Serializable{
 		this.hospital = hospital;
 	}
 
+	public MedicalRecord getMedicalRecord() {
+		return medicalRecord;
+	}
+
+	public void setMedicalRecord(MedicalRecord medicalRecord) {
+		this.medicalRecord = medicalRecord;
+	}
+
 	public Integer getState() {
 		return state;
 	}
@@ -82,7 +91,7 @@ public class CheckReport implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + ", state=" + state + ", url=" + url + "]";
+		return "CheckReport [uuid=" + uuid + ", name=" + name + ", description=" + description + ", time=" + time + ", patient=" + patient + ", hospital=" + hospital + ", medicalRecord=" + medicalRecord + ", state=" + state + ", url=" + url + "]";
 	}
 
 }

@@ -1,5 +1,7 @@
 package top.chsis.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +85,9 @@ public class TestDoctor {
 		int delete = doctorMapper.deleteByPrimaryKey("b7c9107ff1244dafa1a3a77bfc6f2f52");
 		System.out.println(delete);
 	}
-
+	@Test
+	public void testSelectDoctorsByDepartmentUUID() {
+		List<Doctor> doctors = doctorMapper.selectDoctorsByDepartmentUUID("1");
+		System.err.println(doctors);
+	}
 }

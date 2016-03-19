@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import top.chsis.model.CheckReport;
 import top.chsis.model.Family;
 import top.chsis.model.Hospital;
+import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
 import top.chsis.util.StringUtil;
 
@@ -38,10 +39,15 @@ public class TestCheckReport {
 		System.out.println(checkReports);
 	}
 	@Test
+	public void testSelectCheckReportsByMedicalRecordUUID() {
+		List<CheckReport> checkReports = checkReportMapper.selectCheckReportsByMedicalRecordUUID("1");
+		System.out.println(checkReports);
+	}
+	@Test
 	public void testInsert() {
 		CheckReport checkReport = new CheckReport();
 		checkReport.setUuid(StringUtil.getUUID());
-		checkReport.setDescription("就诊报告");
+		checkReport.setDescription("qqqqqqq就诊报告");
 		Hospital hospital = new Hospital();
 		hospital.setUuid("1");
 		checkReport.setHospital(hospital);
@@ -66,15 +72,19 @@ public class TestCheckReport {
 		checkReport.setState(1);
 		checkReport.setTime("20161111");
 		checkReport.setUrl("21");
-		checkReportMapper.insert(checkReport);
-		System.out.println(checkReport);
+		
+		MedicalRecord medicalRecord = new MedicalRecord();
+		medicalRecord.setUuid("1");
+		checkReport.setMedicalRecord(medicalRecord);
+		int insert = checkReportMapper.insert(checkReport);
+		System.out.println(insert);
 	}
 	
 	@Test
 	public void testInsertSelective(){
 		CheckReport checkReport = new CheckReport();
 		checkReport.setUuid(StringUtil.getUUID());
-		checkReport.setDescription("就诊报告");
+		checkReport.setDescription("wwwww就诊报告");
 		Hospital hospital = new Hospital();
 		hospital.setUuid("1");
 		checkReport.setHospital(hospital);
@@ -99,20 +109,24 @@ public class TestCheckReport {
 		checkReport.setState(1);
 		checkReport.setTime("20161111");
 		checkReport.setUrl("21");
-		checkReportMapper.insert(checkReport);
-		System.out.println(checkReport);
+		
+		MedicalRecord medicalRecord = new MedicalRecord();
+		medicalRecord.setUuid("1");
+		checkReport.setMedicalRecord(medicalRecord);
+		int insert = checkReportMapper.insert(checkReport);
+		System.out.println(insert);
 	}
 	@Test
 	public void testUpdate() {
 		CheckReport checkReport = checkReportMapper.selectByPrimaryKey("1");
-		checkReport.setName("冉冉");
+		checkReport.setName("ww冉冉");
 		int update = checkReportMapper.updateByPrimaryKey(checkReport);
 		System.out.println(update);
 	}
 	@Test
 	public void testUpdateByPrimaryKeySelective() {
 		CheckReport checkReport = checkReportMapper.selectByPrimaryKey("1");
-		checkReport.setName("冉冉123");
+		checkReport.setName("123冉冉123");
 		int update = checkReportMapper.updateByPrimaryKeySelective(checkReport);
 		System.out.println(update);
 	}

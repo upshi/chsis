@@ -7,7 +7,7 @@ public class Log implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String uuid;
-	private String user;
+	private String userUUID;
 	private Integer userType;
 	private String time;
 	private String operation;
@@ -18,17 +18,6 @@ public class Log implements Serializable{
 		super();
 	}
 
-	public Log(String uuid, String user, Integer userType, String time, String operation, String detail, Integer state) {
-		super();
-		this.uuid = uuid;
-		this.user = user;
-		this.userType = userType;
-		this.time = time;
-		this.operation = operation;
-		this.detail = detail;
-		this.state = state;
-	}
-
 	public String getUuid() {
 		return uuid;
 	}
@@ -37,12 +26,12 @@ public class Log implements Serializable{
 		this.uuid = uuid;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUserUUID() {
+		return userUUID;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUserUUID(String userUUID) {
+		this.userUUID = userUUID;
 	}
 
 	public Integer getUserType() {
@@ -87,7 +76,7 @@ public class Log implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Log [uuid=" + uuid + ", user=" + user + ", userType=" + userType + ", time=" + time + ", operation=" + operation + ", detail=" + detail + ", state=" + state + "]";
+		return "Log [uuid=" + uuid + ", userUUID=" + userUUID + ", userType=" + userType + ", time=" + time + ", operation=" + operation + ", detail=" + detail + ", state=" + state + "]";
 	}
 
 }

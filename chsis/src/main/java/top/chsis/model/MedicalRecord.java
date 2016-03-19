@@ -10,7 +10,6 @@ public class MedicalRecord implements Serializable {
 	private Resident patient;//就诊病人
 	private String time;//就诊时间
 	private Doctor doctor;//主诊医生
-	private List<CheckReport> reports;//检查报告
 	private String disease;//疾病名称
 	private String result;//就诊结果：描述，开了啥药~
 	private Integer state;//就诊记录的状态：0未检查、1检查中、2已检查
@@ -50,14 +49,6 @@ public class MedicalRecord implements Serializable {
 		this.doctor = doctor;
 	}
 
-	public List<CheckReport> getReports() {
-		return reports;
-	}
-
-	public void setReports(List<CheckReport> reports) {
-		this.reports = reports;
-	}
-
 	public String getDisease() {
 		return disease;
 	}
@@ -84,7 +75,7 @@ public class MedicalRecord implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", doctor=" + doctor + ", reports=" + reports + ", disease=" + disease + ", result=" + result + ", state=" + state + "]";
+		return "MedicalRecord [uuid=" + uuid + ", patient=" + patient + ", time=" + time + ", doctor=" + doctor + ", disease=" + disease + ", result=" + result + ", state=" + state + "]";
 	}
 
 }

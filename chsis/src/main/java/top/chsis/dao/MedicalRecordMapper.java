@@ -19,7 +19,5 @@ public interface MedicalRecordMapper {
     
     int updateByPrimaryKeySelective(MedicalRecord record);
 
-    int updateByPrimaryKeyWithBLOBs(MedicalRecord record);
-
     int updateByPrimaryKey(MedicalRecord record);
 }

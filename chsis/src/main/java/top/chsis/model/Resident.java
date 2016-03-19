@@ -28,6 +28,27 @@ public class Resident implements Serializable {
 		super();
 	}
 
+	public Resident(String uuid, String userName, String password, String name, Integer sex, String idNo, String nation, String birth, Integer age, Integer period, String phone, Integer marriage, String height, String weight, String eyesight, Integer bloodType, Family family) {
+		super();
+		this.uuid = uuid;
+		this.userName = userName;
+		this.password = password;
+		this.name = name;
+		this.sex = sex;
+		this.idNo = idNo;
+		this.nation = nation;
+		this.birth = birth;
+		this.age = age;
+		this.period = period;
+		this.phone = phone;
+		this.marriage = marriage;
+		this.height = height;
+		this.weight = weight;
+		this.eyesight = eyesight;
+		this.bloodType = bloodType;
+		this.family = family;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}
