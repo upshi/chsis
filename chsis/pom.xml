@@ -90,6 +90,13 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		
+		<!-- mybatis-pagehelper -->
+		<dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
 
 		<!-- mysql-connector-java -->
 		<dependency>
