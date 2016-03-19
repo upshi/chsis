@@ -33,7 +33,7 @@ public class TestDisease {
 	}
 	
 	@Test
-	public void testSelectDepartmentsByHospitalUUID() {
+	public void testSelectDiseaseHistoriesByPatientUUID() {
 		 List<DiseaseHistory> diseaseHistories= diseaseHistoryMapper.selectDiseaseHistoriesByPatientUUID("1");
 		 System.out.println(diseaseHistories);
 	}
