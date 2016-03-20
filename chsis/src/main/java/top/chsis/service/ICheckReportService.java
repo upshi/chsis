@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.CheckReport;
 
-public interface ICheckReportMapperService {
+public interface ICheckReportService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(CheckReport record);

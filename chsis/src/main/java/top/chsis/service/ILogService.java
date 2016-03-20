@@ -2,7 +2,7 @@ package top.chsis.service;
 
 import top.chsis.model.Log;
 
-public interface ILogMapperService {
+public interface ILogService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Log record);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.Family;
 
-public interface IFamilyMapperService {
+public interface IFamilyService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Family record);

@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.HospitalMapper;
 import top.chsis.model.Hospital;
-import top.chsis.service.IHospitalMapperService;
+import top.chsis.service.IHospitalService;
 
 @Service("hospitalService")
 
-public class HospitalMapperServiceImpl implements IHospitalMapperService{
+public class HospitalServiceImpl implements IHospitalService{
 	@Autowired
 	private HospitalMapper hospitalMapper;
 	

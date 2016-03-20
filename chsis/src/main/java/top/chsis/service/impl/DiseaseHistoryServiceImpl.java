@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.DiseaseHistoryMapper;
 import top.chsis.model.DiseaseHistory;
-import top.chsis.service.IDiseaseHistoryMapperService;
+import top.chsis.service.IDiseaseHistoryService;
 
 @Service("diseaseHistoryService")
-public class DiseaseHistoryMapperServiceImpl implements IDiseaseHistoryMapperService {
+public class DiseaseHistoryServiceImpl implements IDiseaseHistoryService {
 
 	@Autowired
 	private DiseaseHistoryMapper diseaseHistoryMapper;

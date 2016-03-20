@@ -9,7 +9,7 @@ import top.chsis.dao.FamilyMapper;
 import top.chsis.model.Family;
 
 @Service("familyService")
-public class FamilyMapperServiceImpl implements FamilyMapper {
+public class FamilyServiceImpl implements FamilyMapper {
 
 	@Autowired
 	private FamilyMapper familyMapper;

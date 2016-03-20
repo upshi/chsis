@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.MedicalRecord;
 
-public interface IMedicalRecordMapperService {
+public interface IMedicalRecordService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(MedicalRecord record);

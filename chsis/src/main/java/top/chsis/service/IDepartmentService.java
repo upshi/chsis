@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.Department;
 
-public interface IDepartmentMapperService {
+public interface IDepartmentService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Department record);

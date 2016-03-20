@@ -7,7 +7,7 @@ import top.chsis.dao.ManagerMapper;
 import top.chsis.model.Manager;
 
 @Service("managerService")
-public class IManagerMapperServiceImpl implements ManagerMapper {
+public class ManagerServiceImpl implements ManagerMapper {
 	@Autowired
 	private ManagerMapper managerMapper;
 	

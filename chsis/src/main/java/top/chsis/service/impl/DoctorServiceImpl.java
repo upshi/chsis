@@ -9,7 +9,7 @@ import top.chsis.dao.DoctorMapper;
 import top.chsis.model.Doctor;
 
 @Service("doctorService")
-public class DoctorMapperServiceImpl implements DoctorMapper {
+public class DoctorServiceImpl implements DoctorMapper {
 	@Autowired
 	private DoctorMapper doctorMapper;
 	

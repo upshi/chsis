@@ -7,7 +7,7 @@ import top.chsis.dao.NewsMapper;
 import top.chsis.model.News;
 
 @Service("newsService")
-public class NewsMapperServiceImpl implements NewsMapper {
+public class NewsServiceImpl implements NewsMapper {
 	@Autowired
 	private NewsMapper newsMapper;
 	

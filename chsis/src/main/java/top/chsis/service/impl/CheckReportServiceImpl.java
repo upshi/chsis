@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.CheckReportMapper;
 import top.chsis.model.CheckReport;
-import top.chsis.service.ICheckReportMapperService;
+import top.chsis.service.ICheckReportService;
 
 @Service("checkReportService")
-public class CheckReportMapperServiceImpl implements ICheckReportMapperService {
+public class CheckReportServiceImpl implements ICheckReportService {
 	
 	@Autowired
 	private CheckReportMapper checkReportMapper;

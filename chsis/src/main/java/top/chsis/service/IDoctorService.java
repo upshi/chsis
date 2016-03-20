@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.Doctor;
 
-public interface IDoctorMapperService {
+public interface IDoctorService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Doctor record);

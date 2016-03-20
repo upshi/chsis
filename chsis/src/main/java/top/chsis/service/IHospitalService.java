@@ -2,7 +2,7 @@ package top.chsis.service;
 
 import top.chsis.model.Hospital;
 
-public interface IHospitalMapperService {
+public interface IHospitalService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Hospital record);

@@ -7,7 +7,7 @@ import top.chsis.dao.LogMapper;
 import top.chsis.model.Log;
 
 @Service("logService")
-public class LogMapperServiceImpl implements LogMapper {
+public class LogServiceImpl implements LogMapper {
 	@Autowired
 	private LogMapper logMapper;
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.DiseaseHistory;
 
-public interface IDiseaseHistoryMapperService {
+public interface IDiseaseHistoryService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(DiseaseHistory record);

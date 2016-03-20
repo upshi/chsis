@@ -4,7 +4,7 @@ import java.util.List;
 
 import top.chsis.model.ImmuneRecord;
 
-public interface IImmuneRecordMapperService {
+public interface IImmuneRecordService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(ImmuneRecord record);

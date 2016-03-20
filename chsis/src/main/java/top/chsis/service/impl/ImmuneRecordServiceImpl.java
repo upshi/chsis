@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.ImmuneRecordMapper;
 import top.chsis.model.ImmuneRecord;
-import top.chsis.service.IImmuneRecordMapperService;
+import top.chsis.service.IImmuneRecordService;
 
 @Service("immuneRecordService")
-public class ImmuneRecordMapperServiceImpl implements IImmuneRecordMapperService {
+public class ImmuneRecordServiceImpl implements IImmuneRecordService {
 
 	@Autowired
 	private ImmuneRecordMapper immuneRecordMapper;

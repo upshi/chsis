@@ -2,7 +2,7 @@ package top.chsis.service;
 
 import top.chsis.model.Community;
 
-public interface ICommunityMapperService {
+public interface ICommunityService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Community record);

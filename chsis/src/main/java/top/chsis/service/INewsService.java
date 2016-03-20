@@ -2,7 +2,7 @@ package top.chsis.service;
 
 import top.chsis.model.News;
 
-public interface INewsMapperService {
+public interface INewsService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(News record);

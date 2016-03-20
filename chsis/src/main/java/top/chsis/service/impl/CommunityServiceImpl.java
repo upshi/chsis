@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.CommunityMapper;
 import top.chsis.model.Community;
-import top.chsis.service.ICommunityMapperService;
+import top.chsis.service.ICommunityService;
 
 @Service("communityService")
-public class CommunityMapperServiceImpl implements ICommunityMapperService {
+public class CommunityServiceImpl implements ICommunityService {
 	@Autowired
 	private CommunityMapper  communityMapper;
 	

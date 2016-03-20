@@ -9,7 +9,7 @@ import top.chsis.dao.DepartmentMapper;
 import top.chsis.model.Department;
 
 @Service("departmentService")
-public class DepartmentMapperServiceImpl implements DepartmentMapper {
+public class DepartmentServiceImpl implements DepartmentMapper {
 
 	@Autowired
 	private DepartmentMapper departmentMapper;

@@ -2,7 +2,7 @@ package top.chsis.service;
 
 import top.chsis.model.Manager;
 
-public interface IManagerMapperService {
+public interface IManagerService {
 	int deleteByPrimaryKey(String uuid);
 
     int insert(Manager record);
