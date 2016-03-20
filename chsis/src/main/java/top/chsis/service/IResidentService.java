@@ -2,12 +2,11 @@ package top.chsis.service;
 
 import java.util.List;
 
-import top.chsis.exception.ResidentException;
 import top.chsis.model.Resident;
 
 public interface IResidentService {
 
-	int deleteByPrimaryKey(String uuid) throws ResidentException;
+	int deleteByPrimaryKey(String uuid);
 
 	int insert(Resident record);
 

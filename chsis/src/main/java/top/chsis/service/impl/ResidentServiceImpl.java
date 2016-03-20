@@ -2,12 +2,10 @@ package top.chsis.service.impl;
 
 import java.util.List;
 
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import top.chsis.dao.ResidentMapper;
-import top.chsis.exception.ResidentException;
 import top.chsis.model.Resident;
 import top.chsis.service.IResidentService;
 
@@ -18,13 +16,9 @@ public class ResidentServiceImpl implements IResidentService {
 	private ResidentMapper residentMapper;
 	
 
-	public int deleteByPrimaryKey(String uuid) throws ResidentException {
+	public int deleteByPrimaryKey(String uuid) {
 		int result = residentMapper.deleteByPrimaryKey(uuid);
-		if(result == 1) {
-			return 1;
-		} else {
-			throw new ResidentException("您删除的用户不存在"); 
-		} 
+		return result;
 	}
 
 	public int insert(Resident record) {
