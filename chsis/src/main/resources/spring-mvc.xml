@@ -21,6 +21,7 @@
 	<mvc:resources location="/css/" mapping="/css/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/image/" mapping="/image/**" />
+	<mvc:resources location="/chsis/" mapping="/chsis/**" />
 	
 	<!-- 开始   配置支持返回JSON数据 -->
 	<bean id="mappingJacksonHttpMessageConverter"

@@ -1,7 +1,6 @@
 package top.chsis.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Resident implements Serializable {
 	private static final long serialVersionUID = 1L;
