@@ -14,14 +14,15 @@
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 
 	<mvc:annotation-driven />
 	
-	<mvc:resources location="/css/" mapping="/css/**" />
-	<mvc:resources location="/js/" mapping="/js/**" />
-	<mvc:resources location="/image/" mapping="/image/**" />
+	<mvc:resources location="/assets/css/" mapping="/assets/css/**" />
+	<mvc:resources location="/assets/js/" mapping="/assets/js/**" />
+	<mvc:resources location="/assets/image/" mapping="/assets/image/**" />
 	<mvc:resources location="/chsis/" mapping="/chsis/**" />
+	<mvc:resources location="/" mapping="/**" />
 	
 	<!-- 开始   配置支持返回JSON数据 -->
 	<bean id="mappingJacksonHttpMessageConverter"

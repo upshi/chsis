@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.FamilyMapper;
 import top.chsis.model.Family;
+import top.chsis.service.IFamilyService;
 
 @Service("familyService")
-public class FamilyServiceImpl implements FamilyMapper {
+public class FamilyServiceImpl implements IFamilyService {
 
 	@Autowired
 	private FamilyMapper familyMapper;

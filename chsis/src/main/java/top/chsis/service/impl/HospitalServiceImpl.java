@@ -1,10 +1,15 @@
 package top.chsis.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import top.chsis.dao.HospitalManagerMapper;
 import top.chsis.dao.HospitalMapper;
+import top.chsis.dao.ManagerMapper;
 import top.chsis.model.Hospital;
+import top.chsis.model.HospitalManager;
 import top.chsis.service.IHospitalService;
 
 @Service("hospitalService")
@@ -13,7 +18,17 @@ public class HospitalServiceImpl implements IHospitalService{
 	@Autowired
 	private HospitalMapper hospitalMapper;
 	
+	@Autowired
+	private HospitalManagerMapper hospitalManagerMapper;
+	
+	@Autowired
+	private ManagerMapper managerMapper;
+	
 	public int deleteByPrimaryKey(String uuid) {
+		List<HospitalManager> hospitalManagers = hospitalManagerMapper.selectByHospitalUuid(uuid);
+		for(HospitalManager hm : hospitalManagers) {
+			managerMapper.deleteByPrimaryKey(hm.getManager().getUuid());
+		}
 		return hospitalMapper.deleteByPrimaryKey(uuid);
 	}
 
@@ -35,6 +50,14 @@ public class HospitalServiceImpl implements IHospitalService{
 
 	public int updateByPrimaryKey(Hospital record) {
 		return hospitalMapper.updateByPrimaryKey(record);
+	}
+
+	public List<Hospital> selectAll() {
+		return hospitalMapper.selectAll();
+	}
+
+	public Hospital selectByNumber(String number) {
+		return hospitalMapper.selectByNumber(number);
 	}
 
 }

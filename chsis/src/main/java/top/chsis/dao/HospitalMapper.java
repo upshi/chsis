@@ -1,5 +1,7 @@
 package top.chsis.dao;
 
+import java.util.List;
+
 import top.chsis.model.Hospital;
 
 public interface HospitalMapper {
@@ -10,8 +12,12 @@ public interface HospitalMapper {
     int insertSelective(Hospital record);
 
     Hospital selectByPrimaryKey(String uuid);
+    
+    Hospital selectByNumber(String number);
 
     int updateByPrimaryKeySelective(Hospital record);
 
     int updateByPrimaryKey(Hospital record);
+    
+    List<Hospital> selectAll();
 }

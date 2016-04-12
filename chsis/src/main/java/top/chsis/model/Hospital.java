@@ -1,7 +1,6 @@
 package top.chsis.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Hospital implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -13,6 +12,10 @@ public class Hospital implements Serializable{
 	private String description;//医院描述
 	
 	public Hospital() {}
+
+	public Hospital(String hospitalUuid) {
+		this.uuid = hospitalUuid;
+	}
 
 	public String getUuid() {
 		return uuid;

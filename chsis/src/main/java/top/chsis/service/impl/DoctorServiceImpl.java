@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.DoctorMapper;
 import top.chsis.model.Doctor;
+import top.chsis.service.IDoctorService;
 
 @Service("doctorService")
-public class DoctorServiceImpl implements DoctorMapper {
+public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	private DoctorMapper doctorMapper;
 	

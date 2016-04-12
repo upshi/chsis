@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.NewsMapper;
 import top.chsis.model.News;
+import top.chsis.service.INewsService;
 
 @Service("newsService")
-public class NewsServiceImpl implements NewsMapper {
+public class NewsServiceImpl implements INewsService {
 	@Autowired
 	private NewsMapper newsMapper;
 	

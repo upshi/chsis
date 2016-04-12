@@ -15,7 +15,17 @@
   <sql id="Blob_Column_List" >
     description
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hospital
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -23,10 +33,20 @@
     from t_hospital
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hospital
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_hospital
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.Hospital" >
     insert into t_hospital (uuid, number, name, 
       address, description)

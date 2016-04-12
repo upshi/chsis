@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.LogMapper;
 import top.chsis.model.Log;
+import top.chsis.service.ILogService;
 
 @Service("logService")
-public class LogServiceImpl implements LogMapper {
+public class LogServiceImpl implements ILogService {
 	@Autowired
 	private LogMapper logMapper;
 	

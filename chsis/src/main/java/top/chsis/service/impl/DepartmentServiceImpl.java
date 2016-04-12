@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.DepartmentMapper;
 import top.chsis.model.Department;
+import top.chsis.service.IDepartmentService;
 
 @Service("departmentService")
-public class DepartmentServiceImpl implements DepartmentMapper {
+public class DepartmentServiceImpl implements IDepartmentService {
 
 	@Autowired
 	private DepartmentMapper departmentMapper;

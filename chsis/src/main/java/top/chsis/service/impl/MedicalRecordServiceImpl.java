@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.MedicalRecord;
+import top.chsis.service.IMedicalRecordService;
 
 @Service("medicalRecordService")
-public class MedicalRecordServiceImpl implements MedicalRecordMapper {
+public class MedicalRecordServiceImpl implements IMedicalRecordService {
 
 	@Autowired
 	private MedicalRecordMapper medicalRecordMapper;

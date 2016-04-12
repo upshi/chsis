@@ -12,22 +12,33 @@
   <sql id="Base_Column_List" >
     uuid, userName, password, name, phone, type
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_manager
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_manager
+    where userName = #{userName,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_manager
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.Manager" >
     insert into t_manager (uuid, userName, password, 
       name, phone, type)
     values (#{uuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER})
   </insert>
+  
   <insert id="insertSelective" parameterType="top.chsis.model.Manager" >
     insert into t_manager
     <trim prefix="(" suffix=")" suffixOverrides="," >
