@@ -16,7 +16,7 @@ function onAddHospital() {
 	$("textarea[name='description']").html('');
 	
 	//绑定input元素失去焦点事件
-	$('#addh-numberGroup').on('blur', checkNumber_add);
+	$('#addh-number').on('blur', checkNumber_add);
 	$('#addh-name').on('blur', checkName_add);
 	$('#addh-address').on('blur', checkAddress_add);
 	$('#addh-description').on('blur', checkDescription_add);
@@ -59,14 +59,14 @@ function checkNumber_add() {
 			dataType : "json" ,
 			success : function(data) {
 				if(data.result == "exist") {
-					$('#addm-userNameGroup').removeClass('has-success');
-					$('#addm-userNameGroup').addClass('has-error');
-					$('#addm-userNameGroup .help-block').html('医院编号已存在');
+					$('#addh-numberGroup').removeClass('has-success');
+					$('#addh-numberGroup').addClass('has-error');
+					$('#addh-numberGroup .help-block').html('医院编号已存在');
 					return false;
 				} else {
-					$('#addm-userNameGroup').removeClass('has-error');
-					$('#addm-userNameGroup').addClass('has-success');
-					$('#addm-userNameGroup .help-block').html('');
+					$('#addh-numberGroup').removeClass('has-error');
+					$('#addh-numberGroup').addClass('has-success');
+					$('#addh-numberGroup .help-block').html('');
 					return true;
 				}
 			} 

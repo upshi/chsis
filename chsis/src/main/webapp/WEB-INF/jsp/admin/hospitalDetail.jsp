@@ -108,8 +108,6 @@
 					</div>
 				</div>
 				<!-- panel end -->
-
-
 			</div>
 		<!--body wrapper end-->
 
@@ -261,6 +259,5 @@
     <!-- Custome Javascript -->
     <script src="assets/js/admin/hospitalDetail.js"></script>
     
-	
 </body>
 </html>

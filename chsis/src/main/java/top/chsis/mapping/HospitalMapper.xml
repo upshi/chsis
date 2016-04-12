@@ -22,7 +22,7 @@
     ,
     <include refid="Blob_Column_List" />
     from t_hospital
-    where number = #{number,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   
   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -31,7 +31,7 @@
     ,
     <include refid="Blob_Column_List" />
     from t_hospital
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where number = #{number,jdbcType=VARCHAR}
   </select>
   
   <select id="selectAll" resultMap="BaseResultMap">
