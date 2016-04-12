@@ -47,8 +47,8 @@
 			<hr>
 			<!-- manager start -->
 			<li><a href="admin/hospital"><i class="fa fa-home"></i> <span>医院管理</span></a></li>
-			<li><a href="manager/manageFamily.jsp"><i class="fa fa-home"></i> <span>管理家庭</span></a></li>
-			<li><a href="manager/manageResident.jsp"><i class="fa fa-home"></i> <span>管理居民</span></a></li>
+			<li><a href="manager/manageFamily.jsp"><i class="fa fa-home"></i> <span>家庭管理</span></a></li>
+			<li><a href="manager/manageResident.jsp"><i class="fa fa-home"></i> <span>居民管理</span></a></li>
 			<li><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- manager end -->
 			<hr>

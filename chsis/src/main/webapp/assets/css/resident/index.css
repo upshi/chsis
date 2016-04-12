@@ -90,6 +90,13 @@ table p {
 .infoList button {
     margin-left:20px;
 }
+.breadcrumb {
+    background-color: #ffffff;
+    border-radius: 4px;
+    list-style: outside none none;
+    margin-bottom: 20px;
+    padding: 8px 15px;
+}
 .blank {
     height:10px;
 }

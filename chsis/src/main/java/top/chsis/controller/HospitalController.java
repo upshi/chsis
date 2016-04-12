@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
-import top.chsis.model.Manager;
 import top.chsis.service.IHospitalManagerService;
 import top.chsis.service.IHospitalService;
 import top.chsis.util.StringUtil;

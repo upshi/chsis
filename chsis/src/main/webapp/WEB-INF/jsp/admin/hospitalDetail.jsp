@@ -38,80 +38,73 @@
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
 					<li><a href="admin/hospital">医院管理</a></li>
-					<li class="active">医院详请</li>
+					<li class="active">${hospital.name }详情</li>
 				</ul>
-				<!-- panel start -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							${hospital.name }<span class="tools pull-right"> <a class="fa fa-chevron-down" href="javascript:;"></a>
-							</span>
-						</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<section class="panel">
+							<header class="panel-heading">
+								<b>医院编号：</b>${hospital.number }
+							</header>
+							<header class="panel-heading">
+								<b>医院名称：</b>${hospital.name }
+							</header>
+							<header class="panel-heading">
+								<b>医院地址：</b>${hospital.address }
+							</header>
+						</section>
+						<section class="panel">
+							<header class="panel-heading">
+								<b>医院描述：</b>
+							</header>
+							<div class="panel-body">
+								<p>${hospital.description }</p>
+							</div>
+						</section>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-sm-4 col-sm-offset-1">
-								<h4>
-									<b>医院编号：</b>${hospital.number }
-								</h4>
-							</div>
-							<div class="col-sm-5">
-								<h4>
-									<b>医院名称：</b>${hospital.name }
-								</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-2 text-right">
-								<h4>
-									<b>医院地址：</b>
-								</h4>
-							</div>
-							<div class="col-sm-8 text-left">
-								<h4>${hospital.address }</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-2 col-sm-offset-1">
-								<h4>
-									<b>医院描述：</b>
-								</h4>
-							</div>
-							<div class="col-sm-8">
-								<h4>${hospital.description }</h4>
-							</div>
-						</div>
-						
-						<h2 class="t-due">
-							医院管理员信息&nbsp;
-							<button class="btn btn-warning btn-add-manager" uuid="${hospital.uuid }">添加医院管理员</button>
-						</h2>
-						<table class="table table-bordered table-responsive table-hover">
-							<tr class="info">
-								<th>用户名</th>
-								<th>姓名</th>
-								<th>电话</th>
-								<th>操作</th>
-							</tr>
-							<c:forEach items="${hospitalManagers }" var="hospitalManager" varStatus="index">
-								<tr>
-									<td>${hospitalManager.manager.userName }</td>
-									<td>${hospitalManager.manager.name }</td>
-									<td>${hospitalManager.manager.phone }</td>
-									<td>
-										<button class="btn btn-danger btn-sm deleteHospitalManager" onclick="deleteHospital('${hospitalManager.manager.uuid}')">删除</button>
-										<button class="btn btn-info btn-sm" data-target="#hospitalManagerDetail" data-toggle="modal" uuid="${hospitalManager.manager.uuid }">修改</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-				<!-- panel end -->
-			</div>
-		<!--body wrapper end-->
 
-		<!--footer section start-->
+					<div class="col-sm-6">
+						<!-- panel start -->
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									医院管理员信息
+									<span class="tools pull-right">
+										<button class="btn btn-warning pull-left btn-add-manager" uuid="${hospital.uuid }">添加医院管理员</button>
+										<a class="fa fa-chevron-down" href="javascript:;"></a>
+									</span>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<table class="table table-bordered table-responsive table-hover">
+									<tr class="info">
+										<th>用户名</th>
+										<th>姓名</th>
+										<th>电话</th>
+										<th>操作</th>
+									</tr>
+									<c:forEach items="${hospitalManagers }" var="hospitalManager" varStatus="index">
+										<tr>
+											<td>${hospitalManager.manager.userName }</td>
+											<td>${hospitalManager.manager.name }</td>
+											<td>${hospitalManager.manager.phone }</td>
+											<td>
+												<button class="btn btn-danger btn-sm deleteHospitalManager" onclick="deleteHospitalManager('${hospitalManager.manager.uuid}','${hospital.uuid}')">删除</button>
+												<button class="btn btn-info btn-sm btn-edit-hospitalManager" uuid="${hospitalManager.manager.uuid }">修改</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+						<!-- panel end -->
+					</div>
+
+				</div>
+			</div>
+			<!--body wrapper end-->
+
+			<!--footer section start-->
 			<%@ include file="/include/footer.jsp"%>
 			<!--footer section end-->
 		</div>
@@ -189,7 +182,7 @@
 	<!-- Modal End -->
 
 	<!-- Modal Start -->
-	<div class="modal fade" id="hospitalManagerDetail" tabindex="-1" role="dialog">
+	<div class="modal fade" id="editHospitalManager" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -199,42 +192,47 @@
 					<h4 class="modal-title">修改医院管理员信息</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="manager/editHospitalManager">
+						<input id="editm-uuid" type="hidden" name="uuid" value="" />
+						<input type="hidden" name="hospitalUuid" value="${hospital.uuid }" />
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editm-userNameGroup">
 								<label class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="用户名">
+									<div class="iconic-input right">
+										<input id="editm-userName" class="form-control" type="text" placeholder="用户名" readonly>
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">密码</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="密码">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editm-nameGroup">
 								<label class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="姓名">
+									<div class="iconic-input right">
+										<input id="editm-name" class="form-control" name="name" type="text" placeholder="姓名">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editm-phoneGroup">
 								<label class="col-sm-2 control-label">电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="电话">
+									<div class="iconic-input right">
+										<input id="editm-phone" class="form-control" name="phone" type="text" placeholder="电话">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-offset-5">
-							<button class="btn btn-success deleteHospital">保存</button>
-							<button class="btn btn-default">取消</button>
+						<div class="row container">
+							<div class="col-sm-offset-2">
+								<input id="editm-submit" type="submit" class="btn btn-success" value="保存" />
+								<button class="btn btn-default" data-dismiss="modal">取消</button>
+							</div>
 						</div>
 					</form>
 				</div>

@@ -43,7 +43,9 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							医院信息<span class="tools pull-right"> <a class="fa fa-chevron-down" href="javascript:;"></a>
+							医院信息
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>

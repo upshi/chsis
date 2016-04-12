@@ -5,14 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.chsis.model.Manager;
-import top.chsis.service.IHospitalService;
 import top.chsis.service.IManagerService;
-import top.chsis.service.impl.HospitalServiceImpl;
 import top.chsis.util.StringUtil;
 
 @Controller
@@ -55,5 +54,33 @@ public class ManagerController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("/get/{uuid}")
+	@ResponseBody
+	public Map<String, Object> get(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			Manager manager = managerService.selectByPrimaryKey(uuid);
+			if(manager != null) {
+				manager.setPassword(null);
+				manager.setType(null);
+				map.put("result", "success");
+				map.put("manager", manager);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
+	@RequestMapping("/editHospitalManager")
+	public String editHospitalManager(Manager manager, Model model, String hospitalUuid) {
+		managerService.updateByPrimaryKeySelective(manager);
+		return "redirect:/hospital/detail/" + hospitalUuid;
+	}
+	
+	
 	
 }

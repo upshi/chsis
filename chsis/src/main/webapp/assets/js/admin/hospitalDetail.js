@@ -4,10 +4,14 @@ $(function() {
 	$('.btn-add-manager').on('click', function(){
 		onAddManager($(this).attr('uuid'));
 	});
+	
+	$('.btn-edit-hospitalManager').on('click', function(){
+		onEditManager($(this).attr('uuid'));
+	})
 });
 
 //删除医院管理员操作
-function deleteManager(uuid) {
+function deleteHospitalManager(uuid,hospitalUuid) {
 	$.confirm({
 		keyboardEnabled : true,
 			title : '删除医院管理员',
@@ -30,7 +34,7 @@ function deleteManager(uuid) {
 										cancelButtonClass : 'btn-danger',
 										autoClose : 'confirm|3000'
 							});
-							window.location.href = 'admin/hospital'
+							window.location.href = 'hospital/detail/' + hospitalUuid;
 						} else {
 							$.confirm({
 										keyboardEnabled : true,
@@ -78,9 +82,58 @@ function onAddManager(hospitalUuid) {
 	$('#addHospitalManager').modal();
 }
 
+//打开修改医院管理员模态框
+function onEditManager(uuid) {
+	//异步获取管理员信息
+	$.ajax({
+			url : "manager/get/" + uuid ,
+			type : "GET" ,
+			cache : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == 'success') {
+					//赋值
+					$('#editm-uuid').attr('value', data.manager.uuid);
+					$('#editm-userName').attr('value', data.manager.userName);
+					$('#editm-name').attr('value', data.manager.name);
+					$('#editm-phone').attr('value', data.manager.phone);
+					//绑定input元素失去焦点事件
+					$('#editm-name').on('blur', checkName_edit);
+					$('#editm-phone').on('blur', checkPhone_edit);
+					//绑定保存按钮点击事件
+					$('#editm-submit').on('click', function(){
+						//表单校验
+						var pass = validate_editm();
+						return pass;
+					});
+					$('#editHospitalManager').modal();
+				} else {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '查询失败',
+						content : '您查询的医院管理员不存在！',
+						confirmButtonClass : 'btn-info',
+						cancelButtonClass : 'btn-danger',
+						autoClose : 'confirm|3000'
+					});
+				}
+			} 
+	});
+	
+}
+
 //表单校验
 function validate_addm() {
 	if(checkUserName_add() && checkPassword_add() && checkName_add() &&　checkPhone_add()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+//表单校验
+function validate_editm() {
+	if(checkName_edit() &&　checkPhone_edit()) {
 		return true;
 	} else {
 		return false;
@@ -95,6 +148,7 @@ function handleBeforeSubmit() {
 }
 
 function checkUserName_add() {
+	var flag = false;
 	var userName = $('#addm-userName').val();
 	if(userName == null || $.trim(userName) == '') {
 		$('#addm-userNameGroup').removeClass('has-success');
@@ -102,26 +156,27 @@ function checkUserName_add() {
 		$('#addm-userNameGroup .help-block').html('请输入用户名');
 		return false;
 	} else {
-		return $.ajax({
+		$.ajax({
 			url : "manager/checkUsernameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
+			async : false ,
 			dataType : "json" ,
 			success : function(data) {
 				if(data.result == "exist") {
 					$('#addm-userNameGroup').removeClass('has-success');
 					$('#addm-userNameGroup').addClass('has-error');
 					$('#addm-userNameGroup .help-block').html('用户名已存在');
-					return false;
 				} else {
 					$('#addm-userNameGroup').removeClass('has-error');
 					$('#addm-userNameGroup').addClass('has-success');
 					$('#addm-userNameGroup .help-block').html('');
-					return true;
+					flag = true;
 				}
 			} 
 		});
 	}
+	return flag;
 }
 
 function checkPassword_add() {
@@ -168,3 +223,34 @@ function checkPhone_add() {
 		return true;
 	}
 }
+
+function checkName_edit() {
+	var name = $('#editm-name').val();
+	if(name == null || $.trim(name) == '') {
+		$('#editm-nameGroup').removeClass('has-success');
+		$('#editm-nameGroup').addClass('has-error');
+		$('#editm-nameGroup .help-block').html('请输入姓名');
+		return false;
+	} else {
+		$('#editm-nameGroup').removeClass('has-error');
+		$('#editm-nameGroup').addClass('has-success');
+		$('#editm-nameGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkPhone_edit() {
+	var phone = $('#editm-phone').val();
+	if(phone == null || $.trim(phone) == '') {
+		$('#editm-phoneGroup').removeClass('has-success');
+		$('#editm-phoneGroup').addClass('has-error');
+		$('#editm-phoneGroup .help-block').html('请输入电话');
+		return false;
+	} else {
+		$('#editm-phoneGroup').removeClass('has-error');
+		$('#editm-phoneGroup').addClass('has-success');
+		$('#editm-phoneGroup .help-block').html('');
+		return true;
+	}
+}
+

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -17,7 +18,7 @@
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
-<link href="assets/css/manager/index.css" rel="stylesheet">
+<link href="assets/css/admin/index.css" rel="stylesheet">
 
 </head>
 <body class="sticky-header">
@@ -38,7 +39,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							管理家庭
+							家庭管理
 							<span class="tools pull-right"> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
@@ -60,56 +61,21 @@
 		                        <th>所在社区</th>
 		                        <th>操作</th>
 		                    </tr>
-		                    <tr>
-		                        <td>f_001</td>
-		                        <td>王文静</td>
-		                        <td>0512-722217726</td>
-		                        <td>阳光小区</td>
-		                        <td><a class="detail" href="manager/familyDatail.jsp">详情</a></td>
-		                    </tr>
-		                    <tr>
-		                        <td>f_001</td>
-		                        <td>王文静</td>
-		                        <td>0512-722217726</td>
-		                        <td>阳光小区</td>
-		                        <td><span class="detail">详情</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td>f_001</td>
-		                        <td>王文静</td>
-		                        <td>0512-722217726</td>
-		                        <td>阳光小区</td>
-		                        <td><span class="detail">详情</span></td>
-		                    </tr>
-		                    <tr>
-		                        <td>f_001</td>
-		                        <td>王文静</td>
-		                        <td>0512-722217726</td>
-		                        <td>阳光小区</td>
-		                        <td><span class="detail">详情</span></td>
-		                    </tr>
+		                    <c:forEach items="families" var="familyVO">
+			                    <tr>
+			                        <td>${familyVO.number }</td>
+			                        <td>${familyVO.householderName }</td>
+			                        <td>${familyVO.phone }</td>
+			                        <td>${familyVO.communityName }</td>
+			                        <td>
+			                        	<button class="btn btn-primary btn-sm" href="family/detail/${familyVO.uuid }">详情</button>
+			                        </td>
+			                    </tr>
+		                    </c:forEach>
 		                </table>
-		                
+		                <div>查询到${totals }条记录/共${totalPages }页</div>
 		                <!-- pagination start -->
-		                <nav class="col-sm-4 col-sm-offset-4">
-							<ul class="pagination ">
-								<li>
-									<a href="#" aria-label="Previous"> 
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li>
-									<a href="#" aria-label="Next"> 
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
+		                <%@include file="/include/page.jsp" %>
 						<!-- pagination end -->
 			        </div>
 				</div>

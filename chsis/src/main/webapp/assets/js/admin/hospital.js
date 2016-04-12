@@ -45,6 +45,7 @@ function validate_addh() {
 
 //提交前处理
 function checkNumber_add() {
+	var flag = false;
 	var number = $('#addh-number').val();
 	if(number == null || $.trim(number) == '') {
 		$('#addh-numberGroup').removeClass('has-success');
@@ -52,26 +53,27 @@ function checkNumber_add() {
 		$('#addh-numberGroup .help-block').html('请输入医院编号');
 		return false;
 	} else {
-		return $.ajax({
+		$.ajax({
 			url : "hospital/checkNumberUnique/" + number ,
 			type : "GET" ,
 			cache : false , 
+			async : false , 
 			dataType : "json" ,
 			success : function(data) {
 				if(data.result == "exist") {
 					$('#addh-numberGroup').removeClass('has-success');
 					$('#addh-numberGroup').addClass('has-error');
 					$('#addh-numberGroup .help-block').html('医院编号已存在');
-					return false;
 				} else {
 					$('#addh-numberGroup').removeClass('has-error');
 					$('#addh-numberGroup').addClass('has-success');
 					$('#addh-numberGroup .help-block').html('');
-					return true;
+					flag = true;
 				}
 			} 
 		});
 	}
+	return flag;
 }
 
 function checkName_add() {

@@ -11,6 +11,14 @@
     <association column="community_uuid" property="community" select="top.chsis.dao.CommunityMapper.selectByPrimaryKey"></association>
   </resultMap>
   
+  <resultMap id="FamilyVOResultMap" type="top.chsis.vo.FamilyVO" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="householderName" property="householderName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="communityName" property="communityName" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, number, phone, address, householder_uuid, community_uuid
   </sql>
@@ -27,6 +35,28 @@
     <include refid="Base_Column_List" />
     from t_family
     where community_uuid = #{communityUUID,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCondition" resultMap="FamilyVOResultMap" parameterType="top.chsis.vo.FamilyVO" >
+    select f.uuid, f.number, f.phone, r.name householderName, c.name communityName from t_family f, t_resident r, t_community c
+    where 1=1
+    <if test="uuid!=null and uuid!=''">
+		and f.uuid LIKE CONCAT('%', #{uuid},'%' )
+	</if>
+    <if test="number!=null and number!=''">
+		and f.number LIKE CONCAT('%', #{number},'%' )
+	</if>
+	<if test="phone!=null and phone!=''">
+		and f.phone LIKE CONCAT('%', #{phone},'%' )
+	</if>
+	<if test="householderName!=null and householderName!=''">
+		and r.name LIKE CONCAT('%', #{householderName},'%' )
+	</if>
+	<if test="communityName!=null and communityName!=''">
+		and c.name LIKE CONCAT('%', #{communityName},'%' )
+	</if>
+	and f.householder_uuid = r.uuid
+	and f.community_uuid = c.uuid
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
