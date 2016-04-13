@@ -20,26 +20,62 @@
     <result column="bloodType" property="bloodType" jdbcType="INTEGER" />
     <association column="family_uuid" property="family" select="top.chsis.dao.FamilyMapper.selectByPrimaryKey" />
   </resultMap>
+  
+  <resultMap id="ResidentVOResultMap" type="top.chsis.vo.ResidentVO" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="idNo" property="idNo" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="familyNumber" property="familyNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, userName, password, name, sex, idNo, nation, birth, age, period, phone, marriage, 
     height, weight, eyesight, bloodType, family_uuid
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_resident
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectResidentsByFamilyUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_resident
     where family_uuid = #{familyUUID,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByCondition" resultMap="ResidentVOResultMap" parameterType="top.chsis.vo.ResidentVO" >
+    select r.uuid, r.userName, r.name, r.sex, r.phone, r.idNo, f.number familyNumber from t_resident r, t_family f
+    where 1=1
+    <if test="userName!=null and userName!=''">
+		and r.userName LIKE CONCAT('%', #{userName},'%' )
+	</if>
+    <if test="name!=null and name!=''">
+		and r.name LIKE CONCAT('%', #{name},'%' )
+	</if>
+    <if test="sex!=null and sex!=''">
+		and r.sex LIKE CONCAT('%', #{sex},'%' )
+	</if>
+    <if test="idNo!=null and idNo!=''">
+		and r.idNo LIKE CONCAT('%', #{idNo},'%' )
+	</if>
+    <if test="familyNumber!=null and familyNumber!=''">
+		and f.number LIKE CONCAT('%', #{familyNumber},'%' )
+	</if>
+	and r.family_uuid = f.uuid
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_resident
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.Resident" >
     insert into t_resident (uuid, userName, password, 
       name, sex, idNo, nation, 

@@ -2,7 +2,10 @@ package top.chsis.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.Resident;
+import top.chsis.vo.ResidentVO;
 
 public interface IResidentService {
 
@@ -19,5 +22,7 @@ public interface IResidentService {
 	int updateByPrimaryKeySelective(Resident record);
 
 	int updateByPrimaryKey(Resident record);
+
+	PageInfo<ResidentVO> selectByConditionAndPaging(ResidentVO residentVO, int page, int size);
 
 }

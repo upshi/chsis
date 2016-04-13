@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -18,7 +19,7 @@
 
 <!--你自己的样式文件 -->
 <link href="assets/css/jquery-confirm.css" rel="stylesheet">
-<link href="assets/css/manager/index.css" rel="stylesheet">
+<link href="assets/css/admin/index.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
     <section>
@@ -36,7 +37,7 @@
 			<div class="wrapper">
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
-					<li><a href="manager/manageFamily.jsp">管理家庭</a></li>
+					<li><a href="family/manage">家庭管理</a></li>
 					<li class="active">家庭信息详请</li>
 				</ul>
 				<!-- panel start -->
@@ -51,15 +52,15 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
-		                    <div class="col-sm-3 col-sm-offset-1"><h4><b>家庭编号：</b>f_001</h4></div>
-		                    <div class="col-sm-4"><h4><b>户主姓名：</b>王文静</h4></div>
+		                    <div class="col-sm-3 col-sm-offset-1"><h4><b>家庭编号：</b>${family.number }</h4></div>
+		                    <div class="col-sm-4"><h4><b>户主姓名：</b>${householderName }</h4></div>
 		                </div>
 		                <div class="row">
 		                    <div class="col-sm-2 col-sm-offset-1">
 		                        <h4><b>家庭电话：</b></h4>
 		                    </div>
 		                    <div class="col-sm-8">
-		                        <h4>0512-822276613</h4>
+		                        <h4>${family.phone }</h4>
 		                    </div>
 		                </div>
 		                <div class="row">
@@ -67,7 +68,7 @@
 		                        <h4><b>家庭地址：</b></h4>
 		                    </div>
 		                    <div class="col-sm-8">
-		                        <h4>江苏省南京市栖霞区江南路平林路123号</h4>
+		                        <h4>${family.address }</h4>
 		                    </div>
 		                </div>
 		                <div class="row">
@@ -75,7 +76,7 @@
 		                        <h4><b>所在社区：</b></h4>
 		                    </div>
 		                    <div class="col-sm-8">
-		                        <h4>阳光小区</h4>
+		                        <h4>${community.name }</h4>
 		                    </div>
 		                </div>
 		                <div class="row">
@@ -83,7 +84,7 @@
 		                        <h4><b>社区地址：</b></h4>
 		                    </div>
 		                    <div class="col-sm-8">
-		                        <h4>江苏省南京市栖霞区江南路平林路</h4>
+		                        <h4>${community.address }</h4>
 		                    </div>
 		                </div>
 		                <div class="row">
@@ -91,8 +92,7 @@
 		                        <h4><b>社区描述：</b></h4>
 		                    </div>
 		                    <div class="col-sm-8">
-		                        <h4>社区描述的机会的哈哈回到家后的受打击换房间换话费地级市附近的海景房的好时机风景好
-		                            风华绝代神烦大叔 涸鲋得水付款是否恢复独守空房佛山市房防守打法。</h4>
+		                        <h4>${community.description }</h4>
 		                    </div>
 		                </div>
 					</div>
@@ -119,54 +119,23 @@
 								<th>电话</th>
 								<th>操作</th>
 							</tr>
-							<tr>
-								<td>ranran</td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button> 
-									<button class="btn btn-primary btn-sm" data-target="#residentInfo" data-toggle="modal">详情</button> 
-									<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#residentChange">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td>up</td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button> 
-									<button class="btn btn-primary btn-sm">详情</button> 
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td>lili</td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button> 
-									<button class="btn btn-primary btn-sm">详情</button> 
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td>lili</td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button> 
-									<button class="btn btn-primary btn-sm">详情</button> 
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
+							<c:forEach items="${residents}" var="resident">
+								<tr>
+									<td>${resident.userName }</td>
+									<td>${resident.name }</td>
+									<td>
+										<c:if test="${resident.sex=='0' }">男</c:if>
+										<c:if test="${resident.sex=='1' }">女</c:if>
+									</td>
+									<td>${resident.idNo }</td>
+									<td>${resident.phone }</td>
+									<td>
+										<button class="btn btn-danger btn-sm deleteResident" onclick="deleteResident('${resident.uuid}')">删除</button> 
+										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
+										<button class="btn btn-info btn-sm btn-edit-resident" uuid="${resident.uuid }">修改</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
@@ -181,24 +150,8 @@
 		<!-- main content end-->
 	</section>
     
-    
-    <!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/adminex/js/bootstrap.min.js"></script>
-	<script src="assets/adminex/js/modernizr.min.js"></script>
-	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-
-	<!--common scripts for all pages-->
-	<script src="assets/adminex/js/scripts.js"></script>
-    <script src="assets/js/jquery-confirm.js"></script>
-    <script src="assets/js/manager/dropDownList.js"></script>
-    <script src="assets/js/manager/util.js"></script>
-
-    
     <!-- Modal Start -->
-	<div class="modal fade" id="residentInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="residentDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -217,7 +170,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>d_001</h4>
+							<h4 id="resident-name"></h4>
 						</div>
 						<div class="col-sm-3">
 							<h4>
@@ -225,7 +178,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>男</h4>
+							<h4 id="resident-sex"></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -235,7 +188,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-4 text-left">
-							<h4>329444199312091624</h4>
+							<h4 id="resident-idNo"></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -245,7 +198,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>汉族</h4>
+							<h4 id="resident-nation"></h4>
 						</div>
 						<div class="col-sm-3">
 							<h4>
@@ -253,7 +206,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>1993/12/01</h4>
+							<h4 id="resident-birth"></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -263,7 +216,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>22岁</h4>
+							<h4 id="resident-age"></h4>
 						</div>
 						<div class="col-sm-3">
 							<h4>
@@ -271,7 +224,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>青年</h4>
+							<h4 id="resident-period"></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -281,7 +234,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-3 text-left">
-							<h4>18394338773</h4>
+							<h4 id="resident-phone"></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -291,7 +244,7 @@
 							</h4>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>未婚</h4>
+							<h4 id="resident-marriage"></h4>
 						</div>
 					</div>
 				</div>
@@ -302,7 +255,7 @@
 	<!-- Modal End -->
 	
 	<!-- Modal Start -->
-	<div class="modal fade" id="residentChange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editResident" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -400,5 +353,21 @@
 		</div>
 	</div>
 	<!-- Modal End -->
+	
+	    
+    <!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
+
+	<!--common scripts for all pages-->
+	<script src="assets/adminex/js/scripts.js"></script>
+    <script src="assets/js/jquery-confirm.js"></script>
+    <script src="assets/js/admin/dropDownList.js"></script>
+    <script src="assets/js/admin/util.js"></script>
+    <script src="assets/js/admin/familyDetail.js"></script>
 </body>
 </html>

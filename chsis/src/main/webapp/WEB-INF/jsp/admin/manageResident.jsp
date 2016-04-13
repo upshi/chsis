@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -18,7 +19,7 @@
 
 <!--你自己的样式文件 -->
 <link href="assets/css/jquery-confirm.css" rel="stylesheet">
-<link href="assets/css/manager/index.css" rel="stylesheet">
+<link href="assets/css/admin/index.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
 	<section>
@@ -38,17 +39,23 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							管理居民
+							居民管理
 							 <span class="tools pull-right"> 
 							 	<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="">
-	                    	<input class="form-control" type="text" placeholder="按姓名搜索">
-	                    	<input class="form-control" type="text" placeholder="按家庭编号搜索">
-	                   	 	<input class="form-control" type="text" placeholder="按身份证号搜索">
+						<form class="form-inline" action="resident/search">
+	                    	<input name="userName" class="form-control" type="text" placeholder="请输入用户名">
+	                    	<input name="name" class="form-control" type="text" placeholder="请输入姓名">
+	                    	<select name="sex" class="form-control">
+	                    		<option value="">性别</option>
+	                    		<option value="0">男</option>
+	                    		<option value="1">女</option>
+	                    	</select>
+	                   	 	<input name="idNo" class="form-control" type="text" placeholder="请输入身份证号">
+	                   	 	<input name="familyNumber" class="form-control" type="text" placeholder="请输入家庭编号">
 	                    	<button class="btn btn-info">搜索</button>
                 		</form>
                			<div class="blank"></div>
@@ -63,74 +70,28 @@
 								<th>家庭编号</th>
 								<th>操作</th>
 							</tr>
-							<tr>
-								<td><a href="#">ranran</a></td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td><a href="#">f001</a></td>
+							<c:forEach items="${residents }" var="residentVO">
+								<tr>
+								<td><a href="#">${residentVO.userName }</a></td>
+								<td>${residentVO.name }</td>
+								<td>
+									<c:if test="${residentVO.sex == '0' }">男</c:if>
+									<c:if test="${residentVO.sex == '1' }">女</c:if>
+								</td>
+								<td>${residentVO.idNo }</td>
+								<td>${residentVO.phone }</td>
+								<td><a href="#">${residentVO.familyNumber }</a></td>
 								<td>
 									<button class="btn btn-danger btn-sm deleteResident">删除</button>
 									<button class="btn btn-primary btn-sm" data-target="#residentInfo" data-toggle="modal">详情</button>
 									<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#residentChange">修改</button>
 								</td>
 							</tr>
-							<tr>
-								<td><a href="#">ranran</a></td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td><a href="#">f001</a></td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button>
-									<button class="btn btn-primary btn-sm">详情</button>
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td><a href="#">ranran</a></td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td><a href="#">f001</a></td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button>
-									<button class="btn btn-primary btn-sm">详情</button>
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
-							<tr>
-								<td><a href="#">ranran</a></td>
-								<td>王文静</td>
-								<td>女</td>
-								<td>328333118738221192</td>
-								<td>18392228223</td>
-								<td><a href="#">f001</a></td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button>
-									<button class="btn btn-primary btn-sm">详情</button>
-									<button class="btn btn-info btn-sm">修改</button>
-								</td>
-							</tr>
+							</c:forEach>
 						</table>
-						
+						<div>查询到${totals }条记录/共${totalPages }页</div>
 						<!-- pagination start -->
-						<nav class="col-sm-4 col-sm-offset-4">
-							<ul class="pagination ">
-								<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a></li>
-							</ul>
-						</nav>
+						<%@include file="/include/page.jsp" %>
 						<!-- pagination end -->
 					</div>
 				</div>
@@ -156,8 +117,8 @@
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
     <script src="assets/js/jquery-confirm.js"></script>
-    <script src="assets/js/manager/dropDownList.js"></script>
-    <script src="assets/js/manager/util.js"></script>
+    <script src="assets/js/admin/dropDownList.js"></script>
+    <script src="assets/js/admin/util.js"></script>
 
     
     <!-- Modal Start -->

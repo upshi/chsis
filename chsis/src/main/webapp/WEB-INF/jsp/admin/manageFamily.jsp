@@ -68,7 +68,7 @@
 			                        <td>${familyVO.phone }</td>
 			                        <td>${familyVO.communityName }</td>
 			                        <td>
-			                        	<button class="btn btn-primary btn-sm" href="family/detail/${familyVO.uuid }">详情</button>
+			                        	<a href="family/detail/${familyVO.uuid }" class="btn btn-primary btn-sm">详情</a>
 			                        </td>
 			                    </tr>
 		                    </c:forEach>

@@ -1,13 +1,18 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.dao.ResidentMapper;
 import top.chsis.model.Resident;
 import top.chsis.service.IResidentService;
+import top.chsis.vo.ResidentVO;
 
 @Service("residentService")
 public class ResidentServiceImpl implements IResidentService {
@@ -43,6 +48,14 @@ public class ResidentServiceImpl implements IResidentService {
 
 	public int updateByPrimaryKey(Resident record) {
 		return residentMapper.updateByPrimaryKey(record);
+	}
+
+	public PageInfo<ResidentVO> selectByConditionAndPaging(ResidentVO residentVO, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<ResidentVO> list = new ArrayList<ResidentVO>();
+		list = residentMapper.selectByCondition(residentVO);
+		PageInfo<ResidentVO> pageInfo = new PageInfo<ResidentVO>(list);
+		return pageInfo;
 	}
 
 }

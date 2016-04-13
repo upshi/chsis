@@ -99,7 +99,6 @@
 						</div>
 						<!-- panel end -->
 					</div>
-
 				</div>
 			</div>
 			<!--body wrapper end-->

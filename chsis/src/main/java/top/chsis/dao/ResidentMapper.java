@@ -3,6 +3,7 @@ package top.chsis.dao;
 import java.util.List;
 
 import top.chsis.model.Resident;
+import top.chsis.vo.ResidentVO;
 
 public interface ResidentMapper {
     int deleteByPrimaryKey(String uuid);
@@ -18,4 +19,6 @@ public interface ResidentMapper {
     int updateByPrimaryKeySelective(Resident record);
 
     int updateByPrimaryKey(Resident record);
+    
+    List<ResidentVO> selectByCondition(ResidentVO residentVO);
 }

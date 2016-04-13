@@ -43,7 +43,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							医院信息
+							医院信息 
 							<span class="tools pull-right"> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
@@ -63,13 +63,13 @@
 									<td>${hospital.name }</td>
 									<td>${hospital.address }</td>
 									<td>
-										<button class="btn btn-danger btn-sm" onclick="deleteHospital('${hospital.uuid}')">删除</button>
+										<button class="btn btn-danger btn-sm" onclick="deleteHospital('${hospital.uuid}')">删除</button> 
 										<a href="hospital/detail/${hospital.uuid}" class="btn btn-primary btn-sm">详情</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</table>
-				</div>
+					</div>
 				</div>
 				<!-- panel end -->
 			</div>
