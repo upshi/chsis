@@ -21,15 +21,36 @@ public class FamilyController {
 	private IFamilyService familyService;
 
 	@RequestMapping("/manage")
-	public String manage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size) {
-		PageInfo<FamilyVO> pageInfo = null;
-		pageInfo = familyService.selectByConditionAndPaging(null, page, size);
+	public String manage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		PageInfo<FamilyVO> pageInfo = familyService.selectByConditionAndPaging(null, page, size);
 		List<FamilyVO> families = pageInfo.getList();
+		System.out.println(families.get(0));
 		model.addAttribute("families", families);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "family/manage?");
+		
+		return "admin/manageFamily";
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @RequestParam(defaultValue = "1") int page,
+									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String number,
+									  @RequestParam(defaultValue = "") String householderName,
+									  @RequestParam(defaultValue = "") String communityName) {
+		FamilyVO familyVO = new FamilyVO(null, number, householderName, null, communityName);
+		
+		PageInfo<FamilyVO> pageInfo = familyService.selectByConditionAndPaging(familyVO, page, size);
+		List<FamilyVO> families = pageInfo.getList();
+		model.addAttribute("families", families);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "family/search?number=" + number + 
+									"&householderName=" + householderName + 
+									"&communityName=" + communityName + "&" );
 		
 		return "admin/manageFamily";
 	}

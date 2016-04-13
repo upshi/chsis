@@ -46,10 +46,10 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="">
-		                    <input class="form-control" type="text" placeholder="按居民姓名搜索">
-		                    <input class="form-control" type="text" placeholder="按家庭编号搜索">
-		                    <input class="form-control" type="text" placeholder="按身份证号搜索">
+						<form class="form-inline" action="family/search">
+		                    <input class="form-control" name="number" type="text" placeholder="请输入家庭编号">
+		                    <input class="form-control" name="householderName" type="text" placeholder="请输入户主姓名">
+		                    <input class="form-control" name="communityName" type="text" placeholder="请输入社区名称">
 		                    <button class="btn btn-info">搜索</button>
 	                    </form>
 	                    <div class="blank"></div>
@@ -61,7 +61,7 @@
 		                        <th>所在社区</th>
 		                        <th>操作</th>
 		                    </tr>
-		                    <c:forEach items="families" var="familyVO">
+		                    <c:forEach items="${families}" var="familyVO">
 			                    <tr>
 			                        <td>${familyVO.number }</td>
 			                        <td>${familyVO.householderName }</td>
