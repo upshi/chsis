@@ -4,7 +4,7 @@ $(function() {
 	$('.btn-add-manager').on('click', function(){
 		onAddManager($(this).attr('uuid'));
 	});
-	
+	//绑定修改医院管理员按钮事件
 	$('.btn-edit-hospitalManager').on('click', function(){
 		onEditManager($(this).attr('uuid'));
 	})
@@ -124,7 +124,7 @@ function onEditManager(uuid) {
 
 //表单校验
 function validate_addm() {
-	if(checkUserName_add() && checkPassword_add() && checkName_add() &&　checkPhone_add()) {
+	if(checkUserName_add() && checkPassword_add() && checkName_add() && checkPhone_add()) {
 		return true;
 	} else {
 		return false;

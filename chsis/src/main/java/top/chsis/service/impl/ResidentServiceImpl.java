@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.dao.CommunityMapper;
+import top.chsis.dao.FamilyMapper;
 import top.chsis.dao.ResidentMapper;
 import top.chsis.model.Resident;
 import top.chsis.service.IResidentService;
@@ -20,6 +22,11 @@ public class ResidentServiceImpl implements IResidentService {
 	@Autowired
 	private ResidentMapper residentMapper;
 	
+	@Autowired
+	private FamilyMapper familyMapper;
+	
+	@Autowired
+	private CommunityMapper communityMapper;
 
 	public int deleteByPrimaryKey(String uuid) {
 		int result = residentMapper.deleteByPrimaryKey(uuid);

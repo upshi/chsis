@@ -72,7 +72,7 @@
 							</tr>
 							<c:forEach items="${residents }" var="residentVO">
 								<tr>
-								<td><a href="#">${residentVO.userName }</a></td>
+								<td>${residentVO.userName }</td>
 								<td>${residentVO.name }</td>
 								<td>
 									<c:if test="${residentVO.sex == '0' }">男</c:if>
@@ -80,11 +80,11 @@
 								</td>
 								<td>${residentVO.idNo }</td>
 								<td>${residentVO.phone }</td>
-								<td><a href="#">${residentVO.familyNumber }</a></td>
+								<td>${residentVO.familyNumber }</td>
 								<td>
-									<button class="btn btn-danger btn-sm deleteResident">删除</button>
-									<button class="btn btn-primary btn-sm" data-target="#residentInfo" data-toggle="modal">详情</button>
-									<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#residentChange">修改</button>
+									<button class="btn btn-danger btn-sm" onclick="deleteResident('${residentVO.uuid}','${url }')">删除</button>
+									<button class="btn btn-primary btn-sm btn-residentDetail"  uuid="${residentVO.uuid }">详情</button>
+									<button class="btn btn-info btn-sm btn-edit-resident" uuid="${residentVO.uuid }">修改</button>
 								</td>
 							</tr>
 							</c:forEach>
@@ -106,23 +106,8 @@
 		<!-- main content end-->
 	</section>
 
-    <!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/adminex/js/bootstrap.min.js"></script>
-	<script src="assets/adminex/js/modernizr.min.js"></script>
-	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-
-	<!--common scripts for all pages-->
-	<script src="assets/adminex/js/scripts.js"></script>
-    <script src="assets/js/jquery-confirm.js"></script>
-    <script src="assets/js/admin/dropDownList.js"></script>
-    <script src="assets/js/admin/util.js"></script>
-
-    
-    <!-- Modal Start -->
-	<div class="modal fade" id="residentInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- Modal Start -->
+	<div class="modal fade" id="residentDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -135,137 +120,133 @@
 				</div>
 				<div class="modal-body container col-sm-12">
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>居民姓名：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-2 text-left">
-							<h4>d_001</h4>
+						<div class="col-sm-3 text-left">
+							<h5 id="resident-name"></h5>
 						</div>
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>居民性别：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>男</h4>
+							<h5 id="resident-sex"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>身份证号：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-4 text-left">
-							<h4>329444199312091624</h4>
+						<div class="col-sm-3 text-left">
+							<h5 id="resident-idNo"></h5>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>所属民族：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>汉族</h4>
+							<h5 id="resident-nation"></h5>
 						</div>
-						<div class="col-sm-3">
-							<h4>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>出生日期：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>1993/12/01</h4>
+							<h5 id="resident-birth"></h5>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
 								<b>居民年龄：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>22岁</h4>
+							<h5 id="resident-age"></h5>
 						</div>
-						<div class="col-sm-3">
-							<h4>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>年龄分段：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>青年</h4>
+							<h5 id="resident-period"></h5>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
 								<b>联系电话：</b>
-							</h4>
-						</div>
-						<div class="col-sm-3 text-left">
-							<h4>18394338773</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
-								<b>婚姻状况：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4>未婚</h4>
+							<h5 id="resident-phone"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>婚姻状况：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-marriage"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
 								<b>家庭编号：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-5 text-left">
-							<h4>f_001</h4>
+						<div class="col-sm-2 text-left">
+							<h5 id="family-number"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>家庭电话：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-5 text-left">
-							<h4>0512-12349866</h4>
+						<div class="col-sm-9 text-left">
+							<h5 id="family-phone"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>家庭地址：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-8 text-left">
-							<h4>江苏省南京市栖霞区进取村仁爱小区113号</h4>
+						<div class="col-sm-9 text-left">
+							<h5 id="family-address"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>所在社区：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-3 text-left">
-							<h4>阳光社区</h4>
+						<div class="col-sm-9 text-left">
+							<h5 id="community-name"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>社区地址：</b>
-							</h4>
+							</h5>
 						</div>
-						<div class="col-sm-8 text-left">
-							<h4>江苏省南京市栖霞区进取村</h4>
+						<div class="col-sm-9 text-left">
+							<h5 id="community-address"></h5>
 						</div>
 					</div>
 				</div>
@@ -276,7 +257,7 @@
 	<!-- Modal End -->
 	
 	<!-- Modal Start -->
-	<div class="modal fade" id="residentChange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="edit-resident" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -288,123 +269,170 @@
 					</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="resident/edit">
+						<input id="editr-uuid" type="hidden" name="uuid" value="" />
+						<input type="hidden" name="url" value="${url }page=${pageIndex }" />
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民姓名</label>
+							<div class="form-group" id="editr-nameGroup">
+								<label class="col-sm-2 control-label">居民姓名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民姓名" value="王豫宁">
+									<div class="iconic-input right">
+										<input id="editr-name" name="name" class="form-control" type="text" placeholder="请输入居民姓名">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别</label>
+							<div class="form-group" id="editr-sexGroup">
+								<label class="col-sm-2 control-label">居民性别</label>
 								<div class="col-sm-3 text-left">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
-									</label>
+									<div class="iconic-input right">
+										<label class="radio-inline"> 
+											<input type="radio" name="sex" id="male" value="0"> 男
+										</label> 
+										<label class="radio-inline"> 
+											<input type="radio" name="sex" id="female" value="1"> 女
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">身份证号</label>
+							<div class="form-group" id="editr-idNoGroup">
+								<label class="col-sm-2 control-label">身份证号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="身份证号" value="3294332199312031127">
+									<div class="iconic-input right">
+										<input id="editr-idNo" name="idNo" class="form-control" type="text" placeholder="身份证号">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所属民族</label>
+							<div class="form-group" id="editr-nationGroup">
+								<label class="col-sm-2 control-label">所属民族</label>
 								<div class="col-sm-3">
-									<select id="nation" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="nation" name="nation" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期</label>
+							<div class="form-group" id="editr-birthGroup">
+								<label class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="出生日期，如：19931201" value="19931201">
+									<div class="iconic-input right">
+										<input id="editr-birth" name="birth" class="form-control" type="text" placeholder="出生日期，如：19931201">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄</label>
+							<div class="form-group" id="editr-ageGroup">
+								<label class="col-sm-2 control-label">居民年龄</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民年龄" value="23">
+									<div class="iconic-input right">
+										<input id="editr-age" name="age" class="form-control" type="text" placeholder="居民年龄">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">年龄分段</label>
+							<div class="form-group" id="editr-periodGroup">
+								<label class="col-sm-2 control-label">年龄分段</label>
 								<div class="col-sm-3">
-									<select id="period" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="period" name="period" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话</label>
+							<div class="form-group" id="editr-phoneGroup">
+								<label class="col-sm-2 control-label">联系电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="联系电话" value="18222993338">
+									<div class="iconic-input right">
+										<input id="editr-phone" name="phone" class="form-control" type="text" placeholder="联系电话">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">婚姻状况</label>
+							<div class="form-group" id="editr-marriageGroup">
+								<label class="col-sm-2 control-label">婚姻状况</label>
 								<div class="col-sm-3">
-									<select id="marriage" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="marriage" name="marriage" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">家庭编号</label>
+							<div class="form-group" id="editr-familyNumberGroup">
+								<label class="col-sm-2 control-label">家庭编号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="家庭编号">
+									<div class="iconic-input right">
+										<input id="editr-familyNumber" readonly class="form-control" type="text" placeholder="家庭编号">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">家庭电话</label>
+							<div class="form-group" id="editr-familyPhoneGroup">
+								<label class="col-sm-2 control-label">家庭电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="家庭电话">
+									<div class="iconic-input right">
+										<input id="editr-familyPhone" readonly class="form-control" type="text" placeholder="家庭电话">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">家庭地址</label>
+							<div class="form-group" id="editr-familyAddressGroup">
+								<label class="col-sm-2 control-label">家庭地址</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="家庭地址">
+									<div class="iconic-input right">
+										<input id="editr-familyAddress" readonly class="form-control" type="text" placeholder="家庭地址">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所在社区</label>
+							<div class="form-group" id="editr-communityNameGroup">
+								<label class="col-sm-2 control-label">所在社区</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在社区">
+									<div class="iconic-input right">
+										<input id="editr-communityName" readonly class="form-control" type="text" placeholder="所在社区">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">社区地址</label>
+							<div class="form-group" id="editr-communityAddressGroup">
+								<label class="col-sm-2 control-label">社区地址</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="社区地址">
+									<div class="iconic-input right">
+										<input id="editr-communityAddress" readonly class="form-control" type="text" placeholder="社区地址">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-info">保存</button>
-						<button class="btn btn-default">取消</button>
+						<div class="row container">
+							<div class="col-sm-offset-2">
+								<button class="btn btn-info" id="editr-submit">保存</button>
+								<button class="btn btn-default" data-dismiss="modal">取消</button>
+							</div>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer"></div>
@@ -412,5 +440,20 @@
 		</div>
 	</div>
 	<!-- Modal End -->
+	
+    <!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
+
+	<!--common scripts for all pages-->
+	<script src="assets/adminex/js/scripts.js"></script>
+    <script src="assets/js/jquery-confirm.js"></script>
+    <script src="assets/js/admin/dropDownList.js"></script>
+    <script src="assets/js/admin/resident.js"></script>
+    
 </body>
 </html>

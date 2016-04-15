@@ -36,7 +36,7 @@ function onAddHospital() {
 
 //表单校验
 function validate_addh() {
-	if(checkNumber_add() && checkName_add() && checkAddress_add() &&　checkDescription_add()) {
+	if(checkNumber_add() && checkName_add() && checkAddress_add() && checkDescription_add()) {
 		return true;
 	} else {
 		return false;

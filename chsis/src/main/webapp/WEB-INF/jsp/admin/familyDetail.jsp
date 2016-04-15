@@ -52,49 +52,35 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
-		                    <div class="col-sm-3 col-sm-offset-1"><h4><b>家庭编号：</b>${family.number }</h4></div>
-		                    <div class="col-sm-4"><h4><b>户主姓名：</b>${householderName }</h4></div>
-		                </div>
-		                <div class="row">
-		                    <div class="col-sm-2 col-sm-offset-1">
-		                        <h4><b>家庭电话：</b></h4>
-		                    </div>
-		                    <div class="col-sm-8">
-		                        <h4>${family.phone }</h4>
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="col-sm-2 col-sm-offset-1">
-		                        <h4><b>家庭地址：</b></h4>
-		                    </div>
-		                    <div class="col-sm-8">
-		                        <h4>${family.address }</h4>
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="col-sm-2 col-sm-offset-1">
-		                        <h4><b>所在社区：</b></h4>
-		                    </div>
-		                    <div class="col-sm-8">
-		                        <h4>${community.name }</h4>
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="col-sm-2 col-sm-offset-1">
-		                        <h4><b>社区地址：</b></h4>
-		                    </div>
-		                    <div class="col-sm-8">
-		                        <h4>${community.address }</h4>
-		                    </div>
-		                </div>
-		                <div class="row">
-		                    <div class="col-sm-2 col-sm-offset-1">
-		                        <h4><b>社区描述：</b></h4>
-		                    </div>
-		                    <div class="col-sm-8">
-		                        <h4>${community.description }</h4>
-		                    </div>
-		                </div>
+							<section class="panel col-sm-6">
+								<header class="panel-heading">
+									家庭编号：${family.number }
+								</header>
+								<header class="panel-heading">
+									户主姓名：${householderName }
+								</header>
+								<header class="panel-heading">
+									家庭电话：${family.phone }
+								</header>
+								<header class="panel-heading">
+									家庭地址：${family.address }
+								</header>
+							</section>
+							<section class="panel col-sm-6">
+								<header class="panel-heading">
+									所在社区：${community.name }
+								</header>
+								<header class="panel-heading">
+									社区地址：${community.address }
+								</header>
+								<header class="panel-heading">
+									社区描述：
+								</header>
+								<div class="panel-body">
+									${community.description }
+								</div>
+							</section>
+						</div>
 					</div>
 				</div>
 				<!-- panel end -->
@@ -159,92 +145,91 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 查看家庭成员信息
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 查看家庭成员信息
 					</h4>
 				</div>
 				<div class="modal-body container col-sm-12">
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>居民姓名：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4 id="resident-name"></h4>
+							<h5 id="resident-name"></h5>
 						</div>
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
 								<b>居民性别：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4 id="resident-sex"></h4>
+							<h5 id="resident-sex"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
+						<div class="col-sm-3 text-right">
+							<h5>
 								<b>身份证号：</b>
-							</h4>
-						</div>
-						<div class="col-sm-4 text-left">
-							<h4 id="resident-idNo"></h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
-								<b>所属民族：</b>
-							</h4>
-						</div>
-						<div class="col-sm-2 text-left">
-							<h4 id="resident-nation"></h4>
-						</div>
-						<div class="col-sm-3">
-							<h4>
-								<b>出生日期：</b>
-							</h4>
-						</div>
-						<div class="col-sm-2 text-left">
-							<h4 id="resident-birth"></h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
-								<b>居民年龄：</b>
-							</h4>
-						</div>
-						<div class="col-sm-2 text-left">
-							<h4 id="resident-age"></h4>
-						</div>
-						<div class="col-sm-3">
-							<h4>
-								<b>年龄分段：</b>
-							</h4>
-						</div>
-						<div class="col-sm-2 text-left">
-							<h4 id="resident-period"></h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3">
-							<h4>
-								<b>联系电话：</b>
-							</h4>
+							</h5>
 						</div>
 						<div class="col-sm-3 text-left">
-							<h4 id="resident-phone"></h4>
+							<h5 id="resident-idNo"></h5>
+						</div>
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>所属民族：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-nation"></h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3">
-							<h4>
-								<b>婚姻状况：</b>
-							</h4>
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>出生日期：</b>
+							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
-							<h4 id="resident-marriage"></h4>
+							<h5 id="resident-birth"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>居民年龄：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-age"></h5>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>年龄分段：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-period"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>联系电话：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-phone"></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>婚姻状况：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-marriage"></h5>
 						</div>
 					</div>
 				</div>
@@ -266,85 +251,114 @@
 						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 修改家庭成员信息
 					</h4>
 				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal">
+				<div class="modal-body">
+					<form class="form-horizontal" method="POST" action="family/editResident">
+						<input id="editr-uuid" type="hidden" name="uuid" value="" />
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民姓名</label>
+							<div class="form-group" id="editr-nameGroup">
+								<label class="col-sm-2 control-label">居民姓名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民姓名" value="王豫宁">
+									<div class="iconic-input right">
+										<input id="editr-name" class="form-control" type="text" placeholder="请输入居民姓名">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别</label>
+							<div class="form-group" id="editr-sexGroup">
+								<label class="col-sm-2 control-label">居民性别</label>
 								<div class="col-sm-3 text-left">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
-									</label>
+									<div class="iconic-input right">
+										<label class="radio-inline"> 
+											<input type="radio" name="inlineRadioOptions" id="male" value="0" checked> 男
+										</label> 
+										<label class="radio-inline"> 
+											<input type="radio" name="inlineRadioOptions" id="female" value="1"> 女
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">身份证号</label>
+							<div class="form-group" id="editr-idNoGroup">
+								<label class="col-sm-2 control-label">身份证号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="身份证号" value="3294332199312031127">
+									<div class="iconic-input right">
+										<input id="editr-idNo" class="form-control" type="text" placeholder="身份证号">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所属民族</label>
+							<div class="form-group" id="editr-nationGroup">
+								<label class="col-sm-2 control-label">所属民族</label>
 								<div class="col-sm-3">
-									<select id="nation" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="nation" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期</label>
+							<div class="form-group" id="editr-birthGroup">
+								<label class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="出生日期，如：19931201" value="19931201">
+									<div class="iconic-input right">
+										<input id="editr-birth" class="form-control" type="text" placeholder="出生日期，如：19931201">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄</label>
+							<div class="form-group" id="editr-ageGroup">
+								<label class="col-sm-2 control-label">居民年龄</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民年龄" value="23">
+									<div class="iconic-input right">
+										<input id="editr-age" class="form-control" type="text" placeholder="居民年龄">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">年龄分段</label>
+							<div class="form-group" id="editr-periodGroup">
+								<label class="col-sm-2 control-label">年龄分段</label>
 								<div class="col-sm-3">
-									<select id="period" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="period" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话</label>
+							<div class="form-group" id="editr-phoneGroup">
+								<label class="col-sm-2 control-label">联系电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="联系电话" value="18222993338">
+									<div class="iconic-input right">
+										<input id="editr-phone" class="form-control" type="text" placeholder="联系电话" value="18222993338">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">婚姻状况</label>
+							<div class="form-group" id="editr-marriageGroup">
+								<label class="col-sm-2 control-label">婚姻状况</label>
 								<div class="col-sm-3">
-									<select id="marriage" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="marriage" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-offset-5">
-							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+						<div class="row container">
+							<div class="col-sm-offset-2">
+								<button class="btn btn-info">保存</button>
+								<button class="btn btn-default">取消</button>
+							</div>
 						</div>
 					</form>
 				</div>
