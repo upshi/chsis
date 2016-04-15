@@ -18,8 +18,8 @@
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
-<link href="assets/css/jquery-confirm.css" rel="stylesheet">
-<link href="assets/css/admin/index.css" rel="stylesheet">
+<link href="assets/css/hospitalManager/index.css" rel="stylesheet">
+
 </head>
 <body class="sticky-header">
 	<section>
@@ -32,114 +32,135 @@
 			<!-- header start -->
 			<%@ include file="/include/header.jsp"%>
 			<!-- header end -->
-
-			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-hospital">添加医院</button> 
-			</div>
 			
+			<div class="page-heading"> 
+				<button class="btn btn-warning btn-add-department" data-toggle="modal" data-target="#addDepartment">添加科室</button>
+			</div>
+
 			<!--body wrapper start-->
 			<div class="wrapper">
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							医院信息 
+							科室管理
 							<span class="tools pull-right"> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>
 					<div class="panel-body">
+						<form class="form-inline" action="">
+							<input class="form-control" type="text" placeholder="按科室编号搜索"> 
+							<input class="form-control" type="text" placeholder="按科室名称搜索">
+							<button class="btn btn-info">搜索</button>
+						</form>
+						<div class="blank"></div>
 						<table class="table table-bordered table-responsive table-hover">
+							<tr>
+								<th colspan="4">科室信息</th>
+							</tr>
 							<tr class="info">
-								<th>医院编号</th>
-								<th>医院名称</th>
-								<th>医院地址</th>
+								<th>科室编号</th>
+								<th>科室名称</th>
+								<th>所属医院</th>
 								<th>操作</th>
 							</tr>
-							<c:forEach items="${hospitals}" var="hospital" varStatus="status">
+							<c:forEach items="${departments }" var="department">
 								<tr>
-									<td>${hospital.number }</td>
-									<td>${hospital.name }</td>
-									<td>${hospital.address }</td>
+									<td>${department.number }</td>
+									<td>${department.name }</td>
+									<td>${department.hospital.name }</td>
 									<td>
-										<button class="btn btn-danger btn-sm" onclick="deleteHospital('${hospital.uuid}')">删除</button> 
-										<a href="hospital/detail/${hospital.uuid}" class="btn btn-primary btn-sm">详情</a>
+										<buttun class="btn btn-danger btn-sm">删除</buttun> 
+										<a href="hospitalManager/departmentDetail.jsp" class="btn btn-primary btn-sm">详情</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</table>
-					</div>
+
+						<!-- pagination start -->
+		                <nav class="col-sm-4 col-sm-offset-4">
+							<ul class="pagination ">
+								<li>
+									<a href="#" aria-label="Previous"> 
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li>
+									<a href="#" aria-label="Next"> 
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- pagination end -->
+			        </div>
 				</div>
 				<!-- panel end -->
 			</div>
-		<!--body wrapper end-->
+			<!--body wrapper end-->
 
-		<!--footer section start-->
+			<!--footer section start-->
 			<%@ include file="/include/footer.jsp"%>
 			<!--footer section end-->
 		</div>
 		<!-- main content end-->
 	</section>
+	
 	<!-- Modal Start -->
-	<div class="modal fade" id="addHospital" tabindex="-1" role="dialog">
+	<div class="modal fade" id="addDepartment" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">添加医院</h4>
+					<h4 class="modal-title">添加科室</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" method="POST" action="admin/addHospital">
+					<form class="form-horizontal">
 						<div class="row container">
-							<div class="form-group" id="addh-numberGroup">
-								<label class="col-sm-2 control-label">医院编号</label>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">科室编号</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-number" class="form-control" name="number" type="text" placeholder="医院编号">
-										<p class="help-block"></p>
-									</div>
+									<input class="form-control" type="text" placeholder="科室编号">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group" id="addh-nameGroup">
-								<label class="col-sm-2 control-label">医院名称</label>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">科室名称</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-name" class="form-control" name="name" type="text" placeholder="医院名称">
-										<p class="help-block"></p>
-									</div>
+									<input class="form-control" type="text" placeholder="科室名称">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group" id="addh-addressGroup">
-								<label class="col-sm-2 control-label">医院地址</label>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">所属医院</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-address" class="form-control" name="address" type="text" placeholder="医院地址">
-										<p class="help-block"></p>
-									</div>
+									<input class="form-control" type="text" placeholder="所属医院">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group" id="addh-descriptionGroup">
-								<label class="col-sm-2 control-label">医院描述</label>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">科室描述</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<textarea id="addh-description" class="form-control" name="description" rows="5"></textarea>
-										<p class="help-block"></p>
-									</div>
+									<textarea class="form-control" rows="5">这个科室医疗器械充足，医生来源可靠，医生水平高，医德高，护士服务到位。医院环境干净卫生，虽然是新成立的医院，但是发展前景非常好。
+                                </textarea>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-offset-5">
-							<button class="btn btn-success" id="addh-submit">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						<div class="col-sm-offset-4">
+							<button class="btn btn-info">保存</button>
+							<button class="btn btn-default">取消</button>
 						</div>
 					</form>
 				</div>
@@ -147,7 +168,7 @@
 		</div>
 	</div>
 	<!-- Modal End -->
-
+	
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -158,11 +179,6 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
-    <script src="assets/js/jquery-confirm.js"></script>
-    <script src="assets/js/jquery.base64.js"></script>
-    
-    <!-- Custome Javascript -->
-	<script src="assets/js/hospitalManager/util.js"></script>    
-	
+
 </body>
 </html>

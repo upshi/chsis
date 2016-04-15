@@ -43,4 +43,8 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		return departmentMapper.updateByPrimaryKey(record);
 	}
 
+	public List<Department> selectAll() {
+		return departmentMapper.selectAll();
+	}
+
 }

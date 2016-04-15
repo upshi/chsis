@@ -13,6 +13,8 @@ public interface DepartmentMapper {
 
     Department selectByPrimaryKey(String uuid);
     
+    List<Department> selectAll();
+    
     List<Department> selectDepartmentsByHospitalUUID(String hospitalUUID);
 
     int updateByPrimaryKeySelective(Department record);

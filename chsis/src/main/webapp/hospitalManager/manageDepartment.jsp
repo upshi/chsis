@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -58,7 +59,6 @@
 							</div>
 						</div>
 						<div class="blank"></div>
-						<div class="blank"></div>
 						<table class="table table-bordered table-responsive table-hover">
 							<tr>
 								<th colspan="4">科室信息</th>
@@ -69,15 +69,17 @@
 								<th>所属医院</th>
 								<th>操作</th>
 							</tr>
-							<tr>
-								<td>d001</td>
-								<td>外科</td>
-								<td>李惠利医院</td>
-								<td>
-									<buttun class="btn btn-danger btn-sm">删除</buttun> 
-									<a href="hospitalManager/departmentDetail.jsp" class="btn btn-primary btn-sm">详情</a>
-								</td>
-							</tr>
+							<c:forEach items="${departments }" var="department">
+								<tr>
+									<td>${department.number }</td>
+									<td>${department.name }</td>
+									<td>${department.hospital.name }</td>
+									<td>
+										<buttun class="btn btn-danger btn-sm">删除</buttun> 
+										<a href="hospitalManager/departmentDetail.jsp" class="btn btn-primary btn-sm">详情</a>
+									</td>
+								</tr>
+							</c:forEach>
 						</table>
 
 						<!-- pagination start -->
@@ -180,7 +182,6 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/hospitalManager/util.js"></script>
 
 </body>
 </html>

@@ -24,6 +24,9 @@
     from t_department
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from t_department
+  </select>
   
   <select id="selectDepartmentsByHospitalUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
   	select
