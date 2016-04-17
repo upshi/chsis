@@ -94,4 +94,22 @@ public class DoctorController {
 		}
 		return map;
 	}
+	
+	//检查医生编号是否重复
+		@RequestMapping("/checkNumberUnique/{number}")
+		@ResponseBody
+		public Map<String, Object> checkNumberUnique(@PathVariable String number) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(StringUtil.isNoE(number)) {
+				map.put("result", "exist");
+			} else {
+				Doctor doctor = doctorService.selectByNumber(number);
+				if(doctor == null) {
+					map.put("result", "inexistence");
+				} else {
+					map.put("result", "exist");
+				}
+			}
+			return map;
+		}
 }

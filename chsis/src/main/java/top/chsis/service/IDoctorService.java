@@ -19,4 +19,6 @@ public interface IDoctorService {
     int updateByPrimaryKey(Doctor record);
 
 	int insert(Doctor doctor, UploadObject uo) throws Exception;
+
+	Doctor selectByNumber(String number);
 }

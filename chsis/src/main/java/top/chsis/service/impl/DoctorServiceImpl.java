@@ -68,4 +68,8 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doctorMapper.updateByPrimaryKey(doctor);
 	}
 
+	public Doctor selectByNumber(String number) {
+		return doctorMapper.selectByNumber(number);
+	}
+
 }

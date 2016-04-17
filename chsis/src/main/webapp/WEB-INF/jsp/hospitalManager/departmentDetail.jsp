@@ -16,7 +16,7 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
-<link href="assets/adminex/css/jquery-confirm.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!-- fileinput组件样式 -->
 <link href="assets/fileinput/fileinput.min.css" rel="stylesheet">
@@ -187,10 +187,13 @@
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-imgGroup">
 								<label class="col-sm-2 control-label">医生照片</label>
-								<div class="col-sm-3 panel">
-									<input type="file" id="input-id" name="file_data" />
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input type="file" id="input-id" name="file_data" />
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -242,7 +245,7 @@
 						</div>
 						<div class="row container">
 							<div class="form-group" id="adddoc-descriptionGroup">
-								<label class="col-sm-2 control-label">电话</label>
+								<label class="col-sm-2 control-label">医生描述</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
 										<textarea id="adddoc-description" class="form-control" name="description" rows="5" placeholder="请输入对医生的描述信息"></textarea>
@@ -252,7 +255,7 @@
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info btn-adddoc-submit">保存</button>
+							<button class="btn btn-info adddoc-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
