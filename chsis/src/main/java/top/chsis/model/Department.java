@@ -13,6 +13,17 @@ public class Department implements Serializable{
 	
 	public Department() {}
 
+	public Department(String uuid) {
+		this.uuid = uuid;
+	}
+	
+	public Department(String uuid, String number, String name, Hospital hospital) {
+		this.uuid = uuid;
+		this.number = number;
+		this.name = name;
+		this.hospital = hospital;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}

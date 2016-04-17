@@ -3,11 +3,10 @@ package top.chsis.service;
 import java.util.List;
 
 import top.chsis.model.Doctor;
+import top.chsis.model.UploadObject;
 
 public interface IDoctorService {
 	int deleteByPrimaryKey(String uuid);
-
-    int insert(Doctor record);
 
     int insertSelective(Doctor record);
 
@@ -18,4 +17,6 @@ public interface IDoctorService {
     int updateByPrimaryKeySelective(Doctor record);
 
     int updateByPrimaryKey(Doctor record);
+
+	int insert(Doctor doctor, UploadObject uo) throws Exception;
 }

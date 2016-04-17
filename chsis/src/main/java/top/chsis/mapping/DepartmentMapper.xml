@@ -24,6 +24,16 @@
     from t_department
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_department
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select * from t_department
   </select>
@@ -35,6 +45,22 @@
     <include refid="Blob_Column_List" />
     from t_department
     where hospital_uuid = #{hospitalUUID,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="top.chsis.model.Department" >
+    select * from t_department d
+    where 1=1
+    <if test="uuid!=null and uuid!=''">
+		and d.uuid LIKE CONCAT('%', #{uuid},'%' )
+	</if>
+    <if test="number!=null and number!=''">
+		and d.number LIKE CONCAT('%', #{number},'%' )
+	</if>
+	<if test="name!=null and name!=''">
+		and d.name LIKE CONCAT('%', #{name},'%' )
+	</if>
+	
+	and d.hospital_uuid = #{hospital.uuid}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

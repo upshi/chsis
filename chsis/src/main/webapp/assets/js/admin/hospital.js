@@ -1,5 +1,4 @@
 $(function() {
-	
 	//绑定点击添加医院按钮事件
 	$('.btn-add-hospital').on('click', function(){
 		onAddHospital();
@@ -125,7 +124,7 @@ function deleteHospital(uuid) {
 	$.confirm({
 		keyboardEnabled : true,
 			title : '删除医院',
-			content : '此操作会删除该医院，该医院下的所有医院管理员都将被删除，而且操作不可撤销，确定删除？',
+			content : '此操作会删除该医院，而且操作不可撤销，确定删除？',
 			confirmButtonClass : 'btn-info',
 			cancelButtonClass : 'btn-danger',
 			confirm : function() {
@@ -139,7 +138,7 @@ function deleteHospital(uuid) {
 							$.confirm({
 										keyboardEnabled : true,
 										title : '删除成功',
-										content : '成功删除医院管理员！',
+										content : '成功删除该医院！',
 										confirmButtonClass : 'btn-info',
 										cancelButtonClass : 'btn-danger',
 										autoClose : 'confirm|3000'

@@ -37,8 +37,6 @@ function onShowResident(uuid) {
 				}
 			} 
 	});
-	
-	
 }
 
 function getPeriod(num) {

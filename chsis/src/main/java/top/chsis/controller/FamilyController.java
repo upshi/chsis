@@ -72,11 +72,9 @@ public class FamilyController {
 	public String detail(@PathVariable String uuid,Model model){
 		Family family = familyService.selectByPrimaryKey(uuid);
 		String householderName =  residentService.selectByPrimaryKey(family.getHouseholderUUID()).getName();
-		Community community = family.getCommunity();
 		List<Resident> residents = residentService.selectResidentsByFamilyUUID(uuid);
 		model.addAttribute("family", family);
 		model.addAttribute("householderName", householderName);
-		model.addAttribute("community", community);
 		model.addAttribute("residents",residents);
 		return "admin/familyDetail";
 	}

@@ -68,16 +68,16 @@
 							</section>
 							<section class="panel col-sm-6">
 								<header class="panel-heading">
-									所在社区：${community.name }
+									所在社区：${family.community.name }
 								</header>
 								<header class="panel-heading">
-									社区地址：${community.address }
+									社区地址：${family.community.address }
 								</header>
 								<header class="panel-heading">
 									社区描述：
 								</header>
 								<div class="panel-body">
-									${community.description }
+									${family.community.description }
 								</div>
 							</section>
 						</div>

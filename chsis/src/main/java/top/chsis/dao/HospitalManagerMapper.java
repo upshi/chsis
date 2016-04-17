@@ -20,4 +20,6 @@ public interface HospitalManagerMapper {
     int updateByPrimaryKey(HospitalManager record);
     
     List<HospitalManager> selectAll();
+    
+    HospitalManager selectByManagerUuid(String managerUuid);
 }

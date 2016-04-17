@@ -133,7 +133,7 @@ function validate_addm() {
 
 //表单校验
 function validate_editm() {
-	if(checkName_edit() &&　checkPhone_edit()) {
+	if(checkName_edit() && checkPhone_edit()) {
 		return true;
 	} else {
 		return false;

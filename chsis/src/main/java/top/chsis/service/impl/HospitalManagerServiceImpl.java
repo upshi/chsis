@@ -47,4 +47,8 @@ public class HospitalManagerServiceImpl implements IHospitalManagerService {
 		return hospitalManagerMapper.selectByHospitalUuid(hospitalUuid);
 	}
 
+	public HospitalManager selectByManagerUuid(String managerUuid) {
+		return hospitalManagerMapper.selectByManagerUuid(managerUuid);
+	}
+
 }

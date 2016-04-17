@@ -3,7 +3,6 @@ package top.chsis.service;
 import java.util.List;
 
 import top.chsis.model.HospitalManager;
-import top.chsis.model.Manager;
 
 public interface IHospitalManagerService {
 
@@ -22,5 +21,7 @@ public interface IHospitalManagerService {
 	int updateByPrimaryKey(HospitalManager hospitalManager);
 	
 	List<HospitalManager> selectAll();
+
+	HospitalManager selectByManagerUuid(String managerUuid);
 
 }

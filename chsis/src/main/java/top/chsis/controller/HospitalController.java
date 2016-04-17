@@ -38,7 +38,7 @@ public class HospitalController {
 			if(result == 1) {
 				map.put("result", "success");
 			} else {
-				map.put("result", "failure");
+				map.put("result", "该医院下还有科室，不能删除该医院哦~");
 			}
 		}
 		return map;

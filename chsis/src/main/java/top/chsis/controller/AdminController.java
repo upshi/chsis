@@ -3,9 +3,12 @@ package top.chsis.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.fastjson.util.Base64;
 
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
@@ -28,6 +31,9 @@ public class AdminController {
 	@Autowired
 	private IManagerService managerService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/hospital")
 	public String manageHospital(Model model) {
 		List<Hospital> hospitals = hospitalService.selectAll();
@@ -46,8 +52,14 @@ public class AdminController {
 		HospitalManager hospitalManager = new HospitalManager();
 		hospitalManager.setUuid(StringUtil.getUUID());
 		hospitalManager.setHospital(new Hospital(hospitalUuid));
-		hospitalManager.setManager(manager);
 		
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(manager.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		manager.setPassword(encodedPassword);
+		
+		hospitalManager.setManager(manager);
 		managerService.insertHospitalManager(manager, hospitalManager);
 		
 		return "redirect:/hospital/detail/" + hospitalUuid;
@@ -56,9 +68,7 @@ public class AdminController {
 	@RequestMapping("/addHospital")
 	public String addHospital(Hospital hospital, Model model) {
 		hospital.setUuid(StringUtil.getUUID());
-
 		hospitalService.insert(hospital);
-		
 		return "redirect:/admin/hospital/";
 	}
 	

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -15,6 +16,10 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/adminex/css/jquery-confirm.css" rel="stylesheet">
+
+<!-- fileinput组件样式 -->
+<link href="assets/fileinput/fileinput.min.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
 <link href="assets/css/hospitalManager/index.css" rel="stylesheet">
@@ -34,6 +39,11 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="department/manage">科室管理</a></li>
+					<li class="active">科室信息详请</li>
+				</ul>
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -43,20 +53,19 @@
 						<div class="row">
 							<section class="panel col-sm-3">
 								<header class="panel-heading">
-									<b>科室编号：</b>d_001
+									<b>科室编号：</b>${department.number }
 								</header>
 								<header class="panel-heading">
-									<b>科室名称：</b>外科
+									<b>科室名称：</b>${department.name }
 								</header>
 								<header class="panel-heading">
-									<b>所属医院：</b>李惠利医院
+									<b>所属医院：</b>${department.hospital.name }
 								</header>
-						
 								<header class="panel-heading">
 									<b>科室描述：</b>
 								</header>
 								<div class="panel-body">
-									<p>这个科室医疗器械充足，医生来源可靠，医生水平高，医德高，护士服务到位。医院环境干净卫生，虽然是新成立的医院，但是发展前景非常好。</p>
+									${department.description }
 								</div>
 							</section>
 							<div class="panel col-sm-9">
@@ -64,15 +73,13 @@
 									<h3 class="panel-title">
 										医生信息 
 										<span class="tools pull-right"> 
-											<button class="btn btn-warning pull-left" data-toggle="modal" data-target="#addDoctor">添加医生</button>
+											<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button>
 										</span>
 									</h3>
 								</div>
 								<div class="panel-body">
 									<table class="table table-bordered table-responsive table-hover">
 										<tr class="info">
-											<th>用户名</th>
-											<th>密码</th>
 											<th>编号</th>
 											<th>姓名</th>
 											<th>电话</th>
@@ -80,53 +87,32 @@
 											<th>职称</th>
 											<th>操作</th>
 										</tr>
-										<tr>
-											<td>ranran</td>
-											<td>12121</td>
-											<td>d001</td>
-											<td>王文静</td>
-											<td>18394338773</td>
-											<td>本科</td>
-											<td>主任医师</td>
-											<td>
-												<button class="btn btn-danger btn-sm">删除</button> 
-												<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#doctor1">详情</button>
-											</td>
+										<c:forEach items="${doctors }" var="doctor">
+											<tr>
+												<td>${doctor.number }</td>
+												<td>${doctor.name }</td>
+												<td>${doctor.phone }</td>
+												<td>
+													<c:if test="${doctor.diploma == 0}">专科</c:if>
+													<c:if test="${doctor.diploma == 1}">本科</c:if>
+													<c:if test="${doctor.diploma == 2}">硕士</c:if>
+													<c:if test="${doctor.diploma == 3}">博士</c:if>
+													<c:if test="${doctor.diploma == 4}">博士后</c:if>
+												</td>
+												<td>
+													<c:if test="${doctor.title == 0}">护士</c:if>
+													<c:if test="${doctor.title == 1}">医师</c:if>
+													<c:if test="${doctor.title == 2}">主治医师</c:if>
+													<c:if test="${doctor.title == 3}">副主任医师</c:if>
+													<c:if test="${doctor.title == 4}">主任医师</c:if>
+												</td>
+												<td>
+													<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${department.uuid }')">删除</button> 
+													<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
+												</td>
 										</tr>
-										<tr>
-											<td>ranran</td>
-											<td>12121</td>
-											<td>d001</td>
-											<td>王文静</td>
-											<td>18394338773</td>
-											<td>本科</td>
-											<td>主任医师</td>
-											<td>
-												<button class="btn btn-danger btn-sm">删除</button> 
-												<button class="btn btn-default btn-sm">详情</button>
-											</td>
-										</tr>
+										</c:forEach>
 									</table>
-									<!-- pagination start -->
-					                <nav class="col-sm-4 col-sm-offset-4">
-										<ul class="pagination ">
-											<li>
-												<a href="#" aria-label="Previous"> 
-													<span aria-hidden="true">&laquo;</span>
-												</a>
-											</li>
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li>
-												<a href="#" aria-label="Next"> 
-													<span aria-hidden="true">&raquo;</span>
-												</a>
-											</li>
-										</ul>
-									</nav>
-									<!-- pagination end -->
 								</div>
 							</div>
 						</div>
@@ -142,65 +128,6 @@
 		</div>
 		<!-- main content end-->
 	</section>
-
-
-	
-
-	<!-- Modal Start -->
-	<div class="modal fade" id="changeDepartmentInfo" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">添加科室</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">科室编号</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="科室编号">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">科室名称</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="科室名称">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">所属医院</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所属医院">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">科室描述</label>
-								<div class="col-sm-3">
-									<textarea class="form-control" rows="5">这个科室医疗器械充足，医生来源可靠，医生水平高，医德高，护士服务到位。医院环境干净卫生，虽然是新成立的医院，但是发展前景非常好。
-                                </textarea>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-offset-4">
-							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
 	
 	<!-- Modal Start -->
 	<div class="modal fade" id="addDoctor" tabindex="-1" role="dialog">
@@ -213,92 +140,119 @@
 					<h4 class="modal-title">添加医生</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" class="department">
+					<form class="form-horizontal" method="POST" action="doctor/addDoctor" enctype="multipart/form-data">
+						<input id="departmentUuid" type="hidden" name="departmentUuid" value="${department.uuid }" />
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-userNameGroup">
 								<label class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="用户名">
+									<div class="iconic-input right">
+										<input id="adddoc-userName" class="form-control" name="userName" type="text" placeholder="用户名">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-passwordGroup">
 								<label class="col-sm-2 control-label">密码</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="密码">
+									<div class="iconic-input right">
+										<input id="adddoc-password" class="form-control" name="password" type="password" placeholder="密码">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-numberGroup">
 								<label class="col-sm-2 control-label">医生编号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="医生编号">
+									<div class="iconic-input right">
+										<input id="adddoc-number" class="form-control" name="number" type="text" placeholder="医生编号">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">姓名</label>
+							<div class="form-group" id="adddoc-nameGroup">
+								<label class="col-sm-2 control-label">医生姓名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="姓名">
+									<div class="iconic-input right">
+										<input id="adddoc-name" class="form-control" name="name" type="text" placeholder="医生姓名">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-2 control-label">照片</label>
-								<div class="col-sm-3">
-									<input type="file" name="photo" style="margin-top: 7px;">
+								<label class="col-sm-2 control-label">医生照片</label>
+								<div class="col-sm-3 panel">
+									<input type="file" id="input-id" name="file_data" />
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">性别</label>
-								<div class="col-sm-3">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
-									</label>
+							<div class="form-group" id="adddoc-sexGroup">
+								<label class="col-sm-2 control-label">医生性别</label>
+								<div class="col-sm-3 text-left">
+									<div class="iconic-input right">
+										<label class="radio-inline"> 
+											<input type="radio" name="sex" checked id="male" value="0"> 男
+										</label> 
+										<label class="radio-inline"> 
+											<input type="radio" name="sex" id="female" value="1"> 女
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-phoneGroup">
 								<label class="col-sm-2 control-label">电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="电话">
+									<div class="iconic-input right">
+										<input id="adddoc-phone" class="form-control" name="phone" type="text" placeholder="电话">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-diplomaGroup">
 								<label class="col-sm-2 control-label">学历</label>
 								<div class="col-sm-3">
-									<select id="diploma" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="diploma" name="diploma" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddoc-titleGroup">
 								<label class="col-sm-2 control-label">职称</label>
 								<div class="col-sm-3">
-									<select id="title" class="form-control"></select>
+									<div class="iconic-input right">
+										<select id="title" name="title" class="form-control"></select>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">医生描述</label>
+							<div class="form-group" id="adddoc-descriptionGroup">
+								<label class="col-sm-2 control-label">电话</label>
 								<div class="col-sm-3">
-									<textarea class="form-control" rows="5">这个科室医疗器械充足，医生来源可靠，医生水平高，医德高，护士服务到位。医院环境干净卫生，虽然是新成立的医院，但是发展前景非常好。
-                                </textarea>
+									<div class="iconic-input right">
+										<textarea id="adddoc-description" class="form-control" name="description" rows="5" placeholder="请输入对医生的描述信息"></textarea>
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info">保存</button>
+							<button class="btn btn-info btn-adddoc-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
@@ -309,7 +263,7 @@
 	<!-- Modal End -->
 	
 	<!-- Modal Start -->
-	<div class="modal fade" id="doctor1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="doctorDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -322,25 +276,36 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-3">
-						<img src="assets/image/doctorImg.jpg" alt="医生照片" style="height: auto; width: 150px;" />
+						<img id="doctor-photo" src="" alt="医生照片" style="height: auto; width: 145px;" />
 					</div>
-					<div class="col-sm-8 col-sm-offset-1">
-						<session class="panel">
+					<div class="col-sm-9">
+						<session class="panel col-sm-6">
 							<header class="panel-heading">
-								编号 ：NO.001_112
+								编号 ：<span id="doctor-number"></span>
 							</header>
 							<header class="panel-heading">
-								姓名 ：李惠利
+								姓名 ：<span id="doctor-name"></span>
 							</header>
 							<header class="panel-heading">
-								电话 ：18394338773
+								性别：<span id="doctor-sex"></span>
+							</header>
+						</session>
+						<session class="panel col-sm-6">
+							<header class="panel-heading">
+								电话 ：<span id="doctor-phone"></span>
 							</header>
 							<header class="panel-heading">
-								学历：硕士
+								学历：<span id="doctor-diploma"></span>
 							</header>
 							<header class="panel-heading">
-								科室 ：外科
+								职称：<span id="doctor-title"></span>
 							</header>
+						</session>
+						<session class="panel col-sm-12">
+							<header class="panel-heading">
+								医生描述：
+							</header>
+							<div class="panel-body" id="doctor-description"></div>
 						</session>
 					</div>
 				</div>
@@ -360,6 +325,17 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+	
+	<!-- fileinput组件 -->
+	<script type="text/javascript" src="assets/fileinput/fileinput.min.js"></script>
+	<script type="text/javascript" src="assets/fileinput/fileinput_locale_zh.js"></script>
+	
+	<!-- Custom JS -->
+	<script src="assets/js/file.js"></script>
+	<script src="assets/js/jquery.base64.js"></script>
+	<script src="assets/js/hospitalManager/dropDownList.js"></script>
+	<script src="assets/js/hospitalManager/departmentDetail.js"></script>
     
 </body>
 </html>

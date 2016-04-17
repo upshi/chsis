@@ -5,25 +5,51 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+
 import top.chsis.dao.DoctorMapper;
+import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.Doctor;
+import top.chsis.model.MedicalRecord;
+import top.chsis.model.UploadObject;
 import top.chsis.service.IDoctorService;
+import top.chsis.util.UploadUtil;
 
 @Service("doctorService")
 public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	private DoctorMapper doctorMapper;
 	
+	@Autowired
+	private MedicalRecordMapper medicalRecordMapper;
+	
 	public int deleteByPrimaryKey(String uuid) {
-		return doctorMapper.deleteByPrimaryKey(uuid);
+		List<MedicalRecord> medicalRecords = medicalRecordMapper.selectMedicalRecordsByDoctorUUID(uuid);
+		if(medicalRecords != null && medicalRecords.size() > 0){
+			return 0;
+		}else{
+			return doctorMapper.deleteByPrimaryKey(uuid);
+		}
 	}
 
-	public int insert(Doctor record) {
-		return doctorMapper.insert(record);
+	public int insert(Doctor doctor, UploadObject uo) throws Exception {
+		int result = doctorMapper.insert(doctor);
+		String msg = null;
+		try {
+			msg = UploadUtil.uploadImage(uo.getRemotePath(), uo.getInputStream());
+		} catch (Exception e) {
+			throw e;
+		}
+		JSONObject json = JSONObject.parseObject(msg);
+		Integer code = (Integer) json.get("code");
+		if(code != 0) {
+			throw new Exception("文件上传失败");
+		}
+		return result;
 	}
 
-	public int insertSelective(Doctor record) {
-		return doctorMapper.insertSelective(record);
+	public int insertSelective(Doctor doctor) {
+		return doctorMapper.insertSelective(doctor);
 	}
 
 	public Doctor selectByPrimaryKey(String uuid) {
@@ -34,12 +60,12 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doctorMapper.selectDoctorsByDepartmentUUID(departmentUUID);
 	}
 
-	public int updateByPrimaryKeySelective(Doctor record) {
-		return doctorMapper.updateByPrimaryKeySelective(record);
+	public int updateByPrimaryKeySelective(Doctor doctor) {
+		return doctorMapper.updateByPrimaryKeySelective(doctor);
 	}
 
-	public int updateByPrimaryKey(Doctor record) {
-		return doctorMapper.updateByPrimaryKey(record);
+	public int updateByPrimaryKey(Doctor doctor) {
+		return doctorMapper.updateByPrimaryKey(doctor);
 	}
 
 }

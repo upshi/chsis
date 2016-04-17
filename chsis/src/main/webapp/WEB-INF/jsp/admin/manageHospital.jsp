@@ -162,7 +162,7 @@
     <script src="assets/js/jquery.base64.js"></script>
     
     <!-- Custome Javascript -->
-	<script src="assets/js/hospitalManager/util.js"></script>    
+	<script src="assets/js/admin/hospital.js"></script>    
 	
 </body>
 </html>

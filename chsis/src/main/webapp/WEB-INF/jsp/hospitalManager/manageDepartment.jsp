@@ -16,6 +16,7 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
 <link href="assets/css/hospitalManager/index.css" rel="stylesheet">
@@ -34,7 +35,7 @@
 			<!-- header end -->
 			
 			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-department" data-toggle="modal" data-target="#addDepartment">添加科室</button>
+				<button class="btn btn-warning btn-add-department">添加科室</button>
 			</div>
 
 			<!--body wrapper start-->
@@ -50,9 +51,9 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="">
-							<input class="form-control" type="text" placeholder="按科室编号搜索"> 
-							<input class="form-control" type="text" placeholder="按科室名称搜索">
+						<form class="form-inline" action="department/search">
+							<input class="form-control" name="number" type="text" placeholder="请输入科室编号"> 
+							<input class="form-control" name="name" type="text" placeholder="请输入科室名称">
 							<button class="btn btn-info">搜索</button>
 						</form>
 						<div class="blank"></div>
@@ -72,33 +73,16 @@
 									<td>${department.name }</td>
 									<td>${department.hospital.name }</td>
 									<td>
-										<buttun class="btn btn-danger btn-sm">删除</buttun> 
-										<a href="hospitalManager/departmentDetail.jsp" class="btn btn-primary btn-sm">详情</a>
+										<buttun class="btn btn-danger btn-sm" onclick="deleteDepartment('${department.uuid}','${url }')">删除</buttun> 
+										<a href="department/detail/${department.uuid }" class="btn btn-primary btn-sm">详情</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</table>
 
-						<!-- pagination start -->
-		                <nav class="col-sm-4 col-sm-offset-4">
-							<ul class="pagination ">
-								<li>
-									<a href="#" aria-label="Previous"> 
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li>
-									<a href="#" aria-label="Next"> 
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
+						<div>查询到${totals }条记录/共${totalPages }页</div>
+		                <!-- pagination start -->
+		                <%@include file="/include/page.jsp" %>
 						<!-- pagination end -->
 			        </div>
 				</div>
@@ -124,43 +108,43 @@
 					<h4 class="modal-title">添加科室</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="department/addDepartment">
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddep-numberGroup">
 								<label class="col-sm-2 control-label">科室编号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="科室编号">
+									<div class="iconic-input right">
+										<input id="adddep-number" class="form-control" name="number" type="text" placeholder="科室编号">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddep-nameGroup">
 								<label class="col-sm-2 control-label">科室名称</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="科室名称">
+									<div class="iconic-input right">
+										<input id="adddep-name" class="form-control" name="name" type="text" placeholder="科室名称">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-2 control-label">所属医院</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所属医院">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="adddep-descriptionGroup">
 								<label class="col-sm-2 control-label">科室描述</label>
 								<div class="col-sm-3">
-									<textarea class="form-control" rows="5">这个科室医疗器械充足，医生来源可靠，医生水平高，医德高，护士服务到位。医院环境干净卫生，虽然是新成立的医院，但是发展前景非常好。
-                                </textarea>
+									<div class="iconic-input right">
+										<textarea id="adddep-description" class="form-control" name="description" rows="5" placeholder="请输入科室描述"></textarea>
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-info"  id="adddep-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>
@@ -179,6 +163,8 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+	<script src="assets/js/hospitalManager/department.js"></script>
 
 </body>
 </html>

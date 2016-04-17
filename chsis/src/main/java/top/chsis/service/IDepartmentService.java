@@ -2,6 +2,8 @@ package top.chsis.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.Department;
 
 public interface IDepartmentService {
@@ -20,5 +22,9 @@ public interface IDepartmentService {
     int updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
+    
+    PageInfo<Department> selectByConditionAndPaging(Department department, int page, int size);
+
+	Department selectByNumber(String number);
 
 }
