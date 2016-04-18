@@ -174,7 +174,7 @@
 						</div>
 						<div class="col-sm-offset-5">
 							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>

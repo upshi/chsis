@@ -28,6 +28,7 @@ import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 import top.chsis.model.UploadObject;
+import top.chsis.service.IDepartmentService;
 import top.chsis.service.IDoctorService;
 import top.chsis.service.IHospitalManagerService;
 import top.chsis.service.IManagerService;
@@ -49,6 +50,9 @@ public class DoctorController {
 	@Autowired
 	private IHospitalManagerService hospitalManagerService;
 	
+	@Autowired
+	private IDepartmentService departmentService;
+	
 	@RequestMapping("/manage")
 	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//查询
@@ -58,6 +62,7 @@ public class DoctorController {
 		DoctorVO doctorVO = new DoctorVO(null, null, null, null, hospitalUuid);
 		PageInfo<Doctor> pageInfo = doctorService.selectByConditionAndPaging(doctorVO, page, size);
 		List<Doctor> doctors = pageInfo.getList();
+		model.addAttribute("hospitalUuid", hospitalUuid);
 		model.addAttribute("doctors", doctors);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
@@ -155,34 +160,54 @@ public class DoctorController {
 	}
 	
 	//检查医生编号是否重复
-		@RequestMapping("/checkNumberUnique/{number}")
-		@ResponseBody
-		public Map<String, Object> checkNumberUnique(@PathVariable String number) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			if(StringUtil.isNoE(number)) {
-				map.put("result", "exist");
+	@RequestMapping("/checkNumberUnique/{number}")
+	@ResponseBody
+	public Map<String, Object> checkNumberUnique(@PathVariable String number) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(number)) {
+			map.put("result", "exist");
+		} else {
+			Doctor doctor = doctorService.selectByNumber(number);
+			if(doctor == null) {
+				map.put("result", "inexistence");
 			} else {
-				Doctor doctor = doctorService.selectByNumber(number);
-				if(doctor == null) {
-					map.put("result", "inexistence");
-				} else {
-					map.put("result", "exist");
-				}
+				map.put("result", "exist");
 			}
-			return map;
 		}
+		return map;
+	}
 		
-		//根据登陆的管理员信息，查询所管理的医院。
-		private Hospital getManagedHospital(HttpSession session) {
-			HospitalManager hospitalManager = (HospitalManager) session.getAttribute("hospitalManager");
-			if(hospitalManager == null) {
-				//获取当前登录的用户
-				String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				//根据当前用户查出管理员信息
-				Manager manager = managerService.selectByUserName(userName.split("%")[0]);
-				//根据管理员信息查出所管理的医院
-				hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
-			}
-			return hospitalManager.getHospital();
+	//根据登陆的管理员信息，查询所管理的医院。
+	private Hospital getManagedHospital(HttpSession session) {
+		HospitalManager hospitalManager = (HospitalManager) session.getAttribute("hospitalManager");
+		if(hospitalManager == null) {
+			//获取当前登录的用户
+			String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			//根据当前用户查出管理员信息
+			Manager manager = managerService.selectByUserName(userName.split("%")[0]);
+			//根据管理员信息查出所管理的医院
+			hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
 		}
+		return hospitalManager.getHospital();
+	}
+	
+	//获取该医院下的所有科室的名称
+	@RequestMapping("/getDepartmentType/{hospitalUuid}")
+	@ResponseBody
+	public Map<String, Object> getDepartmentType(@PathVariable String hospitalUuid){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtil.isNoE(hospitalUuid)) {
+			map.put("result", "failure");
+		} else {
+			List<Department> departments = departmentService.selectDepartmentsByHospitalUUID(hospitalUuid);
+			if(departments != null) {
+				map.put("result", "success");
+				map.put("departments", departments);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
 }

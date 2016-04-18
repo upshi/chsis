@@ -53,10 +53,10 @@
 			<!-- admin end -->
 			<hr>
 			<!-- doctor start -->
-			<li><a href="doctor/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
-			<li><a href="doctor/createMedicalRecord.jsp"><i class="fa fa-home"></i> <span>已就诊记录</span></a></li>
-			<li><a href="doctor/finishedMedicalRecord.jsp"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
-			<li><a href="doctor/unfishedMedicalRecord.jsp"><i class="fa fa-home"></i> <span>新建就诊记录</span></a></li>
+			<li><a href="doctor/baseInfo.jsp"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
+			<li><a href="doctor/createMedicalRecord.jsp"><i class="fa fa-home"></i> <span>新建就诊记录</span></a></li>
+			<li><a href="doctor/finishedMedicalRecord.jsp"><i class="fa fa-home"></i> <span>已就诊记录</span></a></li>
+			<li><a href="doctor/unfishedMedicalRecord.jsp"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
 			<li><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- doctor end -->
 			<hr>

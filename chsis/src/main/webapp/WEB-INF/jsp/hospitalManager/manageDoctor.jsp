@@ -16,6 +16,10 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
+
+<!-- fileinput组件样式 -->
+<link href="assets/fileinput/fileinput.min.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
 <link href="assets/css/hospitalManager/index.css" rel="stylesheet">
@@ -34,7 +38,7 @@
 			<!-- header end -->
 
 			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-doctor" data-toggle="modal" data-target="#addDoctor">添加医生</button> 
+				<button class="btn btn-warning btn-add-doctor">添加医生</button> 
 			</div>
 			
 			<!--body wrapper start-->
@@ -76,8 +80,8 @@
 			                        <td>${doctor.diploma }</td>
 			                        <td>${doctor.title }</td>
 			                        <td>
-			                            <button class="btn btn-danger btn-sm">删除</button>
-			                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#doctor1">详情</button>
+			                        	<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${url }')">删除</button> 
+										<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
 			                        </td>
 			                    </tr>
 		                    </c:forEach>
@@ -100,6 +104,7 @@
 
     <!-- Modal Start -->
 	<div class="modal fade" id="addDoctor" tabindex="-1" role="dialog">
+		<input id="hospitalUuid" type="hidden" name="hospitalUuid" value="${hospitalUuid }" />
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -110,6 +115,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="doctor/addDoctor" enctype="multipart/form-data">
+						<input id="departmentUuid" type="hidden" name="departmentUuid" value="${department.uuid }" />
 						<div class="row container">
 							<div class="form-group" id="adddoc-userNameGroup">
 								<label class="col-sm-2 control-label">用户名</label>
@@ -212,11 +218,11 @@
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group" id="adddoc-titleGroup">
-								<label class="col-sm-2 control-label">选择科室</label>
+							<div class="form-group" id="adddoc-departmentGroup">
+								<label class="col-sm-2 control-label">所在科室</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<select id="departmentType" name="departmentType" class="form-control"></select>
+										<select id="department" name="department" class="form-control"></select>
 									</div>
 								</div>
 							</div>
@@ -244,7 +250,7 @@
 	<!-- Modal End -->
 	
 	<!-- Modal Start -->
-	<div class="modal fade" id="doctor1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="doctorDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -252,74 +258,45 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 医生信息
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 查看医生信息
 					</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-3">
-						<img src="assets/image/doctorImg.jpg" alt="医生照片" style="height: auto; width: 150px;" />
+						<img id="doctor-photo" src="" alt="医生照片" style="height: auto; width: 145px;" />
 					</div>
 					<div class="col-sm-9">
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>编号 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-1">
-								<h4>NO.001_112</h4>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>姓名 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-1">
-								<h4>李惠利</h4>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>电话 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-1">
-								<h4>18394338773</h4>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>学历 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-1">
-								<h4>硕士</h4>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>科室 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-1">
-								<h4>外科</h4>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="col-sm-1">
-								<h4>
-									<b>描述 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-3">
-								<p>李惠利医生认真负责，临床经验丰富，对外科有独到的见解和认识， 治疗各种疾病。药到病除，让患者摆脱疾病的困扰。</p>
-							</div>
-						</div>
+						<session class="panel col-sm-6">
+							<header class="panel-heading">
+								编号 ：<span id="doctor-number"></span>
+							</header>
+							<header class="panel-heading">
+								姓名 ：<span id="doctor-name"></span>
+							</header>
+							<header class="panel-heading">
+								性别：<span id="doctor-sex"></span>
+							</header>
+							<header class="panel-heading">
+								所在科室：<span id="doctor-department"></span>
+							</header>
+						</session>
+						<session class="panel col-sm-6">
+							<header class="panel-heading">
+								电话 ：<span id="doctor-phone"></span>
+							</header>
+							<header class="panel-heading">
+								学历：<span id="doctor-diploma"></span>
+							</header>
+							<header class="panel-heading">
+								职称：<span id="doctor-title"></span>
+							</header>
+						</session>
+						<session class="panel col-sm-12">
+							<header class="panel-heading">
+								医生描述：
+							</header>
+							<div class="panel-body" id="doctor-description"></div>
+						</session>
 					</div>
 				</div>
 				<div class="modal-footer"></div>
@@ -339,7 +316,15 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+	
+	<!-- fileinput组件 -->
+	<script type="text/javascript" src="assets/fileinput/fileinput.min.js"></script>
+	<script type="text/javascript" src="assets/fileinput/fileinput_locale_zh.js"></script>
+	
+	<!-- Custom JS -->
 	<script src="assets/js/hospitalManager/dropDownList.js"></script>
+	<script src="assets/js/hospitalManager/doctor.js"></script>
 	
 </body>
 </html>
