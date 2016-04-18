@@ -1,27 +1,38 @@
 package top.chsis.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.util.Base64;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.Department;
 import top.chsis.model.Doctor;
+import top.chsis.model.Hospital;
+import top.chsis.model.HospitalManager;
+import top.chsis.model.Manager;
 import top.chsis.model.UploadObject;
 import top.chsis.service.IDoctorService;
+import top.chsis.service.IHospitalManagerService;
+import top.chsis.service.IManagerService;
 import top.chsis.util.StringUtil;
+import top.chsis.vo.DoctorVO;
 
 @Controller
 @RequestMapping("/doctor")
@@ -31,6 +42,54 @@ public class DoctorController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private IManagerService managerService;
+	
+	@Autowired
+	private IHospitalManagerService hospitalManagerService;
+	
+	@RequestMapping("/manage")
+	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//查询
+		//得到所管理的医院
+		Hospital hospital = getManagedHospital(session);
+		String hospitalUuid = hospital.getUuid();
+		DoctorVO doctorVO = new DoctorVO(null, null, null, null, hospitalUuid);
+		PageInfo<Doctor> pageInfo = doctorService.selectByConditionAndPaging(doctorVO, page, size);
+		List<Doctor> doctors = pageInfo.getList();
+		model.addAttribute("doctors", doctors);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "doctor/manage?");
+		
+		return "hospitalManager/manageDoctor";
+	}
+	
+	@RequestMapping("/search")
+	public String search(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page,
+									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String number,
+									  @RequestParam(defaultValue = "") String name,
+									  @RequestParam(defaultValue = "") String departmentName) {
+		//得到所管理的医院
+		Hospital hospital = getManagedHospital(session);
+		String hospitalUuid = hospital.getUuid();
+		DoctorVO doctorVO = new DoctorVO(null, number, name, departmentName, hospitalUuid);
+		
+		PageInfo<Doctor> pageInfo = doctorService.selectByConditionAndPaging(doctorVO, page, size);
+		List<Doctor> doctors = pageInfo.getList();
+		model.addAttribute("doctors", doctors);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "doctor/search?number=" + number + 
+												"&name=" + name +
+												"&departmentName=" + departmentName + "&" );
+		
+		return "hospitalManager/manageDoctor";
+	}
 	
 	//添加医生
 	@RequestMapping("/addDoctor")
@@ -111,5 +170,19 @@ public class DoctorController {
 				}
 			}
 			return map;
+		}
+		
+		//根据登陆的管理员信息，查询所管理的医院。
+		private Hospital getManagedHospital(HttpSession session) {
+			HospitalManager hospitalManager = (HospitalManager) session.getAttribute("hospitalManager");
+			if(hospitalManager == null) {
+				//获取当前登录的用户
+				String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				//根据当前用户查出管理员信息
+				Manager manager = managerService.selectByUserName(userName.split("%")[0]);
+				//根据管理员信息查出所管理的医院
+				hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
+			}
+			return hospitalManager.getHospital();
 		}
 }

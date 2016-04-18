@@ -1,11 +1,15 @@
 package top.chsis.service.impl;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.DoctorMapper;
 import top.chsis.dao.MedicalRecordMapper;
@@ -14,6 +18,8 @@ import top.chsis.model.MedicalRecord;
 import top.chsis.model.UploadObject;
 import top.chsis.service.IDoctorService;
 import top.chsis.util.UploadUtil;
+import top.chsis.vo.DoctorVO;
+import top.chsis.vo.ResidentVO;
 
 @Service("doctorService")
 public class DoctorServiceImpl implements IDoctorService {
@@ -70,6 +76,14 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	public Doctor selectByNumber(String number) {
 		return doctorMapper.selectByNumber(number);
+	}
+
+	public PageInfo<Doctor> selectByConditionAndPaging(DoctorVO doctorVO, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<Doctor> list = new ArrayList<Doctor>();
+		list = doctorMapper.selectByCondition(doctorVO);
+		PageInfo<Doctor> pageInfo = new PageInfo<Doctor>(list);
+		return pageInfo;
 	}
 
 }

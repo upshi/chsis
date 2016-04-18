@@ -63,7 +63,7 @@
 			
 			<!-- hospitalManager start -->
 			<li><a href="department/manage"><i class="fa fa-home"></i> <span>科室管理</span></a></li>
-			<li><a href="hospitalManager/manageDoctor.jsp"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
+			<li><a href="doctor/manage"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
 			<li><a href="hospitalManager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- hospitalManager end -->
 			<hr>

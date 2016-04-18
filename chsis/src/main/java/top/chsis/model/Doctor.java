@@ -2,6 +2,8 @@ package top.chsis.model;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.parser.deserializer.StringFieldDeserializer;
+
 public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,7 @@ public class Doctor implements Serializable {
 	private Department department;// 所在科室
 
 	public Doctor() {}
-
+	
 	public Doctor(String uuid, String userName, String password, String number, String name, String photo, Integer sex, String phone, Integer diploma, String description, Integer title, Department department) {
 		super();
 		this.uuid = uuid;
@@ -36,6 +38,13 @@ public class Doctor implements Serializable {
 		this.department = department;
 	}
 
+
+	public Doctor(String uuid, String number, String name, Department department) {
+		this.uuid = uuid;
+		this.number = number;
+		this.name = name;
+		this.department = department;
+	}
 
 	public String getUuid() {
 		return uuid;

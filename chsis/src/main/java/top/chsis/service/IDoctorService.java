@@ -2,8 +2,11 @@ package top.chsis.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.Doctor;
 import top.chsis.model.UploadObject;
+import top.chsis.vo.DoctorVO;
 
 public interface IDoctorService {
 	int deleteByPrimaryKey(String uuid);
@@ -21,4 +24,6 @@ public interface IDoctorService {
 	int insert(Doctor doctor, UploadObject uo) throws Exception;
 
 	Doctor selectByNumber(String number);
+
+	PageInfo<Doctor> selectByConditionAndPaging(DoctorVO doctorVO, int page, int size);
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -43,9 +45,9 @@ public class DepartmentContrller {
 	private IDoctorService doctorService;
 	
 	@RequestMapping("/manage")
-	public String manage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//得到所管理的医院
-		Hospital hospital = getManagedHospital();
+		Hospital hospital = getManagedHospital(session);
 		//构造查询参数
 		Department department = new Department();
 		department.setHospital(hospital);
@@ -63,12 +65,12 @@ public class DepartmentContrller {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(defaultValue = "1") int page,
+	public String search(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page,
 									  @RequestParam(defaultValue = "5") int size,
 									  @RequestParam(defaultValue = "") String number,
 									  @RequestParam(defaultValue = "") String name) {
 		//得到所管理的医院
-		Hospital hospital = getManagedHospital();
+		Hospital hospital = getManagedHospital(session);
 		Department department = new Department(null, number, name,hospital);
 		
 		PageInfo<Department> pageInfo = departmentService.selectByConditionAndPaging(department, page, size);
@@ -85,9 +87,9 @@ public class DepartmentContrller {
 	
 	//添加科室
 	@RequestMapping("/addDepartment")
-	public String addHospital(Department department, Model model) {
+	public String addHospital(Department department, Model model, HttpSession session) {
 		department.setUuid(StringUtil.getUUID());
-		department.setHospital(getManagedHospital());
+		department.setHospital(getManagedHospital(session));
 		departmentService.insert(department);
 		return "redirect:/department/manage";
 	}
@@ -140,14 +142,16 @@ public class DepartmentContrller {
 	}
 	
 	//根据登陆的管理员信息，查询所管理的医院。
-	private Hospital getManagedHospital() {
-		//获取当前登录的用户
-		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//根据当前用户查出管理员信息
-		Manager manager = managerService.selectByUserName(userName.split("%")[0]);
-		//根据管理员信息查出所管理的医院
-		HospitalManager hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
-		
+	private Hospital getManagedHospital(HttpSession session) {
+		HospitalManager hospitalManager = (HospitalManager) session.getAttribute("hospitalManager");
+		if(hospitalManager == null) {
+			//获取当前登录的用户
+			String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			//根据当前用户查出管理员信息
+			Manager manager = managerService.selectByUserName(userName.split("%")[0]);
+			//根据管理员信息查出所管理的医院
+			hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
+		}
 		return hospitalManager.getHospital();
 	}
 }

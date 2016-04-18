@@ -72,21 +72,21 @@
 							</tr>
 							<c:forEach items="${residents }" var="residentVO">
 								<tr>
-								<td>${residentVO.userName }</td>
-								<td>${residentVO.name }</td>
-								<td>
-									<c:if test="${residentVO.sex == '0' }">男</c:if>
-									<c:if test="${residentVO.sex == '1' }">女</c:if>
-								</td>
-								<td>${residentVO.idNo }</td>
-								<td>${residentVO.phone }</td>
-								<td>${residentVO.familyNumber }</td>
-								<td>
-									<button class="btn btn-danger btn-sm" onclick="deleteResident('${residentVO.uuid}','${url }')">删除</button>
-									<button class="btn btn-primary btn-sm btn-residentDetail"  uuid="${residentVO.uuid }">详情</button>
-									<button class="btn btn-info btn-sm btn-edit-resident" uuid="${residentVO.uuid }">修改</button>
-								</td>
-							</tr>
+									<td>${residentVO.userName }</td>
+									<td>${residentVO.name }</td>
+									<td>
+										<c:if test="${residentVO.sex == '0' }">男</c:if>
+										<c:if test="${residentVO.sex == '1' }">女</c:if>
+									</td>
+									<td>${residentVO.idNo }</td>
+									<td>${residentVO.phone }</td>
+									<td>${residentVO.familyNumber }</td>
+									<td>
+										<button class="btn btn-danger btn-sm" onclick="deleteResident('${residentVO.uuid}','${url }')">删除</button>
+										<button class="btn btn-primary btn-sm btn-residentDetail"  uuid="${residentVO.uuid }">详情</button>
+										<button class="btn btn-info btn-sm btn-edit-resident" uuid="${residentVO.uuid }">修改</button>
+									</td>
+								</tr>
 							</c:forEach>
 						</table>
 						<div>查询到${totals }条记录/共${totalPages }页</div>

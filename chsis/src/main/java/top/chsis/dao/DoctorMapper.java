@@ -3,6 +3,7 @@ package top.chsis.dao;
 import java.util.List;
 
 import top.chsis.model.Doctor;
+import top.chsis.vo.DoctorVO;
 
 public interface DoctorMapper {
     int deleteByPrimaryKey(String uuid);
@@ -20,4 +21,6 @@ public interface DoctorMapper {
     int updateByPrimaryKey(Doctor record);
     
     Doctor selectByNumber(String number);
+    
+    List<Doctor> selectByCondition(DoctorVO doctorVO);
 }

@@ -21,6 +21,7 @@
   <sql id="Blob_Column_List" >
     description
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -29,6 +30,27 @@
     from t_doctor
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="top.chsis.vo.DoctorVO" >
+    select d.* from t_doctor d, t_department dep, t_hospital h
+    where 1=1
+    <if test="uuid!=null and uuid!=''">
+		and d.uuid = #{uuid}
+	</if>
+    <if test="number!=null and number!=''">
+		and d.number LIKE CONCAT('%', #{number},'%' )
+	</if>
+    <if test="name!=null and name!=''">
+		and d.name LIKE CONCAT('%', #{name},'%' )
+	</if>
+    <if test="departmentName!=null and departmentName!=''">
+		and dep.name LIKE CONCAT('%', #{departmentName},'%' )
+	</if>
+	and d.department_uuid = dep.uuid 
+	and dep.hospital_uuid = h.uuid
+	and h.uuid = #{hospitalUuid}
+  </select>
+  
   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -37,6 +59,7 @@
     from t_doctor
     where number = #{number,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectDoctorsByDepartmentUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -45,10 +68,12 @@
     from t_doctor
     where department_uuid = #{departmentUUID,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_doctor
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.Doctor" >
     insert into t_doctor (uuid, userName, password, 
       number, name, photo, 
@@ -61,6 +86,7 @@
       #{title,jdbcType=INTEGER}, #{department.uuid,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
       )
   </insert>
+  
   <insert id="insertSelective" parameterType="top.chsis.model.Doctor" >
     insert into t_doctor
     <trim prefix="(" suffix=")" suffixOverrides="," >
