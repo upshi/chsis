@@ -77,8 +77,20 @@
 			                        <td>${doctor.name }</td>
 			                        <td>${doctor.department.name }</td>
 			                        <td>${doctor.phone }</td>
-			                        <td>${doctor.diploma }</td>
-			                        <td>${doctor.title }</td>
+			                        <td>
+			                        	<c:if test="${doctor.diploma==0}">专科</c:if>
+			                        	<c:if test="${doctor.diploma==1}">本科</c:if>
+			                        	<c:if test="${doctor.diploma==2}">硕士</c:if>
+			                        	<c:if test="${doctor.diploma==3}">博士</c:if>
+			                        	<c:if test="${doctor.diploma==4}">博士后</c:if>
+			                        </td>
+			                        <td>
+			                        	<c:if test="${doctor.title==0}">护士</c:if>
+			                        	<c:if test="${doctor.title==1}">医师</c:if>
+			                        	<c:if test="${doctor.title==2}">主治医师</c:if>
+			                        	<c:if test="${doctor.title==3}">副主任医师</c:if>
+			                        	<c:if test="${doctor.title==4}">主任医师</c:if>
+			                        </td>
 			                        <td>
 			                        	<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${url }')">删除</button> 
 										<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
@@ -115,7 +127,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="doctor/addDoctor" enctype="multipart/form-data">
-						<input id="departmentUuid" type="hidden" name="departmentUuid" value="${department.uuid }" />
+						<input id="url" type="hidden" name="url" value="${url }page=${pageIndex }" />
 						<div class="row container">
 							<div class="form-group" id="adddoc-userNameGroup">
 								<label class="col-sm-2 control-label">用户名</label>
@@ -222,7 +234,7 @@
 								<label class="col-sm-2 control-label">所在科室</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<select id="department" name="department" class="form-control"></select>
+										<select id="department" name="departmentUuid" class="form-control"></select>
 									</div>
 								</div>
 							</div>
@@ -323,6 +335,8 @@
 	<script type="text/javascript" src="assets/fileinput/fileinput_locale_zh.js"></script>
 	
 	<!-- Custom JS -->
+	<script src="assets/js/file.js"></script>
+	<script src="assets/js/jquery.base64.js"></script>
 	<script src="assets/js/hospitalManager/dropDownList.js"></script>
 	<script src="assets/js/hospitalManager/doctor.js"></script>
 	

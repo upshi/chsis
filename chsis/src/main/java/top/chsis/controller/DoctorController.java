@@ -98,7 +98,7 @@ public class DoctorController {
 	
 	//添加医生
 	@RequestMapping("/addDoctor")
-	public String addDoctor(Doctor doctor,Model model,String departmentUuid,HttpServletRequest request){
+	public String addDoctor(Doctor doctor,Model model,String departmentUuid, String url, HttpServletRequest request){
 		doctor.setUuid(StringUtil.getUUID());
 		doctor.setDepartment(new Department(departmentUuid));
 
@@ -120,7 +120,11 @@ public class DoctorController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/department/detail/" + departmentUuid;
+		if(url == null){
+			return "redirect:/department/detail/" + departmentUuid;
+		}else{
+			return "redirect:/" + url;
+		}	
 	}
 	
 	//删除医生
@@ -168,6 +172,23 @@ public class DoctorController {
 			map.put("result", "exist");
 		} else {
 			Doctor doctor = doctorService.selectByNumber(number);
+			if(doctor == null) {
+				map.put("result", "inexistence");
+			} else {
+				map.put("result", "exist");
+			}
+		}
+		return map;
+	}
+	//检查医生编号是否重复
+	@RequestMapping("/checkUserNameUnique/{userName}")
+	@ResponseBody
+	public Map<String, Object> checkUserNameUnique(@PathVariable String userName) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(userName)) {
+			map.put("result", "exist");
+		} else {
+			Doctor doctor = doctorService.selectByUserName(userName);
 			if(doctor == null) {
 				map.put("result", "inexistence");
 			} else {

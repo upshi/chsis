@@ -60,6 +60,15 @@
     where number = #{number,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_doctor
+    where userName = #{userName,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectDoctorsByDepartmentUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

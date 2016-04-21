@@ -16,9 +16,9 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
-<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 <link href="assets/css/admin/index.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
@@ -381,7 +381,6 @@
 	<script src="assets/adminex/js/scripts.js"></script>
     <script src="assets/js/jquery-confirm.js"></script>
     <script src="assets/js/admin/dropDownList.js"></script>
-    <script src="assets/js/admin/util.js"></script>
     <script src="assets/js/admin/familyDetail.js"></script>
 </body>
 </html>

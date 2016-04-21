@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -15,6 +16,7 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
 <link href="assets/css/resident/index.css" rel="stylesheet">
@@ -39,21 +41,164 @@
 						<h3 class="panel-title">
 							基本信息
 							<span class="tools pull-right"> 
+								<button class="btn btn-warning pull-left btn-edit-baseInfo">修改基本信息</button>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>
 					<div class="panel-body">
-			            <div class="infoList">
-							<span><b>居民姓名：</b>d_001</span> <span><b>居民性别：</b>男</span> <span><b>身份证号：</b>329444199312091624</span>
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>居民姓名：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										${resident.name }
+									</header>
+								</session>
+							</div>
 						</div>
-						<div class="infoList">
-							<span><b>所属民族：</b>汉族</span> <span><b>出生日期：</b>1993/12/01</span> <span><b>居民年龄：</b>22岁</span>
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>居民性别：
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										<c:if test="${resident.sex==0 }">男</c:if>
+										<c:if test="${resident.sex==1 }">女</c:if>
+									</header>
+								</session>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>身份证号：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										${resident.idNo }
+									</header>
+								</session>
+							</div>
 						</div>
-						<div class="infoList">
-							<span><b>年龄分段：</b>青年</span> <span><b>联系电话：</b>18394338773</span> <span><b>婚姻状况：</b>未婚</span>
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>所属民族：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading" id="nationCode" nationCode="${resident.nation }">
+									</header>
+								</session>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>出生日期：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										${resident.birth }
+									</header>
+								</session>
+							</div>
 						</div>
-						<button class="btn btn-info col-sm-offset-4" data-target="#baseInfo" data-toggle="modal">修改基本信息</button>
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>居民年龄：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										${resident.age }
+									</header>
+								</session>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>年龄分段：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										<c:if test="${resident.period==0 }">婴幼儿</c:if>
+										<c:if test="${resident.period==1 }">儿童</c:if>
+										<c:if test="${resident.period==2 }">青少年</c:if>
+										<c:if test="${resident.period==3 }">青年</c:if>
+										<c:if test="${resident.period==4 }">中年</c:if>
+										<c:if test="${resident.period==5 }">中老年</c:if>
+										<c:if test="${resident.period==6 }">老年</c:if>
+									</header>
+								</session>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>联系电话：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										${resident.phone }
+									</header>
+								</session>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-sm-2 col-sm-offset-3">
+								<session class="panel">
+									<header class="panel-heading text-center">
+										<b>婚姻状况：</b>
+									</header>
+								</session>
+							</div>
+							<div class="col-sm-3">
+								<session class="panel">
+									<header class="panel-heading">
+										<c:if test="${resident.marriage==0 }">未婚</c:if>
+										<c:if test="${resident.marriage==1 }">已婚</c:if>
+										<c:if test="${resident.marriage==2 }">离异</c:if>
+									</header>
+								</session>
+							</div>
+						</div>
 			        </div>
 				</div>
 				<!-- panel end -->
@@ -67,20 +212,8 @@
 		<!-- main content end-->
 	</section>
 
-	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/adminex/js/bootstrap.min.js"></script>
-	<script src="assets/adminex/js/modernizr.min.js"></script>
-	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/resident/dropDownList.js"></script>
-
-	<!--common scripts for all pages-->
-	<script src="assets/adminex/js/scripts.js"></script>
-
 	<!-- Modal Start-->
-	<div class="modal fade" id="baseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editBaseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -92,89 +225,90 @@
 					</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="resident/edit">
+						<input id="residentUuid" type="hidden" name="uuid" value="${resident.uuid }">
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民姓名</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民姓名:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民姓名">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别</label>
-								<div class="col-sm-3">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
+									<label class="control-label">
+										${resident.name }
 									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">身份证号</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="身份证号">
+									<label class="control-label">
+										<c:if test="${resident.sex==0 }">男</c:if>
+										<c:if test="${resident.sex==1 }">女</c:if>
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所属民族</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">身份证号:</label>
 								<div class="col-sm-3">
-									<select id="nation" class="form-control"></select>
+									<label class="control-label">
+										${resident.idNo }
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">所属民族:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="出生日期，如：19931201">
+									<select id="nation" class="form-control" name="nation" nationCode="${resident.nation }"></select>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="居民年龄">
+									<input class="form-control" type="text" name="birth" placeholder="出生日期，如：19931201" value="${resident.birth }">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">年龄分段</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄:</label>
 								<div class="col-sm-3">
-									<select id="period" class="form-control"></select>
+									<input class="form-control" type="text" name="age" placeholder="居民年龄" value="${resident.age }">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">年龄分段:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="联系电话">
+									<select id="period" class="form-control" name="period" periodCode="${resident.period }"></select>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">婚姻状况</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话:</label>
 								<div class="col-sm-3">
-									<select id="marriage" class="form-control"></select>
+									<input class="form-control" type="text" name="phone" placeholder="联系电话" value="${resident.phone }">
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group">
+								<label class="col-sm-1 col-sm-offset-1 control-label">婚姻状况:</label>
+								<div class="col-sm-3">
+									<select id="marriage" class="form-control" name="marriage" marriageCode="${resident.marriage }"></select>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-5">
 							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>
@@ -183,5 +317,18 @@
 		</div>
 	</div>
 	<!-- Modal End-->
+	
+	<!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+
+	<!--common scripts for all pages-->
+	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/resident/baseInfo.js"></script>
 </body>
 </html>

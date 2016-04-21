@@ -25,4 +25,6 @@ public interface IResidentService {
 
 	PageInfo<ResidentVO> selectByConditionAndPaging(ResidentVO residentVO, int page, int size);
 
+	Resident selectByUserName(String userName);
+
 }

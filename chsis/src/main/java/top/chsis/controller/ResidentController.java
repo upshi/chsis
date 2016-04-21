@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import top.chsis.model.Community;
-import top.chsis.model.Family;
 import top.chsis.model.Resident;
 import top.chsis.service.ICommunityService;
 import top.chsis.service.IFamilyService;
@@ -38,8 +36,12 @@ public class ResidentController {
 	private ICommunityService communityService;
 
 	@RequestMapping("/baseInfo")
-	public String baseInfo() {
+	public String baseInfo(Model model) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+		Resident resident = residentService.selectByUserName(userName);
+		model.addAttribute("resident", resident);
 		return "resident/baseInfo";
 	}
 	
@@ -119,8 +121,16 @@ public class ResidentController {
 	
 	@RequestMapping("/edit")
 	public String editResident(Resident resident, Model model, String url) {
+		System.out.println("ssssa");
+		System.out.println("ssssa");
+		System.out.println("ssssa");
+		
 		residentService.updateByPrimaryKeySelective(resident);
-		return "redirect:/" + url;
+		if(url == null){
+			return "redirect:/resident/baseInfo";
+		}else{
+			return "redirect:/" + url;
+		}	
 	}
 	
 }

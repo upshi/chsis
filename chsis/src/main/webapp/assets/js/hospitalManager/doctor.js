@@ -11,7 +11,7 @@ $(function() {
 			success : function(data) {
 				if(data.result == "success") {
 					for(var i in data.departments) {
-			           	$('#department').append('<option value="' + i + '">' + data.departments[i].name + '</option>');
+			           	$('#department').append('<option value="' + data.departments[i].uuid + '">' + data.departments[i].name + '</option>');
 			        }
 				} else {
 					alert('失败');
@@ -185,6 +185,7 @@ function validate_adddoc() {
 
 //提交前处理
 function checkUserName_add() {
+	var flag = false;
 	var userName = $('#adddoc-userName').val();
 	if(userName == null || $.trim(userName) == '') {
 		$('#adddoc-userNameGroup').removeClass('has-success');
@@ -192,11 +193,27 @@ function checkUserName_add() {
 		$('#adddoc-userNameGroup .help-block').html('请输入医生的用户名');
 		return false;
 	} else {
-		$('#adddoc-userNameGroup').removeClass('has-error');
-		$('#adddoc-userNameGroup').addClass('has-success');
-		$('#adddoc-userNameGroup .help-block').html('');
-		return true;
-	}
+		$.ajax({
+			url : "doctor/checkUserNameUnique/" + userName ,
+			type : "GET" ,
+			cache : false , 
+			async : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == "exist") {
+					$('#adddoc-userNameGroup').removeClass('has-success');
+					$('#adddoc-userNameGroup').addClass('has-error');
+					$('#adddoc-userNameGroup .help-block').html('用户名已存在');
+				} else {
+					$('#adddoc-userNameGroup').removeClass('has-error');
+					$('#adddoc-userNameGroup').addClass('has-success');
+					$('#adddoc-userNameGroup .help-block').html('');
+					flag = true;
+				}
+			} 
+		});
+	}	
+	return flag;
 }
 function checkPassword_add() {
 	var password = $('#adddoc-password').val();

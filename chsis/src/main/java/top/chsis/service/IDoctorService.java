@@ -24,6 +24,8 @@ public interface IDoctorService {
 	int insert(Doctor doctor, UploadObject uo) throws Exception;
 
 	Doctor selectByNumber(String number);
+	
+	Doctor selectByUserName(String userName);
 
 	PageInfo<Doctor> selectByConditionAndPaging(DoctorVO doctorVO, int page, int size);
 }

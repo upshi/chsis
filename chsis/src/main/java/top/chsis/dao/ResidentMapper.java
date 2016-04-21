@@ -21,4 +21,6 @@ public interface ResidentMapper {
     int updateByPrimaryKey(Resident record);
     
     List<ResidentVO> selectByCondition(ResidentVO residentVO);
+    
+    Resident selectByUserName(String userName);
 }

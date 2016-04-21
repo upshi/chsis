@@ -86,4 +86,8 @@ public class DoctorServiceImpl implements IDoctorService {
 		return pageInfo;
 	}
 
+	public Doctor selectByUserName(String userName) {
+		return doctorMapper.selectByUserName(userName);
+	}
+
 }

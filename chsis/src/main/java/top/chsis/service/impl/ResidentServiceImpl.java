@@ -65,4 +65,8 @@ public class ResidentServiceImpl implements IResidentService {
 		return pageInfo;
 	}
 
+	public Resident selectByUserName(String userName) {
+		return residentMapper.selectByUserName(userName);
+	}
+
 }

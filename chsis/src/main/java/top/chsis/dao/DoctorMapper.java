@@ -22,5 +22,7 @@ public interface DoctorMapper {
     
     Doctor selectByNumber(String number);
     
+    Doctor selectByUserName(String userName);
+    
     List<Doctor> selectByCondition(DoctorVO doctorVO);
 }
