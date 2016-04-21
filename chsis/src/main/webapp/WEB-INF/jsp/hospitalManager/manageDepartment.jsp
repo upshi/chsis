@@ -143,7 +143,7 @@
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info"  id="adddep-submit">保存</button>
+							<button class="btn btn-info" id="adddep-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

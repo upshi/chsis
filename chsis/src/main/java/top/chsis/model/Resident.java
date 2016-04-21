@@ -48,6 +48,10 @@ public class Resident implements Serializable {
 		this.family = family;
 	}
 
+	public Resident(String uuid) {
+		this.uuid = uuid;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}

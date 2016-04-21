@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.model.Department;
+import top.chsis.model.DiseaseHistory;
 import top.chsis.model.Resident;
 import top.chsis.service.ICommunityService;
+import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
@@ -34,6 +39,9 @@ public class ResidentController {
 	
 	@Autowired
 	private ICommunityService communityService;
+	
+	@Autowired
+	private IDiseaseHistoryService diseaseHistoryService;
 
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -43,6 +51,21 @@ public class ResidentController {
 		Resident resident = residentService.selectByUserName(userName);
 		model.addAttribute("resident", resident);
 		return "resident/baseInfo";
+	}
+	
+	@RequestMapping("/healthInfo")
+	public String healthInfo(Model model) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Resident resident = residentService.selectByUserName(userName);
+		
+		//获得居民的疾病史信息
+		List<DiseaseHistory> diseaseHistories = diseaseHistoryService.selectDiseaseHistoriesByPatientUUID(resident.getUuid());
+		
+		model.addAttribute("resident", resident);
+		model.addAttribute("diseaseHistories", diseaseHistories);
+		return "resident/healthInfo";
 	}
 	
 	@RequestMapping("/manage")
@@ -120,17 +143,48 @@ public class ResidentController {
 	}
 	
 	@RequestMapping("/edit")
-	public String editResident(Resident resident, Model model, String url) {
-		System.out.println("ssssa");
-		System.out.println("ssssa");
-		System.out.println("ssssa");
-		
+	public String editResident(Resident resident, Model model, String url, String leftEyesight, String rightEyesight) {
+		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
+		String eyesight = leftEyesight + "," + rightEyesight;
+		//为eyesight赋值
+		resident.setEyesight(eyesight);
 		residentService.updateByPrimaryKeySelective(resident);
-		if(url == null){
-			return "redirect:/resident/baseInfo";
-		}else{
+		
+		//根据不同的参数，返回不同的页面
+		if(leftEyesight != null && rightEyesight != null) {
+			return "redirect:/resident/healthInfo";
+		}else if(url != null) {
 			return "redirect:/" + url;
+		}else {
+			return "redirect:/resident/baseInfo";
 		}	
 	}
 	
+	@RequestMapping("/getDiseaseHistory/{uuid}")
+	@ResponseBody
+	public Map<String, Object> getDiseaseHistory(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			DiseaseHistory diseaseHistory = diseaseHistoryService.selectByPrimaryKey(uuid);
+			if(diseaseHistory != null) {
+				map.put("result", "success");
+				map.put("diseaseHistory", diseaseHistory);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
+	//添加疾病史
+	@RequestMapping("/addDiseaseHistory")
+	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String residentUuid) {
+		diseaseHistory.setUuid(StringUtil.getUUID());
+		Resident resident = new Resident(residentUuid);
+		diseaseHistory.setPatient(resident);
+		diseaseHistoryService.insert(diseaseHistory);
+		return "redirect:/department/manage";
+	}
 }
