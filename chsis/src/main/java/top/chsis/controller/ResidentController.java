@@ -180,11 +180,12 @@ public class ResidentController {
 	
 	//添加疾病史
 	@RequestMapping("/addDiseaseHistory")
-	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String residentUuid) {
+	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String patientUuid) {
+		System.out.println(patientUuid);
 		diseaseHistory.setUuid(StringUtil.getUUID());
-		Resident resident = new Resident(residentUuid);
+		Resident resident = new Resident(patientUuid);
 		diseaseHistory.setPatient(resident);
 		diseaseHistoryService.insert(diseaseHistory);
-		return "redirect:/department/manage";
+		return "redirect:/resident/healthInfo";
 	}
 }

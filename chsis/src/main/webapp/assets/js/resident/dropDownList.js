@@ -14,4 +14,9 @@ $(document).ready(function(){
             $('#marriage').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
         }
     });
+     $.getJSON('assets/json/diseaseHistory.json',function(data){
+        for(var i in data) {
+            $('#diseaseHistory').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
+        }
+    });
 });

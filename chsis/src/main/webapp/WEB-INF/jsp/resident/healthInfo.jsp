@@ -145,40 +145,52 @@
 					<form class="form-horizontal" method="POST" action="resident/edit">
 						<input id="residentUuid" type="hidden" name="uuid" value="${resident.uuid }">
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editdis-heightGroup">
 								<label class="col-sm-2 control-label">身高</label>
 								<div class="col-sm-3">
-									<input name="height" class="form-control" type="text" placeholder="身高(cm)" value="${resident.height }">
+									<div class="iconic-input right">
+										<input id="editdis-height" class="form-control" name="height" type="text" placeholder="身高(cm)" value="${resident.height }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editdis-weightGroup">
 								<label class="col-sm-2 control-label">体重</label>
 								<div class="col-sm-3">
-									<input name="weight" class="form-control" type="text" placeholder="体重(kg)" value="${resident.weight }">
+									<div class="iconic-input right">
+										<input id="editdis-weight" class="form-control" name="weight" type="text" placeholder="体重(kg)" value="${resident.weight }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editdis-leftEyesightGroup">
 								<label class="col-sm-2 control-label">左眼视力</label>
 								<div class="col-sm-3">
-									<input id="leftEyesight" name="leftEyesight" class="form-control" type="text" placeholder="左眼视力">
+									<div class="iconic-input right">
+										<input id="editdis-leftEyesight" class="form-control" name="leftEyesight" type="text" placeholder="左眼视力">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="editdis-rightEyesightGroup">
 								<label class="col-sm-2 control-label">右眼视力</label>
 								<div class="col-sm-3">
-									<input id="rightEyesight" name="rightEyesight" class="form-control" type="text" placeholder="右眼视力">
+									<div class="iconic-input right">
+										<input id="editdis-rightEyesight" class="form-control" name="rightEyesight" type="text" placeholder="右眼视力">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
 							<div class="blank"></div>
-							<button class="btn btn-info">保存</button>
+							<button class="btn btn-info" id="editdis-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
@@ -273,7 +285,7 @@
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal" method="POST" action="resident/addDiseaseHistory">
-						<input name="residentUuid" type="hidden" value="${resident.uuid }">
+						<input id="patientUuid" name="patientUuid" type="hidden" value="${resident.uuid }">
 						<div class="row container">
 							<div class="form-group" id="adddis-nameGroup">
 								<label class="col-sm-2 control-label">疾病名称</label>
@@ -289,10 +301,7 @@
 							<div class="form-group" id="adddis-typeGroup">
 								<label class="col-sm-2 control-label">疾病类型</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="adddis-type" class="form-control" name="type" type="text" placeholder="疾病类型">
-										<p class="help-block"></p>
-									</div>
+									<select id="diseaseHistory" name="type" class="form-control"></select>
 								</div>
 							</div>
 						</div>
@@ -301,7 +310,7 @@
 								<label class="col-sm-2 control-label">开始时间</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<input id="adddis-startTime" class="form-control" name="startTime" type="text" placeholder="开始时间">
+										<input id="adddis-startTime" class="form-control" name="startTime" type="text" placeholder="开始时间:如：2015-12-01">
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -312,31 +321,12 @@
 								<label class="col-sm-2 control-label">痊愈时间</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<input id="adddis-endTime" class="form-control" name="startTime" type="text" placeholder="痊愈时间">
+										<input id="adddis-endTime" class="form-control" name="endTime" type="text" placeholder="痊愈时间，如：2016-12-01">
 										<p class="help-block"></p>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">开始时间</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" value="2016-05-15" id="datetimepicker" data-date-format="yyyy-mm-dd">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">痊愈时间</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="痊愈时间">
-								</div>
-							</div>
-						</div>
-						
 						<div class="row container">
 							<div class="form-group" id="addis-descriptionGroup">
 								<label class="col-sm-2 control-label">病情描述</label>

@@ -18,8 +18,8 @@ $(function(){
 function onloadModal(){
 	var eyesightCode = $('#eyesightCode').attr('eyesightCode');
 	var eye = eyesightCode.split(',');
-	$('#leftEyesight').val(eye[0]);
-	$('#rightEyesight').val(eye[1]);
+	$('#editdis-leftEyesight').val(eye[0]);
+	$('#editdis-rightEyesight').val(eye[1]);
 	
 	//绑定点击修改基本信息按钮事件
 	$('.btn-edit-commonHealthInfo').on('click', function(){
@@ -28,8 +28,93 @@ function onloadModal(){
 }
 //打开修改常规健康信息的模态框
 function onEditCommonHealthInfo() {
+	//绑定input元素失去焦点事件
+	$('#editdis-height').on('blur', checkHeight_edit);
+	$('#editdis-weight').on('blur', checkWeight_edit);
+	$('#editdis-leftEyesight').on('blur', checkLeftEyesight_edit);
+	$('#editdis-rightEyesight').on('blur', checkRightEyesight_edit);
+	
+	//绑定保存按钮点击事件
+	$('#editdis-submit').on('click', function(){
+		//表单校验
+		var pass = validate_editdis();
+		if(pass) {
+			return true;
+		}
+		return false;
+	});
+	
 	$('#editCommonHealthInfo').modal();
 }
+
+//表单校验
+function validate_editdis() {
+	if(checkHeight_edit() && checkWeight_edit() && checkLeftEyesight_edit() && checkRightEyesight_edit()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function checkHeight_edit() {
+	var height = $('#editdis-height').val();
+	if(height == null || $.trim(height) == '') {
+		$('#editdis-heightGroup').removeClass('has-success');
+		$('#editdis-heightGroup').addClass('has-error');
+		$('#editdis-heightGroup .help-block').html('请输入身高');
+		return false;
+	} else {
+		$('#editdis-heightGroup').removeClass('has-error');
+		$('#editdis-heightGroup').addClass('has-success');
+		$('#editdis-heightGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkWeight_edit() {
+	var weight = $('#editdis-weight').val();
+	if(weight == null || $.trim(weight) == '') {
+		$('#editdis-weightGroup').removeClass('has-success');
+		$('#editdis-weightGroup').addClass('has-error');
+		$('#editdis-weightGroup .help-block').html('请输入体重');
+		return false;
+	} else {
+		$('#editdis-weightGroup').removeClass('has-error');
+		$('#editdis-weightGroup').addClass('has-success');
+		$('#editdis-weightGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkLeftEyesight_edit() {
+	var leftEyesight = $('#editdis-leftEyesight').val();
+	if(leftEyesight == null || $.trim(leftEyesight) == '') {
+		$('#editdis-leftEyesightGroup').removeClass('has-success');
+		$('#editdis-leftEyesightGroup').addClass('has-error');
+		$('#editdis-leftEyesightGroup .help-block').html('请输入左眼视力');
+		return false;
+	} else {
+		$('#editdis-leftEyesightGroup').removeClass('has-error');
+		$('#editdis-leftEyesightGroup').addClass('has-success');
+		$('#editdis-leftEyesightGroup .help-block').html('');
+		return true;
+	}
+}
+function checkRightEyesight_edit() {
+	var rightEyesight = $('#editdis-rightEyesight').val();
+	if(rightEyesight == null || $.trim(rightEyesight) == '') {
+		$('#editdis-rightEyesightGroup').removeClass('has-success');
+		$('#editdis-rightEyesightGroup').addClass('has-error');
+		$('#editdis-rightEyesightGroup .help-block').html('请输入右眼视力');
+		return false;
+	} else {
+		$('#editdis-rightEyesightGroup').removeClass('has-error');
+		$('#editdis-rightEyesightGroup').addClass('has-success');
+		$('#editdis-rightEyesightGroup .help-block').html('');
+		return true;
+	}
+}
+
 
 function getEyesight(eyesight) {
 	var eye = eyesight.split(',');
@@ -66,23 +151,17 @@ function onShowDiseaseHistory(uuid) {
 }
 
 //打开添加疾病史模态框
-function onAddDepartment() {
-	//获取所有input元素并清空内容
-	var inputs = $('#addDiseaseHistory input');
-	for(var i=0; i<inputs.length-1; i++) {
-		$(inputs[i]).attr('value','');
-	}
-	$("textarea[name='description']").html('');
-	
+function onAddDiseaseHistory() {
 	//绑定input元素失去焦点事件
-	$('#adddep-number').on('blur', checkNumber_add);
-	$('#adddep-name').on('blur', checkName_add);
-	$('#adddep-description').on('blur', checkDescription_add);
+	$('#adddis-name').on('blur', checkName_add);
+	$('#adddis-startTime').on('blur', checkStartTime_add);
+	$('#adddis-endTime').on('blur', checkEndTime_add);
+	$('#adddis-description').on('blur', checkDescription_add);
 	
 	//绑定保存按钮点击事件
 	$('#adddis-submit').on('click', function(){
 		//表单校验
-		var pass = validate_addh();
+		var pass = validate_adddis();
 		if(pass) {
 			return true;
 		}
@@ -91,6 +170,76 @@ function onAddDepartment() {
 	
 	$('#addDiseaseHistory').modal();
 }
+
+//表单校验
+function validate_adddis() {
+	if(checkName_add() && checkStartTime_add() && checkEndTime_add() && checkDescription_add()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function checkName_add() {
+	var name = $('#adddis-name').val();
+	if(name == null || $.trim(name) == '') {
+		$('#adddis-nameGroup').removeClass('has-success');
+		$('#adddis-nameGroup').addClass('has-error');
+		$('#adddis-nameGroup .help-block').html('请输入疾病名称');
+		return false;
+	} else {
+		$('#adddis-nameGroup').removeClass('has-error');
+		$('#adddis-nameGroup').addClass('has-success');
+		$('#adddis-nameGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkStartTime_add() {
+	var startTime = $('#adddis-startTime').val();
+	if(startTime == null || $.trim(startTime) == '') {
+		$('#adddis-startTimeGroup').removeClass('has-success');
+		$('#adddis-startTimeGroup').addClass('has-error');
+		$('#adddis-startTimeGroup .help-block').html('请输入疾病开始时间');
+		return false;
+	} else {
+		$('#adddis-startTimeGroup').removeClass('has-error');
+		$('#adddis-startTimeGroup').addClass('has-success');
+		$('#adddis-startTimeGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkEndTime_add() {
+	var endTime = $('#adddis-endTime').val();
+	if(endTime == null || $.trim(endTime) == '') {
+		$('#adddis-endTimeGroup').removeClass('has-success');
+		$('#adddis-endTimeGroup').addClass('has-error');
+		$('#adddis-endTimeGroup .help-block').html('请输入疾病痊愈时间');
+		return false;
+	} else {
+		$('#adddis-endTimeGroup').removeClass('has-error');
+		$('#adddis-endTimeGroup').addClass('has-success');
+		$('#adddis-endTimeGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkDescription_add() {
+	var description = $('#adddis-description').val();
+	if(description == null || $.trim(description) == '') {
+		$('#adddis-descriptionGroup').removeClass('has-success');
+		$('#adddis-descriptionGroup').addClass('has-error');
+		$('#adddis-descriptionGroup .help-block').html('请输入病情描述');
+		return false;
+	} else {
+		$('#adddis-descriptionGroup').removeClass('has-error');
+		$('#adddis-descriptionGroup').addClass('has-success');
+		$('#adddis-descriptionGroup .help-block').html('');
+		return true;
+	}
+}
+
 
 function getType(num) {
 	switch(num) {
