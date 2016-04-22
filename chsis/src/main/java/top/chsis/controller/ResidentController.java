@@ -143,7 +143,7 @@ public class ResidentController {
 	}
 	
 	@RequestMapping("/edit")
-	public String editResident(Resident resident, Model model, String url, String leftEyesight, String rightEyesight) {
+	public String editResident(Resident resident, String url, String leftEyesight, String rightEyesight) {
 		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
 		String eyesight = leftEyesight + "," + rightEyesight;
 		//为eyesight赋值

@@ -98,7 +98,7 @@ public class DoctorController {
 	
 	//添加医生
 	@RequestMapping("/addDoctor")
-	public String addDoctor(Doctor doctor,Model model,String departmentUuid, String url, HttpServletRequest request){
+	public String addDoctor(Doctor doctor, String departmentUuid, String url, HttpServletRequest request){
 		doctor.setUuid(StringUtil.getUUID());
 		doctor.setDepartment(new Department(departmentUuid));
 

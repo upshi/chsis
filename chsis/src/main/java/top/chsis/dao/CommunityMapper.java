@@ -1,5 +1,7 @@
 package top.chsis.dao;
 
+import java.util.List;
+
 import top.chsis.model.Community;
 
 public interface CommunityMapper {
@@ -14,4 +16,6 @@ public interface CommunityMapper {
     int updateByPrimaryKeySelective(Community record);
 
     int updateByPrimaryKey(Community record);
+    
+    List<Community> selectAll();
 }

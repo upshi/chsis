@@ -105,9 +105,8 @@
 							<div class="form-group">
 								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别</label>
 								<div class="col-sm-3">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
-									</label>
+									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男</label> 
+									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女</label>
 								</div>
 							</div>
 						</div>

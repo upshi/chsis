@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -54,30 +55,20 @@
 								<th>就诊记录</th>
 								<th>操作</th>
 							</tr>
-							<tr>
-								<td>张三</td>
-								<td>22</td>
-								<td>18493228776</td>
-								<td><a data-toggle="modal" id="aaa">疾病史</a></td>
-								<td><a data-toggle="modal" data-target="#healthRecord">体检记录</a></td>
-								<td><a href="resident/medicalRecordDetail.jsp">就诊记录</a></td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteMember">删除</button> 
-									<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#memberInfoDetail">详情</button> 
-								</td>
-							</tr>
-							<tr>
-								<td>张三</td>
-								<td>22</td>
-								<td>18493228776</td>
-								<td>疾病史</td>
-								<td>体检记录</td>
-								<td>就诊记录</td>
-								<td>
-									<button class="btn btn-danger btn-sm deleteMember">删除</button> 
-									<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#memberInfoDetail">详情</button> 
-								</td>
-							</tr>
+							<c:forEach items="${residents }" var="resident">
+								<tr>
+									<td>${resident.name }</td>
+									<td>${resident.age }</td>
+									<td>${resident.phone }</td>
+									<td><a class="a-diseaseHistory" residentUuid="${resident.uuid }">疾病史</a></td>
+									<td><a data-toggle="modal" data-target="#healthRecord">体检记录</a></td>
+									<td><a href="resident/medicalRecordDetail.jsp">就诊记录</a></td>
+									<td>
+										<button class="btn btn-danger btn-sm deleteMember" onclick="deleteResident('${resident.uuid}')">删除</button> 
+										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
+									</td>
+								</tr>
+							</c:forEach>
 						</table>
 
 					</div>
@@ -96,18 +87,20 @@
 						<table class="table table-bordered table-responsive table-hover">
 							<tr class="info">
 								<th>户主</th>
+								<th>家庭编号</th>
 								<th>家庭电话</th>
 								<th>家庭地址</th>
 								<th>所在社区</th>
 								<th>操作</th>
 							</tr>
 							<tr>
-								<td>张三</td>
-								<td>1865348492</td>
-								<td>南京市栖霞区进取村153号</td>
-								<td>南京市栖霞区阳光小区</td>
+								<td>${householderName }</td>
+								<td>${family.number }</td>
+								<td>${family.phone }</td>
+								<td>${family.address }</td>
+								<td>${family.community.name }</td>
 								<td>
-									<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#familyInfo">修改</button> 
+									<button class="btn btn-success btn-sm btn-edit-family">修改</button> 
 								</td>
 							</tr>
 						</table>
@@ -123,27 +116,8 @@
 		<!-- main content end-->
 	</section>
 
-
-	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/adminex/js/bootstrap.min.js"></script>
-	<script src="assets/adminex/js/modernizr.min.js"></script>
-	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/jquery-confirm.js"></script>
-
-	<!--common scripts for all pages-->
-	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/resident/util.js"></script>
-	<script>
-		$('#aaa').on('click', function() {
-			$('#medicalHistory').modal();
-		})
-	</script>
-
 	<!-- Modal Start-->
-	<div class="modal fade" id="medicalHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="diseaseHistoryDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -156,18 +130,12 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-12">
-						<table class="table table-responsive table-hover">
+						<table id="table-diseaseHistory" class="table table-responsive table-hover">
 							<tr>
 								<th>疾病名称</th>
 								<th>疾病类型</th>
 								<th>开始时间</th>
 								<th>痊愈时间</th>
-							</tr>
-							<tr>
-								<td>白血病</td>
-								<td>遗传病</td>
-								<td>1993/12/02</td>
-								<td>--</td>
 							</tr>
 						</table>
 					</div>
@@ -289,7 +257,7 @@
 	<!-- Modal End-->
 	
 	<!-- Modal Start-->
-	<div class="modal fade" id="memberInfoDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="residentDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -300,27 +268,124 @@
 						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 家庭成员信息
 					</h4>
 				</div>
-				<div class="modal-body container">
-					<div class="infoList">
-						<span><b>居民姓名：</b>d_001</span> <span><b>居民性别：</b>男</span>
+				<div class="modal-body container col-sm-12">
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>居民姓名：</b>
+							</h5>
+						</div>
+						<div class="col-sm-3 text-left">
+							<h5 id="resident-name"></h5>
+						</div>
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>居民性别：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-sex"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>身份证号：</b>329444199312091624</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>身份证号：</b>
+							</h5>
+						</div>
+						<div class="col-sm-3 text-left">
+							<h5 id="resident-idNo"></h5>
+						</div>
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>所属民族：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-nation"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>所属民族：</b>汉族</span> <span><b>出生日期：</b>1993/12/01</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>出生日期：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-birth"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>居民年龄：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-age"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>居民年龄：</b>22岁</span> <span><b>年龄分段：</b>青年</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>年龄分段：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-period"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>联系电话：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-phone"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>联系电话：</b>18394338773</span> <span><b>婚姻状况：</b>未婚</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>婚姻状况：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-marriage"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>居民身高：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-height"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>身高：</b>183cm</span> <span><b>体重：</b>87kg</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>居民体重：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-weight"></h5>
+						</div>
+						<div class="col-sm-3 text-right col-sm-offset-1">
+							<h5>
+								<b>居民视力：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-eyesight"></h5>
+						</div>
 					</div>
-					<div class="infoList">
-						<span><b>视力：</b>《左眼2.1，右眼2.5》</span> <span><b>血型：</b>A型</span>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>居民血型：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="resident-bloodType"></h5>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer"></div>
@@ -330,7 +395,7 @@
 	<!-- Modal End-->
 	
 	<!-- Modal Start-->
-	<div class="modal fade" id="familyInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editFamily" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -342,21 +407,35 @@
 					</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="family/editFamily">
+						<input name="uuid" type="hidden" value="${family.uuid }">
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">家庭电话</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">家庭编号</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="家庭电话" value="0512-8652211">
+									<input class="form-control" name="number" type="text" placeholder="家庭编号" value="${family.number }" readonly>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">家庭地址</label>
-
+							<div class="form-group" id="editf-phoneGroup">
+								<label class="col-sm-2 control-label">家庭电话</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="家庭地址" value="南京市栖霞区进取村153号">
+									<div class="iconic-input right">
+										<input id="editf-phone" class="form-control" name="phone" type="text" placeholder="家庭电话" value="${family.phone }">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="editf-addressGroup">
+								<label class="col-sm-2 control-label">家庭地址</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="editf-address" class="form-control" name="address" type="text" placeholder="家庭地址" value="${family.address }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -364,13 +443,13 @@
 							<div class="form-group">
 								<label class="col-sm-1 col-sm-offset-1 control-label">所在社区</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在社区" value="南京市栖霞区阳光小区">
+									<select id="community" name="communityUuid" class="form-control" communityName="${family.community.name }"></select>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-5">
-							<button class="btn btn-success">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button id="editf-submit" class="btn btn-success">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 				
 					</form>
@@ -380,6 +459,20 @@
 		</div>
 	</div>
 	<!-- Modal End-->
+	
+	
+	<!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+
+	<!--common scripts for all pages-->
+	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/resident/familyInfo.js"></script>
 
 </body>
 </html>

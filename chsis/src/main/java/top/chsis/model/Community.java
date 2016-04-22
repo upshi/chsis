@@ -13,6 +13,10 @@ public class Community implements Serializable {
 	
 	public Community() {}
 
+	public Community(String communityUuid) {
+		this.uuid = communityUuid;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}

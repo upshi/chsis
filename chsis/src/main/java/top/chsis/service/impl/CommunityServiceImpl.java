@@ -1,5 +1,7 @@
 package top.chsis.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,10 @@ public class CommunityServiceImpl implements ICommunityService {
 
 	public int updateByPrimaryKey(Community record) {
 		return communityMapper.updateByPrimaryKey(record);
+	}
+
+	public List<Community> selectAll() {
+		return communityMapper.selectAll();
 	}
 
 }

@@ -1,5 +1,7 @@
 package top.chsis.service;
 
+import java.util.List;
+
 import top.chsis.model.Community;
 
 public interface ICommunityService {
@@ -14,4 +16,6 @@ public interface ICommunityService {
     int updateByPrimaryKeySelective(Community record);
 
     int updateByPrimaryKey(Community record);
+
+	List<Community> selectAll();
 }

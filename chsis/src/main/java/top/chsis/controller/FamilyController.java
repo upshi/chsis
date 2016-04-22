@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,12 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.ResidentMapper;
 import top.chsis.model.Community;
+import top.chsis.model.DiseaseHistory;
 import top.chsis.model.Family;
 import top.chsis.model.Manager;
 import top.chsis.model.Resident;
+import top.chsis.service.ICommunityService;
+import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
@@ -33,6 +37,34 @@ public class FamilyController {
 	
 	@Autowired
 	private IResidentService residentService;
+	
+	@Autowired
+	private IDiseaseHistoryService diseaseHistoryService;
+	
+	@Autowired
+	private ICommunityService communityService;
+	
+	@RequestMapping("/familyInfo")
+	public String FamilyInfo(Model model){
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		
+		//根据登陆的用户查到家庭id，然后根据家庭id查到该家庭下的所有成员
+		String familyUuid = resident.getFamily().getUuid();
+		List<Resident> residents = residentService.selectResidentsByFamilyUUID(familyUuid);
+		
+		Family family = familyService.selectByPrimaryKey(familyUuid);
+		String  householderUuid = family.getHouseholderUUID();
+		Resident householder = residentService.selectByPrimaryKey(householderUuid);
+		String householderName = householder.getName();
+		
+		model.addAttribute("residents", residents);
+		model.addAttribute("family", family);
+		model.addAttribute("householderName", householderName);
+		
+		return "resident/familyInfo";
+	}
 
 	@RequestMapping("/manage")
 	public String manage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
@@ -95,5 +127,68 @@ public class FamilyController {
 			}
 		}
 		return map;
+	}
+	
+	@RequestMapping("/getDiseaseHistory/{residentUuid}")
+	@ResponseBody
+	public Map<String, Object> getDiseaseHistory(@PathVariable String residentUuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(residentUuid)) {
+			map.put("result", "failure");
+		} else {
+			List<DiseaseHistory> diseaseHistories = diseaseHistoryService.selectDiseaseHistoriesByPatientUUID(residentUuid);
+			if(diseaseHistories != null) {
+				map.put("result", "success");
+				map.put("diseaseHistories", diseaseHistories);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
+	@RequestMapping("/getResident/{uuid}")
+	@ResponseBody
+	public Map<String, Object> getResident(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			Resident resident = residentService.selectByPrimaryKey(uuid);
+			
+			if(resident != null) {
+				map.put("result", "success");
+				map.put("resident", resident);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
+	@RequestMapping("/getCommunityType")
+	@ResponseBody
+	public Map<String, Object> getCommunityType() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<Community> communities = communityService.selectAll();
+		
+		if(communities != null) {
+			map.put("result", "success");
+			map.put("communities", communities);
+		} else {
+			map.put("result", "failure");
+		}
+	
+		return map;
+	}
+	
+	@RequestMapping("/editFamily")
+	public String editFamily(Family family, String communityUuid){
+		System.out.println(communityUuid);
+		Community community = new Community(communityUuid);
+		family.setCommunity(community);
+		familyService.updateByPrimaryKeySelective(family);
+		return "redirect:/family/familyInfo";
 	}
 }

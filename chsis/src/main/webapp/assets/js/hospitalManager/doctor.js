@@ -276,6 +276,7 @@ function checkName_add() {
 		return true;
 	}
 }
+
 function checkPhone_add() {
 	var phone = $('#adddoc-phone').val();
 	if(phone == null || $.trim(phone) == '') {
