@@ -213,7 +213,7 @@
 	</section>
 
 	<!-- Modal Start -->
-	<div class="modal fade" id="baseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editBaseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -225,85 +225,100 @@
 					</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="POST" action="doctor/edit">
+						<input id="doctorUuid" type="hidden" name="uuid" value="${doctor.uuid }">
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">编号</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">编号：</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="编号" value="d_001">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">姓名</label>
-								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="姓名" value="王豫宁">
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">性别</label>
-								<div class="col-sm-3">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
+									<label class="control-label">
+										${doctor.number }
 									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">电话</label>
-
+								<label class="col-sm-1 col-sm-offset-1 control-label">姓名：</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="电话" value="183932211998">
+									<label class="control-label">
+										${doctor.name }
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">学历</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">性别：</label>
 								<div class="col-sm-3">
-									<select id="diploma" class="form-control"></select>
+									<label class="control-label">
+										<c:if test="${doctor.sex==0 }">男</c:if>
+										<c:if test="${doctor.sex==1 }">女</c:if>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="editdoc-phoneGroup">
+								<label class="col-sm-2 control-label">电话：</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="editdoc-phone" class="form-control" type="text" name="phone" placeholder="联系电话" value="${doctor.phone }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">职称</label>
+								<label class="col-sm-2 control-label">学历：</label>
 								<div class="col-sm-3">
-									<select id="title" class="form-control"></select>
+									<select id="diploma" class="form-control" name="diploma" diplomaCode="${doctor.diploma }"></select>
+								</div>
+							</div>
+						</div>
+						<div class="blank"></div>
+						<div class="row container">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">职称：</label>
+								<div class="col-sm-3">
+									<select id="title" class="form-control" name="title" titleCode="${doctor.title }"></select>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所在医院</label>
+								<label class="col-sm-2 control-label">所在医院：</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在医院" value="李惠利医院">
+									<label class="control-label">
+										${doctor.department.hospital.name }
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所在科室</label>
+								<label class="col-sm-2 control-label">所在科室：</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在科室" value="外科">
+									<label class="control-label">
+										${doctor.department.name }
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">医院地址</label>
+								<label class="col-sm-2 control-label">医院地址：</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="医院地址" value="浙江省宁波市江南路1879号">
+									<label class="control-label">
+										${doctor.department.hospital.address }
+									</label>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-info" id="editdoc-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>
@@ -320,9 +335,9 @@
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/doctor/dropDownList.js"></script>
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/doctor/baseInfo.js"></script>
 </body>
 </html>

@@ -192,5 +192,5 @@ public class Resident implements Serializable {
 	public String toString() {
 		return "Resident [uuid=" + uuid + ", userName=" + userName + ", password=" + password + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", nation=" + nation + ", birth=" + birth + ", age=" + age + ", period=" + period + ", phone=" + phone + ", marriage=" + marriage + ", height=" + height + ", weight=" + weight + ", eyesight=" + eyesight + ", bloodType=" + bloodType + ", family=" + family + "]";
 	}
-
+	
 }

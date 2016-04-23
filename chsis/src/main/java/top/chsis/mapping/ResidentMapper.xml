@@ -43,11 +43,24 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_resident
+  </select>
+  
   <select id="selectResidentsByFamilyUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_resident
     where family_uuid = #{familyUUID,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByDimIdNo" resultMap="ResidentVOResultMap" parameterType="java.lang.String" >
+    select 
+    uuid, userName, name, sex, idNo, phone
+    from t_resident
+    where idNo LIKE CONCAT('%', #{idNo},'%' )
   </select>
   
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >

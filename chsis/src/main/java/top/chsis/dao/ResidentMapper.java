@@ -23,4 +23,8 @@ public interface ResidentMapper {
     List<ResidentVO> selectByCondition(ResidentVO residentVO);
     
     Resident selectByUserName(String userName);
+    
+    List<Resident> selectAll();
+
+	List<ResidentVO> selectByDimIdNo(String idNo);
 }

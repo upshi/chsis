@@ -33,7 +33,7 @@ public class UploadObject {
 		this.remoteBasePath = remoteBasePath;
 		this.multipartFile = multipartFile;
 		String originalFilename = multipartFile.getOriginalFilename();
-		String ext = originalFilename.substring(originalFilename.lastIndexOf(".") + 1, originalFilename.length()).toLowerCase();
+		String ext = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length()).toLowerCase();
 		this.fileName = fileName + ext;
 	}
 	

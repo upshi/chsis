@@ -27,4 +27,8 @@ public interface IResidentService {
 
 	Resident selectByUserName(String userName);
 
+	List<Resident> selectAll();
+
+	List<ResidentVO> selectByDimIdNo(String idNo);
+
 }

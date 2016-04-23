@@ -17,10 +17,10 @@
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
-<link href="assets/css/doctor/index.css" rel="stylesheet">
+<link href="assets/css/resident/index.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
-    <section>
+	<section>
 		<!-- left-side start -->
 		<%@ include file="/include/left-side.jsp"%>
 		<!-- left-side end -->
@@ -44,24 +44,16 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-		                <div class="infoList">
-		                    <span><b>编号：</b>d_001</span>
-		                    <span><b>姓名：</b>王世红</span>
-		                    <span><b>性别：</b>男</span>
-		                </div>
-		                <div class="infoList">
-		                    <span><b>电话：</b>1833030824</span>
-		                    <span><b>学历：</b>硕士</span>
-		                    <span><b>职称：</b>主治医生</span>
-		                </div>
-		                <div class="infoList">
-		                    <span><b>所在医院：</b>李惠利医院</span>
-		                    <span><b>所在科室：</b>外科</span>
-		                </div>
-		                <div class="infoList">
-		                    <span><b>医院地址：</b>浙江省宁波市江南路1879号</span>
-		                </div>
-		                <button class="btn btn-info col-sm-offset-4" data-target="#baseInfo" data-toggle="modal">修改基本信息</button>
+			            <div class="infoList">
+							<span><b>居民姓名：</b>d_001</span> <span><b>居民性别：</b>男</span> <span><b>身份证号：</b>329444199312091624</span>
+						</div>
+						<div class="infoList">
+							<span><b>所属民族：</b>汉族</span> <span><b>出生日期：</b>1993/12/01</span> <span><b>居民年龄：</b>22岁</span>
+						</div>
+						<div class="infoList">
+							<span><b>年龄分段：</b>青年</span> <span><b>联系电话：</b>18394338773</span> <span><b>婚姻状况：</b>未婚</span>
+						</div>
+						<button class="btn btn-info col-sm-offset-4" data-target="#baseInfo" data-toggle="modal">修改基本信息</button>
 			        </div>
 				</div>
 				<!-- panel end -->
@@ -75,7 +67,19 @@
 		<!-- main content end-->
 	</section>
 
-	<!-- Modal Start -->
+	<!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
+	<script src="assets/js/resident/dropDownList.js"></script>
+
+	<!--common scripts for all pages-->
+	<script src="assets/adminex/js/scripts.js"></script>
+
+	<!-- Modal Start-->
 	<div class="modal fade" id="baseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -84,89 +88,92 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 修改基本信息
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 修改基本信息
 					</h4>
 				</div>
 				<div class="modal-body row">
 					<form class="form-horizontal">
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">编号</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民姓名</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="编号" value="d_001">
+									<input class="form-control" type="text" placeholder="居民姓名">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">姓名</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民性别</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="姓名" value="王豫宁">
+									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男</label> 
+									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女</label>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">性别</label>
-								<div class="col-sm-3">
-									<label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="male" value="male" checked> 男
-									</label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="female" value="female"> 女
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">电话</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">身份证号</label>
 
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="电话" value="183932211998">
+									<input class="form-control" type="text" placeholder="身份证号">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">学历</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">所属民族</label>
+
 								<div class="col-sm-3">
-									<select id="diploma" class="form-control"></select>
+									<select id="nation" class="form-control"></select>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">职称</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期</label>
+
 								<div class="col-sm-3">
-									<select id="title" class="form-control"></select>
+									<input class="form-control" type="text" placeholder="出生日期，如：19931201">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所在医院</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄</label>
+
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在医院" value="李惠利医院">
+									<input class="form-control" type="text" placeholder="居民年龄">
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">所在科室</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">年龄分段</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="所在科室" value="外科">
+									<select id="period" class="form-control"></select>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
 							<div class="form-group">
-								<label class="col-sm-1 col-sm-offset-1 control-label">医院地址</label>
+								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话</label>
+
 								<div class="col-sm-3">
-									<input class="form-control" type="text" placeholder="医院地址" value="浙江省宁波市江南路1879号">
+									<input class="form-control" type="text" placeholder="联系电话">
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-offset-4">
+						<div class="row container">
+							<div class="form-group">
+								<label class="col-sm-1 col-sm-offset-1 control-label">婚姻状况</label>
+								<div class="col-sm-3">
+									<select id="marriage" class="form-control"></select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-5">
 							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>
@@ -174,18 +181,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal End -->
-
-	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="assets/adminex/js/bootstrap.min.js"></script>
-	<script src="assets/adminex/js/modernizr.min.js"></script>
-	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/doctor/dropDownList.js"></script>
-
-	<!--common scripts for all pages-->
-	<script src="assets/adminex/js/scripts.js"></script>
+	<!-- Modal End-->
 </body>
 </html>

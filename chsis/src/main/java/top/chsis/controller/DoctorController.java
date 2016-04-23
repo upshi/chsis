@@ -242,4 +242,10 @@ public class DoctorController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("/edit")
+	public String editResident(Doctor doctor) {
+		doctorService.updateByPrimaryKeySelective(doctor);
+		return "redirect:/doctor/baseInfo";
+	}
 }

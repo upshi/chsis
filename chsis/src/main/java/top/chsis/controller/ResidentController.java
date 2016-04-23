@@ -1,10 +1,9 @@
 package top.chsis.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import top.chsis.model.Department;
 import top.chsis.model.DiseaseHistory;
 import top.chsis.model.Resident;
 import top.chsis.service.ICommunityService;
@@ -142,6 +140,20 @@ public class ResidentController {
 		return map;
 	}
 	
+	@RequestMapping("/getByDimIdNo")
+	@ResponseBody
+	public List<ResidentVO> getByDimIdNo(String query) {
+		List<ResidentVO> list = new ArrayList<ResidentVO>();
+		if(StringUtil.isNoE(query)) {
+			return list;
+		}
+		list = residentService.selectByDimIdNo(query);
+		for(ResidentVO r : list) {
+			r.setName(r.getName() + " | " + r.getIdNo());
+		}
+		return list;
+	}
+	
 	@RequestMapping("/edit")
 	public String editResident(Resident resident, String url, String leftEyesight, String rightEyesight) {
 		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
@@ -178,10 +190,35 @@ public class ResidentController {
 		return map;
 	}
 	
+	@RequestMapping("/getResidentAndDiseaseHistory/{uuid}")
+	@ResponseBody
+	public Map<String, Object> getResidentAndDiseaseHistory(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Resident resident = residentService.selectByPrimaryKey(uuid);
+		resident.setPassword(null);
+		resident.setNation(null);
+		resident.setBirth(null);
+		resident.setPeriod(null);
+		resident.setPhone(null);
+		resident.setMarriage(null);
+		resident.setFamily(null);
+		
+		map.put("result", "success");
+		map.put("resident", resident);
+		
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			List<DiseaseHistory> diseaseHistories = diseaseHistoryService.selectDiseaseHistoriesByPatientUUID(uuid);
+			map.put("diseaseHistories", diseaseHistories);
+		}
+		return map;
+	}
+	
 	//添加疾病史
 	@RequestMapping("/addDiseaseHistory")
 	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String patientUuid) {
-		System.out.println(patientUuid);
 		diseaseHistory.setUuid(StringUtil.getUUID());
 		Resident resident = new Resident(patientUuid);
 		diseaseHistory.setPatient(resident);

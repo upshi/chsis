@@ -44,20 +44,58 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal">
-							<div class="row container">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">请输入病人姓名</label>
-									<div class="col-sm-3">
-										<input class="form-control" type="text" placeholder="病人姓名">
-									</div>
-									<div class="col-sm-3">
-										<a class="btn btn-info" data-toggle="modal" data-target="#hospital">确定新建</a>
-										<button class="btn btn-default">取消</button>
-									</div>
+						<div class="row container">
+							<label class="col-sm-2 control-label" style="margin-top:5px;">请输入病人身份证号</label>
+							<div class="col-sm-5">
+								<input id="idNo-input" class="form-control" type="text" placeholder="请输入病人身份证号" data-provide="typeahead" data-items="4">
+							</div>
+							<button id="btn-clear" class="btn btn-default">清空</button>
+							<a class="btn btn-warning">确认新建</a>
+						</div>
+						<div class="blank"></div>
+						<div id="detail" class="col-sm-12" hidden>
+							<div class="row col-sm-offset-2">
+								<div class="col-sm-2">
+									<h5>病人姓名 ：</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5 id="name"></h5>
 								</div>
 							</div>
-						</form>
+							<div class="row col-sm-offset-2">
+								<div class="col-sm-2">
+									<h5>身份证号 ：</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5 id="idNo"></h5>
+								</div>
+							</div>
+							<div class="row col-sm-offset-2">
+								<div class="col-sm-2">
+									<h5>病人性别 ：</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5 id="sex"></h5>
+								</div>
+							</div>
+							<div class="row col-sm-offset-2">
+								<div class="col-sm-2">
+									<h5>病人年龄 ：</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5 id="age"></h5>
+								</div>
+							</div>
+							<div class="row col-sm-offset-2">
+								<div class="col-sm-2">
+									<h5>疾病史 ：</h5>
+								</div>
+								<div class="col-sm-6">
+									<h5 id="diseaseHistory"></h5>
+								</div>
+							</div>
+							<div class="blank"></div>
+						</div>
 			        </div>
 				</div>
 				<!-- panel end -->
@@ -71,73 +109,6 @@
 		<!-- main content end-->
 	</section>
 
-	<!-- Modal Start -->
-	<div class="modal fade" id="hospital" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="img/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 新建就诊记录
-					</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="row">
-							<div class="col-sm-3 text-left col-sm-offset-2">
-								<h4>
-									<b>病人姓名 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-7 text-left">
-								<h4>王文静</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3 text-left col-sm-offset-2">
-								<h4>
-									<b>疾病史 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-7 text-left">
-								<h4>色盲</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3 text-left col-sm-offset-2">
-								<h4>
-									<b>电话 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-7 text-left">
-								<h4>18394338773</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3 text-left col-sm-offset-2">
-								<h4>
-									<b>病情描述 ：</b>
-								</h4>
-							</div>
-							<div class="col-sm-6 text-left">
-								<h4>发烧，有鼻涕.......</h4>
-							</div>
-						</div>
-						<div class="blank"></div>
-						<div class="col-sm-offset-4">
-							<button class="btn btn-info">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -145,9 +116,10 @@
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/doctor/dropDownList.js"></script>
+	<script src="assets/js/bootstrap-typeahead.js"></script>
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/doctor/medicalRecord.js"></script>
 </body>
 </html>
