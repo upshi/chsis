@@ -28,7 +28,7 @@ function validate() {
 function handleBeforeSubmit() {
 	$.base64.utf8encode = true;
 	var $password = $('#password');
-	$password.val( $.base64('encode', $password.val() + '% ') );
+	$password.val( $.base64('encode', $password.val() + '%doctor') );
 }
 
 function checkUsername() {

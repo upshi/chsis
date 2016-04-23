@@ -27,6 +27,7 @@ import top.chsis.model.Doctor;
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
+import top.chsis.model.Resident;
 import top.chsis.model.UploadObject;
 import top.chsis.service.IDepartmentService;
 import top.chsis.service.IDoctorService;
@@ -52,6 +53,16 @@ public class DoctorController {
 	
 	@Autowired
 	private IDepartmentService departmentService;
+	
+	@RequestMapping("/baseInfo")
+	public String baseInfo(Model model) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Doctor doctor = doctorService.selectByUserName(userName);
+		model.addAttribute("doctor", doctor);
+		return "doctor/baseInfo";
+	}
 	
 	@RequestMapping("/manage")
 	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
