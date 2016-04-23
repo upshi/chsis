@@ -45,12 +45,12 @@
 					</div>
 					<div class="panel-body">
 						<div class="row container">
-							<label class="col-sm-2 control-label" style="margin-top:5px;">请输入病人身份证号</label>
+							<label class="col-sm-2 control-label" style="margin-top:5px;">请输入病人的身份证号：</label>
 							<div class="col-sm-5">
-								<input id="idNo-input" class="form-control" type="text" placeholder="请输入病人身份证号" data-provide="typeahead" data-items="4">
+								<input id="idNo-input" class="form-control" type="text" placeholder="请输入病人的身份证号" data-provide="typeahead" data-items="4">
 							</div>
 							<button id="btn-clear" class="btn btn-default">清空</button>
-							<a class="btn btn-warning">确认新建</a>
+							<a href="medicalRecord/unfinishedMedicalRecordDetail" class="btn btn-warning">确认新建</a>
 						</div>
 						<div class="blank"></div>
 						<div id="detail" class="col-sm-12" hidden>

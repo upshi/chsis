@@ -71,7 +71,7 @@
 		                        </td>
 		                        <td>外科</td>
 		                        <td>已检查</td>
-		                        <td><a class="btn btn-warning btn-sm" href="doctor/unfinishedMedicalRecordDetail.jsp">完善</a></td>
+		                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/unfinishedMedicalRecordDetail">完善</a></td>
 		                    </tr>
 		                </table>
 		                <nav class="col-sm-4 col-sm-offset-4">
