@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class CheckReport implements Serializable{
 	private static final long serialVersionUID = 1L;
+	public static final int IN_VISITING = 0;
+	public static final int VISITED = 1;
 	
 	private String uuid;//唯一标识一条检查报告，主键 
 	private String name;//报告名称
@@ -12,7 +14,7 @@ public class CheckReport implements Serializable{
 	private Resident patient;//就诊病人
 	private Hospital hospital;//就诊医院
 	private MedicalRecord medicalRecord;//就诊记录：一个就诊记录对应多个检查报告
-	private Integer state;//检查报告的状态：0未检查、1检查中、2已检查
+	private Integer state;//检查报告的状态：0检查中、1已检查
 	private String url;//检查报告单存放路径
 	
 	public CheckReport() {}

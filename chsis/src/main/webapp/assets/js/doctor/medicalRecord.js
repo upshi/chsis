@@ -17,6 +17,9 @@ $(function(){
             $('#idNo').attr('uuid',val);
             getResident(val);
             $('#detail').show();
+            $('#idNo-inputGroup').removeClass('has-error');
+			$('#idNo-inputGroup').addClass('has-success');
+			$('#idNo-inputGroup .help-block').html('');
         }
 	});
 	
@@ -24,6 +27,17 @@ $(function(){
 		$('#idNo-input').val('');
 		clear();
 		$('#detail').hide();
+	});
+	
+	$('.btn-create').on('click',function() {
+		var patientUuid = $('#idNo').attr('uuid');
+		if(patientUuid == null || $.trim(patientUuid) == ''){
+			$('#idNo-inputGroup').removeClass('has-success');
+			$('#idNo-inputGroup').addClass('has-error');
+			$('#idNo-inputGroup .help-block').html('请输入病人的身份证号!');
+		}else {
+			window.location.href = 'medicalRecord/create/' + patientUuid;
+		}
 	});
 });
 

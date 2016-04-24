@@ -1,10 +1,13 @@
 package top.chsis.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class MedicalRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static final int IN_VISITING = 0;
+	public static final int VISITED = 1;
+	
 	
 	private String uuid;//唯一标识一条就诊记录，主键
 	private Resident patient;//就诊病人
@@ -12,7 +15,7 @@ public class MedicalRecord implements Serializable {
 	private Doctor doctor;//主诊医生
 	private String disease;//疾病名称
 	private String result;//就诊结果：描述，开了啥药~
-	private Integer state;//就诊记录的状态：0未检查、1检查中、2已检查
+	private Integer state;//就诊记录的状态：0就诊中、1已就诊
 	
 	public MedicalRecord() {}
 

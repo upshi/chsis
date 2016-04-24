@@ -66,7 +66,6 @@ public class DoctorController {
 	
 	@RequestMapping("/manage")
 	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-		//查询
 		//得到所管理的医院
 		Hospital hospital = getManagedHospital(session);
 		String hospitalUuid = hospital.getUuid();
@@ -123,7 +122,7 @@ public class DoctorController {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile multipartFile = multipartRequest.getFile("file_data");
 		String remoteBasePath = UploadObject.DOCTOR_ACCOUNT_PHOTO_BASE_PATH;
-		UploadObject uo = new UploadObject(doctor.getUuid(), remoteBasePath, multipartFile);
+		UploadObject uo = new UploadObject(StringUtil.getUUID(), remoteBasePath, multipartFile);
 		
 		doctor.setPhoto(UploadObject.DOMAIN + uo.getRemotePath());
 		try {
@@ -191,7 +190,7 @@ public class DoctorController {
 		}
 		return map;
 	}
-	//检查医生编号是否重复
+	//检查医生用户名是否重复
 	@RequestMapping("/checkUserNameUnique/{userName}")
 	@ResponseBody
 	public Map<String, Object> checkUserNameUnique(@PathVariable String userName) {

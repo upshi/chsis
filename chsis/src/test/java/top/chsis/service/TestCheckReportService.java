@@ -70,7 +70,7 @@ public class TestCheckReportService {
 		MedicalRecord medicalRecord = new MedicalRecord();
 		medicalRecord.setUuid("1");
 		checkReport.setMedicalRecord(medicalRecord);
-		int insert = checkReportService.insert(checkReport);
-		System.out.println(insert);
+		//int insert = checkReportService.insert(checkReport);
+		//System.out.println(insert);
 	}
 }
