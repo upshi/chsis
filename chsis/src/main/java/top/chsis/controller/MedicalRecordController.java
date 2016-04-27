@@ -29,7 +29,6 @@ import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.MedicalRecordVO;
-import top.chsis.vo.ResidentVO;
 
 @Controller
 @RequestMapping("/medicalRecord")
@@ -124,6 +123,7 @@ public class MedicalRecordController {
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
 		medicalRecordVO.setDoctorUuid(doctor.getUuid());
+		medicalRecordVO.setState(MedicalRecordVO.IN_VISITING);
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
 		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
 		model.addAttribute("medicalRecords", medicalRecords);
@@ -135,9 +135,28 @@ public class MedicalRecordController {
 		return "doctor/unfinishedMedicalRecord";
 	}
 	
+	@RequestMapping("/finished")
+	public String finished(MedicalRecordVO medicalRecordVO, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Doctor doctor = doctorService.selectByUserName(userName);
+		medicalRecordVO.setDoctorUuid(doctor.getUuid());
+		medicalRecordVO.setState(MedicalRecordVO.VISITED);
+		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
+		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
+		model.addAttribute("medicalRecords", medicalRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "medicalRecord/finished?");
+		
+		return "doctor/finishedMedicalRecord";
+	}
+	
 	@RequestMapping("/search")
 	public String search(Model model, @RequestParam(defaultValue = "1") int page,
 									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String state,
 									  @RequestParam(defaultValue = "") String name,
 									  @RequestParam(defaultValue = "") String idNo,
 									  @RequestParam(defaultValue = "") String time,
@@ -145,7 +164,8 @@ public class MedicalRecordController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
-		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid());
+		Integer state1 = Integer.parseInt(state);
+		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid(), state1, null);
 		
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
 		List<MedicalRecordVO> medicalRecords = pageInfo.getList();

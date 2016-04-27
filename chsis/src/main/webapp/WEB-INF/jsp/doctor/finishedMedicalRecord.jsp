@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -44,57 +45,45 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="">
-		                    <input class="form-control" type="text" placeholder="按就诊病人搜索">
-		                    <input class="form-control" type="text" placeholder="按就诊时间搜索">
-		                    <button class="btn btn-info">搜索</button>
-		                </form>
+						<form class="form-inline" action="medicalRecord/search">
+							<input name="state" class="form-control" type="hidden" value="1">
+		                    <input name="name" class="form-control" type="text" placeholder="请输入病人姓名">
+		                    <input name="idNo" class="form-control" type="text" placeholder="请输入病人身份证号">
+		                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
+	                    	<select name="sex" class="form-control">
+	                    		<option value="">性别</option>
+	                    		<option value="0">男</option>
+	                    		<option value="1">女</option>
+	                    	</select>
+	                    	<button class="btn btn-info">搜索</button>
+                		</form>
 		                <div class="blank"></div>
 		                <table class="table table-bordered table-responsive table-hover">
 		                    <tr class="info">
-		                        <th>就诊病人</th>
+		                    	<th>就诊病人</th>
+		                        <th>病人性别</th>
+		                        <th>病人身份证号</th>
 		                        <th>就诊时间</th>
 		                        <th>疾病名称</th>
-		                        <th>就诊医院</th>
-		                        <th>就诊科室</th>
-		                        <th>就诊状态</th>
 		                        <th>就诊结果</th>
+		                        <th>操作</th>
 		                    </tr>
-		                    <tr>
-		                        <td>
-		                            <a data-toggle="modal" data-target="#patient">李四</a>
-		                        </td>
-		                        <td>2016.03.22</td>
-		                        <td>感冒</td>
-		                        <td>
-		                            <a data-toggle="modal" data-target="#hospital">李惠利医院</a>
-		                        </td>
-		                        <td>外科</td>
-		                        <td>已检查</td>
-		                        <td>
-		                            <a data-toggle="modal" data-target="#url">就诊报告单</a>
-		                        </td>
-		                    </tr>
+		                    <c:forEach items="${medicalRecords }" var="medicalRecord">
+			                    <tr>
+			                    	<td>${medicalRecord.name }</td>
+			                        <td>${medicalRecord.sex }</td>
+			                        <td>${medicalRecord.idNo }</td>
+			                        <td>${medicalRecord.time }</td>
+			                        <td>${medicalRecord.disease }</td>
+			                        <td><span data-toggle="tooltip" data-placement="top" title="${medicalRecord.result }">查看病情描述</span></td>
+			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/finishedMedicalRecordDetail">详情</a></td>
+			                    </tr>
+		                    </c:forEach>
 		                </table>
-		                <nav class="col-sm-4 col-sm-offset-4">
-		                    <ul class="pagination ">
-		                        <li>
-		                            <a href="#" aria-label="Previous">
-		                                <span aria-hidden="true">&laquo;</span>
-		                            </a>
-		                        </li>
-		                        <li class="active"><a href="#">1</a></li>
-		                        <li><a href="#">2</a></li>
-		                        <li><a href="#">3</a></li>
-		                        <li><a href="#">4</a></li>
-		                        <li><a href="#">5</a></li>
-		                        <li>
-		                            <a href="#" aria-label="Next">
-		                                <span aria-hidden="true">&raquo;</span>
-		                            </a>
-		                        </li>
-		                    </ul>
-		                </nav>
+		               	<div>查询到${totals }条记录/共${totalPages }页</div>
+						<!-- pagination start -->
+						<%@include file="/include/page.jsp" %>
+						<!-- pagination end -->
 			        </div>
 				</div>
 				<!-- panel end -->

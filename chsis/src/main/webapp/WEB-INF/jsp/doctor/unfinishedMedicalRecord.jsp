@@ -46,6 +46,7 @@
 					</div>
 					<div class="panel-body">
 						<form class="form-inline" action="medicalRecord/search">
+							<input name="state" class="form-control" type="hidden" value="0">
 		                    <input name="name" class="form-control" type="text" placeholder="请输入病人姓名">
 		                    <input name="idNo" class="form-control" type="text" placeholder="请输入病人身份证号">
 		                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
