@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
 import top.chsis.model.Doctor;
@@ -25,6 +28,8 @@ import top.chsis.service.IDoctorService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
+import top.chsis.vo.MedicalRecordVO;
+import top.chsis.vo.ResidentVO;
 
 @Controller
 @RequestMapping("/medicalRecord")
@@ -111,4 +116,49 @@ public class MedicalRecordController {
 		model.addAttribute("checkReport", checkReport);
 		return "redirect:/medicalRecord/unfinishedMedicalRecordDetail/" + medicalRecordUuid;
 	}
+	
+	
+	@RequestMapping("/unfinished")
+	public String unfinished(MedicalRecordVO medicalRecordVO, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Doctor doctor = doctorService.selectByUserName(userName);
+		medicalRecordVO.setDoctorUuid(doctor.getUuid());
+		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
+		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
+		model.addAttribute("medicalRecords", medicalRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "medicalRecord/unfinished?");
+		
+		return "doctor/unfinishedMedicalRecord";
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @RequestParam(defaultValue = "1") int page,
+									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String name,
+									  @RequestParam(defaultValue = "") String idNo,
+									  @RequestParam(defaultValue = "") String time,
+									  @RequestParam(defaultValue = "") String sex) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Doctor doctor = doctorService.selectByUserName(userName);
+		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid());
+		
+		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
+		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
+		model.addAttribute("medicalRecords", medicalRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "medicalRecord/search?name=" + name + 
+									"&idNo=" + idNo + 
+									"&time=" + time +
+									"&sex=" + sex + "&" );
+		
+		return "doctor/unfinishedMedicalRecord";
+	}
+	
 }

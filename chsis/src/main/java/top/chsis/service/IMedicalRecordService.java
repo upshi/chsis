@@ -2,7 +2,10 @@ package top.chsis.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.MedicalRecord;
+import top.chsis.vo.MedicalRecordVO;
 
 public interface IMedicalRecordService {
 	int deleteByPrimaryKey(String uuid);
@@ -20,4 +23,6 @@ public interface IMedicalRecordService {
     int updateByPrimaryKeySelective(MedicalRecord record);
 
     int updateByPrimaryKey(MedicalRecord record);
+
+	PageInfo<MedicalRecordVO> selectByConditionAndPaging(MedicalRecordVO medicalRecordVO, int page, int size);
 }

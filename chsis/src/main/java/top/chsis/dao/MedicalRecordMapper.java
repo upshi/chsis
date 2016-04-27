@@ -3,6 +3,7 @@ package top.chsis.dao;
 import java.util.List;
 
 import top.chsis.model.MedicalRecord;
+import top.chsis.vo.MedicalRecordVO;
 
 public interface MedicalRecordMapper {
     int deleteByPrimaryKey(String uuid);
@@ -20,4 +21,6 @@ public interface MedicalRecordMapper {
     int updateByPrimaryKeySelective(MedicalRecord record);
 
     int updateByPrimaryKey(MedicalRecord record);
+
+	List<MedicalRecordVO> selectByCondition(MedicalRecordVO medicalRecordVO);
 }

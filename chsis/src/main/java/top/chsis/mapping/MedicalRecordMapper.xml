@@ -10,12 +10,23 @@
     <association column="patient_uuid" property="patient" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
     <association column="doctor_uuid" property="doctor" select="top.chsis.dao.DoctorMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <resultMap id="MedicalRecordVOResultMap" type="top.chsis.vo.MedicalRecordVO" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="idNo" property="idNo" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="disease" property="disease" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, patient_uuid, time, doctor_uuid, disease, state
   </sql>
   <sql id="Blob_Column_List" >
     result
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -24,6 +35,7 @@
     from t_medicalrecord
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectMedicalRecordsByPatientUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -32,6 +44,7 @@
     from t_medicalrecord
     where patient_uuid = #{patientUUID,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectMedicalRecordsByDoctorUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -40,10 +53,32 @@
     from t_medicalrecord
     where doctor_uuid = #{doctorUUID,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByCondition" resultMap="MedicalRecordVOResultMap" parameterType="top.chsis.vo.MedicalRecordVO" >
+    select m.uuid, r.name, r.sex, m.time, r.idNo, m.disease from t_resident r, t_medicalrecord m
+    where 1=1
+    <if test="name!=null and name!=''">
+		and r.name LIKE CONCAT('%', #{name},'%' )
+	</if>
+    <if test="idNo!=null and idNo!=''">
+		and r.idNo LIKE CONCAT('%', #{idNo},'%' )
+	</if>
+    <if test="time!=null and time!=''">
+		and m.time LIKE CONCAT('%', #{time},'%' )
+	</if>
+    <if test="sex!=null and sex!=''">
+		and r.sex LIKE CONCAT('%', #{sex},'%' )
+	</if>
+	and m.patient_uuid = r.uuid
+	and m.state = 0
+	and m.doctor_uuid = #{doctorUuid}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_medicalrecord
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.MedicalRecord" >
     insert into t_medicalrecord (uuid, patient_uuid, time, 
       doctor_uuid, disease, state, 

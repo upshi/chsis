@@ -1,13 +1,19 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.MedicalRecord;
 import top.chsis.service.IMedicalRecordService;
+import top.chsis.vo.MedicalRecordVO;
+import top.chsis.vo.ResidentVO;
 
 @Service("medicalRecordService")
 public class MedicalRecordServiceImpl implements IMedicalRecordService {
@@ -45,6 +51,14 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 
 	public int updateByPrimaryKey(MedicalRecord record) {
 		return medicalRecordMapper.updateByPrimaryKey(record);
+	}
+
+	public PageInfo<MedicalRecordVO> selectByConditionAndPaging(MedicalRecordVO medicalRecordVO, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<MedicalRecordVO> list = new ArrayList<MedicalRecordVO>();
+		list = medicalRecordMapper.selectByCondition(medicalRecordVO);
+		PageInfo<MedicalRecordVO> pageInfo = new PageInfo<MedicalRecordVO>(list);
+		return pageInfo;
 	}
 
 }
