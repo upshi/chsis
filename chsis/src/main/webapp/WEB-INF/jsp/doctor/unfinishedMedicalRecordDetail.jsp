@@ -96,6 +96,17 @@
 									</div>
 								</div>
 							</div>
+							<div class="row container">
+								<div class="form-group">
+									<label class="col-sm-2 control-label"><b>就诊状态：</b></label>
+									<div class="col-sm-10">
+										<label class="control-label">
+											<c:if test="${medicalRecord.state==0 }"><div style="color:red;">未完成本次就诊</div></c:if>
+											<c:if test="${medicalRecord.state==1 }"><div style="color:green;">已完成本次就诊</div></c:if>
+										</label>
+									</div>
+								</div>
+							</div>
 						</form>
 			        </div>
 				</div>
@@ -174,6 +185,31 @@
 									<div class="iconic-input right">
 										<textarea id="editm-result" class="form-control" name="result" rows="7" placeholder="请输入有关就诊结果的描述">${medicalRecord.result }</textarea>
 										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="editm-diseaseGroup">
+								<label class="col-sm-2 control-label">就诊状态：</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<c:if test="${medicalRecord.state==0 }">
+											<label class="radio-inline"> 
+												<input type="radio" name="state" value="0" checked> 未完成就诊
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio" name="state" value="1"> 已完成就诊
+											</label>
+										</c:if>
+										<c:if test="${medicalRecord.state==1 }">
+											<label class="radio-inline"> 
+												<input type="radio" name="state" value="0"> 未完成本次就诊
+											</label> 
+											<label class="radio-inline"> 
+												<input type="radio" name="state" value="1" checked> 已完成本次就诊
+											</label>
+										</c:if>
 									</div>
 								</div>
 							</div>
