@@ -79,7 +79,7 @@
 			                        <td>${medicalRecord.idNo }</td>
 			                        <td>${medicalRecord.time }</td>
 			                        <td>${medicalRecord.disease }</td>
-			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/unfinishedMedicalRecordDetail">完善</a></td>
+			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/unfinishedMedicalRecordDetail/${medicalRecord.uuid }">完善</a></td>
 			                    </tr>
 		                    </c:forEach>
 		                </table>

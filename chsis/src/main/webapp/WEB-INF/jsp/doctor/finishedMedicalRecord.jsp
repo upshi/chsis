@@ -71,7 +71,10 @@
 		                    <c:forEach items="${medicalRecords }" var="medicalRecord">
 			                    <tr>
 			                    	<td>${medicalRecord.name }</td>
-			                        <td>${medicalRecord.sex }</td>
+			                        <td>
+			                        	<c:if test="${medicalRecord.sex==0 }">男</c:if>
+			                        	<c:if test="${medicalRecord.sex==1 }">女</c:if>
+			                        </td>
 			                        <td>${medicalRecord.idNo }</td>
 			                        <td>${medicalRecord.time }</td>
 			                        <td>${medicalRecord.disease }</td>
