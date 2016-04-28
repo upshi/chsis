@@ -34,6 +34,12 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li class="active">已完成记录</li>
+					<li><a href="medicalRecord/finished">已完成就诊记录</a></li>
+				</ul>
+				
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -79,7 +85,7 @@
 			                        <td>${medicalRecord.time }</td>
 			                        <td>${medicalRecord.disease }</td>
 			                        <td><span data-toggle="tooltip" data-placement="top" title="${medicalRecord.result }">查看病情描述</span></td>
-			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/finishedMedicalRecordDetail">详情</a></td>
+			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/finishedMedicalRecordDetail/${medicalRecord.uuid }">详情</a></td>
 			                    </tr>
 		                    </c:forEach>
 		                </table>
@@ -99,157 +105,7 @@
 		</div>
 		<!-- main content end-->
 	</section>
-	
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9">
-                
-            </div>
-        </div>
-    </div>
 
-	<!-- Modal Start -->
-	<div class="modal fade" id="patient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="img/patient.png" alt="病人图标" style="height: 20px; width: 20px;" /> 病人信息
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>病人姓名 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>李四</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>病人年龄 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>31岁</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>身份证号 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>342443299837650032</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>家庭地址 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-6 text-left">
-							<p class="h4">阳光小区98号</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
-	<!-- Modal Start -->
-	<div class="modal fade" id="url" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="img/url.png" alt="就诊报告单" style="height: 20px; width: 20px;" /> 就诊报告单
-					</h4>
-				</div>
-				<div class="modal-body row">
-					<div class="col-sm-12 container-fluid">
-						<img src="img/report.jpg" alt="就诊报告单" style="height: 100%; width: 100%;" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
-	<!-- Modal Start -->
-	<div class="modal fade" id="hospital" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="img/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 医院信息
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>医院编号 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>NO.001</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>医院名称 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>李惠利医院</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>医院地址 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>浙江省宁波市鄞州区江南路128号</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>医院描述 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-6 text-left">
-							<p class="h4">李惠利医院是一所综合医院，拥有34个科室，100多名主任医生， 占地面积2千平方米，集多种科技于一体，免费挂号.......</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>

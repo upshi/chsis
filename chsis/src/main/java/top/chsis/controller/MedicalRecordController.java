@@ -86,6 +86,14 @@ public class MedicalRecordController {
 		model.addAttribute("checkReports", checkReports);
 		return "doctor/unfinishedMedicalRecordDetail";
 	}
+	@RequestMapping("/finishedMedicalRecordDetail/{uuid}")
+	public String finishedMedicalRecordDetail(@PathVariable String uuid, Model model) {
+		MedicalRecord medicalRecord = medicalRecordService.selectByPrimaryKey(uuid);
+		List<CheckReport> checkReports = checkReportService.selectCheckReportsByMedicalRecordUUID(uuid);
+		model.addAttribute("medicalRecord", medicalRecord);
+		model.addAttribute("checkReports", checkReports);
+		return "doctor/finishedMedicalRecordDetail";
+	}
 	
 	@RequestMapping("/addCheckReport")
 	public String addCheckReport(String medicalRecordUuid, CheckReport checkReport, Model model, HttpServletRequest request){
@@ -123,7 +131,7 @@ public class MedicalRecordController {
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
 		medicalRecordVO.setDoctorUuid(doctor.getUuid());
-		medicalRecordVO.setState(MedicalRecordVO.IN_VISITING);
+		medicalRecordVO.setState("0");//state:0待完成就诊记录，1已完成就诊记录
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
 		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
 		model.addAttribute("medicalRecords", medicalRecords);
@@ -141,7 +149,7 @@ public class MedicalRecordController {
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
 		medicalRecordVO.setDoctorUuid(doctor.getUuid());
-		medicalRecordVO.setState(MedicalRecordVO.VISITED);
+		medicalRecordVO.setState("1");//state:0待完成就诊记录，1已完成就诊记录
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
 		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
 		model.addAttribute("medicalRecords", medicalRecords);
@@ -154,9 +162,8 @@ public class MedicalRecordController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(defaultValue = "1") int page,
+	public String search(Model model, String state, @RequestParam(defaultValue = "1") int page,
 									  @RequestParam(defaultValue = "5") int size,
-									  @RequestParam(defaultValue = "") String state,
 									  @RequestParam(defaultValue = "") String name,
 									  @RequestParam(defaultValue = "") String idNo,
 									  @RequestParam(defaultValue = "") String time,
@@ -164,8 +171,7 @@ public class MedicalRecordController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
-		Integer state1 = Integer.parseInt(state);
-		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid(), state1, null);
+		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid(), state, null);
 		
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
 		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
@@ -177,8 +183,11 @@ public class MedicalRecordController {
 									"&idNo=" + idNo + 
 									"&time=" + time +
 									"&sex=" + sex + "&" );
-		
-		return "doctor/unfinishedMedicalRecord";
+		if(state=="0") {
+			return "doctor/unfinishedMedicalRecord";
+		}else {
+			return "doctor/finishedMedicalRecord";
+		}
 	}
 	
 }

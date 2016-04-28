@@ -34,6 +34,12 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li class="active">待完成记录</li>
+					<li><a href="medicalRecord/unfinished">待完成就诊记录</a></li>
+				</ul>
+				
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -69,9 +75,7 @@
 		                    </tr>
 		                    <c:forEach items="${medicalRecords }" var="medicalRecord">
 			                    <tr>
-			                        <td>
-			                            <a data-toggle="modal" data-target="#patient">${medicalRecord.name }</a>
-			                        </td>
+			                        <td>${medicalRecord.name }</td>
 			                        <td>
 			                        	<c:if test="${medicalRecord.sex==0 }">男</c:if>
 			                        	<c:if test="${medicalRecord.sex==1 }">女</c:if>
@@ -100,66 +104,6 @@
 		<!-- main content end-->
 	</section>
     
-    <!-- Modal Start -->
-	<div class="modal fade" id="patient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="assets/image/patient.png" alt="病人图标" style="height: 20px; width: 20px;" /> 病人信息
-					</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>病人姓名 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>李四</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>病人年龄 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>31岁</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>身份证号 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-7 text-left">
-							<h4>342443299837650032</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-left col-sm-offset-2">
-							<h4>
-								<b>家庭地址 ：</b>
-							</h4>
-						</div>
-						<div class="col-sm-6 text-left">
-							<p class="h4">阳光小区98号</p>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>

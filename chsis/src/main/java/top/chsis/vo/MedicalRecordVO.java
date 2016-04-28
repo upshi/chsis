@@ -1,8 +1,6 @@
 package top.chsis.vo;
 
 public class MedicalRecordVO {
-	public static final int IN_VISITING = 0;
-	public static final int VISITED = 1;
 	
 	private String uuid;
 	private String name;//姓名	
@@ -11,12 +9,12 @@ public class MedicalRecordVO {
 	private String time;//就诊时间
 	private String disease;//疾病名称
 	private String doctorUuid;//医生的id
-	private Integer state;//就诊记录的状态：0就诊中、1已就诊
+	private String state;//就诊记录的状态：0就诊中、1已就诊
 	private String result;//就诊结果
 	
 	public MedicalRecordVO() {}
 
-	public MedicalRecordVO(String uuid, String name, String sex, String idNo, String time, String disease, String doctorUuid, Integer state, String result) {
+	public MedicalRecordVO(String uuid, String name, String sex, String idNo, String time, String disease, String doctorUuid, String state, String result) {
 		super();
 		this.uuid = uuid;
 		this.name = name;
@@ -85,11 +83,11 @@ public class MedicalRecordVO {
 		this.doctorUuid = doctorUuid;
 	}
 
-	public Integer getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -99,14 +97,6 @@ public class MedicalRecordVO {
 
 	public void setResult(String result) {
 		this.result = result;
-	}
-
-	public static int getInVisiting() {
-		return IN_VISITING;
-	}
-
-	public static int getVisited() {
-		return VISITED;
 	}
 
 	@Override
