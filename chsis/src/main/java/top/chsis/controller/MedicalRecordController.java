@@ -183,7 +183,7 @@ public class MedicalRecordController {
 									"&idNo=" + idNo + 
 									"&time=" + time +
 									"&sex=" + sex + "&" );
-		if(state=="0") {
+		if(state.equals("0")) {
 			return "doctor/unfinishedMedicalRecord";
 		}else {
 			return "doctor/finishedMedicalRecord";

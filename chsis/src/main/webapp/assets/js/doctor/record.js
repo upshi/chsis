@@ -29,7 +29,27 @@ $(function(){
 		$('#detail').hide();
 	});
 	
-	$('.btn-create').on('click',function() {
+	$('.btn-createMedicalRecord').on('click',function() {
+		var patientUuid = $('#idNo').attr('uuid');
+		if(patientUuid == null || $.trim(patientUuid) == ''){
+			$('#idNo-inputGroup').removeClass('has-success');
+			$('#idNo-inputGroup').addClass('has-error');
+			$('#idNo-inputGroup .help-block').html('请输入病人的身份证号!');
+		}else {
+			window.location.href = 'medicalRecord/create/' + patientUuid;
+		}
+	});
+	$('.btn-createHealthRecord').on('click',function() {
+		var patientUuid = $('#idNo').attr('uuid');
+		if(patientUuid == null || $.trim(patientUuid) == ''){
+			$('#idNo-inputGroup').removeClass('has-success');
+			$('#idNo-inputGroup').addClass('has-error');
+			$('#idNo-inputGroup .help-block').html('请输入病人的身份证号!');
+		}else {
+			window.location.href = 'medicalRecord/create/' + patientUuid;
+		}
+	});
+	$('.btn-createImmuneRecord').on('click',function() {
 		var patientUuid = $('#idNo').attr('uuid');
 		if(patientUuid == null || $.trim(patientUuid) == ''){
 			$('#idNo-inputGroup').removeClass('has-success');

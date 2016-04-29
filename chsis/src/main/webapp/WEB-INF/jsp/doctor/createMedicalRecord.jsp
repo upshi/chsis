@@ -46,14 +46,16 @@
 					<div class="panel-body">
 						<div class="row container">
 							<label class="col-sm-2 control-label" style="margin-top:5px;">请输入病人的身份证号：</label>
-							<div class="col-sm-5" id="idNo-inputGroup">
+							<div class="col-sm-4" id="idNo-inputGroup">
 								<div class="iconic-input right">
 									<input id="idNo-input" class="form-control" type="text" placeholder="请输入病人的身份证号" data-provide="typeahead" data-items="4">
 									<p class="help-block"></p>
 								</div>	
 							</div>
 							<button id="btn-clear" class="btn btn-default">清空</button>
-							<button class="btn btn-warning btn-create">确认新建</button>
+							<button class="btn btn-danger btn-createMedicalRecord">新建就诊记录</button>
+							<button class="btn btn-success btn-createHealthRecord">新建体检记录</button>
+							<button class="btn btn-warning btn-createImmuneRecord">新建预防免疫记录</button>
 						</div>
 						<div class="blank"></div>
 						<div id="detail" class="col-sm-12" hidden>
@@ -123,6 +125,6 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/doctor/medicalRecord.js"></script>
+	<script src="assets/js/doctor/record.js"></script>
 </body>
 </html>

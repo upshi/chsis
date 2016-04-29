@@ -329,6 +329,6 @@
 	<!--common scripts for all pages-->
 	<script src="assets/js/file.js"></script>
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/doctor/unfinishedMedicalRecordDetail.js"></script>
+	<script src="assets/js/doctor/medicalRecordDetail.js"></script>
 </body>
 </html>
