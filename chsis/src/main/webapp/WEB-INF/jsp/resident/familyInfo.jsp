@@ -52,7 +52,7 @@
 								<th>电话</th>
 								<th>疾病信息</th>
 								<th>体检记录</th>
-								<th>就诊记录</th>
+								<th>免疫记录</th>
 								<th>操作</th>
 							</tr>
 							<c:forEach items="${residents }" var="resident">
@@ -61,8 +61,8 @@
 									<td>${resident.age }</td>
 									<td>${resident.phone }</td>
 									<td><a class="a-diseaseHistory" residentUuid="${resident.uuid }">疾病史</a></td>
-									<td><a data-toggle="modal" data-target="#healthRecord">体检记录</a></td>
-									<td><a href="resident/medicalRecordDetail.jsp">就诊记录</a></td>
+									<td><a class="a-healthRecord" residentUuid="${resident.uuid }">体检记录</a></td>
+									<td><a class="a-immuneRecord" residentUuid="${resident.uuid }">免疫记录</a></td>
 									<td>
 										<button class="btn btn-danger btn-sm deleteMember" onclick="deleteResident('${resident.uuid}')">删除</button> 
 										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
@@ -159,93 +159,42 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-12">
-						<table class="table table-responsive table-hover">
+						<table id="table-healthRecord" class="table table-responsive table-hover">
 							<tr>
-								<th>报告名称</th>
-								<th>诊察时间</th>
+								<th>体检人</th>
 								<th>体检医院</th>
-								<th>病情描述</th>
+								<th>体检时间</th>
+								<th>体检描述</th>
 							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End-->
+	
+	<!-- Modal Start-->
+	<div class="modal fade" id="immuneRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-left">
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 免疫记录
+					</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="col-sm-12">
+						<table id="table-immuneRecord" class="table table-responsive table-hover">
 							<tr>
-								<td>检查报告1</td>
-								<td>2016.03.22</td>
-								<td><a data-toggle="modal" data-target="#hospital">李惠利医院</a> <!-- Modal -->
-									<div class="modal fade" id="hospital" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-													<h4 class="modal-title text-left">
-														<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 医院信息
-													</h4>
-												</div>
-												<div class="modal-body">
-													<div class="row">
-														<div class="col-sm-3 text-left col-sm-offset-2">
-															<h4>
-																<b>医院编号 ：</b>
-															</h4>
-														</div>
-														<div class="col-sm-7 text-left">
-															<h4>NO.001</h4>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-sm-3 text-left col-sm-offset-2">
-															<h4>
-																<b>医院名称 ：</b>
-															</h4>
-														</div>
-														<div class="col-sm-7 text-left">
-															<h4>李惠利医院</h4>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-sm-3 text-left col-sm-offset-2">
-															<h4>
-																<b>医院地址 ：</b>
-															</h4>
-														</div>
-														<div class="col-sm-7 text-left">
-															<h4>浙江省宁波市鄞州区江南路128号</h4>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-sm-3 text-left col-sm-offset-2">
-															<h4>
-																<b>医院描述 ：</b>
-															</h4>
-														</div>
-														<div class="col-sm-6 text-left">
-															<p class="h4">李惠利医院是一所综合医院，拥有34个科室，100多名主任医生， 占地面积2千平方米，集多种科技于一体，免费挂号.......</p>
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer"></div>
-											</div>
-										</div>
-									</div></td>
-								<td><span data-toggle="tooltip" data-placement="top" title="没有不良反应，注意饮食清淡，多吃水果，注意休息。">没有不良反应...</span></td>
-							</tr>
-							<tr>
-								<td>检查报告2</td>
-								<td>2015.03.30</td>
-								<td><a href="#">华佗医院</a></td>
-								<td>常规检查，轻微感冒</td>
-							</tr>
-							<tr>
-								<td>检查报告2</td>
-								<td>2015.03.30</td>
-								<td><a href="#">华佗医院</a></td>
-								<td>常规检查，轻微感冒</td>
-							</tr>
-							<tr>
-								<td>检查报告2</td>
-								<td>2015.03.30</td>
-								<td><a href="#">华佗医院</a></td>
-								<td>常规检查，轻微感冒</td>
+								<th>接种人</th>
+								<th>接种医院</th>
+								<th>接种时间</th>
+								<th>疫苗名称</th>
 							</tr>
 						</table>
 					</div>

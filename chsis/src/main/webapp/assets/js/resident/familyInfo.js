@@ -3,6 +3,14 @@ $(function(){
 	$('.a-diseaseHistory').on('click',function(){
 		onShowDiseaseHistory($(this).attr('residentUuid'));
 	});
+	//绑定点击体检记录的事件
+	$('.a-healthRecord').on('click',function(){
+		onShowHealthRecord($(this).attr('residentUuid'));
+	});
+	//绑定点击免疫记录的事件
+	$('.a-immuneRecord').on('click',function(){
+		onShowImmuneRecord($(this).attr('residentUuid'));
+	});
 	
 	//绑定点击居民详情按钮事件
 	$('.btn-residentDetail').on('click',function(){
@@ -119,6 +127,76 @@ function onShowDiseaseHistory(residentUuid) {
 						keyboardEnabled : true,
 						title : '查询失败',
 						content : '您查询的疾病史信息不存在！',
+						autoClose : 'confirm|3000'
+					});
+				}
+			} 
+	});
+}
+
+//打开体检记录模态框
+function onShowHealthRecord(residentUuid) {
+	//异步获取体检信息
+	$.ajax({
+			url : "family/getHealthRecord/" + residentUuid ,
+			type : "GET" ,
+			cache : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == 'success') {
+					var trs = $('#table-healthRecord tr');
+					for(var i=1; i<trs.length; i++) {
+						$(trs[i]).remove();
+					}
+					//赋值
+					for(var i in data.checkReports) {
+						$('#table-healthRecord').append('<tr><td>' + data.checkReports[i].patient.name + "</td><td>" + 
+														  data.checkReports[i].hospital.name + "</td><td>" + 
+														  data.checkReports[i].time + "</td><td><span data-toggle='tooltip' data-placement='top' title=" + data.checkReports[i].description + ">" +
+														  "查看体检描述" + "</span></td></tr>");
+					}
+					
+					$('#healthRecord').modal();
+				} else {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '查询失败',
+						content : '您查询的体检信息不存在！',
+						autoClose : 'confirm|3000'
+					});
+				}
+			} 
+	});
+}
+
+//打开免疫记录模态框
+function onShowImmuneRecord(residentUuid) {
+	//异步获取免疫信息
+	$.ajax({
+			url : "family/getImmuneRecord/" + residentUuid ,
+			type : "GET" ,
+			cache : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == 'success') {
+					var trs = $('#table-immuneRecord tr');
+					for(var i=1; i<trs.length; i++) {
+						$(trs[i]).remove();
+					}
+					//赋值
+					for(var i in data.immuneRecords) {
+						$('#table-immuneRecord').append('<tr><td>' + data.immuneRecords[i].patient.name + "</td><td>" + 
+														  data.immuneRecords[i].hospital.name + "</td><td>" + 
+														  data.immuneRecords[i].immuneTime + "</td><td>" + 
+														  data.immuneRecords[i].vaccine + "</td></tr>");
+					}
+					
+					$('#immuneRecord').modal();
+				} else {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '查询失败',
+						content : '您查询的免疫信息不存在！',
 						autoClose : 'confirm|3000'
 					});
 				}
