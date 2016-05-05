@@ -20,4 +20,6 @@ public interface ImmuneRecordMapper {
     int updateByPrimaryKeySelective(ImmuneRecord record);
 
     int updateByPrimaryKey(ImmuneRecord record);
+
+	List<ImmuneRecord> selectByConditionInResident(ImmuneRecord immuneRecord);
 }

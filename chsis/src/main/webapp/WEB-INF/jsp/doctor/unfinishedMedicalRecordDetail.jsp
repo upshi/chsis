@@ -300,7 +300,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/url.png" alt="体检报告" style="height: 20px; width: 20px;" /> 体检报告
+						<img src="assets/image/url.png" alt="检查报告" style="height: 20px; width: 20px;" /> 检查报告
 					</h5>
 				</div>
 				<div class="modal-body row">

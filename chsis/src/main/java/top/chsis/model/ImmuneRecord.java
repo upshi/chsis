@@ -12,6 +12,17 @@ public class ImmuneRecord implements Serializable {
 	private String vaccine;//疫苗名称
 	
 	public ImmuneRecord() {}
+	
+	public ImmuneRecord(String uuid, Resident patient, String immuneTime, Hospital hospital, String vaccine) {
+		super();
+		this.uuid = uuid;
+		this.patient = patient;
+		this.immuneTime = immuneTime;
+		this.hospital = hospital;
+		this.vaccine = vaccine;
+	}
+
+
 
 	public String getUuid() {
 		return uuid;

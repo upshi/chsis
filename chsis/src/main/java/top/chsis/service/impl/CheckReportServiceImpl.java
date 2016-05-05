@@ -1,14 +1,18 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.CheckReportMapper;
 import top.chsis.model.CheckReport;
+import top.chsis.model.ImmuneRecord;
 import top.chsis.model.UploadObject;
 import top.chsis.service.ICheckReportService;
 import top.chsis.util.UploadUtil;
@@ -81,5 +85,13 @@ public class CheckReportServiceImpl implements ICheckReportService {
 
 	public int insert(CheckReport record) {
 		return checkReportMapper.insert(record);
+	}
+
+	public PageInfo<CheckReport> selectByConditionAndPagingInResident(CheckReport checkReport, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<CheckReport> list = new ArrayList<CheckReport>();
+		list = checkReportMapper.selectByConditionInResident(checkReport);
+		PageInfo<CheckReport> pageInfo = new PageInfo<CheckReport>(list);
+		return pageInfo;
 	}
 }

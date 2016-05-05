@@ -2,6 +2,8 @@ package top.chsis.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.ImmuneRecord;
 
 public interface IImmuneRecordService {
@@ -20,4 +22,6 @@ public interface IImmuneRecordService {
     int updateByPrimaryKeySelective(ImmuneRecord record);
 
     int updateByPrimaryKey(ImmuneRecord record);
+
+	PageInfo<ImmuneRecord> selectByConditionAndPagingInResident(ImmuneRecord immuneRecord, int page, int size);
 }

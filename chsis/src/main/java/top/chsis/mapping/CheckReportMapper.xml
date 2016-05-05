@@ -52,6 +52,16 @@
     where medicalrecord_uuid = #{medicalrecordUUID,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByConditionInResident" resultMap="BaseResultMap" parameterType="top.chsis.model.CheckReport" >
+    select * from t_checkreport
+    where 1=1
+    <if test="time!=null and time!=''">
+		and time LIKE CONCAT('%', #{time},'%' )
+	</if>
+	and patient_uuid = #{patient.uuid}
+	and name = "体检"
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_checkreport
     where uuid = #{uuid,jdbcType=VARCHAR}

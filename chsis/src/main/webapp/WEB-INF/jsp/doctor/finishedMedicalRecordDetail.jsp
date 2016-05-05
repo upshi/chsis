@@ -158,138 +158,6 @@
 	</section>
 
 	<!-- Modal Start -->
-	<div class="modal fade" id="editMedicalReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h5 class="modal-title text-left">
-						<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 就诊记录
-					</h5>
-				</div>
-				<div class="modal-body row">
-					<form class="form-horizontal" method="post" action="medicalRecord/edit">
-						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
-						<div class="row container">
-							<div class="form-group" id="editm-diseaseGroup">
-								<label class="col-sm-2 control-label">疾病名称：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="editm-disease" class="form-control" type="text" name="disease" placeholder="请输入疾病名称" value="${medicalRecord.disease }">
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="editm-resultGroup">
-								<label class="col-sm-2 control-label">就诊结果：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<textarea id="editm-result" class="form-control" name="result" rows="7" placeholder="请输入有关就诊结果的描述">${medicalRecord.result }</textarea>
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="editm-diseaseGroup">
-								<label class="col-sm-2 control-label">就诊状态：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<c:if test="${medicalRecord.state==0 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0" checked> 未完成就诊
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1"> 已完成就诊
-											</label>
-										</c:if>
-										<c:if test="${medicalRecord.state==1 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0"> 未完成本次就诊
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1" checked> 已完成本次就诊
-											</label>
-										</c:if>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="editm-submit">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
-	<!-- Modal Start -->
-	<div class="modal fade" id="addCheckReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title text-left">
-						<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 医院信息
-					</h5>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" method="post" action="medicalRecord/addCheckReport" enctype="multipart/form-data">
-						<input type="hidden" name="medicalRecordUuid" value="${medicalRecord.uuid }">
-						<div class="row container">
-							<div class="form-group" id="addchr-nameGroup">
-								<label class="col-sm-2 control-label">报告名称：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addchr-name" class="form-control" name="name" type="text" placeholder="请输入报告名称">
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="addchr-descriptionGroup">
-								<label class="col-sm-2 control-label">诊断结果：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<textarea id="addchr-description" class="form-control" name="description" rows="7" placeholder="请输入诊断结果描述"></textarea>
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="addchr-imgGroup">
-								<label class="col-sm-2 control-label">上传报告单：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input type="file" id="input-id" name="file_data" />
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-offset-4">
-							<button class="btn btn-info addchr-submit">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
-	
-	<!-- Modal Start -->
 	<div class="modal fade" id="checkReportPhotoDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -298,7 +166,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/url.png" alt="体检报告" style="height: 20px; width: 20px;" /> 体检报告
+						<img src="assets/image/url.png" alt="检查报告" style="height: 20px; width: 20px;" /> 检查报告
 					</h5>
 				</div>
 				<div class="modal-body row">

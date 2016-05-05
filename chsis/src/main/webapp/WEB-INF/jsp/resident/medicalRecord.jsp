@@ -36,14 +36,14 @@
 			<div class="wrapper">
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
-					<li><a href="medicalRecord/finished">就诊记录</a></li>
+					<li><a href="resident/medicalRecord">就诊记录</a></li>
 				</ul>
 				
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							已完成就诊记录
+							就诊记录
 							<span class="tools pull-right"> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>

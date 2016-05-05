@@ -18,14 +18,17 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
 import top.chsis.model.DiseaseHistory;
+import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
 import top.chsis.service.ICheckReportService;
 import top.chsis.service.ICommunityService;
 import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
+import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
+import top.chsis.service.impl.ImmuneRecordServiceImpl;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
 
@@ -50,6 +53,9 @@ public class ResidentController {
 	
 	@Autowired
 	private ICheckReportService checkReportService;
+	
+	@Autowired
+	private IImmuneRecordService immuneRecordService;
 
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -237,7 +243,7 @@ public class ResidentController {
 	}
 	
 	@RequestMapping("/medicalRecord")
-	public String finished(MedicalRecord medicalRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+	public String medicalRecord(MedicalRecord medicalRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Resident resident = residentService.selectByUserName(userName);
@@ -274,7 +280,7 @@ public class ResidentController {
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", page);
-		model.addAttribute("url", "medicalRecord/search?disease=" + disease + 
+		model.addAttribute("url", "resident/searchMedicalRecord?disease=" + disease + 
 									"&time=" + time +
 									"&state=" + state + "&" );
 		return "resident/medicalRecord";
@@ -287,5 +293,79 @@ public class ResidentController {
 		model.addAttribute("medicalRecord", medicalRecord);
 		model.addAttribute("checkReports", checkReports);
 		return "resident/medicalRecordDetail";
+	}
+	
+	@RequestMapping("/immuneRecord")
+	public String immuneRecord(ImmuneRecord immuneRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		immuneRecord.setPatient(resident);
+		PageInfo<ImmuneRecord> pageInfo = immuneRecordService.selectByConditionAndPagingInResident(immuneRecord, page, size);
+		List<ImmuneRecord> immuneRecords = pageInfo.getList();
+		model.addAttribute("immuneRecords", immuneRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "resident/medicalRecord?");
+		
+		return "resident/immuneRecord";
+	}
+	
+	@RequestMapping("/searchImmuneRecord")
+	public String searchImmuneRecord(Model model, @RequestParam(defaultValue = "1") int page,
+									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String vaccine,
+									  @RequestParam(defaultValue = "") String immuneTime) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		ImmuneRecord immuneRecord = new ImmuneRecord(null, resident, immuneTime, null, vaccine);
+		
+		PageInfo<ImmuneRecord> pageInfo = immuneRecordService.selectByConditionAndPagingInResident(immuneRecord, page, size);
+		List<ImmuneRecord> immuneRecords = pageInfo.getList();
+		model.addAttribute("immuneRecords", immuneRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "resident/searchImmuneRecord?vaccine=" + vaccine + 
+									"&immuneTime=" + immuneTime+ "&" );
+		return "resident/immuneRecord";
+	}
+	
+	@RequestMapping("/healthRecord")
+	public String healthRecord(CheckReport checkReport, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		checkReport.setPatient(resident);
+		PageInfo<CheckReport> pageInfo = checkReportService.selectByConditionAndPagingInResident(checkReport, page, size);
+		List<CheckReport> checkReports = pageInfo.getList();
+		model.addAttribute("checkReports", checkReports);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "resident/healthRecord?");
+		
+		return "resident/healthRecord";
+	}
+	
+	@RequestMapping("/searchHealthRecord")
+	public String searchHealthRecord(Model model, @RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "5") int size,
+			@RequestParam(defaultValue = "") String time) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		CheckReport checkReport = new CheckReport(null, null, null, time, resident, null, null, 1, null);
+		
+		PageInfo<CheckReport> pageInfo = checkReportService.selectByConditionAndPagingInResident(checkReport, page, size);
+		List<CheckReport> checkReports = pageInfo.getList();
+		model.addAttribute("checkReports", checkReports);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "resident/searchHealthRecord?time=" + time + "&" );
+		return "resident/healthRecord";
 	}
 }

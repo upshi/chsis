@@ -22,4 +22,6 @@ public interface CheckReportMapper {
     int updateByPrimaryKeySelective(CheckReport record);
 
     int updateByPrimaryKey(CheckReport record);
+
+	List<CheckReport> selectByConditionInResident(CheckReport checkReport);
 }

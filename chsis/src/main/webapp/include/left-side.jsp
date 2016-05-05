@@ -40,8 +40,8 @@
 			<li><a href="resident/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
 			<li><a href="resident/healthInfo"><i class="fa fa-home"></i> <span>健康信息</span></a></li>
 			<li><a href="resident/medicalRecord"><i class="fa fa-home"></i> <span>就诊记录</span></a></li>
-			<li><a href="resident/immuneRecord.jsp"><i class="fa fa-home"></i> <span>免疫记录</span></a></li>
-			<li><a href="resident/healthReport.jsp"><i class="fa fa-home"></i> <span>体检记录</span></a></li>
+			<li><a href="resident/immuneRecord"><i class="fa fa-home"></i> <span>免疫记录</span></a></li>
+			<li><a href="resident/healthRecord"><i class="fa fa-home"></i> <span>体检记录</span></a></li>
 			<li><a href="family/familyInfo"><i class="fa fa-home"></i> <span>家庭信息</span></a></li>
 			<!-- resident end -->
 			<hr>

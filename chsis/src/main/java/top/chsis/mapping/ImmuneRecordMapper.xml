@@ -8,9 +8,11 @@
     <association column="patient_uuid" property="patient" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR"></association>
     <association column="hospital_uuid" property="hospital" select="top.chsis.dao.HospitalMapper.selectByPrimaryKey" jdbcType="VARCHAR"></association>
   </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, patient_uuid, immuneTime, hospital_uuid, vaccine
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -23,22 +25,38 @@
     from t_immunerecord
     where patient_uuid = #{patientUUID,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectImmuneRecordsByHospitalUUID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_immunerecord
     where hospital_uuid = #{hospitalUUID,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByConditionInResident" resultMap="BaseResultMap" parameterType="top.chsis.model.ImmuneRecord" >
+    select * from t_immunerecord
+    where 1=1
+    <if test="vaccine!=null and vaccine!=''">
+		and vaccine LIKE CONCAT('%', #{vaccine},'%' )
+	</if>
+    <if test="immuneTime!=null and immuneTime!=''">
+		and immuneTime LIKE CONCAT('%', #{immuneTime},'%' )
+	</if>
+	and patient_uuid = #{patient.uuid}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_immunerecord
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.ImmuneRecord" >
     insert into t_immunerecord (uuid, patient_uuid, immuneTime, 
       hospital_uuid, vaccine)
     values (#{uuid,jdbcType=VARCHAR}, #{patient.uuid,jdbcType=VARCHAR}, #{immuneTime,jdbcType=VARCHAR}, 
       #{hospital.uuid,jdbcType=VARCHAR}, #{vaccine,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="top.chsis.model.ImmuneRecord" >
     insert into t_immunerecord
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -76,6 +94,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="top.chsis.model.ImmuneRecord" >
     update t_immunerecord
     <set >
@@ -94,6 +113,7 @@
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="top.chsis.model.ImmuneRecord" >
     update t_immunerecord
     set patient_uuid = #{patient.uuid,jdbcType=VARCHAR},

@@ -1,12 +1,17 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.dao.ImmuneRecordMapper;
 import top.chsis.model.ImmuneRecord;
+import top.chsis.model.MedicalRecord;
 import top.chsis.service.IImmuneRecordService;
 
 @Service("immuneRecordService")
@@ -45,6 +50,14 @@ public class ImmuneRecordServiceImpl implements IImmuneRecordService {
 
 	public int updateByPrimaryKey(ImmuneRecord record) {
 		return immuneRecordMapper.updateByPrimaryKey(record);
+	}
+
+	public PageInfo<ImmuneRecord> selectByConditionAndPagingInResident(ImmuneRecord immuneRecord, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<ImmuneRecord> list = new ArrayList<ImmuneRecord>();
+		list = immuneRecordMapper.selectByConditionInResident(immuneRecord);
+		PageInfo<ImmuneRecord> pageInfo = new PageInfo<ImmuneRecord>(list);
+		return pageInfo;
 	}
 
 }

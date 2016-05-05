@@ -18,6 +18,21 @@ public class CheckReport implements Serializable{
 	private String url;//检查报告单存放路径
 	
 	public CheckReport() {}
+	
+	public CheckReport(String uuid, String name, String description, String time, Resident patient, Hospital hospital, MedicalRecord medicalRecord, Integer state, String url) {
+		super();
+		this.uuid = uuid;
+		this.name = name;
+		this.description = description;
+		this.time = time;
+		this.patient = patient;
+		this.hospital = hospital;
+		this.medicalRecord = medicalRecord;
+		this.state = state;
+		this.url = url;
+	}
+
+
 
 	public String getUuid() {
 		return uuid;

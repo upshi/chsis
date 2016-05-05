@@ -1,6 +1,9 @@
 package top.chsis.service;
 
 import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.CheckReport;
 import top.chsis.model.UploadObject;
 
@@ -24,4 +27,6 @@ public interface ICheckReportService {
     int updateByPrimaryKeySelective(CheckReport record, UploadObject uo) throws Exception;
 
     int updateByPrimaryKey(CheckReport record);
+
+	PageInfo<CheckReport> selectByConditionAndPagingInResident(CheckReport checkReport, int page, int size);
 }
