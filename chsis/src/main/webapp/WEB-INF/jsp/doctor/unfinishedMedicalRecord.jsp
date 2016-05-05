@@ -44,7 +44,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							基本信息
+							待完成就诊记录
 							<span class="tools pull-right"> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>

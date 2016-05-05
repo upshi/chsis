@@ -46,7 +46,7 @@ $(function(){
 			$('#idNo-inputGroup').addClass('has-error');
 			$('#idNo-inputGroup .help-block').html('请输入病人的身份证号!');
 		}else {
-			window.location.href = 'medicalRecord/create/' + patientUuid;
+			window.location.href = 'healthRecord/create/' + patientUuid;
 		}
 	});
 	$('.btn-createImmuneRecord').on('click',function() {
@@ -56,7 +56,7 @@ $(function(){
 			$('#idNo-inputGroup').addClass('has-error');
 			$('#idNo-inputGroup .help-block').html('请输入病人的身份证号!');
 		}else {
-			window.location.href = 'medicalRecord/create/' + patientUuid;
+			window.location.href = 'immuneRecord/create/' + patientUuid;
 		}
 	});
 });

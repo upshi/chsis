@@ -49,7 +49,7 @@ public class MedicalRecordController {
 	
 	@RequestMapping("/toCreate")
 	public String toCreate() {
-		return "doctor/createMedicalRecord";
+		return "doctor/createRecord";
 	}
 	
 	@RequestMapping("/create/{patientUuid}")
@@ -109,7 +109,7 @@ public class MedicalRecordController {
 		//处理图片
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile multipartFile = multipartRequest.getFile("file_data");
-		String remoteBasePath = UploadObject.DOCTOR_ACCOUNT_PHOTO_BASE_PATH;
+		String remoteBasePath = UploadObject.REPORT_BASE_PATH;
 		UploadObject uo = new UploadObject(StringUtil.getUUID(), remoteBasePath, multipartFile);
 		
 		checkReport.setUrl(UploadObject.DOMAIN + uo.getRemotePath());
@@ -189,5 +189,4 @@ public class MedicalRecordController {
 			return "doctor/finishedMedicalRecord";
 		}
 	}
-	
 }

@@ -12,6 +12,7 @@
     <association column="hospital_uuid" property="hospital" select="top.chsis.dao.HospitalMapper.selectByPrimaryKey"></association>
     <association column="medicalrecord_uuid" property="medicalRecord" select="top.chsis.dao.MedicalRecordMapper.selectByPrimaryKey"></association>
   </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, name, time, patient_uuid, hospital_uuid, state, url,medicalrecord_uuid
   </sql>
@@ -50,10 +51,12 @@
     from t_checkreport
     where medicalrecord_uuid = #{medicalrecordUUID,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_checkreport
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="top.chsis.model.CheckReport" >
     insert into t_checkreport (uuid, name, time, 
       patient_uuid, hospital_uuid, state, 
@@ -75,10 +78,10 @@
         time,
       </if>
       <if test="patient != null" >
-        patient.uuid,
+        patient_uuid,
       </if>
       <if test="hospital != null" >
-        hospital.uuid,
+        hospital_uuid,
       </if>
       <if test="state != null" >
         state,
@@ -132,10 +135,10 @@
       <if test="time != null" >
         time = #{time,jdbcType=VARCHAR},
       </if>
-      <if test="patient.uuid != null" >
+      <if test="patient != null" >
         patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="hospital.uuid != null" >
+      <if test="hospital != null" >
         hospital_uuid = #{hospital.uuid,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
@@ -148,11 +151,12 @@
         description = #{description,jdbcType=LONGVARCHAR},
       </if>
        <if test="medicalRecord != null" >
-        medicalRecord.uuid,
+        medicalRecord_uuid = #{medicalRecord.uuid,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="top.chsis.model.CheckReport" >
     update t_checkreport
     set name = #{name,jdbcType=VARCHAR},

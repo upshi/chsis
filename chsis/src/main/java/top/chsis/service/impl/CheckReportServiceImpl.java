@@ -39,7 +39,7 @@ public class CheckReportServiceImpl implements ICheckReportService {
 		return result;
 	}
 
-	public int insertSelective(CheckReport record) {
+	public int insertSelective(CheckReport record){
 		return checkReportMapper.insertSelective(record);
 	}
 
@@ -59,12 +59,27 @@ public class CheckReportServiceImpl implements ICheckReportService {
 		return checkReportMapper.selectCheckReportsByMedicalRecordUUID(medicalrecordUUID);
 	}
 
-	public int updateByPrimaryKeySelective(CheckReport record) {
-		return checkReportMapper.updateByPrimaryKeySelective(record);
+	public int updateByPrimaryKeySelective(CheckReport record, UploadObject uo) throws Exception {
+		int result = checkReportMapper.updateByPrimaryKeySelective(record);
+		String msg = null;
+		try {
+			msg = UploadUtil.uploadImage(uo.getRemotePath(), uo.getInputStream());
+		} catch (Exception e) {
+			throw e;
+		}
+		JSONObject json = JSONObject.parseObject(msg);
+		Integer code = (Integer) json.get("code");
+		if(code != 0) {
+			throw new Exception("文件上传失败");
+		}
+		return result;
 	}
 
 	public int updateByPrimaryKey(CheckReport record) {
 		return checkReportMapper.updateByPrimaryKey(record);
 	}
 
+	public int insert(CheckReport record) {
+		return checkReportMapper.insert(record);
+	}
 }

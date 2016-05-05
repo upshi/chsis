@@ -1,7 +1,12 @@
 $(function(){
+	var flag = false;
 	$('.btn-edit').on('click', function() {
 		onEdit();
 	})
+	$('.btn-add-checkReport').on('click', function() {
+		onAddCheckReport();
+	})
+	
 	$('#checkReportPhoto').on('click', function() {
 		var urlImg = $('#checkReportPhoto').attr('urlImg');
 		$('#urlImg').attr('src',urlImg);
@@ -9,7 +14,7 @@ $(function(){
 	})
 })
 
-//打开修改医生基本信息的模态框
+//打开编辑就诊信息的模态框
 function onEdit(){
 	//绑定input元素失去焦点事件
 	$('#editm-disease').on('blur', checkDisease_edit);
@@ -70,7 +75,12 @@ function onAddCheckReport() {
 	//绑定input元素失去焦点事件
 	$('#addchr-name').on('blur', checkName_add);
 	$('#addchr-description').on('blur', checkDescription_add);
-	
+	$('#input-id').on('fileloaded', function(event, file, previewId, index, reader) {
+		$('#addchr-imgGroup').removeClass('has-error');
+		$('#addchr-imgGroup').addClass('has-success');
+		$('#addchr-imgGroup .help-block').html('');
+	   flag = true;
+	});
 	//绑定保存按钮点击事件
 	$('.addchr-submit').on('click', function(){
 		//表单校验
@@ -79,14 +89,14 @@ function onAddCheckReport() {
 			$('#addchr-imgGroup').removeClass('has-success');
 			$('#addchr-imgGroup').addClass('has-error');
 			$('#addchr-imgGroup .help-block').html('请上传报告单');
-			return false;
+			flag = false;
 		} else {
 			$('#addchr-imgGroup').removeClass('has-error');
 			$('#addchr-imgGroup').addClass('has-success');
 			$('#addchr-imgGroup .help-block').html('');
+			flag = true
 		}
 		if(pass && flag == true) {
-			handleBeforeSubmit();
 			return true;
 		}
 		return false;

@@ -3,7 +3,6 @@ package top.chsis.dao;
 import java.util.List;
 
 import top.chsis.model.CheckReport;
-import top.chsis.model.Department;
 
 public interface CheckReportMapper {
     int deleteByPrimaryKey(String uuid);

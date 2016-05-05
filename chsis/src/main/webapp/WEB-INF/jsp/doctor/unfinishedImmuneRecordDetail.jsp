@@ -40,15 +40,15 @@
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
 					<li class="active">待完成记录</li>
-					<li><a href="medicalRecord/unfinished">待完成就诊记录</a></li>
-					<li class="active">待完成就诊记录详请</li>
+					<li><a href="medicalRecord/unfinished">待完成预防免疫记录</a></li>
+					<li class="active">待完成预防免疫记录详请</li>
 				</ul>
 				
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							就诊记录
+							预防免疫记录
 							<span class="tools pull-right"> 
 								<button class="btn btn-warning pull-left btn-edit">编辑</button>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>

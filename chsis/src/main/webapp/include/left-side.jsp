@@ -59,16 +59,16 @@
 				<a href=""><i class="fa fa-laptop"></i><span>已完成记录</span></a>
 				<ul class="sub-menu-list" style="display: none;">
 					<li><a href="medicalRecord/finished">已完成就诊记录</a></li>
-					<li><a href="boxed_view.html">已完成体检记录</a></li>
-					<li><a href="leftmenu_collapsed_view.html">已完成预防免疫记录</a></li>
+					<li><a href="healthRecord/finished">已完成体检记录</a></li>
+					<li><a href="immuneRecord/finished">已完成预防免疫记录</a></li>
 				</ul>
 			</li>	
 			<li class="menu-list">
 				<a href=""><i class="fa fa-cogs"></i><span>待完成记录</span></a>
 				<ul class="sub-menu-list" style="display: none;">
 					<li><a href="medicalRecord/unfinished">待完成就诊记录</a></li>
-					<li><a href="boxed_view.html">待完成体检记录</a></li>
-					<li><a href="leftmenu_collapsed_view.html">待完成预防免疫记录</a></li>
+					<li><a href="healthRecord/unfinished">待完成体检记录</a></li>
+					<li><a href="healthRecord/unfinished">待完成预防免疫记录</a></li>
 				</ul>
 			</li>	
 			<li><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i><span>发布新闻</span></a></li>
