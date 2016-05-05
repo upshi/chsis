@@ -25,7 +25,7 @@ import top.chsis.util.StringUtil;
 
 @Controller
 @RequestMapping("/healthRecord")
-public class healthRecordController {
+public class HealthRecordController {
 	@Autowired
 	private IDoctorService doctorService;
 	
@@ -54,7 +54,7 @@ public class healthRecordController {
 		checkReportService.insert(checkReport);
 		
 		model.addAttribute("checkReport", checkReport);
-		return "redirect:/healthRecord/unfinishedHealthRecordDetail/" + checkReport.getUuid();
+		return "redirect:/healthRecord/healthRecordDetail/" + checkReport.getUuid();
 	}
 	
 	@RequestMapping("/edit")
@@ -74,13 +74,13 @@ public class healthRecordController {
 			e.printStackTrace();
 		}
 		model.addAttribute("checkReport", checkReport);
-		return "redirect:/healthRecord/unfinishedHealthRecordDetail/" + checkReport.getUuid();
+		return "redirect:/healthRecord/healthRecordDetail/" + checkReport.getUuid();
 	}
 	
-	@RequestMapping("/unfinishedHealthRecordDetail/{uuid}")
+	@RequestMapping("/healthRecordDetail/{uuid}")
 	public String unfinishedHealthRecordDetail(@PathVariable String uuid, Model model) {
 		CheckReport checkReport = checkReportService.selectByPrimaryKey(uuid);
 		model.addAttribute("checkReport", checkReport);
-		return "doctor/unfinishedHealthRecordDetail";
+		return "doctor/healthRecordDetail";
 	}
 }

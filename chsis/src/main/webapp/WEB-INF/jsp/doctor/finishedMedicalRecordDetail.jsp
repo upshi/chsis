@@ -55,7 +55,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" method="POST" action="medicalRecord/add">
+						<form class="form-horizontal">
 							<div class="row container">
 								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>就诊病人：</b></label>

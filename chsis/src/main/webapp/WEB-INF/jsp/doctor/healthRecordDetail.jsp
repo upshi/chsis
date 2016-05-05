@@ -39,7 +39,8 @@
 			<div class="wrapper">
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
-					<li><a href="medicalRecord/unfinished">体检记录</a></li>
+					<li><a href="medicalRecord/toCreate">新建记录</a></li>
+					<li class="active">体检记录</li>
 				</ul>
 				
 				<!-- panel start -->
@@ -54,7 +55,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" method="POST" action="medicalRecord/add">
+						<form class="form-horizontal">
 							<div class="row container">
 								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>报告名称：</b></label>
@@ -173,32 +174,7 @@
 								</div>
 							</div>
 						</div>
-<%-- 						<div class="row container">
-							<div class="form-group" id="edithealth-diseaseGroup">
-								<label class="col-sm-2 control-label">体检状态：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<c:if test="${checkReport.state==0 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0" checked> 未完成就诊
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1"> 已完成就诊
-											</label>
-										</c:if>
-										<c:if test="${checkReport.state==1 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0"> 未完成本次体检
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1" checked> 已完成本次体检
-											</label>
-										</c:if>
-									</div>
-								</div>
-							</div>
-						</div>
- --%>						<div class="col-sm-offset-4">
+						<div class="col-sm-offset-4">
 							<button class="btn btn-info" id="edithealth-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
@@ -225,6 +201,6 @@
 	<!--common scripts for all pages-->
 	<script src="assets/js/file.js"></script>
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/doctor/healthRecordDetail.js"></script>
+	<script src="assets/js/doctor/healthRecord.js"></script>
 </body>
 </html>

@@ -45,6 +45,7 @@
 			<li><a href="family/familyInfo"><i class="fa fa-home"></i> <span>家庭信息</span></a></li>
 			<!-- resident end -->
 			<hr>
+			
 			<!-- admin start -->
 			<li><a href="admin/hospital"><i class="fa fa-home"></i> <span>医院管理</span></a></li>
 			<li><a href="family/manage"><i class="fa fa-home"></i> <span>家庭管理</span></a></li>
@@ -52,25 +53,12 @@
 			<li><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- admin end -->
 			<hr>
+			
 			<!-- doctor start -->
 			<li><a href="doctor/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
 			<li><a href="medicalRecord/toCreate"><i class="fa fa-home"></i> <span>新建记录</span></a></li>
-			<li class="menu-list">
-				<a href=""><i class="fa fa-laptop"></i><span>已完成记录</span></a>
-				<ul class="sub-menu-list" style="display: none;">
-					<li><a href="medicalRecord/finished">已完成就诊记录</a></li>
-					<li><a href="healthRecord/finished">已完成体检记录</a></li>
-					<li><a href="immuneRecord/finished">已完成预防免疫记录</a></li>
-				</ul>
-			</li>	
-			<li class="menu-list">
-				<a href=""><i class="fa fa-cogs"></i><span>待完成记录</span></a>
-				<ul class="sub-menu-list" style="display: none;">
-					<li><a href="medicalRecord/unfinished">待完成就诊记录</a></li>
-					<li><a href="healthRecord/unfinished">待完成体检记录</a></li>
-					<li><a href="healthRecord/unfinished">待完成预防免疫记录</a></li>
-				</ul>
-			</li>	
+			<li><a href="medicalRecord/finished"><i class="fa fa-home"></i> <span>已完成就诊记录</span></a></li>
+			<li><a href="medicalRecord/unfinished"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
 			<li><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i><span>发布新闻</span></a></li>
 			<!-- doctor end -->
 			<hr>
