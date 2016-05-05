@@ -18,6 +18,19 @@ public class MedicalRecord implements Serializable {
 	private Integer state;//就诊记录的状态：0就诊中、1已就诊
 	
 	public MedicalRecord() {}
+	
+	public MedicalRecord(String uuid, Resident patient, String time, Doctor doctor, String disease, String result, Integer state) {
+		super();
+		this.uuid = uuid;
+		this.patient = patient;
+		this.time = time;
+		this.doctor = doctor;
+		this.disease = disease;
+		this.result = result;
+		this.state = state;
+	}
+
+
 
 	public String getUuid() {
 		return uuid;

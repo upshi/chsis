@@ -86,6 +86,7 @@ public class MedicalRecordController {
 		model.addAttribute("checkReports", checkReports);
 		return "doctor/unfinishedMedicalRecordDetail";
 	}
+	
 	@RequestMapping("/finishedMedicalRecordDetail/{uuid}")
 	public String finishedMedicalRecordDetail(@PathVariable String uuid, Model model) {
 		MedicalRecord medicalRecord = medicalRecordService.selectByPrimaryKey(uuid);

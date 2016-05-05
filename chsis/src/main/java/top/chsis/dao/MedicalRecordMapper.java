@@ -2,6 +2,8 @@ package top.chsis.dao;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.MedicalRecord;
 import top.chsis.vo.MedicalRecordVO;
 
@@ -23,4 +25,6 @@ public interface MedicalRecordMapper {
     int updateByPrimaryKey(MedicalRecord record);
 
 	List<MedicalRecordVO> selectByCondition(MedicalRecordVO medicalRecordVO);
+	
+	List<MedicalRecord> selectByConditionInResident(MedicalRecord medicalRecord);
 }

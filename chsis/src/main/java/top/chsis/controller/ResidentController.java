@@ -16,11 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.model.CheckReport;
 import top.chsis.model.DiseaseHistory;
+import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
+import top.chsis.service.ICheckReportService;
 import top.chsis.service.ICommunityService;
 import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
+import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
@@ -40,6 +44,12 @@ public class ResidentController {
 	
 	@Autowired
 	private IDiseaseHistoryService diseaseHistoryService;
+	
+	@Autowired
+	private IMedicalRecordService medicalRecordService;
+	
+	@Autowired
+	private ICheckReportService checkReportService;
 
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -224,5 +234,58 @@ public class ResidentController {
 		diseaseHistory.setPatient(resident);
 		diseaseHistoryService.insert(diseaseHistory);
 		return "redirect:/resident/healthInfo";
+	}
+	
+	@RequestMapping("/medicalRecord")
+	public String finished(MedicalRecord medicalRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		medicalRecord.setPatient(resident);
+		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
+		List<MedicalRecord> medicalRecords = pageInfo.getList();
+		model.addAttribute("medicalRecords", medicalRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "resident/medicalRecord?");
+		
+		return "resident/medicalRecord";
+	}
+	
+	@RequestMapping("/searchMedicalRecord")
+	public String searchMedicalRecord(Model model, @RequestParam(defaultValue = "1") int page,
+									  @RequestParam(defaultValue = "5") int size,
+									  @RequestParam(defaultValue = "") String disease,
+									  @RequestParam(defaultValue = "") String time,
+									  @RequestParam(defaultValue = "") String state) {
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Resident resident = residentService.selectByUserName(userName);
+		Integer realState = null;
+		if(state != null && !state.equals("")){
+			realState = Integer.parseInt(state);
+		}
+		MedicalRecord medicalRecord = new MedicalRecord(null, resident, time, null, disease, null, realState);
+		
+		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
+		List<MedicalRecord> medicalRecords = pageInfo.getList();
+		model.addAttribute("medicalRecords", medicalRecords);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "medicalRecord/search?disease=" + disease + 
+									"&time=" + time +
+									"&state=" + state + "&" );
+		return "resident/medicalRecord";
+	}
+	
+	@RequestMapping("/medicalRecordDetail/{uuid}")
+	public String medicalRecordDetail(@PathVariable String uuid, Model model) {
+		MedicalRecord medicalRecord = medicalRecordService.selectByPrimaryKey(uuid);
+		List<CheckReport> checkReports = checkReportService.selectCheckReportsByMedicalRecordUUID(uuid);
+		model.addAttribute("medicalRecord", medicalRecord);
+		model.addAttribute("checkReports", checkReports);
+		return "resident/medicalRecordDetail";
 	}
 }

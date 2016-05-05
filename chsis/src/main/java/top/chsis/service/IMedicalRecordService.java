@@ -25,4 +25,6 @@ public interface IMedicalRecordService {
     int updateByPrimaryKey(MedicalRecord record);
 
 	PageInfo<MedicalRecordVO> selectByConditionAndPaging(MedicalRecordVO medicalRecordVO, int page, int size);
+
+	PageInfo<MedicalRecord> selectByConditionAndPagingInResident(MedicalRecord medicalRecord, int page, int size);
 }

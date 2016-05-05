@@ -69,11 +69,26 @@
 		and m.time LIKE CONCAT('%', #{time},'%' )
 	</if>
     <if test="sex!=null and sex!=''">
-		and r.sex LIKE CONCAT('%', #{sex},'%' )
+		and r.sex = #{sex}
 	</if>
 	and m.patient_uuid = r.uuid
 	and m.state = #{state}
 	and m.doctor_uuid = #{doctorUuid}
+  </select>
+  
+  <select id="selectByConditionInResident" resultMap="BaseResultMap" parameterType="top.chsis.model.MedicalRecord" >
+    select * from t_medicalrecord
+    where 1=1
+    <if test="disease!=null and disease!=''">
+		and disease LIKE CONCAT('%', #{disease},'%' )
+	</if>
+    <if test="time!=null and time!=''">
+		and time LIKE CONCAT('%', #{time},'%' )
+	</if>
+	<if test="state!=null and state!=''">
+		and state = #{state}
+	</if>
+	and patient_uuid = #{patient.uuid}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
