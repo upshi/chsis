@@ -16,10 +16,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import top.chsis.model.CheckReport;
 import top.chsis.model.Doctor;
+import top.chsis.model.ImmuneRecord;
 import top.chsis.model.Resident;
 import top.chsis.model.UploadObject;
 import top.chsis.service.ICheckReportService;
 import top.chsis.service.IDoctorService;
+import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
 
@@ -33,7 +35,7 @@ public class ImmuneRecordController {
 	private IResidentService residentService;
 	
 	@Autowired
-	private ICheckReportService checkReportService;
+	private IImmuneRecordService immuneRecordService ;
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -44,43 +46,36 @@ public class ImmuneRecordController {
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Doctor doctor = doctorService.selectByUserName(userName);
 		
-		CheckReport checkReport = new CheckReport();
-		checkReport.setUuid(StringUtil.getUUID());
-		checkReport.setName("体检");
-		checkReport.setPatient(patient);
-		checkReport.setHospital(doctor.getDepartment().getHospital());
-		checkReport.setTime(sdf.format(new Date()));
-		checkReport.setState(CheckReport.IN_VISITING);
-		checkReportService.insert(checkReport);
+		ImmuneRecord immuneRecord = new ImmuneRecord();
+		immuneRecord.setUuid(StringUtil.getUUID());
+		immuneRecord.setPatient(patient);
+		immuneRecord.setHospital(doctor.getDepartment().getHospital());
+		immuneRecord.setImmuneTime(sdf.format(new Date()));
 		
-		model.addAttribute("checkReport", checkReport);
-		return "redirect:/healthRecord/healthRecordDetail/" + checkReport.getUuid();
+		immuneRecordService.insert(immuneRecord);
+		
+		model.addAttribute("immuneRecord", immuneRecord);
+		return "redirect:/immuneRecord/immuneRecordDetail/" + immuneRecord.getUuid();
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(CheckReport checkReport, Model model, HttpServletRequest request) {
-		//处理图片
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile multipartFile = multipartRequest.getFile("file_data");
-		String remoteBasePath = UploadObject.REPORT_BASE_PATH;
-		UploadObject uo = new UploadObject(StringUtil.getUUID(), remoteBasePath, multipartFile);
-		
-		checkReport.setUrl(UploadObject.DOMAIN + uo.getRemotePath());
-		checkReport.setState(CheckReport.VISITED);
-		try {
-			//改造service层的insert方法
-			checkReportService.updateByPrimaryKeySelective(checkReport, uo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		model.addAttribute("checkReport", checkReport);
-		return "redirect:/healthRecord/healthRecordDetail/" + checkReport.getUuid();
+	public String edit(ImmuneRecord immuneRecord, Model model, HttpServletRequest request) {
+		immuneRecordService.updateByPrimaryKeySelective(immuneRecord);
+		model.addAttribute("immuneRecord", immuneRecord);
+		return "redirect:/immuneRecord/finishedImmuneRecord/" + immuneRecord.getUuid();
 	}
 	
-	@RequestMapping("/healthRecordDetail/{uuid}")
-	public String unfinishedHealthRecordDetail(@PathVariable String uuid, Model model) {
-		CheckReport checkReport = checkReportService.selectByPrimaryKey(uuid);
-		model.addAttribute("checkReport", checkReport);
-		return "doctor/healthRecordDetail";
+	@RequestMapping("/immuneRecordDetail/{uuid}")
+	public String immuneRecordDetail(@PathVariable String uuid, Model model) {
+		ImmuneRecord immuneRecord = immuneRecordService.selectByPrimaryKey(uuid);
+		model.addAttribute("immuneRecord", immuneRecord);
+		return "doctor/immuneRecordDetail";
+	}
+	
+	@RequestMapping("/finishedImmuneRecord/{uuid}")
+	public String finishedImmuneRecordDetail(@PathVariable String uuid, Model model) {
+		ImmuneRecord immuneRecord = immuneRecordService.selectByPrimaryKey(uuid);
+		model.addAttribute("immuneRecord", immuneRecord);
+		return "doctor/finishedImmuneRecord";
 	}
 }

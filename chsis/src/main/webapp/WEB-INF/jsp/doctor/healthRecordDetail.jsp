@@ -107,7 +107,7 @@
 									<label class="col-sm-2 control-label"><b>体检报告：</b></label>
 									<div class="col-sm-10">
 										<div style="margin-top:7px;">
-											<img id="urlImg" src="${checkReport.url }" alt="暂无"/>
+											<img id="urlImg" src="${checkReport.url }" alt="暂无" width="70%" height="70%" />
 										</div>
 									</div>
 								</div>

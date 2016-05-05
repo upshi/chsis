@@ -55,19 +55,13 @@
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal" method="post" action="immuneRecord/edit">
-							<input type="hidden" name="uuid" value="${immuneRecord.uuid }">
 							<div class="row container">
-								<div class="form-group" id="editImmune-vaccineGroup">
+								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>疫苗名称：</b></label>
-									<div class="col-sm-3">
-										<div class="iconic-input right">
-											<input id="editImmune-vaccine" name="vaccine" type="text" class="form-control" placeholder="请输入疫苗名称" value="${immuneRecord.vaccine }">
-											<p class="help-block"></p>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<button class="btn btn-info" id="editimmune-submit">保存</button>
-										<button class="btn btn-default" data-dismiss="modal">取消</button>
+									<div class="col-sm-10">
+										<label class="control-label">
+											${immuneRecord.vaccine }
+										</label>
 									</div>
 								</div>
 							</div>
@@ -129,6 +123,5 @@
 	<!--common scripts for all pages-->
 	<script src="assets/js/file.js"></script>
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/doctor/immuneRecord.js"></script>
 </body>
 </html>

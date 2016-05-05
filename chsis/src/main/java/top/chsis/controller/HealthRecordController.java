@@ -78,7 +78,7 @@ public class HealthRecordController {
 	}
 	
 	@RequestMapping("/healthRecordDetail/{uuid}")
-	public String unfinishedHealthRecordDetail(@PathVariable String uuid, Model model) {
+	public String healthRecordDetail(@PathVariable String uuid, Model model) {
 		CheckReport checkReport = checkReportService.selectByPrimaryKey(uuid);
 		model.addAttribute("checkReport", checkReport);
 		return "doctor/healthRecordDetail";
