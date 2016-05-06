@@ -27,6 +27,17 @@
     where userName = #{userName,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="top.chsis.model.Manager" >
+    select * from t_manager
+    where 1=1
+    <if test="userName!=null and userName!=''">
+		and userName LIKE CONCAT('%', #{userName},'%' )
+	</if>
+    <if test="name!=null and name!=''">
+		and name LIKE CONCAT('%', #{name},'%' )
+	</if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_manager
     where uuid = #{uuid,jdbcType=VARCHAR}

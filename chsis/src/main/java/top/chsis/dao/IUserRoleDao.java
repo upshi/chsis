@@ -5,7 +5,8 @@ import java.util.List;
 import top.chsis.model.UserRole;
 import top.chsis.vo.UserRoleVO;
 
-public interface IUserRoleMapper {
+
+public interface IUserRoleDao {
     int deleteByPrimaryKey(String uuid);
 
     int insert(UserRole record);
@@ -25,5 +26,5 @@ public interface IUserRoleMapper {
     int updateByPrimaryKeySelective(UserRole record);
 
     int updateByPrimaryKey(UserRole record);
-    
+  
 }

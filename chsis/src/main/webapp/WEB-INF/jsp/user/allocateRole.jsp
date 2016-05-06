@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -16,10 +17,13 @@
 
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
-<link href="assets/css/jquery-confirm.css" rel="stylesheet" type="text/css"/>
+
+<!--multi-select-->
+<link rel="stylesheet" type="text/css" href="assets/css/multi-select.css" />
+
 <!-- Custom Style -->
 <link href="assets/css/common.css" rel="stylesheet" type="text/css">
-<link href="assets/css/resourceDetail.css" rel="stylesheet" type="text/css">
+<link href="static/css/allocateRole.css" rel="stylesheet" type="text/css">
 </head>
 <body class="sticky-header">
 	<section> <!-- 左侧导航栏  开始 -->
@@ -38,30 +42,35 @@
 			<div class="wrapper">
 				<div class="col-lg-12">
 					<section class="panel">
-						<header class="panel-heading"> 资源信息详情 </header>
+						<header class="panel-heading"> 分配角色 </header>
 						<div class="panel-body">
-							<br>
-							<div class="row">
-								<label class="col-sm-2 text-right">资源名称:</label> <label class="col-sm-8 text-left">${resource.name}</label>
-							</div>
-							
-							<div class="row">
-								<label class="col-sm-2 text-right">资源URL:</label> <label class="col-sm-8 text-left">${resource.url}</label>
-							</div>
-					
-							<div class="row">
-								<label class="col-sm-2 text-right">资源描述:</label> <label class="col-sm-8">${resource.description}</label>
-							</div>
-					
-							<br><br><br>
-							<div class="row">
-								<br>
-								<div class="col-sm-offset-3  col-sm-20">
-									<a href="resource/toUpdate/${resource.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="btn btn-danger" onclick="deleteResource('${resource.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="resource/manager" class="btn btn-primary"  type="button">查看资源列表</a>
+							<form action="user/allocateRole" class="form-horizontal" method="POST">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<input type="hidden" name="userUuid" value="${user.uuid}"/>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">姓名:&nbsp;</label>
+									<label class="col-sm-4 control-label" style="text-align:left">${user.name }&nbsp;&nbsp;|&nbsp;&nbsp;${company.name }</label>
 								</div>
-							</div>
+								
+								<div class="form-group last">
+									<label class="control-label col-md-2"> 角色列表</label>
+									<div class="col-md-9">
+										<select name="roleUuid" class="multi-select" multiple="" id="multi_select">
+											<c:forEach items="${roleList}" var="role" varStatus="id">
+												<option value="${role.uuid }" <c:if test="${role.description == '%SELECTED%@' }">selected</c:if> >
+													${role.cName }&nbsp;&nbsp;|&nbsp;&nbsp;${role.eName }
+												</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="panel-body">
+									<label class="col-sm-5 control-label"></label>
+									<sec:authorize access="hasRole('ROLE_7fb1b2deae0e449fa1e46683e0cd9f2d')">	
+										<button class="btn btn-primary" type="submit" id="submit">保存</button>
+									</sec:authorize>
+								</div>
+							</form>
 						</div>
 					</section>
 				</div>
@@ -73,6 +82,7 @@
 		</div>
 	</section>
 	
+	
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -81,11 +91,18 @@
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
 	<script src="assets/js/jquery-confirm.js"></script>
+	
+	<!--multi-select-->
+	<script type="text/javascript" src="assets/adminex/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+	<script type="text/javascript" src="assets/adminex/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/multi-select.js"></script>
 	<!-- Custom JS -->
-	<script src="assets/js/resource/resourceDetail.js"></script>
+	<script type="text/javascript">
+		$('#navi_user').addClass('active');
+	</script>
 </body>
 
 </html>

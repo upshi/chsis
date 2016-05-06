@@ -14,9 +14,21 @@ public class Manager implements Serializable {
 	private String password;//密码
 	private String name;//姓名
 	private String phone;//电话
-	private Integer type;//类型：0医院管理员、1内容管理员、2系统管理员
+	private Integer type;//类型：0医院管理员、1审核员、2系统管理员
 	
 	public Manager() {}
+
+	public Manager(String uuid, String userName, String password, String name, String phone, Integer type) {
+		super();
+		this.uuid = uuid;
+		this.userName = userName;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.type = type;
+	}
+
+
 
 	public String getUuid() {
 		return uuid;

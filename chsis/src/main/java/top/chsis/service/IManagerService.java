@@ -1,5 +1,7 @@
 package top.chsis.service;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 
@@ -19,4 +21,6 @@ public interface IManagerService {
     int updateByPrimaryKey(Manager record);
 
 	Manager selectByUserName(String userName);
+
+	PageInfo<Manager> selectByConditionAndPaging(Manager user, int page, int size);
 }

@@ -65,18 +65,10 @@
 							<div class="row">
 								<br>
 								<div class="col-sm-offset-3  col-sm-20">
-									<sec:authorize access="hasRole('ROLE_c188483f3fb343dc85fdc9294edc8cd6')">	
-										<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_dbad596109e94df2a1c5390fa9586028')">	
-										<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_59db1b052eb0419a9791ad82b06d6ec6')">	
-										<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_29a9287932e141feb109c9809b04aebe')">	
-										<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
-									</sec:authorize>
+									<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
 								</div>
 							</div>
 						</div>

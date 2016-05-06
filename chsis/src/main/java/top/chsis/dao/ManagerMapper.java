@@ -1,5 +1,7 @@
 package top.chsis.dao;
 
+import java.util.List;
+
 import top.chsis.model.Manager;
 
 public interface ManagerMapper {
@@ -16,5 +18,7 @@ public interface ManagerMapper {
     int updateByPrimaryKey(Manager record);
     
     Manager selectByUserName(String userName);
+
+	List<Manager> selectByCondition(Manager user);
 
 }

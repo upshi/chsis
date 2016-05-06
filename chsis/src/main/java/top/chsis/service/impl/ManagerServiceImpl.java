@@ -1,13 +1,20 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.HospitalManagerMapper;
 import top.chsis.dao.ManagerMapper;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 import top.chsis.service.IManagerService;
+import top.chsis.vo.ResidentVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements IManagerService {
@@ -54,8 +61,15 @@ public class ManagerServiceImpl implements IManagerService {
 	}
 
 	public int deleteByHospitalUuid(String hospitalUuid) {
-
 		return 0;
+	}
+
+	public PageInfo<Manager> selectByConditionAndPaging(Manager user, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<Manager> list = new ArrayList<Manager>();
+		list = managerMapper.selectByCondition(user);
+		PageInfo<Manager> pageInfo = new PageInfo<Manager>(list);
+		return pageInfo;
 	}
 
 }
