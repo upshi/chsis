@@ -14,7 +14,6 @@ import top.chsis.dao.ManagerMapper;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 import top.chsis.service.IManagerService;
-import top.chsis.vo.ResidentVO;
 
 @Service("managerService")
 public class ManagerServiceImpl implements IManagerService {
