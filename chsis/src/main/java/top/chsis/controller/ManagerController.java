@@ -1,6 +1,7 @@
 package top.chsis.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.util.Base64;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
+import top.chsis.service.IHospitalService;
 import top.chsis.service.IManagerService;
 import top.chsis.util.StringUtil;
 
@@ -29,9 +34,62 @@ public class ManagerController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	IHospitalService hospitalService;
+	
+	@RequestMapping("/manage")
+	public String userManager(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		PageInfo<Manager> pageInfo = managerService.selectByConditionAndPaging(null, page, size);
+		List<Manager> managers = pageInfo.getList();
+		model.addAttribute("managers", managers);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "manager/manage?");
+		return "admin/managerManage";
+	}
+
+	@RequestMapping("/search")
+	public String search(Model model, @RequestParam(defaultValue = "1") int page,
+			  						  @RequestParam(defaultValue = "5") int size,
+			  						  @RequestParam(defaultValue = "") String userName,
+			  						  @RequestParam(defaultValue = "") String name) {
+		Manager manager = new Manager(null, userName, null, name, null, null);
+		PageInfo<Manager> pageInfo = managerService.selectByConditionAndPaging(manager, page, size);
+		List<Manager> managers = pageInfo.getList();
+		model.addAttribute("managers", managers);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
+		model.addAttribute("url", "manager/search?userName=" + userName + 
+									"&name=" + name + "&" );
+		return "admin/managerManage";
+	}
+	
+	@RequestMapping("/toAddManager")
+	public String toAddManager(Model model) {
+		List<Hospital> hospitals = hospitalService.selectAll();
+		model.addAttribute("hospitals", hospitals);
+		return "admin/addManager";
+	}
+
+	@RequestMapping(value = "/addManager", method = RequestMethod.POST)
+	public String addManager(Manager manager, String hospitalUuid, Model model, String roleUuid) {
+		manager.setUuid(StringUtil.getUUID());
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(manager.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		manager.setPassword(encodedPassword);
+		
+		managerService.insert(manager);
+		
+		return "admin/managerDetail";
+	}
+
 	@RequestMapping("/checkUsernameUnique/{userName}")
 	@ResponseBody
-	public Map<String, Object> checkUsernameUnique(@PathVariable String userName) {
+	public Map<String, Object> checkUsernameUnique(@PathVariable(value = "userName") String userName) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(StringUtil.isNoE(userName)) {
 			map.put("result", "exist");

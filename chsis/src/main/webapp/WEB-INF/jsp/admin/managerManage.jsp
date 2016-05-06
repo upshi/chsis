@@ -47,7 +47,7 @@
 				</div>
 				<div class="panel-body">
 					<!-- 员工查询 -->
-					<form class="form-inline" action="user/search">
+					<form class="form-inline" action="manager/search">
 						<div class="form-group">
 							<input type="text" class="form-control" name="userName" placeholder="请输入用户名">
 						</div>
@@ -71,16 +71,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${users}" var="user" varStatus="id">
+							<c:forEach items="${managers}" var="manager" varStatus="id">
 								<tr>
 									<td>${id.index+1 }</td>
-									<td>${user.userName }</td>
-									<td>${user.name }</td>
-									<td>${user.phone }</td>
+									<td>${manager.userName }</td>
+									<td>${manager.name }</td>
+									<td>${manager.phone }</td>
 									<td>
-										<c:if test="${user.type==0 }">医院管理员</c:if>
-										<c:if test="${user.type==1 }">审核员</c:if>
-										<c:if test="${user.type==2 }">系统管理员</c:if>
+										<c:if test="${manager.type==0 }">医院管理员</c:if>
+										<c:if test="${manager.type==1 }">审核员</c:if>
+										<c:if test="${manager.type==2 }">系统管理员</c:if>
 									</td>
 									<td>
 										<div class="btn-group">
@@ -88,10 +88,10 @@
 												操作 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" style="min-width: 60px">
-												<li><a href="user/detail/${user.uuid }">详情</a></li>
-												<li><a href="user/update/${user.uuid }">编辑</a></li>
-												<li><a href="user/toAllocateRole/${user.uuid }">分配角色</a></li>
-												<li><a onclick="deleteUser('${user.uuid}')">删除</a></li>
+												<li><a href="manager/detail/${manager.uuid }">详情</a></li>
+												<li><a href="manager/update/${manager.uuid }">编辑</a></li>
+												<li><a href="manager/toAllocateRole/${manager.uuid }">分配角色</a></li>
+												<li><a onclick="deleteManager('${manager.uuid}')">删除</a></li>
 											</ul>
 										</div>
 									</td>
@@ -126,6 +126,6 @@
 	<script src="assets/adminex/js/scripts.js"></script>
 
 	<!-- Custom JS -->
-	<script src="assets/js/user/userManager.js"></script>
+	<script src="assets/js/admin/managerManage.js"></script>
 </body>
 </html>

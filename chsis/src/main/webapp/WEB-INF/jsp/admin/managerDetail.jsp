@@ -80,18 +80,10 @@
 							<div class="row">
 								<br>
 								<div class="col-sm-offset-3  col-sm-20">
-									<sec:authorize access="hasRole('ROLE_f7361a0d3f40445ead60c5939de7dcdc')">	
-										<a href="user/update/${user.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_40c268b7349f4927978f55b078c3f34e')">	
-										<a href="user/toAllocateRole/${user.uuid}"  class="btn btn-info" type="button">分配角色</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_83152ecd6c5a40d6a69faa47d1ffd49c')">	
-										<a class="btn btn-danger" onclick="deleteUser('${user.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_9a2cb966c0a34039b6934103eb0d1b13')">	
-										<a href="user/manager" class="btn btn-primary"  type="button">查看人员列表</a>
-									</sec:authorize>
+									<a href="user/update/${user.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="user/toAllocateRole/${user.uuid}"  class="btn btn-info" type="button">分配角色</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a class="btn btn-danger" onclick="deleteUser('${user.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="user/manager" class="btn btn-primary"  type="button">查看人员列表</a>
 								</div>
 							</div>
 						</div>
@@ -118,7 +110,7 @@
 	<script src="assets/adminex/js/scripts.js"></script>
 
 	<!-- Custom JS -->
-	<script src="assets/js/user/userDetail.js"></script>
+	<script src="assets/js/admin/managerDetail.js"></script>
 </body>
 
 </html>

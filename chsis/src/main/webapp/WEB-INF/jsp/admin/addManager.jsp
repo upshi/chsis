@@ -42,7 +42,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form id="form" class="form-horizontal" method="post" action="user/addUser" role="form">
+						<form id="form" class="form-horizontal" method="post" action="manager/addManager" role="form">
 							<br>
 							<div class="form-group" id="userNameGroup">
 								<label for="userName" class="col-sm-3 control-label">用户名</label>
@@ -133,6 +133,6 @@
 	<script src="assets/adminex/js/scripts.js"></script>
 
 	<!-- Custom JS -->
-	<script src="assets/js/user/addUser.js"></script>
+	<script src="assets/js/admin/addManager.js"></script>
 </body>
 </html>

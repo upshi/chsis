@@ -41,7 +41,7 @@ public class HospitalController {
 	public String addHospital(Hospital hospital, Model model) {
 		hospital.setUuid(StringUtil.getUUID());
 		hospitalService.insert(hospital);
-		return "redirect:/admin/hospital/";
+		return "redirect:/hospital/list/";
 	}
 	
 	@RequestMapping("/delete/{uuid}")

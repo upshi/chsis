@@ -1,7 +1,7 @@
 $(function() {
 	$("#navi_user").addClass('active');
 	$("#btn-add").on('click', function(){
-		window.location.href = "user/toAddUser";
+		window.location.href = "manager/toAddManager";
 	})
 })
 
