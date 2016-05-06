@@ -51,6 +51,8 @@
 			<li><a href="family/manage"><i class="fa fa-home"></i> <span>家庭管理</span></a></li>
 			<li><a href="resident/manage"><i class="fa fa-home"></i> <span>居民管理</span></a></li>
 			<li><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
+			<li><a href="resource/manager"><i class="fa fa-home"></i> <span>资源管理</span></a></li>
+			<li><a href="role/manager"><i class="fa fa-home"></i> <span>角色管理</span></a></li>
 			<!-- admin end -->
 			<hr>
 			
