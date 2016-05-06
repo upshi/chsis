@@ -22,13 +22,10 @@ import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
 import top.chsis.service.ICheckReportService;
-import top.chsis.service.ICommunityService;
 import top.chsis.service.IDiseaseHistoryService;
-import top.chsis.service.IFamilyService;
 import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
-import top.chsis.service.impl.ImmuneRecordServiceImpl;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
 
@@ -38,12 +35,6 @@ public class ResidentController {
 	
 	@Autowired
 	private IResidentService residentService;
-	
-	@Autowired
-	private IFamilyService familyService;
-	
-	@Autowired
-	private ICommunityService communityService;
 	
 	@Autowired
 	private IDiseaseHistoryService diseaseHistoryService;
@@ -188,23 +179,6 @@ public class ResidentController {
 		}	
 	}
 	
-	@RequestMapping("/getDiseaseHistory/{uuid}")
-	@ResponseBody
-	public Map<String, Object> getDiseaseHistory(@PathVariable String uuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(uuid)) {
-			map.put("result", "failure");
-		} else {
-			DiseaseHistory diseaseHistory = diseaseHistoryService.selectByPrimaryKey(uuid);
-			if(diseaseHistory != null) {
-				map.put("result", "success");
-				map.put("diseaseHistory", diseaseHistory);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
 	
 	@RequestMapping("/getResidentAndDiseaseHistory/{uuid}")
 	@ResponseBody
@@ -230,16 +204,6 @@ public class ResidentController {
 			map.put("diseaseHistories", diseaseHistories);
 		}
 		return map;
-	}
-	
-	//添加疾病史
-	@RequestMapping("/addDiseaseHistory")
-	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String patientUuid) {
-		diseaseHistory.setUuid(StringUtil.getUUID());
-		Resident resident = new Resident(patientUuid);
-		diseaseHistory.setPatient(resident);
-		diseaseHistoryService.insert(diseaseHistory);
-		return "redirect:/resident/healthInfo";
 	}
 	
 	@RequestMapping("/medicalRecord")

@@ -2,6 +2,9 @@ package top.chsis.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,15 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import top.chsis.model.CheckReport;
 import top.chsis.model.Doctor;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.Resident;
-import top.chsis.model.UploadObject;
-import top.chsis.service.ICheckReportService;
 import top.chsis.service.IDoctorService;
 import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IResidentService;
@@ -77,5 +76,23 @@ public class ImmuneRecordController {
 		ImmuneRecord immuneRecord = immuneRecordService.selectByPrimaryKey(uuid);
 		model.addAttribute("immuneRecord", immuneRecord);
 		return "doctor/finishedImmuneRecord";
+	}
+	
+	@RequestMapping("/getImmuneRecord/{residentUuid}")
+	@ResponseBody
+	public Map<String, Object> getImmuneRecord(@PathVariable String residentUuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(residentUuid)) {
+			map.put("result", "failure");
+		} else {
+			List<ImmuneRecord> immuneRecords = immuneRecordService.selectImmuneRecordsByPatientUUID(residentUuid);
+			if(immuneRecords != null) {
+				map.put("result", "success");
+				map.put("immuneRecords", immuneRecords);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
 	}
 }

@@ -121,7 +121,7 @@
 					<h4 class="modal-title">添加医院管理员</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" method="POST" action="admin/addHospitalManager">
+					<form class="form-horizontal" method="POST" action="manager/addHospitalManager">
 						<input type="hidden" name="hospitalUuid" value="" />
 						<div class="row container">
 							<div class="form-group" id="addm-userNameGroup">

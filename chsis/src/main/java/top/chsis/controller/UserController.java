@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.Hospital;
 import top.chsis.model.Manager;
-import top.chsis.model.Role;
 import top.chsis.model.User;
 import top.chsis.service.IHospitalService;
 import top.chsis.service.IManagerService;
 import top.chsis.service.IRoleService;
+import top.chsis.util.StringUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -35,6 +37,8 @@ public class UserController {
 	
 	@Autowired
 	IHospitalService hospitalService;
+	
+	private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@RequestMapping("/manage")
 	public String userManager(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
@@ -68,15 +72,20 @@ public class UserController {
 	@RequestMapping("/toAddUser")
 	public String toAddUser(Model model) {
 		List<Hospital> hospitals = hospitalService.selectAll();
-		List<Role> roles = roleService.selectAll();
-		
 		model.addAttribute("hospitals", hospitals);
-		model.addAttribute("roles", roles);
 		return "user/addUser";
 	}
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String addUser(User user, Model model, String roleUuid) {
+	public String addUser(Manager user, String hospitalUuid, Model model, String roleUuid) {
+		user.setUuid(StringUtil.getUUID());
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(user.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		user.setPassword(encodedPassword);
+		
+		managerService.insert(user);
 		
 		return "user/userDetail";
 	}
@@ -115,9 +124,9 @@ public class UserController {
 		return "user/userDetail";
 	}
 	
-	@RequestMapping("/checkUsernameUnique/{username}")
+	@RequestMapping("/checkUserNameUnique/{userName}")
 	@ResponseBody
-	public Map<String, Object> checkUsernameUnique(@PathVariable(value = "username") String username) {
+	public Map<String, Object> checkUserNameUnique(@PathVariable(value = "userName") String userName) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return map;
 	}

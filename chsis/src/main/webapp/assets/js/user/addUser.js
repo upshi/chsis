@@ -2,10 +2,19 @@ $(function(){
 	/*导航颜色*/
 	$("#navi_user").addClass('active');
 	
+	$("#type-select").change(function(){
+		if($("#type-select").val() == 0){
+			$("#div-hide").show();
+		} else {
+			$("#div-hide").hide();
+		}
+	});
+	
 	/*绑定失焦事件*/
-	$('#username').on('blur',checkUsername);
+	$('#userName').on('blur',checkUserName);
 	$('#password').on('blur',checkPassword);
 	$('#name').on('blur',checkName);
+	$('#phone').on('blur',checkPhone);
 	
 	
 	/*绑定提交按钮事件*/
@@ -22,7 +31,7 @@ $(function(){
 
 //表单校验
 function validate() {
-	if(checkUsername() && checkPassword() && checkName() ) {
+	if(checkUserName() && checkPassword() && checkName() && checkPhone() ) {
 		return true;
 	} else {
 		return false;
@@ -36,29 +45,29 @@ function handleBeforeSubmit() {
 	$password.val( $.base64('encode', $password.val()) );
 }
 
-function checkUsername() {
-	var username = $('#username').val();
-	if(username == null || $.trim(username) == '') {
-		$('#usernameGroup').removeClass('has-success');
-		$('#usernameGroup').addClass('has-error');
-		$('#usernameGroup .help-block').html('请输入用户名');
+function checkUserName() {
+	var userName = $('#userName').val();
+	if(userName == null || $.trim(userName) == '') {
+		$('#userNameGroup').removeClass('has-success');
+		$('#userNameGroup').addClass('has-error');
+		$('#userNameGroup .help-block').html('请输入用户名');
 		return false;
 	} else {
 		return $.ajax({
-			url : "user/checkUsernameUnique/" + username ,
+			url : "user/checkUserNameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
 			success : function(data) {
 				if(data.result == "exist") {
-					$('#usernameGroup').removeClass('has-success');
-					$('#usernameGroup').addClass('has-error');
-					$('#usernameGroup .help-block').html('用户名已存在');
+					$('#userNameGroup').removeClass('has-success');
+					$('#userNameGroup').addClass('has-error');
+					$('#userNameGroup .help-block').html('用户名已存在');
 					return false;
 				} else {
-					$('#usernameGroup').removeClass('has-error');
-					$('#usernameGroup').addClass('has-success');
-					$('#usernameGroup .help-block').html('');
+					$('#userNameGroup').removeClass('has-error');
+					$('#userNameGroup').addClass('has-success');
+					$('#userNameGroup .help-block').html('');
 					return true;
 				}
 			} 
@@ -92,6 +101,21 @@ function checkName() {
 		$('#nameGroup').removeClass('has-error');
 		$('#nameGroup').addClass('has-success');
 		$('#nameGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkPhone() {
+	var phone = $('#phone').val();
+	if(name == null || $.trim(name) == '') {
+		$('#phoneGroup').removeClass('has-success');
+		$('#phoneGroup').addClass('has-error');
+		$('#phoneGroup .help-block').html('请输入联系电话');
+		return false;
+	} else {
+		$('#phoneGroup').removeClass('has-error');
+		$('#phoneGroup').addClass('has-success');
+		$('#phoneGroup .help-block').html('');
 		return true;
 	}
 }

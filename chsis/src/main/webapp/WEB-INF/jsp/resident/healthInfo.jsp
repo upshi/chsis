@@ -284,7 +284,7 @@
 					</h4>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" method="POST" action="resident/addDiseaseHistory">
+					<form class="form-horizontal" method="POST" action="diseaseHistory/addDiseaseHistory">
 						<input id="patientUuid" name="patientUuid" type="hidden" value="${resident.uuid }">
 						<div class="row container">
 							<div class="form-group" id="adddis-nameGroup">

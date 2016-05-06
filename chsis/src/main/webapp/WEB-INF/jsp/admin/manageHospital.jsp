@@ -32,10 +32,6 @@
 			<!-- header start -->
 			<%@ include file="/include/header.jsp"%>
 			<!-- header end -->
-
-			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-hospital">添加医院</button> 
-			</div>
 			
 			<!--body wrapper start-->
 			<div class="wrapper">
@@ -45,6 +41,7 @@
 						<h3 class="panel-title">
 							医院信息 
 							<span class="tools pull-right"> 
+								<button class="btn btn-warning pull-left btn-add-hospital">添加医院</button> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -92,7 +89,7 @@
 					<h4 class="modal-title">添加医院</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" method="POST" action="admin/addHospital">
+					<form class="form-horizontal" method="POST" action="hospital/addHospital">
 						<div class="row container">
 							<div class="form-group" id="addh-numberGroup">
 								<label class="col-sm-2 control-label">医院编号</label>

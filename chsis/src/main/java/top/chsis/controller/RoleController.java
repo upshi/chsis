@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.UUIDGenerator;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.exception.RoleException;

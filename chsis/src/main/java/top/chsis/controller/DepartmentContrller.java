@@ -141,6 +141,26 @@ public class DepartmentContrller {
 		return "hospitalManager/departmentDetail";
 	}
 	
+	//获取该医院下的所有科室的名称
+	@RequestMapping("/getDepartmentType/{hospitalUuid}")
+	@ResponseBody
+	public Map<String, Object> getDepartmentType(@PathVariable String hospitalUuid){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtil.isNoE(hospitalUuid)) {
+			map.put("result", "failure");
+		} else {
+			List<Department> departments = departmentService.selectDepartmentsByHospitalUUID(hospitalUuid);
+			if(departments != null) {
+				map.put("result", "success");
+				map.put("departments", departments);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
 	//根据登陆的管理员信息，查询所管理的医院。
 	private Hospital getManagedHospital(HttpSession session) {
 		HospitalManager hospitalManager = (HospitalManager) session.getAttribute("hospitalManager");

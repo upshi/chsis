@@ -27,9 +27,7 @@ import top.chsis.model.Doctor;
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
-import top.chsis.model.Resident;
 import top.chsis.model.UploadObject;
-import top.chsis.service.IDepartmentService;
 import top.chsis.service.IDoctorService;
 import top.chsis.service.IHospitalManagerService;
 import top.chsis.service.IManagerService;
@@ -50,9 +48,6 @@ public class DoctorController {
 	
 	@Autowired
 	private IHospitalManagerService hospitalManagerService;
-	
-	@Autowired
-	private IDepartmentService departmentService;
 	
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -220,26 +215,6 @@ public class DoctorController {
 			hospitalManager = hospitalManagerService.selectByManagerUuid(manager.getUuid());
 		}
 		return hospitalManager.getHospital();
-	}
-	
-	//获取该医院下的所有科室的名称
-	@RequestMapping("/getDepartmentType/{hospitalUuid}")
-	@ResponseBody
-	public Map<String, Object> getDepartmentType(@PathVariable String hospitalUuid){
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(StringUtil.isNoE(hospitalUuid)) {
-			map.put("result", "failure");
-		} else {
-			List<Department> departments = departmentService.selectDepartmentsByHospitalUUID(hospitalUuid);
-			if(departments != null) {
-				map.put("result", "success");
-				map.put("departments", departments);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
 	}
 	
 	@RequestMapping("/edit")

@@ -4,7 +4,7 @@ $(function() {
 	$('.btn-add-doctor').on('click', function(){
 		var hospitalUuid = $('#hospitalUuid').val();
 		$.ajax({
-			url : "doctor/getDepartmentType/" + hospitalUuid,
+			url : "department/getDepartmentType/" + hospitalUuid,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,

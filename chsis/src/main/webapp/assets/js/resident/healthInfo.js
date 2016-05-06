@@ -125,7 +125,7 @@ function getEyesight(eyesight) {
 function onShowDiseaseHistory(uuid) {
 	//异步获取疾病史信息
 	$.ajax({
-			url : "resident/getDiseaseHistory/" + uuid ,
+			url : "diseaseHistory/getDiseaseHistoryByUuid/" + uuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,

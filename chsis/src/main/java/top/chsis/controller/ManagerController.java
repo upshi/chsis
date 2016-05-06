@@ -4,12 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.util.Base64;
+
+import top.chsis.model.Hospital;
+import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 import top.chsis.service.IManagerService;
 import top.chsis.util.StringUtil;
@@ -21,6 +26,9 @@ public class ManagerController {
 	@Autowired
 	private IManagerService managerService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/checkUsernameUnique/{userName}")
 	@ResponseBody
 	public Map<String, Object> checkUsernameUnique(@PathVariable String userName) {
@@ -81,6 +89,25 @@ public class ManagerController {
 		return "redirect:/hospital/detail/" + hospitalUuid;
 	}
 	
-	
+	@RequestMapping("/addHospitalManager")
+	public String addHospitalManager(Manager manager, String hospitalUuid, Model model) {
+		manager.setUuid(StringUtil.getUUID());
+		manager.setType(Manager.HOSPITAL_MANAGER);
+		
+		HospitalManager hospitalManager = new HospitalManager();
+		hospitalManager.setUuid(StringUtil.getUUID());
+		hospitalManager.setHospital(new Hospital(hospitalUuid));
+		
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(manager.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		manager.setPassword(encodedPassword);
+		
+		hospitalManager.setManager(manager);
+		managerService.insertHospitalManager(manager, hospitalManager);
+		
+		return "redirect:/hospital/detail/" + hospitalUuid;
+	}
 	
 }

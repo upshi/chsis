@@ -2,6 +2,9 @@ package top.chsis.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -82,5 +86,23 @@ public class HealthRecordController {
 		CheckReport checkReport = checkReportService.selectByPrimaryKey(uuid);
 		model.addAttribute("checkReport", checkReport);
 		return "doctor/healthRecordDetail";
+	}
+	
+	@RequestMapping("/getHealthRecord/{residentUuid}")
+	@ResponseBody
+	public Map<String, Object> getHealthRecord(@PathVariable String residentUuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(residentUuid)) {
+			map.put("result", "failure");
+		} else {
+			List<CheckReport> checkReports = checkReportService.selectCheckReportsByPatientUUID(residentUuid);
+			if(checkReports != null) {
+				map.put("result", "success");
+				map.put("checkReports", checkReports);
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
 	}
 }

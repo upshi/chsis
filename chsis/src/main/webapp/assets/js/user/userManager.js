@@ -1,12 +1,15 @@
 $(function() {
 	$("#navi_user").addClass('active');
+	$("#btn-add").on('click', function(){
+		window.location.href = "user/toAddUser";
+	})
 })
 
 function deleteUser(userUuid) {
 	$.confirm({
 		keyboardEnabled : true,
 		title : '删除人员',
-		content : '此操作会删除该人员的所有信息，而且操作不可撤销，确定删除该人员？',
+		content : '此操作会删除该管理员的所有信息，而且操作不可撤销，确定删除该管理员？',
 		confirmButtonClass : 'btn-info',
 		cancelButtonClass : 'btn-danger',
 		confirm : function() {

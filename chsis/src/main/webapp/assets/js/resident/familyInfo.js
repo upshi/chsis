@@ -21,7 +21,7 @@ $(function(){
 	$('.btn-edit-family').on('click',function(){
 		var communityName = $('#community').attr('communityName');
 		$.ajax({
-			url : "family/getCommunityType",
+			url : "community/getCommunityType",
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -103,7 +103,7 @@ function checkAddress_edit() {
 function onShowDiseaseHistory(residentUuid) {
 	//异步获取疾病史信息
 	$.ajax({
-			url : "family/getDiseaseHistory/" + residentUuid ,
+			url : "diseaseHistory/getDiseaseHistoryByResidentUuid/" + residentUuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -138,7 +138,7 @@ function onShowDiseaseHistory(residentUuid) {
 function onShowHealthRecord(residentUuid) {
 	//异步获取体检信息
 	$.ajax({
-			url : "family/getHealthRecord/" + residentUuid ,
+			url : "healthRecord/getHealthRecord/" + residentUuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -173,7 +173,7 @@ function onShowHealthRecord(residentUuid) {
 function onShowImmuneRecord(residentUuid) {
 	//异步获取免疫信息
 	$.ajax({
-			url : "family/getImmuneRecord/" + residentUuid ,
+			url : "immuneRecord/getImmuneRecord/" + residentUuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -208,7 +208,7 @@ function onShowImmuneRecord(residentUuid) {
 function onShowResident(uuid) {
 	//异步获取家庭成员信息
 	$.ajax({
-			url : "family/getResident/" + uuid ,
+			url : "resident/get/" + uuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,

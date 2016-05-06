@@ -15,17 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import top.chsis.model.CheckReport;
 import top.chsis.model.Community;
-import top.chsis.model.DiseaseHistory;
 import top.chsis.model.Family;
-import top.chsis.model.ImmuneRecord;
 import top.chsis.model.Resident;
-import top.chsis.service.ICheckReportService;
-import top.chsis.service.ICommunityService;
-import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
-import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.FamilyVO;
@@ -39,18 +32,6 @@ public class FamilyController {
 	
 	@Autowired
 	private IResidentService residentService;
-	
-	@Autowired
-	private IDiseaseHistoryService diseaseHistoryService;
-	
-	@Autowired
-	private ICommunityService communityService;
-	
-	@Autowired
-	private IImmuneRecordService immuneRecordService;
-	
-	@Autowired
-	private ICheckReportService checkReportService;
 	
 	@RequestMapping("/familyInfo")
 	public String FamilyInfo(Model model){
@@ -134,96 +115,6 @@ public class FamilyController {
 				map.put("result", "failure");
 			}
 		}
-		return map;
-	}
-	
-	@RequestMapping("/getDiseaseHistory/{residentUuid}")
-	@ResponseBody
-	public Map<String, Object> getDiseaseHistory(@PathVariable String residentUuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(residentUuid)) {
-			map.put("result", "failure");
-		} else {
-			List<DiseaseHistory> diseaseHistories = diseaseHistoryService.selectDiseaseHistoriesByPatientUUID(residentUuid);
-			if(diseaseHistories != null) {
-				map.put("result", "success");
-				map.put("diseaseHistories", diseaseHistories);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
-	
-	@RequestMapping("/getHealthRecord/{residentUuid}")
-	@ResponseBody
-	public Map<String, Object> getHealthRecord(@PathVariable String residentUuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(residentUuid)) {
-			map.put("result", "failure");
-		} else {
-			List<CheckReport> checkReports = checkReportService.selectCheckReportsByPatientUUID(residentUuid);
-			if(checkReports != null) {
-				map.put("result", "success");
-				map.put("checkReports", checkReports);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
-	
-	@RequestMapping("/getImmuneRecord/{residentUuid}")
-	@ResponseBody
-	public Map<String, Object> getImmuneRecord(@PathVariable String residentUuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(residentUuid)) {
-			map.put("result", "failure");
-		} else {
-			List<ImmuneRecord> immuneRecords = immuneRecordService.selectImmuneRecordsByPatientUUID(residentUuid);
-			if(immuneRecords != null) {
-				map.put("result", "success");
-				map.put("immuneRecords", immuneRecords);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
-	
-	@RequestMapping("/getResident/{uuid}")
-	@ResponseBody
-	public Map<String, Object> getResident(@PathVariable String uuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(uuid)) {
-			map.put("result", "failure");
-		} else {
-			Resident resident = residentService.selectByPrimaryKey(uuid);
-			
-			if(resident != null) {
-				map.put("result", "success");
-				map.put("resident", resident);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
-	
-	@RequestMapping("/getCommunityType")
-	@ResponseBody
-	public Map<String, Object> getCommunityType() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<Community> communities = communityService.selectAll();
-		
-		if(communities != null) {
-			map.put("result", "success");
-			map.put("communities", communities);
-		} else {
-			map.put("result", "failure");
-		}
-	
 		return map;
 	}
 	

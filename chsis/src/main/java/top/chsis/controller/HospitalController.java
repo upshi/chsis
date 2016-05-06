@@ -27,6 +27,23 @@ public class HospitalController {
 	@Autowired
 	private IHospitalManagerService hospitalManagerService;
 	
+	@RequestMapping("/list")
+	public String manageHospital(Model model) {
+		List<Hospital> hospitals = hospitalService.selectAll();
+		List<HospitalManager> hospitalManagers = hospitalManagerService.selectAll();
+		
+		model.addAttribute("hospitals", hospitals);
+		model.addAttribute("hospitalManagers", hospitalManagers);
+		return "admin/manageHospital";
+	}
+	
+	@RequestMapping("/addHospital")
+	public String addHospital(Hospital hospital, Model model) {
+		hospital.setUuid(StringUtil.getUUID());
+		hospitalService.insert(hospital);
+		return "redirect:/admin/hospital/";
+	}
+	
 	@RequestMapping("/delete/{uuid}")
 	@ResponseBody
 	public Map<String, Object> deleteHospital(@PathVariable String uuid) {
