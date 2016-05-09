@@ -143,7 +143,7 @@ function deleteHospital(uuid) {
 										cancelButtonClass : 'btn-danger',
 										autoClose : 'confirm|3000'
 							});
-							window.location.href = 'admin/hospital'
+							window.location.href = 'hospital/list'
 						} else {
 							$.confirm({
 										keyboardEnabled : true,

@@ -94,18 +94,18 @@ public class ManagerController {
 			hospitalManager.setHospital(hospital);
 			hospitalManager.setManager(manager);
 			managerService.insertHospitalManager(manager, hospitalManager);
+			model.addAttribute("hospitalName", hospital.getName());
 		} else {
 			managerService.insert(manager);
 		}
 		model.addAttribute("manager", manager);
-		model.addAttribute("hospitalName", hospital.getName());
 		
-		return "admin/managerDetail";
+		return "redirect:/manager/manage";
 	}
 
 	@RequestMapping("/checkUserNameUnique/{userName}")
 	@ResponseBody
-	public Map<String, Object> checkUsernameUnique(@PathVariable(value = "userName") String userName) {
+	public Map<String, Object> checkUserNameUnique(@PathVariable(value = "userName") String userName) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(StringUtil.isNoE(userName)) {
 			map.put("result", "exist");
@@ -164,7 +164,6 @@ public class ManagerController {
 			Manager manager = managerService.selectByPrimaryKey(uuid);
 			if(manager != null) {
 				manager.setPassword(null);
-				manager.setType(null);
 				
 				//根据管理员id，判断是否是医院管理员，如果是医院管理员则展示医院名称
 				HospitalManager hospitalManager = hospitalManagerService.selectByManagerUuid(uuid);
@@ -178,6 +177,19 @@ public class ManagerController {
 			} else {
 				map.put("result", "failure");
 			}
+		}
+		return map;
+	}
+	
+	@RequestMapping("/edit")
+	@ResponseBody
+	public Map<String, Object> edit(Manager manager) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int update = managerService.updateByPrimaryKeySelective(manager);
+		if(update == 0){
+			map.put("result", "failure");
+		}else {
+			map.put("result", "success");
 		}
 		return map;
 	}

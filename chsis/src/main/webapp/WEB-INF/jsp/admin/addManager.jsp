@@ -83,11 +83,11 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">管理员类别</label>
 								<div class="col-sm-3">
-									<select id="type-select" class="form-control" name="type">
-										<optgroup label="请选择管理员类别（只能选一个）">
-					             			<option value="2">系统管理员</option>
-					             			<option value="1">审核员</option>
-					             			<option value="0">医院管理员</option>
+									<select class="form-control" name="type" id="type-select">
+										<optgroup label="请选择所属管理员类别（只能选一个）">
+						             		<option value="2">系统管理员</option>
+						             		<option value="1">审核员</option>
+						             		<option value="0">医院管理员</option>
 						        		</optgroup>
 									</select>
 								</div>

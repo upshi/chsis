@@ -10,11 +10,23 @@ $(function() {
 	$('.btn-managerDetail').on('click',function(){
 		onShowManager($(this).attr('uuid'));
 	})
+	
+	//绑定点击编辑管理员按钮事件
+	$('.btn-editManager').on('click',function(){
+		onEditManager($(this).attr('uuid'));
+	})
+	
+	//绑定编辑管理员的点击保存按钮事件
+	$('#editm-submit').on('click',function(){
+		editmOnSubmit();
+		return false;
+	})
+		
 })
 
-//打开家庭成员详情模态框
+//打开管理员详情模态框
 function onShowManager(uuid) {
-	//异步获取家庭成员信息
+	//异步获取管理员信息
 	$.ajax({
 			url : "manager/get/" + uuid ,
 			type : "GET" ,
@@ -25,12 +37,14 @@ function onShowManager(uuid) {
 					//赋值
 					$('#manager-name').html(data.manager.name);
 					$('#manager-phone').html(data.manager.phone);
-					var type = data.manager.type;
+					var type = Number(data.manager.type);
 					$('#manager-type').html(getType(type));
 					
 					if(type == 0) {
-						$('#hospital-name').html(hospitalName);
+						$('#hospital-name').html(data.hospitalName);
 						$('#div-hide').show();
+					} else {
+						$('#div-hide').hide();
 					}
 					
 					$('#managerDetail').modal();
@@ -45,6 +59,67 @@ function onShowManager(uuid) {
 			} 
 	});
 }
+
+//打开编辑管理员模态框
+function onEditManager(uuid) {
+	//异步获取管理员信息
+	$.ajax({
+			url : "manager/get/" + uuid ,
+			type : "GET" ,
+			cache : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == 'success') {
+					//赋值
+					$('#editm-name').val(data.manager.name);
+					$('#editm-phone').val(data.manager.phone);
+					
+					$('#managerUuid').attr('value',data.manager.uuid);
+					$('#editManager').modal();
+				} else {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '查询失败',
+						content : '您查询的管理员不存在！',
+						autoClose : 'confirm|3000'
+					});
+				}
+			} 
+	});
+}
+
+function editmOnSubmit(){
+	var url = $('#url').val() + "page=" + $('#pageIndex').val();
+	//异步修改管理员信息
+	$.ajax({
+			url : "manager/edit",
+			type : "POST" ,
+			cache : false , 
+			dataType : "json" ,
+			data: $("#managerInfoForm").serialize(),
+			success : function(data) {
+				if(data.result == 'success') {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '修改成功',
+						content : '成功修改管理员信息！',
+						confirmButtonClass : 'btn-info',
+						cancelButtonClass : 'btn-danger',	
+						autoClose : 'confirm|3000'
+					});
+					window.location.href = url;
+				} else {
+					$.confirm({
+						keyboardEnabled : true,
+						title : '修改失败',
+						content : '修改管理员信息失败！',
+						autoClose : 'confirm|3000'
+					});
+				}
+			} 
+	});
+}
+
 
 function deleteManager(managerUuid) {
 	$.confirm({

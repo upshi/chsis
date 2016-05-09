@@ -91,7 +91,9 @@
 												<li>
 													<a class="btn btn-default btn-sm btn-managerDetail" uuid="${manager.uuid }" style="border:none;">详情</a> 
 												</li>
-												<li><a href="manager/update/${manager.uuid }">编辑</a></li>
+												<li>
+													<a class="btn btn-default btn-sm btn-editManager" uuid="${manager.uuid }" style="border:none;">编辑</a> 
+												</li>
 												<li><a href="manager/toAllocateRole/${manager.uuid }">分配角色</a></li>
 												<li><a onclick="deleteManager('${manager.uuid}')">删除</a></li>
 											</ul>
@@ -101,6 +103,8 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<input id="url" type="hidden" value="${url }">
+					<input id="pageIndex" type="hidden" value="${pageIndex }">
 					<div>查询到${totals }条记录/共${totalPages }页</div>
 
 					<!-- 分页组件 -->
@@ -134,7 +138,7 @@
 								<b>管理员姓名：</b>
 							</h5>
 						</div>
-						<div class="col-sm-2 text-left">
+						<div class="col-sm-3 text-left">
 							<h5 id="manager-name"></h5>
 						</div>
 					</div>
@@ -154,17 +158,17 @@
 								<b>管理员类型：</b>
 							</h5>
 						</div>
-						<div class="col-sm-2 text-left">
+						<div class="col-sm-3 text-left">
 							<h5 id="manager-type"></h5>
 						</div>
 					</div>
-					<div id="div-hide" class="row" hidden>
-						<div class="col-sm-5">
+					<div id="div-hide" class="row">
+						<div class="col-sm-3 col-sm-offset-3">
 							<h5>
 								<b>所在医院：</b>
 							</h5>
 						</div>
-						<div class="col-sm-2 text-left">
+						<div class="col-sm-3 text-left">
 							<h5 id="hospital-name"></h5>
 						</div>
 					</div>
@@ -174,6 +178,56 @@
 		</div>
 	</div>
 	<!-- Modal End-->
+	
+	<!-- Modal Start -->
+	<div class="modal fade" id="editManager" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-left">
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 修改管理员信息
+					</h4>
+				</div>
+				<div class="modal-body row">
+					<form id="managerInfoForm" class="form-horizontal" method="POST">
+						<input id="managerUuid" type="hidden" name="uuid">
+						<div class="row container">
+							<div class="form-group" id="editm-nameGroup">
+								<label class="col-sm-2 control-label">管理员姓名</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="editm-name" class="form-control" name="name" type="text" placeholder="管理员姓名">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="editm-phoneGroup">
+								<label class="col-sm-2 control-label">管理员电话</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="editm-phone" class="form-control" name="phone" type="text" placeholder="管理员电话">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-4">
+							<div class="blank"></div>
+							<button class="btn btn-info" id="editm-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
 
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>

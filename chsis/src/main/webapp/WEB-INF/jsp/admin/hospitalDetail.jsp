@@ -37,7 +37,7 @@
 			<div class="wrapper">
 				<ul class="breadcrumb">
 					<li>当前位置：</li>
-					<li><a href="admin/hospital">医院管理</a></li>
+					<li><a href="hospital/list">医院管理</a></li>
 					<li class="active">${hospital.name }详情</li>
 				</ul>
 				<div class="row">

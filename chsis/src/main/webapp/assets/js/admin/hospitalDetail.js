@@ -157,7 +157,7 @@ function checkUserName_add() {
 		return false;
 	} else {
 		$.ajax({
-			url : "manager/checkUsernameUnique/" + userName ,
+			url : "manager/checkUserNameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
 			async : false ,
