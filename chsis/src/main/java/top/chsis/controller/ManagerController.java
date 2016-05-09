@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
+import top.chsis.service.IHospitalManagerService;
 import top.chsis.service.IHospitalService;
 import top.chsis.service.IManagerService;
 import top.chsis.util.StringUtil;
@@ -36,6 +37,9 @@ public class ManagerController {
 	
 	@Autowired
 	IHospitalService hospitalService;
+	
+	@Autowired
+	IHospitalManagerService hospitalManagerService;
 	
 	@RequestMapping("/manage")
 	public String userManager(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
@@ -74,7 +78,8 @@ public class ManagerController {
 	}
 
 	@RequestMapping(value = "/addManager", method = RequestMethod.POST)
-	public String addManager(Manager manager, String hospitalUuid, Model model, String roleUuid) {
+	public String addManager(Manager manager, String hospitalUuid, Model model) {
+		Hospital hospital = null;
 		manager.setUuid(StringUtil.getUUID());
 		//Base64解码得到原始密码
 		String rawPassword = new String(Base64.decodeFast(manager.getPassword()));
@@ -82,12 +87,23 @@ public class ManagerController {
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 		manager.setPassword(encodedPassword);
 		
-		managerService.insert(manager);
+		if(manager.getType() == 0){
+			HospitalManager hospitalManager = new HospitalManager();
+			hospitalManager.setUuid(StringUtil.getUUID());
+			hospital = hospitalService.selectByPrimaryKey(hospitalUuid);
+			hospitalManager.setHospital(hospital);
+			hospitalManager.setManager(manager);
+			managerService.insertHospitalManager(manager, hospitalManager);
+		} else {
+			managerService.insert(manager);
+		}
+		model.addAttribute("manager", manager);
+		model.addAttribute("hospitalName", hospital.getName());
 		
 		return "admin/managerDetail";
 	}
 
-	@RequestMapping("/checkUsernameUnique/{userName}")
+	@RequestMapping("/checkUserNameUnique/{userName}")
 	@ResponseBody
 	public Map<String, Object> checkUsernameUnique(@PathVariable(value = "userName") String userName) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -121,6 +137,23 @@ public class ManagerController {
 		return map;
 	}
 	
+	@RequestMapping("/detail/{managerUuid}")
+	public String managerDetail(@PathVariable(value = "managerUuid") String managerUuid, Model model) {
+		Manager manager = new Manager();
+		Hospital hospital = new Hospital();
+		HospitalManager hospitalManager = new HospitalManager();
+		
+		manager = managerService.selectByPrimaryKey(managerUuid);
+		
+		hospitalManager = hospitalManagerService.selectByManagerUuid(managerUuid);
+		if(hospitalManager != null && !hospitalManager.equals("")){
+			hospital = hospitalManager.getHospital();
+			model.addAttribute("hospitalName", hospital.getName());
+		}
+		model.addAttribute("manager", manager);
+		return "admin/managerDetail";
+	}
+	
 	@RequestMapping("/get/{uuid}")
 	@ResponseBody
 	public Map<String, Object> get(@PathVariable String uuid) {
@@ -132,6 +165,14 @@ public class ManagerController {
 			if(manager != null) {
 				manager.setPassword(null);
 				manager.setType(null);
+				
+				//根据管理员id，判断是否是医院管理员，如果是医院管理员则展示医院名称
+				HospitalManager hospitalManager = hospitalManagerService.selectByManagerUuid(uuid);
+				if(hospitalManager != null && !hospitalManager.equals("")){
+					Hospital hospital = hospitalManager.getHospital();
+					map.put("hospitalName", hospital.getName());
+				}
+				
 				map.put("result", "success");
 				map.put("manager", manager);
 			} else {

@@ -88,7 +88,9 @@
 												操作 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" style="min-width: 60px">
-												<li><a href="manager/detail/${manager.uuid }">详情</a></li>
+												<li>
+													<a class="btn btn-default btn-sm btn-managerDetail" uuid="${manager.uuid }" style="border:none;">详情</a> 
+												</li>
 												<li><a href="manager/update/${manager.uuid }">编辑</a></li>
 												<li><a href="manager/toAllocateRole/${manager.uuid }">分配角色</a></li>
 												<li><a onclick="deleteManager('${manager.uuid}')">删除</a></li>
@@ -112,6 +114,66 @@
 		<!--页脚区域  结束-->
 	</div>
 	</section>
+	
+	<!-- Modal Start-->
+	<div class="modal fade" id="managerDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-left">
+						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 管理员信息详情
+					</h4>
+				</div>
+				<div class="modal-body container col-sm-12">
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-3">
+							<h5>
+								<b>管理员姓名：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="manager-name"></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-3">
+							<h5>
+								<b>管理员电话：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="manager-phone"></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-3">
+							<h5>
+								<b>管理员类型：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="manager-type"></h5>
+						</div>
+					</div>
+					<div id="div-hide" class="row" hidden>
+						<div class="col-sm-5">
+							<h5>
+								<b>所在医院：</b>
+							</h5>
+						</div>
+						<div class="col-sm-2 text-left">
+							<h5 id="hospital-name"></h5>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End-->
 
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>

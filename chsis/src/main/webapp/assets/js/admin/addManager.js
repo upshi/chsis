@@ -54,7 +54,7 @@ function checkUserName() {
 		return false;
 	} else {
 		return $.ajax({
-			url : "user/checkUserNameUnique/" + userName ,
+			url : "manager/checkUserNameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -107,7 +107,7 @@ function checkName() {
 
 function checkPhone() {
 	var phone = $('#phone').val();
-	if(name == null || $.trim(name) == '') {
+	if(phone == null || $.trim(phone) == '') {
 		$('#phoneGroup').removeClass('has-success');
 		$('#phoneGroup').addClass('has-error');
 		$('#phoneGroup .help-block').html('请输入联系电话');
