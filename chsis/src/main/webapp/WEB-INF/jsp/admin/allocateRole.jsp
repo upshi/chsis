@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-<title>融圳保本理财系统</title>
+<title>社区健康服务信息系统</title>
 
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
@@ -44,12 +44,11 @@
 					<section class="panel">
 						<header class="panel-heading"> 分配角色 </header>
 						<div class="panel-body">
-							<form action="user/allocateRole" class="form-horizontal" method="POST">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								<input type="hidden" name="userUuid" value="${user.uuid}"/>
+							<form action="manager/allocateRole" class="form-horizontal" method="POST">
+								<input type="hidden" name="managerUuid" value="${manager.uuid}"/>
 								<div class="form-group">
-									<label class="col-sm-2 control-label">姓名:&nbsp;</label>
-									<label class="col-sm-4 control-label" style="text-align:left">${user.name }&nbsp;&nbsp;|&nbsp;&nbsp;${company.name }</label>
+									<label class="col-sm-2 control-label">管理员姓名：</label>
+									<label class="col-sm-4 control-label" style="text-align:left">${manager.name }</label>
 								</div>
 								
 								<div class="form-group last">
@@ -66,9 +65,7 @@
 								</div>
 								<div class="panel-body">
 									<label class="col-sm-5 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_7fb1b2deae0e449fa1e46683e0cd9f2d')">	
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
 								</div>
 							</form>
 						</div>

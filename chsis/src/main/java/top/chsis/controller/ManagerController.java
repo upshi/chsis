@@ -1,6 +1,10 @@
 package top.chsis.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +21,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.exception.UserRoleException;
 import top.chsis.model.Hospital;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
 import top.chsis.service.IHospitalManagerService;
 import top.chsis.service.IHospitalService;
 import top.chsis.service.IManagerService;
+import top.chsis.service.IRoleService;
+import top.chsis.service.IUserRoleService;
 import top.chsis.util.StringUtil;
+import top.chsis.vo.UserRoleVO;
+import top.chsis.model.Role;
+import top.chsis.model.UserRole;
 
 @Controller
 @RequestMapping("/manager")
@@ -40,6 +50,12 @@ public class ManagerController {
 	
 	@Autowired
 	IHospitalManagerService hospitalManagerService;
+	
+	@Autowired
+	IRoleService roleService;
+	
+	@Autowired
+	IUserRoleService userRoleService;
 	
 	@RequestMapping("/manage")
 	public String userManager(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
@@ -219,6 +235,114 @@ public class ManagerController {
 		managerService.insertHospitalManager(manager, hospitalManager);
 		
 		return "redirect:/hospital/detail/" + hospitalUuid;
+	}
+	
+	@RequestMapping("/toAllocateRole/{managerUuid}")
+	public String toAllocateResource(@PathVariable(value = "managerUuid") String managerUuid, Model model) {
+		Manager manager = null;
+		manager = managerService.selectByPrimaryKey(managerUuid);
+		
+		//取出所有角色
+		List<Role> allRole = roleService.selectAll();
+		//取出该用户已经拥有的角色
+		List<UserRole> userRoles = null;
+		try {
+			userRoles = userRoleService.selectRolesByUserUuid(managerUuid);
+		} catch (UserRoleException e) {
+			e.printStackTrace();
+		}
+		
+		//把所有角色放在map中以便快速定位
+		HashMap<String, Role> map = new HashMap<String, Role>();
+		for(Role r : allRole) {
+			map.put(r.getUuid(), r);
+		}
+		//遍历已有角色的集合,在所有角色的map中取出该角色,设置该角色的description为和allocateRole.jsp上约定的 %SELECTED%@,来表明该角色已经是该用户拥有的。
+		for(UserRole ur : userRoles) {
+			Role role = map.get(ur.getRole().getUuid());
+			role.setDescription("%SELECTED%@");
+			map.put(ur.getRole().getUuid(), role);
+		}
+		if(manager.getType() == 0){
+			Hospital hospital = hospitalService.selectByPrimaryKey(hospitalManagerService.selectByManagerUuid(managerUuid).getHospital().getUuid());
+			model.addAttribute("hospital", hospital);
+		}
+		Collection<Role> roleList = map.values();
+		model.addAttribute("manager", manager);
+		model.addAttribute("roleList", roleList);
+		
+		return "admin/allocateRole";
+	}
+
+	@RequestMapping("/allocateRole")
+	public String allocateResource(String managerUuid, String[] roleUuid, Model model) {
+		Manager manager = null;
+		manager = managerService.selectByPrimaryKey(managerUuid);
+		
+		// 新的角色的UUID的Set集合
+		HashSet<String> newRoleSet = null;
+		if(roleUuid == null || roleUuid.length == 0) {
+			newRoleSet = new HashSet<String>();
+		} else {
+			newRoleSet = new HashSet<String>(Arrays.asList(roleUuid));
+		}
+		
+		//取出该用户已经拥有的角色
+		List<UserRole> userRoles = null;
+		try {
+			userRoles = userRoleService.selectRolesByUserUuid(managerUuid);
+		} catch (UserRoleException e1) {
+			e1.printStackTrace();
+		}
+		
+		//遍历已有角色的集合,把角色UUID构建Set集合
+		HashSet<String> oldRoleSet = new HashSet<String>();
+		for(UserRole ur : userRoles) {
+			oldRoleSet.add(ur.getRole().getUuid());
+		}
+		
+		//取新角色Set与原有角色Set的交集，初始化交集为原有的角色集合
+		HashSet<String> mixedRoleSet = new HashSet<String>(oldRoleSet);
+		mixedRoleSet.retainAll(newRoleSet);
+		
+		//新角色Set减去交集部分,得到新增的角色
+		newRoleSet.removeAll(mixedRoleSet);
+		List<UserRoleVO> newUserRoleList = new ArrayList<UserRoleVO>();
+		UserRoleVO urVo = null;
+		for(String str : newRoleSet) {
+			urVo = new UserRoleVO(StringUtil.getUUID(), managerUuid , str);
+			newUserRoleList.add(urVo);
+		}
+		if(newUserRoleList.size() > 0) {
+			userRoleService.insertBatchByUserRoleVO(newUserRoleList);
+		}
+		
+		
+		//原有资源Set减去交集部分,得到删除的资源
+		oldRoleSet.removeAll(mixedRoleSet);
+		List<String> deleteUserRoleList = new ArrayList<String>();
+		for(String str : oldRoleSet) {
+			for(UserRole ur : userRoles) {
+				if(ur.getRole().getUuid().equals(str)) {
+					deleteUserRoleList.add(ur.getUuid());
+				}
+			}
+		}
+		if(deleteUserRoleList.size() > 0) {
+			userRoleService.deleteBatchByUuid(deleteUserRoleList);
+		}
+		
+		//查询最新的用户角色信息
+		try {
+			userRoles = userRoleService.selectRolesByUserUuid(managerUuid);
+		} catch (UserRoleException e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("manager", manager);
+		model.addAttribute("userRoles", userRoles);
+		
+		return "redirect:/manager/manage";
 	}
 	
 }
