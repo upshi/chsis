@@ -1,24 +1,40 @@
-<!DOCTYPE HTML>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>首页</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<base href="<%=basePath%>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" href="assets/image/favicon.ico" type="image/png">
+<title>社区健康信息服务系统</title>
+
+<link href="assets/css/chsis//bootstrap.css" rel="stylesheet" type="text/css" media="all">
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
+<script src="assets/js/chsis/jquery.min.js"></script>
+
 <!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<link href="css/hover.css" rel="stylesheet" media="all">
+<link href="assets/css/chsis/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="assets/css/chsis/hover.css" rel="stylesheet" media="all">
+
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }</script>
 <meta name="keywords" content="Lobortis Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
 <!--Google Fonts-->
 <link href='http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/div-change.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="assets/js/chsis/move-top.js"></script>
+<script type="text/javascript" src="assets/js/chsis/div-change.js"></script>
+<script type="text/javascript" src="assets/js/chsis/easing.js"></script>
 	<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -28,50 +44,35 @@
 			});
 	</script>
 <!-- //end-smoth-scrolling -->
+
 <!-- animated-css -->
-		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-		<script src="js/wow.min.js"></script>
+		<link href="assets/css/chsis/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="assets/js/chsis/wow.min.js"></script>
 		<script>
 		 new WOW().init();
 		</script>
 <!-- animated-css -->
-<script src="js/jquery-1.11.0.min.js"></script>
+
+<script src="assets/js/chsis/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 <!--header start here-->
-<div class="header">
-	<div class="container head-nav-back">
-		<div class="header-main">
-			<div class="logo">
-				<a href="index.html"> <img src="images/logo.png" alt=""/> </a>
-			</div>
-			<div class="navg">
-				<span class="menu"> <img src="images/icon.png" alt=""/></span>
-				<ul class="res">
-					<li><a class="active" href="index.html">首页</a></li>
-					<li><a href="introduce.html">社区简介</a></li>
-					<li><a href="hospital.html">社区医院</a></li>
-					<li><a href="announcement.html">社区公告</a></li>
-					<li><a href="dayhealth.html">每日健康</a></li>
-					<li><a href="contact.html">联系我们</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+<%@ include file="/include/chsis/header.jsp"%>
 <!--header end here-->
+
 <!--banner start here-->
 <div class="banner">
 	<div class="container">
 		<div class="banner-main">
 			<div class="col-md-6 banner-left">
+				<a id="login" href="chsis/login.jsp">登陆</a><a id="register" href="chsis/register.jsp">注册</a>
 				<div class="lobo">
 					<h3>欢迎来到阳光社区!</h3>
 					<P>WELCOME TO SUNSHINE COMMUNITY.</P>
 				</div>
 			</div>
 			<div class="col-md-6 banner-right">
-				<img src="images/welcome.png" alt="welcome" />
+				<img src="assets/image/chsis/welcome.png" alt="welcome" />
 			</div>
 		   <div class="clearefix"> </div>
 		</div>
@@ -88,9 +89,9 @@
 					<h3>重要通知 <span class="gd-clr">(Important Notice)</span> </h3>
 				</div>
 				<div class="info-bott">
-					<img src="images/c1.jpg" alt=""/>
+					<img src="assets/image/chsis/c1.jpg" alt=""/>
 					<ul>
-						<li><a href="news.html">社区医院举行义诊</a></li>
+						<li><a href="chsis/news.jsp">社区医院举行义诊</a></li>
 						<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
 						<li><a href="#">s大奖是的哈时间段a大家都卡</a></li>
 						<li><a href="#">sa的撒健的上课的话康的哈市大大</a></li>
@@ -99,7 +100,7 @@
 					</ul>
 				</div>
 				<div class="infogrid-bwn">
-					<a href="newslist.html">READ MORE</a>
+					<a href="chsis/newslist.jsp">READ MORE</a>
 				</div>
 				<div class="gd-tl-tip"> </div>
 			</div>
@@ -108,7 +109,7 @@
 					<h3>医生寄语 <span class="gd-clr">(Doctor Caution)</h3></span>
 				</div>
 				<div class="info-bott">
-					<img src="images/c2.jpg" alt=""/>
+					<img src="assets/image/chsis/c2.jpg" alt=""/>
 				    <ul>
 						<li><a href="#">sd你好多喝水接电话大家的挥洒</a></li>
 						<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
@@ -128,7 +129,7 @@
 					<h3>每日健康 <span class="gd-clr">(Everyday Health)</h3></span>
 				</div>
 				<div class="info-bott">
-					<img src="images/c3.jpg" alt=""/>
+					<img src="assets/image/chsis/c3.jpg" alt=""/>
 					<ul>
 						<li><a href="#">sd你好多喝水接电话大家的挥洒</a></li>
 						<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
@@ -209,7 +210,7 @@
 				    
 				});
 			   </script>
-			   <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+			   <script type="text/javascript" src="assets/js/chsis/jquery.flexisel.js"></script>
 
 
 </div>
@@ -226,7 +227,7 @@
 				<h4>外科 <span class="gd-clr">(Surgery)</span> </h4>
 			</div>
 			<div class="department-bott">
-				<img src="images/c1.jpg" alt="" style="width:230px;height:230px;"/>
+				<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
 				<div class="wrapper">
 					<div class="text"> 
 						<h4>外科是以手术切除、修补为主要治病手段的专业科室。分类：创伤，感染，肿瘤，畸形和功能障碍。</h4>
@@ -239,7 +240,7 @@
 				<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
 			</div>
 			<div class="department-bott">
-				<img src="images/c1.jpg" alt="" style="width:230px;height:230px;"/>
+				<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
 				<div class="wrapper">
 					<div class="text">
 						<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
@@ -252,7 +253,7 @@
 				<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
 			</div>
 			<div class="department-bott">
-				<img src="images/c1.jpg" alt="" style="width:230px;height:230px;"/>
+				<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
 				<div class="wrapper">
 					<div class="text">
 						<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
@@ -265,7 +266,7 @@
 				<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
 			</div>
 			<div class="department-bott">
-				<img src="images/c1.jpg" alt="" style="width:230px;height:230px;"/>
+				<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
 				<div class="wrapper">
 					<div class="text">
 						<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
@@ -278,58 +279,8 @@
 <!--department-bott end here-->
 
 <!--footer start here-->
-<div class="footer">
-	<div class="container">
-		<div class="footer-main">
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>TRISTIQUE AT DOLOR</h3>
-			  <ul class="ftr-list">
-			  	<li><a href="#">Quisque consequat mattis sapien cursus </a></li>
-			  	<li><a href="#">Etiam convallis turpis sit amet turpis ho</a></li>
-			  	<li><a href="#">Duis sit amet diam eget lorem faucibus</a></li>
-			  	<li><a href="#">Maecenas sed ante sit amet leo pharetra</a></li>
-			  	<li><a href="#">Aliquam fermentum laoreet velit, eget </a></li>
-			  	<li><a href="#">Suspendisse mattis augue at ante com</a></li>
-			  	<li><a href="#">Ut porta blandit mauris quis ultrices felis</a></li>
-			  </ul>
-			</div>
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>QUISQUE SOLLICIDIN ERAT</h3>
-			  <img src="images/c4.jpg" alt=""/>
-			  <p>Proin id mi et dui aliquam pretium at sit amet lorem. Vivamus odio mauris ultrices orta at congue a, consequat a diam. </p>
-			  <div class="ftr-bwn">
-			<a href="#" class="hvr-pulse">Read More</a>
-			  </div>
-			</div>
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>INEN NISLMI EGETCOM</h3>
-			  <P>Etiam euismod orci sit amet nunc vestibulum et porttitor magna varius sit amet facilisis eros vestibulum vel.</P>
-			  <h5>EMAIL US:<br> <a href="mailto:infoexample@email.com">info@coffeeshop.com</a></h5>
-			  <h6>(000)5555 555555</h6>
-			  <h5>FOLLOW US ON:</h5>
-			  <ul class="img-sprit">
-			  	<li><a class="foot" href="#"> </a></li>
-			  	<li><a class="fa" href="#"> </a></li>
-			  	<li><a class="tw" href="#"> </a></li>
-			  	<li><a class="in" href="#"> </a></li>
-			  	<li><a class="t" href="#"> </a></li>
-			  </ul>
-			</div>
-		  <div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
+<%@ include file="/include/chsis/footer.jsp"%>
 <!--footer end here-->
-
-<!--copyrights start here-->
-<div class="copyright">
-	<div class="container">
-		<div class="copyright-main wow bounceInLeft" data-wow-delay="0.4s">
-			<p>Copyright &copy; 2016.03.31 www.ranranup.com</p>
-		</div>
-	</div>
-</div>
-<!--copyrights end here-->
 
 </body>
 </html>

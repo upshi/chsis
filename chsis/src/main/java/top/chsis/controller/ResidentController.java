@@ -332,4 +332,23 @@ public class ResidentController {
 		model.addAttribute("url", "resident/searchHealthRecord?time=" + time + "&" );
 		return "resident/healthRecord";
 	}
+	
+	//检查用户名是否重复
+	@RequestMapping("/checkUserNameUnique/{userName}")
+	@ResponseBody
+	public Map<String, Object> checkUserNameUnique(@PathVariable String userName) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(userName)) {
+			map.put("result", "exist");
+		} else {
+			Resident resident = residentService.selectByUserName(userName);
+			if(resident == null) {
+				map.put("result", "inexistence");
+			} else {
+				map.put("result", "exist");
+			}
+		}
+		return map;
+	}
+	
 }

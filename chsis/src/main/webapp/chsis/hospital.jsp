@@ -1,25 +1,40 @@
-<!DOCTYPE HTML>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>社区医院</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<base href="<%=basePath%>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" href="assets/image/favicon.ico" type="image/png">
+<title>社区健康信息服务系统</title>
+
+<link href="assets/css/chsis/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
+<script src="assets/js/chsis/jquery.min.js"></script>
+
 <!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<link href="css/hover.css" rel="stylesheet" media="all">
+<link href="assets/css/chsis/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="assets/css/chsis/hover.css" rel="stylesheet" media="all">
+
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
-</script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }</script>
 <meta name="keywords" content="Lobortis Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
 <!--Google Fonts-->
 <link href='http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/div-change.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="assets/js/chsis/move-top.js"></script>
+<script type="text/javascript" src="assets/js/chsis/div-change.js"></script>
+<script type="text/javascript" src="assets/js/chsis/easing.js"></script>
 	<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -29,44 +44,20 @@
 			});
 	</script>
 <!-- //end-smoth-scrolling -->
+
 <!-- animated-css -->
-		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-		<script src="js/wow.min.js"></script>
+		<link href="assets/css/chsis/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="assets/js/chsis/wow.min.js"></script>
 		<script>
 		 new WOW().init();
 		</script>
 <!-- animated-css -->
+
+<script src="assets/js/chsis/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 <!--header start here-->
-<div class="header">
-	<div class="container head-nav-back">
-		<div class="header-main">
-			<div class="logo wow bounceIn" data-wow-delay="0.4s">
-				<a href="index.html"> <img src="images/logo.png" alt=""/> </a>
-			</div>
-			<div class="navg">
-				<span class="menu"> <img src="images/icon.png" alt=""/></span>
-				<ul class="res">
-					<li><a href="index.html">首页</a></li>
-					<li><a href="introduce.html">社区简介</a></li>
-					<li><a class="ser active" href="hospital.html">社区医院</a></li>
-					<li><a href="announcement.html">社区公告</a></li>
-					<li><a href="dayhealth.html">每日健康</a></li>
-					<li><a href="contact.html">联系我们</a></li>
-				</ul>
-				 <script>
-                              $( "span.menu").click(function() {
-                                                                $(  "ul.res" ).slideToggle("slow", function() {
-                                                                 // Animation complete.
-                                                                 });
-                                                                 });
-                 </script>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
+<%@ include file="/include/chsis/header.jsp"%>
 <!--header end here-->
 <!--about start here-->
 <div class="service">
@@ -81,12 +72,12 @@
 			</div>
 			<div class="service-left wow bounceIn" data-wow-delay="0.4s">
 			   <div class="service-right">
-				    <img src="images/s1.jpg" alt=""/>
+				    <img src="assets/image/chsis/s1.jpg" alt=""/>
 				    <div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
 							<ul>
-								<li><a href="doctor.html">李医生</a></li>
+								<li><a href="chsis/doctor.jsp">李医生</a></li>
 								<li><a href="#">李医生</a></li>
 								<li><a href="#">李医生</a></li>
 								<li><a href="#">李医生</a></li>
@@ -99,7 +90,7 @@
 				    </div>
 			   </div>
 			    <div class="service-right ser-midd wow bounceIn" data-wow-delay="0.4s">
-				    <img src="images/s2.jpg" alt=""/>
+				    <img src="assets/image/chsis/s2.jpg" alt=""/>
 				    <div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
@@ -117,7 +108,7 @@
 				    </div>
 			   </div>
 			    <div class="service-right wow bounceIn" data-wow-delay="0.4s">
-				    <img src="images/s3.jpg" alt=""/>
+				    <img src="assets/image/chsis/s3.jpg" alt=""/>
 				    <div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
@@ -135,7 +126,7 @@
 				    </div>
 			   </div>
 				<div class="service-right wow bounceIn" data-wow-delay="0.4s">
-				    <img src="images/s4.jpg" alt=""/>
+				    <img src="assets/image/chsis/s4.jpg" alt=""/>
 				    <div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
@@ -153,7 +144,7 @@
 				    </div>
 			   </div>
 			   <div class="service-right ser-midd wow bounceIn" data-wow-delay="0.4s">
-				    <img src="images/s6.jpg" alt=""/>
+				    <img src="assets/image/chsis/s6.jpg" alt=""/>
 				    <div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
@@ -171,7 +162,7 @@
 				    </div>
 			   </div>
 			   <div class="service-right wow bounceIn" data-wow-delay="0.4s">
-				    <img src="images/s7.jpg" alt=""/>
+				    <img src="assets/image/chsis/s7.jpg" alt=""/>
 				   	<div class="wrapper">
 				    	<h3>医生信息</h3>
 						<div class="text">
@@ -194,58 +185,10 @@
 	</div>
 </div>
 <!--about end here-->
+
 <!--footer start here-->
-<div class="footer">
-	<div class="container">
-		<div class="footer-main">
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>TRISTIQUE AT DOLOR</h3>
-			  <ul class="ftr-list">
-			  	<li><a href="#">Quisque consequat mattis sapien cursus </a></li>
-			  	<li><a href="#">Etiam convallis turpis sit amet turpis ho</a></li>
-			  	<li><a href="#">Duis sit amet diam eget lorem faucibus</a></li>
-			  	<li><a href="#">Maecenas sed ante sit amet leo pharetra</a></li>
-			  	<li><a href="#">Aliquam fermentum laoreet velit, eget </a></li>
-			  	<li><a href="#">Suspendisse mattis augue at ante com</a></li>
-			  	<li><a href="#">Ut porta blandit mauris quis ultrices felis</a></li>
-			  </ul>
-			</div>
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>QUISQUE SOLLICIDIN ERAT</h3>
-			  <img src="images/c4.jpg" alt=""/>
-			  <p>Proin id mi et dui aliquam pretium at sit amet lorem. Vivamus odio mauris ultrices orta at congue a, consequat a diam. </p>
-			  <div class="ftr-bwn">
-			   <a href="#">READ MORE</a>
-			  </div>
-			</div>
-			<div class="col-md-4 footer-grid wow bounceIn" data-wow-delay="0.4s">
-			  <h3>INEN NISLMI EGETCOM</h3>
-			  <P>Etiam euismod orci sit amet nunc vestibulum et porttitor magna varius sit amet facilisis eros vestibulum vel.</P>
-			  <h5>EMAIL US:<br> <a href="mailto:infoexample@email.com">info@coffeeshop.com</a></h5>
-			  <h6>(000)5555 555555</h6>
-			  <h5>FOLLOW US ON:</h5>
-			  <ul class="img-sprit">
-			  	<li><a class="foot" href="#"> </a></li>
-			  	<li><a class="fa" href="#"> </a></li>
-			  	<li><a class="tw" href="#"> </a></li>
-			  	<li><a class="in" href="#"> </a></li>
-			  	<li><a class="t" href="#"> </a></li>
-			  </ul>
-			</div>
-		  <div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
+<%@ include file="/include/chsis/footer.jsp"%>
 <!--footer end here-->
-<!--copyrights start here-->
-<div class="copyright">
-	<div class="container">
-		<div class="copyright-main wow bounceInLeft" data-wow-delay="0.4s">
-			<p>Copyright &copy; 2016.03.31 www.ranranup.com</p>
-		</div>
-	</div>
-</div>
-<!--copyrights end here-->
 
 </body>
 </html>

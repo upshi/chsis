@@ -10,11 +10,11 @@ html, body{
 }
 /*--header start here--*/
 .header {
-	background: url(../images/header-back.JPG);
+	background: url(../../image/chsis/header-back.JPG);
 	min-height: 120px;
 }
 .head-nav-back{
-	background: url(../images/header-container.PNG) no-repeat;
+	background: url(../../image/chsis/header-container.PNG) no-repeat;
 	background-size:100%;
 	-webkit-background-size:100%;
 	height:120px;
@@ -57,7 +57,7 @@ a.cont.active {
 .navg ul li a.active{
 	text-decoration:none;
 	color:#fff;
-	background: url(../images/nav-back.png)no-repeat 0px 2px;
+	background: url(../../image/chsis/nav-back.png)no-repeat 0px 2px;
 	background-size:initial;
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
@@ -80,7 +80,7 @@ span.menu{
 /*--banner start here--*/
 .banner {
 	padding: 2em 0px 0px 0px;
-	background:url(../images/banner.jpg)no-repeat;
+	background:url(../../image/chsis/banner.jpg)no-repeat;
 	background-size:cover;
 	background-size: cover;
 	-webkit-background-size:cover;
@@ -99,6 +99,19 @@ span.menu{
 	padding: 10px 10px;
 }
 .banner-left a:hover{
+	background:#273138;
+	text-decoration:none;
+	color:#fff;
+	transition: 0.5s all;
+	 -webkit-transition: 0.5s all;
+	 -moz-transition:  0.5s all;
+	 -o-transition:  0.5s all;
+}
+#register{
+	background:#fff;
+	color:#000;
+}
+#register:hover{
 	background:#273138;
 	text-decoration:none;
 	color:#fff;
@@ -126,7 +139,7 @@ span.menu{
 /*--banner end here--*/
 /*--info-grid start here--*/
 .info-grid {
-	background: url(../images/info-bg.jpg);
+	background: url(../../image/chsis/info-bg.jpg);
 	padding: 3em 0px 5em 0px;
 	background-size: cover;
 	-webkit-background-size:cover;
@@ -135,7 +148,7 @@ span.menu{
 	-ms-background-size:cove;
 }
 .info-top {
-	background: url(../images/d-top.jpg);
+	background: url(../../image/chsis/d-top.jpg);
 	padding: 1em 1em;
 }
 .info-top h3 {
@@ -146,7 +159,7 @@ span.menu{
 	text-align:center;
 }
 .info-bott {
-	background: url(../images/d-middle.jpg)0px 0px;
+	background: url(../../image/chsis/d-middle.jpg)0px 0px;
 	padding: 1em 1em;
 	height: 335px;
 	overflow: hidden;
@@ -167,7 +180,7 @@ span.menu{
 .info-bott ul li a {
 	font-size: 0.94em;
     font-weight: 500;
-    background: url(../images/list.png)no-repeat 0px 7px;
+    background: url(../../image/chsis/list.png)no-repeat 0px 7px;
     padding: 1px 0px 0px 15px;
 	color: #828D94;
 }
@@ -233,7 +246,7 @@ span.gd-clr {
 .flex-slider{
 	min-height: 300px;
 	padding: 3em 0em;
-	background: url(../images/slid-bg.jpg);
+	background: url(../../image/chsis/slid-bg.jpg);
 }
 .grid{
 	text-align:left;
@@ -271,7 +284,7 @@ span.gd-clr {
 .nbs-flexisel-container {
 	position: relative;
 	max-width: 100%;
-	background: url(../images/sli-sml-bg.jpg);
+	background: url(../../image/chsis/sli-sml-bg.jpg);
 	padding: 2em 0px;
 	margin: 0em 3em;
 }
@@ -326,24 +339,24 @@ span.gd-clr {
 .nbs-flexisel-nav-left {
 	left: -32px;
 	top:-105px;
-	background: url(../images/sli-lef.png) no-repeat 0px 69px;
+	background: url(../../image/chsis/sli-lef.png) no-repeat 0px 69px;
 }
 .nbs-flexisel-nav-right {
 	right: -32px;
-	background: url(../images/sli-rit.png) no-repeat 0px 69px;
+	background: url(../../image/chsis/sli-rit.png) no-repeat 0px 69px;
 }
 /*--movegrid end here--*/
 
 /*--department-grid start here--*/
 .star-department{
-	background: url(../images/starDepartment.png)no-repeat;
+	background: url(../../image/chsis/starDepartment.png)no-repeat;
 	height:41px;
 	width:295px;
 	line-height: 41px;
 	margin: 0 0 10px 0;
 }
 .department{
-	background: url(../images/starDepartmentHover.png)no-repeat;
+	background: url(../../image/chsis/starDepartmentHover.png)no-repeat;
 	height:41px;
 	width:295px;
 	line-height: 41px;
@@ -367,10 +380,10 @@ span.gd-clr {
 	margin-left:-3px;
 }
 .star-department:hover{
-	background: url(../images/starDepartmentHover.png)no-repeat;
+	background: url(../../image/chsis/starDepartmentHover.png)no-repeat;
 }
 .department-grid {
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 	padding: 2em 0px;
 	background-size: cover;
 	-webkit-background-size:cover;
@@ -395,7 +408,7 @@ span.gd-clr {
 .wrapper {
 	width:230px;
 	height: 230px;
-	background: url(../images/info-bg.jpg);
+	background: url(../../image/chsis/info-bg.jpg);
 	position: absolute;
     top: 0;
     left: 0;
@@ -417,7 +430,7 @@ span.gd-clr {
 
 /*--footer start here--*/
 .footer {
-	background: url(../images/ft-bg.jpg);
+	background: url(../../image/chsis/ft-bg.jpg);
 	padding: 3em 0em;
 	background-size: cover;
 	-webkit-background-size:cover;
@@ -444,7 +457,7 @@ span.gd-clr {
 	font-size: 0.94em;
 	font-weight: 400;
 	color: #828D94;
-	background: url(../images/list.png)no-repeat 0px 7px;
+	background: url(../../image/chsis/list.png)no-repeat 0px 7px;
 	padding: 1px 0px 0px 15px;
 }
 .footer-grid ul.ftr-list li a:hover{
@@ -466,7 +479,7 @@ span.gd-clr {
 	font-size: 1em;
 	font-weight: 400;
 	color: #273138;
-	background:url(../images/ft-bwn.jpg);
+	background:url(../../image/chsis/ft-bwn.jpg);
 	padding: 10px 10px;
 }
 .ftr-bwn a:hover{
@@ -512,7 +525,7 @@ ul.img-sprit li {
 	display: inline-block;
 }
 ul.img-sprit li a {
-	background: url(../images/ftr-icons.png)no-repeat;
+	background: url(../../image/chsis/ftr-icons.png)no-repeat;
 	display: block;
 	width: 58px;
 	height: 27px;
@@ -597,7 +610,7 @@ ul.img-sprit li a.t:hover{
 
 /*--copyright start here--*/
 .copyright {
-	background: url(../images/copyrt-bg.jpg);
+	background: url(../../image/chsis/copyrt-bg.jpg);
 	padding: 2em 0px;
 	text-align:center;
 	background-size: cover;
@@ -628,7 +641,7 @@ ul.img-sprit li a.t:hover{
 /*--about start here--*/
 .about {
 	padding: 3em 0px;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 .about-left h3 {
 	font-size: 2em;
@@ -646,7 +659,7 @@ ul.img-sprit li a.t:hover{
 	margin: 10px 0px 10px 0px;
 	line-height: 25px;
 	padding:20px;
-	background-image: url(../images/info-bg.jpg);
+	background-image: url(../../image/chsis/info-bg.jpg);
 	text-indent: 1.5em;
 	border-radius: 15px;
 }
@@ -663,7 +676,7 @@ ul.img-sprit li a.t:hover{
 }
 .team {
 	padding-bottom: 3em;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 .about-left ul {
 	list-style: none;
@@ -688,7 +701,7 @@ ul.img-sprit li a.t:hover{
 /*--services start here--*/
 .service {
 	padding: 3em 0px;
-	background:url(../images/banner.jpg);
+	background:url(../../image/chsis/banner.jpg);
 }
 .service-top {
 	text-align:center;
@@ -715,7 +728,7 @@ ul.img-sprit li a.t:hover{
 .service-right .wrapper {
 	width: 100%;
 	height: 85%;
-	background: url(../images/info-bg.jpg);
+	background: url(../../image/chsis/info-bg.jpg);
 	position: absolute;
     top: 0;
     left: 0;
@@ -768,7 +781,7 @@ ul.img-sprit li a.t:hover{
 }
 .solution {
 	padding: 3em 0px;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 .solution-main {
 	text-align: center;
@@ -831,7 +844,7 @@ ul.img-sprit li a.t:hover{
 }
 .projects {
 	padding: 3em 0px;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 .projects-top h3 {
 	font-size: 2em;
@@ -1002,7 +1015,7 @@ a.comme:hover {
 /*--contact start here--*/
 .contact {
 	padding: 3em 0px;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 .contact-top {
 	text-align: center;
@@ -1085,7 +1098,7 @@ a.comme:hover {
 }
 .map {
 	padding-bottom: 2em;
-	background: url(../images/banner.jpg);
+	background: url(../../image/chsis/banner.jpg);
 }
 /*--contact end here--*/
 /*--media quries start here--*/
@@ -1816,7 +1829,7 @@ input[type="submit"] {
 }
 
 .back-img {
-	background: url(../images/info-bg.jpg)0px 0px;
+	background: url(../../image/chsis/info-bg.jpg)0px 0px;
     padding: 1em 1em;
     height: 50px;
     line-height:50px;
@@ -1829,12 +1842,12 @@ input[type="submit"] {
 	letter-spacing:.11em;
 	line-height: 30px;
 	padding: 20px 30px;
-	background:url(../images/d-top.jpg);
+	background:url(../../image/chsis/d-top.jpg);
 	border-radius: 0 0 15px 15px;
 	border:1px solid #A9A9A9;
 }
 .news-text ul {
-	list-style-image: url(../images/list.png);
+	list-style-image: url(../../image/chsis/list.png);
 }
 .news-text ul li {
 	height: 40px;
