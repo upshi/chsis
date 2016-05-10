@@ -56,4 +56,8 @@ public class FamilyServiceImpl implements IFamilyService {
 		return pageInfo;
 	}
 
+	public Family selectByNumber(String number) {
+		return familyMapper.selectByNumber(number);
+	}
+
 }

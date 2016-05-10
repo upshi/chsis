@@ -40,23 +40,21 @@
   <select id="selectByCondition" resultMap="FamilyVOResultMap" parameterType="top.chsis.vo.FamilyVO" >
     select f.uuid, f.number, f.phone, r.name householderName, c.name communityName from t_family f, t_resident r, t_community c
     where 1=1
-    <if test="uuid!=null and uuid!=''">
-		and f.uuid LIKE CONCAT('%', #{uuid},'%' )
-	</if>
-    <if test="number!=null and number!=''">
-		and f.number LIKE CONCAT('%', #{number},'%' )
-	</if>
-	<if test="phone!=null and phone!=''">
-		and f.phone LIKE CONCAT('%', #{phone},'%' )
-	</if>
 	<if test="householderName!=null and householderName!=''">
-		and r.name LIKE CONCAT('%', #{householderName},'%' )
+		and householderName LIKE CONCAT('%', #{householderName},'%' )
 	</if>
 	<if test="communityName!=null and communityName!=''">
-		and c.name LIKE CONCAT('%', #{communityName},'%' )
+		and communityName LIKE CONCAT('%', #{communityName},'%' )
 	</if>
-	and f.householder_uuid = r.uuid
+	and f.uuid = r.family_uuid
 	and f.community_uuid = c.uuid
+  </select>
+  
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_family
+    where number = #{number,jdbcType=VARCHAR}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

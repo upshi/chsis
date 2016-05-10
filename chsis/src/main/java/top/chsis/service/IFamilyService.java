@@ -23,4 +23,6 @@ public interface IFamilyService {
     int updateByPrimaryKey(Family record);
 
 	PageInfo<FamilyVO> selectByConditionAndPaging(FamilyVO familyVO, int page, int size);
+
+	Family selectByNumber(String number);
 }

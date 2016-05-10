@@ -18,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import top.chsis.model.Community;
 import top.chsis.model.Family;
 import top.chsis.model.Resident;
+import top.chsis.service.ICommunityService;
 import top.chsis.service.IFamilyService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
@@ -32,6 +33,9 @@ public class FamilyController {
 	
 	@Autowired
 	private IResidentService residentService;
+	
+	@Autowired
+	ICommunityService communityService;
 	
 	@RequestMapping("/familyInfo")
 	public String FamilyInfo(Model model){
@@ -125,5 +129,31 @@ public class FamilyController {
 		family.setCommunity(community);
 		familyService.updateByPrimaryKeySelective(family);
 		return "redirect:/family/familyInfo";
+	}
+	
+	@RequestMapping("/addFamily")
+	public String addFamily(Family family, String communityUuid, Model model) {
+		Community community = communityService.selectByPrimaryKey(communityUuid);
+		family.setUuid(StringUtil.getUUID());
+		family.setCommunity(community);
+		familyService.insert(family);
+		return "redirect:/family/detail/" + family.getUuid();
+	}
+	
+	@RequestMapping("/checkNumberUnique/{number}")
+	@ResponseBody
+	public Map<String, Object> checkNumberUnique(@PathVariable String number) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(number)) {
+			map.put("result", "exist");
+		} else {
+			Family family = familyService.selectByNumber(number);
+			if(family == null) {
+				map.put("result", "inexistence");
+			} else {
+				map.put("result", "exist");
+			}
+		}
+		return map;
 	}
 }

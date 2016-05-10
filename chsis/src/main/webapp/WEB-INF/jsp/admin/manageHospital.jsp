@@ -78,6 +78,7 @@
 		</div>
 		<!-- main content end-->
 	</section>
+	
 	<!-- Modal Start -->
 	<div class="modal fade" id="addHospital" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">

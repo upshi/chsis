@@ -89,6 +89,70 @@
 		</div>
 		<!-- main content end-->
 	</section>
+	
+	<!-- Modal Start -->
+	<div class="modal fade" id="addFamily" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">添加家庭</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" method="POST" action="family/addFamily">
+						<div class="row container">
+							<div class="form-group" id="addf-numberGroup">
+								<label class="col-sm-2 control-label">家庭编号</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="addf-number" class="form-control" name="number" type="text" placeholder="家庭编号">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="addf-phoneGroup">
+								<label class="col-sm-2 control-label">家庭电话</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="addf-phone" class="form-control" name="phone" type="text" placeholder="家庭电话">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group" id="addf-addressGroup">
+								<label class="col-sm-2 control-label">家庭地址</label>
+								<div class="col-sm-3">
+									<div class="iconic-input right">
+										<input id="addf-address" class="form-control" name="address" type="text" placeholder="家庭地址">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group">
+								<label class="col-sm-1 col-sm-offset-1 control-label">所在社区</label>
+								<div class="col-sm-3">
+									<select id="community" name="communityUuid" class="form-control"></select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-5">
+							<button class="btn btn-success" id="addf-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
     
     <!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>

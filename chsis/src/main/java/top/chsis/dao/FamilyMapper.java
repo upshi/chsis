@@ -21,4 +21,6 @@ public interface FamilyMapper {
     int updateByPrimaryKey(Family record);
 
 	List<FamilyVO> selectByCondition(FamilyVO familyVO);
+
+	Family selectByNumber(String number);
 }
