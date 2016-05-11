@@ -1,39 +1,27 @@
 $(function(){
 	onloadModal();
-	
-	var nationCode = Number($('#nationCode').attr('nationCode'));
-	$('#nationCode').html(getNation(nationCode));
+	beforeSubmit();
 })
 
 function onloadModal() {
 	$.getJSON('assets/json/nation.json',function(data) {
-		var nationCode = $('#nation').attr('nationCode');
         for(var i in data) {
-        	if(nationCode == data[i].value){
-        		$('#nation').append('<option value="' + data[i].value + '" selected>' + data[i].name + '</option>');
-        	}else{
-           		$('#nation').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
-        	}	
+       		$('#nation').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
         }
     });
     $.getJSON('assets/json/period.json',function(data) {
-    	var periodCode = $('#period').attr('periodCode');
         for(var i in data) {
-        	if(periodCode == data[i].value){
-        		$('#period').append('<option value="' + data[i].value + '" selected>' + data[i].name + '</option>');
-        	}else{
-        		$('#period').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
-        	}
+    		$('#period').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
         }
     });
     $.getJSON('assets/json/marriage.json',function(data) {
-    	var marriageCode = $('#marriage').attr('marriageCode');
         for(var i in data) {
-        	if(marriageCode == data[i].value){
-        		$('#marriage').append('<option value="' + data[i].value + '" selected>' + data[i].name + '</option>');
-        	}else{
-        		$('#marriage').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
-        	}
+    		$('#marriage').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
+        }
+    });
+    $.getJSON('assets/json/bloodType.json',function(data) {
+        for(var i in data) {
+    		$('#bloodType').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
         }
     });
     
@@ -45,15 +33,10 @@ function onloadModal() {
 			$('#age-select').append('<option value="' + i + '">' + i + '</option>');
 		}
 	}
-    
-	//绑定点击修改基本信息按钮事件
-	$('.btn-edit-baseInfo').on('click', function(){
-		onEditBaseInfo();
-	});
 }
 
 //打开修改居民基本信息的模态框
-function onEditBaseInfo(){
+function beforeSubmit(){
 	/*绑定失焦事件*/
 		$('#birth').on('blur',checkBirth);
 		$('#phone').on('blur',checkPhone);
@@ -76,20 +59,20 @@ function checkBirth() {
 	if(birth != null && $.trim(birth) != '') {
 		var re = /^[1|2]\d{7}$/i;
 		if(!re.test(birth)) {
-			$('#edit-birthGroup').removeClass('has-success');
-			$('#edit-birthGroup').addClass('has-error');
-			$('#edit-birthGroup .help-block').html('您输入的出生日期格式不正确');
+			$('#birthGroup').removeClass('has-success');
+			$('#birthGroup').addClass('has-error');
+			$('#birthGroup .help-block').html('您输入的出生日期格式不正确');
 			return false;
 		} else {
-			$('#edit-birthGroup').removeClass('has-error');
-			$('#edit-birthGroup').addClass('has-success');
-			$('#edit-birthGroup .help-block').html('');
+			$('#birthGroup').removeClass('has-error');
+			$('#birthGroup').addClass('has-success');
+			$('#birthGroup .help-block').html('');
 			return true;
 		}
 	} else {
-		$('#edit-birthGroup').removeClass('has-success');
-		$('#edit-birthGroup').addClass('has-error');
-		$('#edit-birthGroup .help-block').html('请输入您的出生日期');
+		$('#birthGroup').removeClass('has-success');
+		$('#birthGroup').addClass('has-error');
+		$('#birthGroup .help-block').html('请输入您的出生日期');
 		return false;
 	}
 }
@@ -97,19 +80,26 @@ function checkBirth() {
 //校验电话
 function checkPhone() {
 	var phone = $('#phone').val();
-	if(phone == null || $.trim(phone) == '') {
-		$('#edit-phoneGroup').removeClass('has-success');
-		$('#edit-phoneGroup').addClass('has-error');
-		$('#edit-phoneGroup .help-block').html('请输入您的联系电话');
-		return false;
+	if(phone != null && $.trim(phone) != '') {
+		var re = /^1[3|4|5|7|8]\d{9}$/i;
+		if(!re.test(phone)) {
+			$('#phoneGroup').removeClass('has-success');
+			$('#phoneGroup').addClass('has-error');
+			$('#phoneGroup .help-block').html('您输入的手机号格式不正确');
+			return false;
+		} else {
+			$('#phoneGroup').removeClass('has-error');
+			$('#phoneGroup').addClass('has-success');
+			$('#phoneGroup .help-block').html('');
+			return true;
+		}
 	} else {
-		$('#edit-phoneGroup').removeClass('has-error');
-		$('#edit-phoneGroup').addClass('has-success');
-		$('#edit-phoneGroup .help-block').html('');
-		return true;
+		$('#phoneGroup').removeClass('has-success');
+		$('#phoneGroup').addClass('has-error');
+		$('#phoneGroup .help-block').html('请输入手机号');
+		return false;
 	}
 }
-
 //获取民族
 function getNation(num) {
 	switch(num) {

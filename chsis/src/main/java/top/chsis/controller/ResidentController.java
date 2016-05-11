@@ -18,11 +18,13 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
 import top.chsis.model.DiseaseHistory;
+import top.chsis.model.Family;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
 import top.chsis.service.ICheckReportService;
 import top.chsis.service.IDiseaseHistoryService;
+import top.chsis.service.IFamilyService;
 import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
@@ -35,6 +37,9 @@ public class ResidentController {
 	
 	@Autowired
 	private IResidentService residentService;
+	
+	@Autowired
+	private IFamilyService familyService;
 	
 	@Autowired
 	private IDiseaseHistoryService diseaseHistoryService;
@@ -351,9 +356,17 @@ public class ResidentController {
 		return map;
 	}
 	
-	@RequestMapping("/register")
-	public String register(Resident resident, Model model){
-		return "chsis/addInfo";
+	@RequestMapping("/register_joinFamily")
+	public String add(Resident resident, String familyNumber, Model model){
+		//根据家庭编号查出家庭
+		Family family = familyService.selectByNumber(familyNumber);
+		Resident householder = residentService.selectByPrimaryKey(family.getHouseholderUUID());
+		resident.setUuid(StringUtil.getUUID());
+		resident.setFamily(family);
+		residentService.insertSelective(resident);
+		model.addAttribute("resident", resident);
+		model.addAttribute("householderName", householder.getName());
+		return "resident/addInfo";
 	}
 	
 }

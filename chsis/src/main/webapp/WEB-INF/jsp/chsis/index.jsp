@@ -65,7 +65,8 @@
 	<div class="container">
 		<div class="banner-main">
 			<div class="col-md-6 banner-left">
-				<a id="login" href="resident/login">登陆</a><a id="register" href="chsis/register.jsp">注册</a>
+				<a id="login" href="chsis/login">登陆</a>
+				<a id="register" href="chsis/register">注册</a>
 				<div class="lobo">
 					<h3>欢迎来到阳光社区!</h3>
 					<P>WELCOME TO SUNSHINE COMMUNITY.</P>

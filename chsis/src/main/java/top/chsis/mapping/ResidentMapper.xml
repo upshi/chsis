@@ -162,7 +162,7 @@
         bloodType,
       </if>
       <if test="family != null" >
-        family.uuid,
+        family_uuid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >

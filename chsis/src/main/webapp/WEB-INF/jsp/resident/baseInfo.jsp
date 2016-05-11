@@ -138,7 +138,7 @@
 							<div class="col-sm-3">
 								<session class="panel">
 									<header class="panel-heading">
-										${resident.age }
+										${resident.age }岁
 									</header>
 								</session>
 							</div>
@@ -267,18 +267,21 @@
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="edit-birthGroup">
 								<label class="col-sm-1 col-sm-offset-1 control-label">出生日期:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" name="birth" placeholder="出生日期，如：19931201" value="${resident.birth }">
+									<div class="iconic-input right">
+										<input id="birth" class="form-control" type="text" name="birth" placeholder="出生日期，如：19931201" value="${resident.birth }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="edit-ageGroup">
 								<label class="col-sm-1 col-sm-offset-1 control-label">居民年龄:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" name="age" placeholder="居民年龄" value="${resident.age }">
+									<select id="age-select" name="age" class="form-control"></select>
 								</div>
 							</div>
 						</div>
@@ -291,10 +294,13 @@
 							</div>
 						</div>
 						<div class="row container">
-							<div class="form-group">
+							<div class="form-group" id="edit-phoneGroup">
 								<label class="col-sm-1 col-sm-offset-1 control-label">联系电话:</label>
 								<div class="col-sm-3">
-									<input class="form-control" type="text" name="phone" placeholder="联系电话" value="${resident.phone }">
+									<div class="iconic-input right">
+										<input id="phone" class="form-control" type="text" name="phone" placeholder="请输入您的联系电话" value="${resident.phone }">
+										<p class="help-block"></p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -307,7 +313,7 @@
 							</div>
 						</div>
 						<div class="col-sm-offset-5">
-							<button class="btn btn-info">保存</button>
+							<button class="btn btn-info" id="submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

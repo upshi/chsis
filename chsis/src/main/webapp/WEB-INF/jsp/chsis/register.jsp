@@ -27,56 +27,211 @@
 </head>
 
 <body class="login-body">
+	<div class="text-center">
+        <h1 style="color:#fff;">居民健康服务信息系统注册</h1>
+    </div>
+	<!--body wrapper start-->
+    <div class="wrapper">
+    	<div class="row">
+    		<div class="col-sm-4 col-sm-offset-4">
+				<section class="panel">
+				    <header class="panel-heading custom-tab turquoise-tab">
+				        <ul class="nav nav-tabs">
+				            <li class="active">
+				                <a data-toggle="tab" href="#joinFamily">
+				                    <i class="fa fa-user"></i>
+				                                                  注册时加入已知家庭
+				                </a>
+				            </li>
+				            <li class="">
+				                <a data-toggle="tab" href="#createFamily">
+				                    <i class="fa fa-envelope-o"></i>
+				                                                  注册时新建家庭
+				                </a>
+				            </li>
+				        </ul>
+				    </header>
+				    <div class="panel-body">
+				        <div class="tab-content">
+				            <div id="joinFamily" class="tab-pane active">
+				            	<form class="form-signin" method="POST" action="resident/register_joinFamily" style="margin:0 auto;">
+									<div class="login-wrap">
+								       	<div class="row container">
+											<div class="form-group" id="userNameGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="userName" class="form-control" name="userName" type="text" placeholder="请输入用户名">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="passwordGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="password" class="form-control" name="password" type="password" placeholder="请输入密码">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="repasswordGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="repassword" class="form-control" type="password" placeholder="请输入确认密码">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="nameGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="name" class="form-control" type="text" name="name" placeholder="请输入姓名">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="idNoGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="idNo" class="form-control" name="idNo" type="text" placeholder="请输入身份证号">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="familyNumberGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="familyNumber" class="form-control" name="familyNumber" type="text" placeholder="请输入家庭编号">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+							           <button id="join-submit" class="btn btn-lg btn-login btn-block" type="submit">
+							               <i class="fa fa-check"></i>
+							           </button>
+								    </div>
+								</form>
+				            </div>
+				            <div id="createFamily" class="tab-pane ">
+				            	<form class="form-signin" method="POST" action="resident/register_createFamily" style="margin:0 auto;">
+									<div class="login-wrap">
+								       	<div class="row container">
+											<div class="form-group" id="c-userNameGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-userName" class="form-control" name="userName" type="text" placeholder="请输入用户名">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-passwordGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-password" class="form-control" name="password" type="password" placeholder="请输入密码">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-repasswordGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-repassword" class="form-control" type="password" placeholder="请输入确认密码">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-nameGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-name" class="form-control" type="text" name="name" placeholder="请输入姓名">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-idNoGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-idNo" class="form-control" name="idNo" type="text" placeholder="请输入身份证号">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-familyNumberGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-familyNumber" class="form-control" name="familyNumber" type="text" placeholder="请输入家庭编号">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-familyPhoneGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-familyPhone" class="form-control" name="familyPhone" type="text" placeholder="请输入家庭电话">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group" id="c-familyAddressGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-familyAddress" class="form-control" name="familyPhone" type="text" placeholder="请输入家庭地址">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
+											<div class="form-group">
+												<div class="col-sm-3">
+													<select id="community" name="communityUuid" class="form-control" style="height:40px;font-size:0.9em;">
+														<optgroup label="请选择所属社区（只能选一个）"></optgroup>
+													</select>
+												</div>
+											</div>
+										</div>
+							           <button id="submit" class="btn btn-lg btn-login btn-block" type="submit">
+							               <i class="fa fa-check"></i>
+							           </button>
+								    </div>
+								</form>
+				            </div>
+				        </div>
+				    </div>
+				</section>		
+			</div>
+		</div>		
+	</div>	
+	<!--body wrapper end-->	
 
-<div class="container">
-    <form class="form-signin" method="POST" action="resident/register">
-        <div class="form-signin-heading text-center">
-            <h1 class="sign-title">居民健康服务信息系统注册</h1>
-            <img src="assets/images/logo_login.png" alt=""/>
-        </div>
-        <div class="login-wrap">
-        	<div class="row container">
-				<div class="form-group" id="userNameGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="userName" class="form-control" name="userName" type="text" placeholder="请输入用户名">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row container">
-				<div class="form-group" id="passwordGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="password" class="form-control" name="password" type="password" placeholder="请输入密码">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row container">
-				<div class="form-group" id="repasswordGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="repassword" class="form-control" name="repassword" type="password" placeholder="请输入确认密码">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-            <button id="submit" class="btn btn-lg btn-login btn-block" type="submit">
-                <i class="fa fa-check"></i>
-            </button>
-           <!--  <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-                </span>
-            </label> -->
-        </div>
-    </form>
-</div>
+
+	<div class="container">
+		
+	</div>
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
