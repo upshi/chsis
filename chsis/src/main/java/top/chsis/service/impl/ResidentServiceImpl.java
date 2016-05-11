@@ -69,4 +69,8 @@ public class ResidentServiceImpl implements IResidentService {
 		return residentMapper.selectByDimIdNo(idNo);
 	}
 
+	public Resident selectByIdNo(String idNo) {
+		return residentMapper.selectByIdNo(idNo);
+	}
+
 }

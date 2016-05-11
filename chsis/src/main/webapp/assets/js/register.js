@@ -48,7 +48,7 @@ function validate() {
 function handleBeforeSubmit() {
 	$.base64.utf8encode = true;
 	var $password = $('#password');
-	$password.val( $.base64('encode', $password.val() + '% ') );
+	$password.val( $.base64('encode', $password.val()) );
 }
 
 function checkUserName() {
@@ -97,6 +97,7 @@ function checkPassword() {
 		return true;
 	}
 }
+
 function checkRePassword() {
 	var repassword = $('#repassword').val();
 	var password = $('#password').val();
@@ -117,6 +118,7 @@ function checkRePassword() {
 		return true;
 	}
 }
+
 function checkName() {
 	var name = $('#name').val();
 	if(name == null || $.trim(name) == '') {
@@ -131,7 +133,9 @@ function checkName() {
 		return true;
 	}
 }
+
 function checkIdNo() {
+	var flag = false;
 	var idNo = $('#idNo').val();
 	if(idNo == null || $.trim(idNo) == '') {
 		$('#idNoGroup').removeClass('has-success');
@@ -146,17 +150,30 @@ function checkIdNo() {
 			$('#idNoGroup .help-block').html('您输入的身份证号格式不正确');
 			return false;
 		} else {
-			$('#idNoGroup').removeClass('has-error');
-			$('#idNoGroup').addClass('has-success');
-			$('#idNoGroup .help-block').html('');
-			return true;
+			$.ajax({
+				url : "resident/checkIdNoUnique/" + idNo ,
+				type : "GET" ,
+				cache : false , 
+				async : false , 
+				dataType : "json" ,
+				success : function(data) {
+					if(data.result == "exist") {
+						$('#idNoGroup').removeClass('has-success');
+						$('#idNoGroup').addClass('has-error');
+						$('#idNoGroup .help-block').html('您输入的身份证号已存在');
+					} else {
+						$('#idNoGroup').removeClass('has-error');
+						$('#idNoGroup').addClass('has-success');
+						$('#idNoGroup .help-block').html('');
+						flag = true;
+					}
+				} 
+			});
 		}
-	} else {
-		$('#idNoGroup').removeClass('has-error');
-		$('#idNoGroup .help-block').html('');
-		return true;
 	}
+	return flag;
 }
+
 function checkFamilyNumber() {
 	var flag = false;
 	var familyNumber = $('#familyNumber').val();
@@ -188,5 +205,3 @@ function checkFamilyNumber() {
 	}
 	return flag;
 }
-
-

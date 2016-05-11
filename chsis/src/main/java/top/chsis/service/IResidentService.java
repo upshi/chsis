@@ -31,4 +31,6 @@ public interface IResidentService {
 
 	List<ResidentVO> selectByDimIdNo(String idNo);
 
+	Resident selectByIdNo(String idNo);
+
 }

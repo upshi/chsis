@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
@@ -46,6 +48,9 @@ public class ResidentController {
 	
 	@Autowired
 	private IMedicalRecordService medicalRecordService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private ICheckReportService checkReportService;
@@ -182,6 +187,17 @@ public class ResidentController {
 		}else {
 			return "redirect:/resident/baseInfo";
 		}	
+	}
+	@RequestMapping("/complete")
+	public String completeResident(Resident resident,String leftEyesight, String rightEyesight, Model model) {
+		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
+		String eyesight = leftEyesight + "," + rightEyesight;
+		//为eyesight赋值
+		resident.setEyesight(eyesight);
+		residentService.updateByPrimaryKeySelective(resident);
+		resident = residentService.selectByPrimaryKey(resident.getUuid());
+		model.addAttribute("resident", resident);
+		return "resident/baseInfo";
 	}
 	
 	
@@ -356,8 +372,31 @@ public class ResidentController {
 		return map;
 	}
 	
+	//检查用户名是否重复
+	@RequestMapping("/checkIdNoUnique/{idNo}")
+	@ResponseBody
+	public Map<String, Object> checkIdNoUnique(@PathVariable String idNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(idNo)) {
+			map.put("result", "exist");
+		} else {
+			Resident resident = residentService.selectByIdNo(idNo);
+			if(resident == null) {
+				map.put("result", "inexistence");
+			} else {
+				map.put("result", "exist");
+			}
+		}
+		return map;
+	}
+	
 	@RequestMapping("/register_joinFamily")
 	public String add(Resident resident, String familyNumber, Model model){
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(resident.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		resident.setPassword(encodedPassword);
 		//根据家庭编号查出家庭
 		Family family = familyService.selectByNumber(familyNumber);
 		Resident householder = residentService.selectByPrimaryKey(family.getHouseholderUUID());

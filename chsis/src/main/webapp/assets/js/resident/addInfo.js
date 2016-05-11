@@ -40,11 +40,15 @@ function beforeSubmit(){
 	/*绑定失焦事件*/
 		$('#birth').on('blur',checkBirth);
 		$('#phone').on('blur',checkPhone);
+		$('#height').on('blur', checkHeight);
+		$('#weight').on('blur', checkWeight);
+		$('#leftEyesight').on('blur', checkLeftEyesight);
+		$('#rightEyesight').on('blur', checkRightEyesight);
 		
 		/*绑定提交按钮事件*/
 		$('#submit').on('click', function(){
 			//表单校验
-			var pass = checkBirth() && checkPhone();
+			var pass = validate();
 			if(pass) {
 				return true;
 			}
@@ -52,7 +56,14 @@ function beforeSubmit(){
 		});
 	$('#editBaseInfo').modal();
 }
-
+//表单校验
+function validate() {
+	if(checkBirth() && checkPhone() && checkHeight() && checkWeight() && checkLeftEyesight() &&　checkRightEyesight()) {
+		return true;
+	} else {
+		return false;
+	}
+}
 //校验出生日期
 function checkBirth() {
 	var birth = $('#birth').val();
@@ -100,6 +111,64 @@ function checkPhone() {
 		return false;
 	}
 }
+function checkHeight() {
+	var height = $('#height').val();
+	if(height == null || $.trim(height) == '') {
+		$('#heightGroup').removeClass('has-success');
+		$('#heightGroup').addClass('has-error');
+		$('#heightGroup .help-block').html('请输入身高');
+		return false;
+	} else {
+		$('#heightGroup').removeClass('has-error');
+		$('#heightGroup').addClass('has-success');
+		$('#heightGroup .help-block').html('');
+		return true;
+	}
+}
+function checkWeight() {
+	var weight = $('#weight').val();
+	if(weight == null || $.trim(weight) == '') {
+		$('#weightGroup').removeClass('has-success');
+		$('#weightGroup').addClass('has-error');
+		$('#weightGroup .help-block').html('请输入体重');
+		return false;
+	} else {
+		$('#weightGroup').removeClass('has-error');
+		$('#weightGroup').addClass('has-success');
+		$('#weightGroup .help-block').html('');
+		return true;
+	}
+}
+
+function checkLeftEyesight() {
+	var leftEyesight = $('#leftEyesight').val();
+	if(leftEyesight == null || $.trim(leftEyesight) == '') {
+		$('#leftEyesightGroup').removeClass('has-success');
+		$('#leftEyesightGroup').addClass('has-error');
+		$('#leftEyesightGroup .help-block').html('请输入左眼视力');
+		return false;
+	} else {
+		$('#leftEyesightGroup').removeClass('has-error');
+		$('#leftEyesightGroup').addClass('has-success');
+		$('#leftEyesightGroup .help-block').html('');
+		return true;
+	}
+}
+function checkRightEyesight() {
+	var rightEyesight = $('#rightEyesight').val();
+	if(rightEyesight == null || $.trim(rightEyesight) == '') {
+		$('#rightEyesightGroup').removeClass('has-success');
+		$('#rightEyesightGroup').addClass('has-error');
+		$('#rightEyesightGroup .help-block').html('请输入右眼视力');
+		return false;
+	} else {
+		$('#rightEyesightGroup').removeClass('has-error');
+		$('#rightEyesightGroup').addClass('has-success');
+		$('#rightEyesightGroup .help-block').html('');
+		return true;
+	}
+}
+
 //获取民族
 function getNation(num) {
 	switch(num) {

@@ -46,7 +46,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" method="POST" action="resident/edit">
+						<form class="form-horizontal" method="POST" action="resident/complete">
 							<input id="residentUuid" type="hidden" name="uuid" value="${resident.uuid }">
 								<div class="row container">
 									<div class="form-group">
@@ -156,22 +156,22 @@
 									</div>
 								</div>
 								<div class="row container">
-									<div class="form-group" id="editdis-heightGroup">
+									<div class="form-group" id="heightGroup">
 										<label class="col-sm-2 control-label">居民身高:</label>
 										<div class="col-sm-3">
 											<div class="iconic-input right">
-												<input id="editdis-height" class="form-control" name="height" type="text" placeholder="身高(cm)">
+												<input id="height" class="form-control" name="height" type="text" placeholder="身高(cm)">
 												<p class="help-block"></p>
 											</div>
 										</div>
 									</div>	
 								</div>
 								<div class="row container">
-									<div class="form-group" id="editdis-weightGroup">
+									<div class="form-group" id="weightGroup">
 										<label class="col-sm-2 control-label">居民体重:</label>
 										<div class="col-sm-3">
 											<div class="iconic-input right">
-												<input id="editdis-weight" class="form-control" name="weight" type="text" placeholder="体重(kg)">
+												<input id="weight" class="form-control" name="weight" type="text" placeholder="体重(kg)">
 												<p class="help-block"></p>
 											</div>
 										</div>
@@ -186,29 +186,29 @@
 									</div>
 								</div>
 								<div class="row container">
-									<div class="form-group" id="editdis-leftEyesightGroup">
+									<div class="form-group" id="leftEyesightGroup">
 										<label class="col-sm-2 control-label">左眼视力:</label>
 										<div class="col-sm-3">
 											<div class="iconic-input right">
-												<input id="editdis-leftEyesight" class="form-control" name="leftEyesight" type="text" placeholder="左眼视力">
+												<input id="leftEyesight" class="form-control" name="leftEyesight" type="text" placeholder="左眼视力">
 												<p class="help-block"></p>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="row container">
-									<div class="form-group" id="editdis-rightEyesightGroup">
+									<div class="form-group" id="rightEyesightGroup">
 										<label class="col-sm-2 control-label">右眼视力:</label>
 										<div class="col-sm-3">
 											<div class="iconic-input right">
-												<input id="editdis-rightEyesight" class="form-control" name="rightEyesight" type="text" placeholder="右眼视力">
+												<input id="rightEyesight" class="form-control" name="rightEyesight" type="text" placeholder="右眼视力">
 												<p class="help-block"></p>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-offset-2">
-									<button class="btn btn-info">保存</button>
+									<button class="btn btn-info" id="submit">保存</button>
 									<button class="btn btn-default" data-dismiss="modal">取消</button>
 								</div>	
 						</form>

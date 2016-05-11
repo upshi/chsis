@@ -27,4 +27,6 @@ public interface ResidentMapper {
     List<Resident> selectAll();
 
 	List<ResidentVO> selectByDimIdNo(String idNo);
+	
+	Resident selectByIdNo(String idNo);
 }
