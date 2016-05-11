@@ -29,61 +29,65 @@
 <body class="login-body">
 
 <div class="container">
-    <form class="form-signin" method="POST" action="resident/register">
+    <form class="form-signin" method="POST" action="login">
         <div class="form-signin-heading text-center">
-            <h1 class="sign-title">居民健康服务信息系统注册</h1>
+            <h1 class="sign-title">居民健康服务信息系统登录</h1>
             <img src="assets/images/logo_login.png" alt=""/>
         </div>
         <div class="login-wrap">
-        	<div class="row container">
-				<div class="form-group" id="userNameGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="userName" class="form-control" name="userName" type="text" placeholder="请输入用户名">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row container">
-				<div class="form-group" id="passwordGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="password" class="form-control" name="password" type="password" placeholder="请输入密码">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row container">
-				<div class="form-group" id="repasswordGroup">
-					<div class="col-sm-3">
-						<div class="iconic-input right">
-							<input id="repassword" class="form-control" type="password" placeholder="请输入确认密码">
-							<p class="help-block"></p>
-						</div>
-					</div>
-				</div>
-			</div>
+            <input type="text" class="form-control" placeholder="请输入用户名" autofocus name="username" id="username"/>
+            <input type="password" class="form-control" placeholder="请输入密码" name="password" id="password" />
+
             <button id="submit" class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>
             </button>
-           <!--  <label class="checkbox">
+            <div>
+				<p id="msg" style="text-align:center;color:red"></p>
+			</div>
+            <!-- <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
                 </span>
             </label> -->
+
         </div>
+
+        <!-- Modal -->
+        <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Forgot Password ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Enter your e-mail address below to reset your password.</p>
+                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- modal -->
+
     </form>
+
 </div>
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 <script src="assets/adminex/js/bootstrap.min.js"></script>
 <script src="assets/adminex/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.base64.js"></script>
-<script src="assets/js/register.js"></script>
+<script src="assets/js/login.js"></script>
 
 </body>
 </html>

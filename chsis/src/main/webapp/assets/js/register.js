@@ -83,12 +83,14 @@ function checkPassword() {
 }
 function checkRePassword() {
 	var repassword = $('#repassword').val();
+	var password = $('#password').val();
 	if(repassword == null || $.trim(repassword).length < 6) {
 		$('#repasswordGroup').removeClass('has-success');
 		$('#repasswordGroup').addClass('has-error');
 		$('#repasswordGroup .help-block').html('请输入确认密码');
 		return false;
-	} if(repassword !== password) {
+	} if(repassword != password) {
+		alert(password+"--"+password);
 		$('#repasswordGroup').removeClass('has-success');
 		$('#repasswordGroup').addClass('has-error');
 		$('#repasswordGroup .help-block').html('您输入的两次密码不一致');

@@ -59,7 +59,7 @@
 				<div class="form-group" id="repasswordGroup">
 					<div class="col-sm-3">
 						<div class="iconic-input right">
-							<input id="repassword" class="form-control" type="password" placeholder="请输入确认密码">
+							<input id="repassword" class="form-control" name="repassword" type="password" placeholder="请输入确认密码">
 							<p class="help-block"></p>
 						</div>
 					</div>

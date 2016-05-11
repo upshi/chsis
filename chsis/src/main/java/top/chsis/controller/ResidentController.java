@@ -351,4 +351,9 @@ public class ResidentController {
 		return map;
 	}
 	
+	@RequestMapping("/register")
+	public String register(Resident resident, Model model){
+		return "chsis/addInfo";
+	}
+	
 }
