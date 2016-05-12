@@ -19,6 +19,7 @@ import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
+import top.chsis.model.Community;
 import top.chsis.model.DiseaseHistory;
 import top.chsis.model.Family;
 import top.chsis.model.ImmuneRecord;
@@ -175,16 +176,17 @@ public class ResidentController {
 	public String editResident(Resident resident, String url, String leftEyesight, String rightEyesight) {
 		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
 		String eyesight = leftEyesight + "," + rightEyesight;
-		//为eyesight赋值
-		resident.setEyesight(eyesight);
-		residentService.updateByPrimaryKeySelective(resident);
-		
 		//根据不同的参数，返回不同的页面
 		if(leftEyesight != null && rightEyesight != null) {
+			//为eyesight赋值
+			resident.setEyesight(eyesight);
+			residentService.updateByPrimaryKeySelective(resident);
 			return "redirect:/resident/healthInfo";
 		}else if(url != null) {
+			residentService.updateByPrimaryKeySelective(resident);
 			return "redirect:/" + url;
 		}else {
+			residentService.updateByPrimaryKeySelective(resident);
 			return "redirect:/resident/baseInfo";
 		}	
 	}
@@ -391,21 +393,75 @@ public class ResidentController {
 	}
 	
 	@RequestMapping("/register_joinFamily")
-	public String add(Resident resident, String familyNumber, Model model){
+	@ResponseBody
+	public Map<String, Object> register_joinFamily(Resident resident, String familyNumber){
+		Map<String, Object> map = new HashMap<String, Object>();
 		//Base64解码得到原始密码
 		String rawPassword = new String(Base64.decodeFast(resident.getPassword()));
 		//BCrypt加密密码
 		String encodedPassword = passwordEncoder.encode(rawPassword);
-		resident.setPassword(encodedPassword);
-		//根据家庭编号查出家庭
-		Family family = familyService.selectByNumber(familyNumber);
-		Resident householder = residentService.selectByPrimaryKey(family.getHouseholderUUID());
+		String idNo = resident.getIdNo();
+		String birth = idNo.substring(6, 14);
+		int sex = idNo.charAt(16) - 48;//身份证上第17位代表性别,下标从0开始
 		resident.setUuid(StringUtil.getUUID());
-		resident.setFamily(family);
-		residentService.insertSelective(resident);
-		model.addAttribute("resident", resident);
-		model.addAttribute("householderName", householder.getName());
-		return "resident/addInfo";
+		resident.setPassword(encodedPassword);
+		if(sex % 2 == 0){
+			resident.setSex(1);//身份证上第17位为偶数代表女，数据库中1代表女
+		}else {
+			resident.setSex(0);//身份证上第17位为奇数代表男，数据库中0代表男
+		}
+		resident.setBirth(birth);
+		Family family = familyService.selectByNumber(familyNumber);
+		resident.setFamily(family);;
+
+		int insert = residentService.insertSelective(resident);
+		if(insert == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
+	
+	@RequestMapping("/register_createFamily")
+	@ResponseBody
+	public Map<String, Object> register_createFamily(Resident resident, String familyNumber, String familyPhone, String familyAddress, String communityUuid){
+		Map<String, Object> map = new HashMap<String, Object>();
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(resident.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		String idNo = resident.getIdNo();
+		String birth = idNo.substring(6, 14);
+		int sex = idNo.charAt(16) - 48;//身份证上第17位代表性别,下标从0开始
+		resident.setUuid(StringUtil.getUUID());
+		resident.setPassword(encodedPassword);
+		if(sex % 2 == 0){
+			resident.setSex(1);//身份证上第17位为偶数代表女，数据库中1代表女
+		}else {
+			resident.setSex(0);//身份证上第17位为奇数代表男，数据库中0代表男
+		}
+		resident.setBirth(birth);
+	
+		//为家庭赋值
+		Family family = new Family();
+		Community community = new Community(communityUuid);
+		family.setUuid(StringUtil.getUUID());
+		family.setNumber(familyNumber);
+		family.setPhone(familyPhone);
+		family.setHouseholderUUID(resident.getUuid());
+		family.setAddress(familyAddress);
+		family.setCommunity(community);
+		
+		resident.setFamily(family);;
+		
+		int insert = residentService.insertResidentAndFamily(resident, family);
+		if(insert == 2) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
 	}
 	
 }

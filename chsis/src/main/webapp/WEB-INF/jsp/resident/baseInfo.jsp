@@ -138,7 +138,8 @@
 							<div class="col-sm-3">
 								<session class="panel">
 									<header class="panel-heading">
-										${resident.age }岁
+										<c:if test="${resident.age==null }">未填</c:if>
+										<c:if test="${resident.age!=null }">${resident.age }岁</c:if>
 									</header>
 								</session>
 							</div>
@@ -161,6 +162,7 @@
 										<c:if test="${resident.period==4 }">中年</c:if>
 										<c:if test="${resident.period==5 }">中老年</c:if>
 										<c:if test="${resident.period==6 }">老年</c:if>
+										<c:if test="${resident.period==null }">未填</c:if>
 									</header>
 								</session>
 							</div>
@@ -176,6 +178,7 @@
 							<div class="col-sm-3">
 								<session class="panel">
 									<header class="panel-heading">
+										<c:if test="${resident.phone==null }">未填</c:if>
 										${resident.phone }
 									</header>
 								</session>
@@ -195,6 +198,7 @@
 										<c:if test="${resident.marriage==0 }">未婚</c:if>
 										<c:if test="${resident.marriage==1 }">已婚</c:if>
 										<c:if test="${resident.marriage==2 }">离异</c:if>
+										<c:if test="${resident.marriage==null }">未填</c:if>
 									</header>
 								</session>
 							</div>

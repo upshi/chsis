@@ -46,8 +46,16 @@
 					</div>
 					<div class="panel-body">
 						<div class="infoList">
-							<span><b>身高：</b>${resident.height }</span> 
-							<span><b>体重：</b>${resident.weight }</span> 
+							<span>
+								<b>身高：</b>
+								<c:if test="${resident.height==null }">未填</c:if>
+								<c:if test="${resident.height!=null }">${resident.height }cm</c:if>
+							</span> 
+							<span>
+								<b>体重：</b>
+								<c:if test="${resident.weight==null }">未填</c:if>
+								<c:if test="${resident.weight!=null }">${resident.weight }kg</c:if>
+							</span> 
 							<span>
 								<b>视力：</b> 
 								<b id="eyesightCode" eyesightCode="${resident.eyesight }"></b>
@@ -58,6 +66,7 @@
 								<c:if test="${resident.bloodType==1 }">B-型</c:if>
 								<c:if test="${resident.bloodType==2 }">AB-型</c:if>
 								<c:if test="${resident.bloodType==3 }">O-型</c:if>
+								<c:if test="${resident.bloodType==null }">未填 </c:if>
 							</span>
 							<button class="btn btn-success btn-edit-commonHealthInfo">修改</button>
 						</div>
@@ -133,10 +142,11 @@
 						<input id="residentUuid" type="hidden" name="uuid" value="${resident.uuid }">
 						<div class="row container">
 							<div class="form-group" id="editdis-heightGroup">
-								<label class="col-sm-2 control-label">身高</label>
+								<label class="col-sm-2 control-label">居民身高</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
+									<div class="iconic-input right input-group">
 										<input id="editdis-height" class="form-control" name="height" type="text" placeholder="身高(cm)" value="${resident.height }">
+										<span class="input-group-addon">cm</span>
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -144,10 +154,11 @@
 						</div>
 						<div class="row container">
 							<div class="form-group" id="editdis-weightGroup">
-								<label class="col-sm-2 control-label">体重</label>
+								<label class="col-sm-2 control-label">居民体重</label>
 								<div class="col-sm-3">
-									<div class="iconic-input right">
+									<div class="iconic-input right input-group">
 										<input id="editdis-weight" class="form-control" name="weight" type="text" placeholder="体重(kg)" value="${resident.weight }">
+										<span class="input-group-addon">kg</span>
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -172,6 +183,14 @@
 										<input id="editdis-rightEyesight" class="form-control" name="rightEyesight" type="text" placeholder="右眼视力">
 										<p class="help-block"></p>
 									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row container">
+							<div class="form-group">
+								<label class="col-sm-1 col-sm-offset-1 control-label">居民血型:</label>
+								<div class="col-sm-3">
+									<select id="bloodType" class="form-control" name="bloodType"></select>
 								</div>
 							</div>
 						</div>

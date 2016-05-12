@@ -97,16 +97,24 @@ function checkBirth() {
 //校验电话
 function checkPhone() {
 	var phone = $('#phone').val();
-	if(phone == null || $.trim(phone) == '') {
+	if(phone != null && $.trim(phone) != '') {
+		var re = /^1[3|4|5|7|8]\d{9}$/i;
+		if(!re.test(phone)) {
+			$('#edit-phoneGroup').removeClass('has-success');
+			$('#edit-phoneGroup').addClass('has-error');
+			$('#edit-phoneGroup .help-block').html('您输入的手机号格式不正确');
+			return false;
+		} else {
+			$('#edit-phoneGroup').removeClass('has-error');
+			$('#edit-phoneGroup').addClass('has-success');
+			$('#edit-phoneGroup .help-block').html('');
+			return true;
+		}
+	} else {
 		$('#edit-phoneGroup').removeClass('has-success');
 		$('#edit-phoneGroup').addClass('has-error');
-		$('#edit-phoneGroup .help-block').html('请输入您的联系电话');
+		$('#edit-phoneGroup .help-block').html('请输入手机号');
 		return false;
-	} else {
-		$('#edit-phoneGroup').removeClass('has-error');
-		$('#edit-phoneGroup').addClass('has-success');
-		$('#edit-phoneGroup .help-block').html('');
-		return true;
 	}
 }
 

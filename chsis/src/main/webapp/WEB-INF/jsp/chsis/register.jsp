@@ -12,12 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <title>居民健康服务信息系统</title>
 
     <link href="assets/adminex/css/style.css" rel="stylesheet">
     <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -40,13 +41,13 @@
 				            <li class="active">
 				                <a data-toggle="tab" href="#joinFamily">
 				                    <i class="fa fa-user"></i>
-				                                                  注册时加入已知家庭
+				                                                  加入家庭
 				                </a>
 				            </li>
 				            <li class="">
 				                <a data-toggle="tab" href="#createFamily">
 				                    <i class="fa fa-envelope-o"></i>
-				                                                  注册时新建家庭
+				                                                  新建家庭
 				                </a>
 				            </li>
 				        </ul>
@@ -54,7 +55,7 @@
 				    <div class="panel-body">
 				        <div class="tab-content">
 				            <div id="joinFamily" class="tab-pane active">
-				            	<form class="form-signin" method="POST" action="resident/register_joinFamily" style="margin:0 auto;">
+				            	<form class="form-signin" id="joinForm" method="POST" style="margin:0 auto;">
 									<div class="login-wrap">
 								       	<div class="row container">
 											<div class="form-group" id="userNameGroup">
@@ -110,7 +111,7 @@
 											<div class="form-group" id="familyNumberGroup">
 												<div class="col-sm-3">
 													<div class="iconic-input right">
-														<input id="familyNumber" class="form-control" name="familyNumber" type="text" placeholder="请输入家庭编号">
+														<input id="familyNumber" name="familyNumber" class="form-control" type="text" placeholder="请输入家庭编号">
 														<p class="help-block"></p>
 													</div>
 												</div>
@@ -123,7 +124,7 @@
 								</form>
 				            </div>
 				            <div id="createFamily" class="tab-pane ">
-				            	<form class="form-signin" method="POST" action="resident/register_createFamily" style="margin:0 auto;">
+				            	<form id="createForm" class="form-signin" method="POST" style="margin:0 auto;">
 									<div class="login-wrap">
 								       	<div class="row container">
 											<div class="form-group" id="c-userNameGroup">
@@ -176,6 +177,16 @@
 											</div>
 										</div>
 										<div class="row container">
+											<div class="form-group" id="c-phoneGroup">
+												<div class="col-sm-3">
+													<div class="iconic-input right">
+														<input id="c-phone" class="form-control" type="text" name="phone" placeholder="请输入联系电话">
+														<p class="help-block"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row container">
 											<div class="form-group" id="c-familyNumberGroup">
 												<div class="col-sm-3">
 													<div class="iconic-input right">
@@ -199,7 +210,7 @@
 											<div class="form-group" id="c-familyAddressGroup">
 												<div class="col-sm-3">
 													<div class="iconic-input right">
-														<input id="c-familyAddress" class="form-control" name="familyPhone" type="text" placeholder="请输入家庭地址">
+														<input id="c-familyAddress" class="form-control" name="familyAddress" type="text" placeholder="请输入家庭地址">
 														<p class="help-block"></p>
 													</div>
 												</div>
@@ -214,7 +225,7 @@
 												</div>
 											</div>
 										</div>
-							           <button id="submit" class="btn btn-lg btn-login btn-block" type="submit">
+							           <button id="create-submit" class="btn btn-lg btn-login btn-block" type="submit">
 							               <i class="fa fa-check"></i>
 							           </button>
 								    </div>
@@ -228,17 +239,13 @@
 	</div>	
 	<!--body wrapper end-->	
 
-
-	<div class="container">
-		
-	</div>
-
-<!-- Placed js at the end of the document so the pages load faster -->
-<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
-<script src="assets/adminex/js/bootstrap.min.js"></script>
-<script src="assets/adminex/js/modernizr.min.js"></script>
-<script src="assets/js/jquery.base64.js"></script>
-<script src="assets/js/register.js"></script>
+	<!-- Placed js at the end of the document so the pages load faster -->
+	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+	<script src="assets/adminex/js/modernizr.min.js"></script>
+	<script src="assets/js/jquery.base64.js"></script>
+	<script src="assets/js/chsis/register.js"></script>
 
 </body>
 </html>

@@ -47,9 +47,4 @@ public class RoleUserAuthorityGranter implements AuthorityGranter {
         return set;
     }
     
-    public static void main(String[] args) {
-		String s = "swsss% ";
-		System.out.println(s.split("%")[1]);
-	}
-    
 }

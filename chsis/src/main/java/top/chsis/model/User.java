@@ -6,7 +6,6 @@ public class User {
 	private String password;
 	private String name;
 	
-
 	public String getUuid() {
 		return uuid;
 	}

@@ -16,6 +16,12 @@ $(function(){
 })
 
 function onloadModal(){
+	$.getJSON('assets/json/bloodType.json',function(data) {
+        for(var i in data) {
+    		$('#bloodType').append('<option value="' + data[i].value + '">' + data[i].name + '</option>');
+        }
+    });
+    
 	var eyesightCode = $('#eyesightCode').attr('eyesightCode');
 	var eye = eyesightCode.split(',');
 	$('#editdis-leftEyesight').val(eye[0]);

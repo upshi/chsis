@@ -52,12 +52,12 @@ public class UsernameEqualsPasswordLoginModule implements LoginModule {
 
 			callbackHandler.handle(new Callback[] { nameCallback, passwordCallback});
 
-			userName = nameCallback.getName();
 			String temp = new String(passwordCallback.getPassword());
 			//Base64解码
 			temp = new String(Base64.decodeFast(temp));
 			password = temp.split("%")[0];
 			type = temp.split("%")[1];
+			userName = nameCallback.getName();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -71,8 +71,7 @@ public class UsernameEqualsPasswordLoginModule implements LoginModule {
 		}
 		
 		//token里放的是用户名和用户对象
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName + "%" + type, user);
-
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName, user);
 		subject.getPrincipals().add(authenticationToken);
 		return true;
 	}

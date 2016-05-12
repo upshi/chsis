@@ -37,57 +37,31 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="请输入用户名" autofocus name="username" id="username"/>
             <input type="password" class="form-control" placeholder="请输入密码" name="password" id="password" />
-
+			<div class="form-group">
+				<label class="control-label" style="margin-top:10px;">请选择您的身份:</label>
+				<label class="radio-inline">
+					<input type="radio" name="roleType" value="resident" checked> 居民
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="roleType" value="doctor"> 医生
+				</label>
+			</div>	
             <button id="submit" class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>
             </button>
             <div>
 				<p id="msg" style="text-align:center;color:red"></p>
 			</div>
-            <!-- <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-                </span>
-            </label> -->
-
         </div>
-
-        <!-- Modal -->
-        <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Forgot Password ?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Enter your e-mail address below to reset your password.</p>
-                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                        <button class="btn btn-primary" type="button">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- modal -->
-
     </form>
-
 </div>
-
-
-
-<!-- Placed js at the end of the document so the pages load faster -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 <script src="assets/adminex/js/bootstrap.min.js"></script>
 <script src="assets/adminex/js/modernizr.min.js"></script>
 <script src="assets/js/jquery.base64.js"></script>
-<script src="assets/js/login.js"></script>
+<script src="assets/js/chsis/login.js"></script>
 
 </body>
 </html>

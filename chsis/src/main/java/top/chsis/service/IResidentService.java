@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.model.Family;
 import top.chsis.model.Resident;
 import top.chsis.vo.ResidentVO;
 
@@ -32,5 +33,7 @@ public interface IResidentService {
 	List<ResidentVO> selectByDimIdNo(String idNo);
 
 	Resident selectByIdNo(String idNo);
+
+	int insertResidentAndFamily(Resident resident, Family family);
 
 }

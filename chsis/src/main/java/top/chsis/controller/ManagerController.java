@@ -244,6 +244,7 @@ public class ManagerController {
 		
 		//取出所有角色
 		List<Role> allRole = roleService.selectAll();
+		
 		//取出该用户已经拥有的角色
 		List<UserRole> userRoles = null;
 		try {
@@ -263,6 +264,7 @@ public class ManagerController {
 			role.setDescription("%SELECTED%@");
 			map.put(ur.getRole().getUuid(), role);
 		}
+		
 		if(manager.getType() == 0){
 			Hospital hospital = hospitalService.selectByPrimaryKey(hospitalManagerService.selectByManagerUuid(managerUuid).getHospital().getUuid());
 			model.addAttribute("hospital", hospital);

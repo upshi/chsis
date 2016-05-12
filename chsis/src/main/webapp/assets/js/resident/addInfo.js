@@ -111,6 +111,8 @@ function checkPhone() {
 		return false;
 	}
 }
+
+//校验身高
 function checkHeight() {
 	var height = $('#height').val();
 	if(height == null || $.trim(height) == '') {
@@ -125,6 +127,8 @@ function checkHeight() {
 		return true;
 	}
 }
+
+//校验体重
 function checkWeight() {
 	var weight = $('#weight').val();
 	if(weight == null || $.trim(weight) == '') {
@@ -140,6 +144,7 @@ function checkWeight() {
 	}
 }
 
+//校验左眼视力
 function checkLeftEyesight() {
 	var leftEyesight = $('#leftEyesight').val();
 	if(leftEyesight == null || $.trim(leftEyesight) == '') {
@@ -154,6 +159,8 @@ function checkLeftEyesight() {
 		return true;
 	}
 }
+
+//校验右眼视力
 function checkRightEyesight() {
 	var rightEyesight = $('#rightEyesight').val();
 	if(rightEyesight == null || $.trim(rightEyesight) == '') {

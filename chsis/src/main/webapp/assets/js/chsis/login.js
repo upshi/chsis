@@ -28,9 +28,12 @@ function validate() {
 function handleBeforeSubmit() {
 	$.base64.utf8encode = true;
 	var $password = $('#password');
-	/*$password.val( $.base64('encode', $password.val() + '%admin') );*/
-	/*$password.val( $.base64('encode', $password.val() + '%doctor') );*/
-	$password.val( $.base64('encode', $password.val() + '%admin') );
+	var roleType = $('input[name="roleType"]:checked').val();
+	if(roleType == "resident") {
+		$password.val( $.base64('encode', $password.val() + '% ') );
+	} else if(roleType == "doctor"){
+		$password.val( $.base64('encode', $password.val() + '%doctor') );
+	}
 }
 
 function checkUsername() {
