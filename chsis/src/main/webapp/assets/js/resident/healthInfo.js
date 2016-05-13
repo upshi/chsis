@@ -1,4 +1,7 @@
 $(function(){
+	/* 导航颜色 */
+	$("#navi_resident_healthInfo").addClass('active');
+	
 	var eyesightCode = $('#eyesightCode').attr('eyesightCode');
 	$('#eyesightCode').html(getEyesight(eyesightCode));
 	

@@ -105,4 +105,8 @@ public class RoleServiceImpl implements IRoleService {
 		return role;
 	}
 
+	public List<Role> selectCommon() {
+		return roleMapper.selectCommon();
+	}
+
 }

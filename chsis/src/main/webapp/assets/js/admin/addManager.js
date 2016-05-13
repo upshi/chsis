@@ -1,6 +1,6 @@
 $(function(){
 	/*导航颜色*/
-	$("#navi_user").addClass('active');
+	$("#navi_admin_manager").addClass('active');
 	
 	$("#type-select").change(function(){
 		if($("#type-select").val() == 0){

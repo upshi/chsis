@@ -99,7 +99,7 @@
 											</c:forEach>
 										</tbody>
 									</table>
-									<div>查询到${total_mine }条记录/共${pageTotal }页</div>
+									<div>查询到${totals }条记录/共${totalPages }页</div>
 								</div>
 							</div>
 						</div>

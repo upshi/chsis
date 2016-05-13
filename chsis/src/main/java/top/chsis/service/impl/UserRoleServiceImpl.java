@@ -82,4 +82,8 @@ public class UserRoleServiceImpl implements IUserRoleService {
 		return userRoleMapper.deleteBatchByUuid(list);
 	}
 
+	public List<UserRole> selectCommonRolesByUserUuid(String managerUuid) {
+		return userRoleMapper.selectCommonRolesByUserUuid(managerUuid);
+	}
+
 }

@@ -24,4 +24,7 @@ public interface IRoleMapper {
     Role selectByCName(String cName);
     
     Role selectByEName(String eName);
+    
+    List<Role> selectCommon();
+    
 }

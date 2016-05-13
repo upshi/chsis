@@ -1,4 +1,7 @@
 $(function(){
+	/* 导航颜色 */
+	$("#navi_resident_baseInfo").addClass('active');
+	
 	onloadModal();
 	
 	var nationCode = Number($('#nationCode').attr('nationCode'));

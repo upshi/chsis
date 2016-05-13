@@ -1,5 +1,6 @@
 $(function(){
-	$("#navi_role").addClass('active');
+	/*导航颜色*/
+	$("#navi_admin_role").addClass('active');
 	
 	$('#viewAll').on('click', function(){
 		alert('dsds');

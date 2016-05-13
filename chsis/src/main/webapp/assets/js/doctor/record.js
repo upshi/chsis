@@ -1,4 +1,7 @@
 $(function(){
+	/*导航颜色*/
+	$("#navi_doctor_toCreate").addClass('active');
+	
 	$('#idNo-input').typeahead( {
 		ajax : {
 			url: 'resident/getByDimIdNo',

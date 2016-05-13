@@ -27,4 +27,6 @@ public interface IRoleService {
 	Role selectByCName(String cName) throws RoleException;
 	
 	Role selectByEName(String eName) throws RoleException;
+
+	List<Role> selectCommon();
 }

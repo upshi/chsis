@@ -1,5 +1,6 @@
 $(function() {
-	$("#navi_user").addClass('active');
+	/*导航颜色*/
+	$("#navi_admin_manager").addClass('active');
 	
 	//绑定添加管理员按钮事件
 	$("#btn-add").on('click', function(){
@@ -46,7 +47,13 @@ function onShowManager(uuid) {
 					} else {
 						$('#div-hide').hide();
 					}
-					
+					$('#role').empty();
+					if(data.userRoles.length == null){
+						
+					}
+					for(var i=0;i<data.userRoles.length;i++) {
+						$('#role').append('<h5>' + i + ') ' + data.userRoles[i].role.cName + '</h5>');					
+					}
 					$('#managerDetail').modal();
 				} else {
 					$.confirm({

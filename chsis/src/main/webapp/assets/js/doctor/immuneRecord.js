@@ -1,4 +1,7 @@
 $(function(){
+	/*导航颜色*/
+	$("#navi_doctor_toCreate").addClass('active');
+	
 	//绑定input元素失去焦点事件
 	$('#editImmune-vaccine').on('blur', checkVaccine_edit);
 	

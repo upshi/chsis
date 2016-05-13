@@ -34,10 +34,6 @@
 			<%@ include file="/include/header.jsp"%>
 			<!-- header end -->
 			
-			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-department">添加科室</button>
-			</div>
-
 			<!--body wrapper start-->
 			<div class="wrapper">
 				<!-- panel start -->
@@ -46,6 +42,7 @@
 						<h3 class="panel-title">
 							科室管理
 							<span class="tools pull-right"> 
+								<button class="btn btn-warning pull-left btn-add-department">添加科室</button>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>

@@ -25,5 +25,7 @@ public interface IUserRoleMapper {
     int updateByPrimaryKeySelective(UserRole record);
 
     int updateByPrimaryKey(UserRole record);
-    
+
+	List<UserRole> selectCommonRolesByUserUuid(String managerUuid);
+
 }

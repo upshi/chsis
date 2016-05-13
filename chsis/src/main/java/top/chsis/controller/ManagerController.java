@@ -178,6 +178,12 @@ public class ManagerController {
 			map.put("result", "failure");
 		} else {
 			Manager manager = managerService.selectByPrimaryKey(uuid);
+			List<UserRole> userRoles = null;
+			try {
+				userRoles = userRoleService.selectRolesByUserUuid(uuid);
+			} catch (UserRoleException e) {
+				e.printStackTrace();
+			}
 			if(manager != null) {
 				manager.setPassword(null);
 				
@@ -190,6 +196,7 @@ public class ManagerController {
 				
 				map.put("result", "success");
 				map.put("manager", manager);
+				map.put("userRoles", userRoles);
 			} else {
 				map.put("result", "failure");
 			}
@@ -242,16 +249,13 @@ public class ManagerController {
 		Manager manager = null;
 		manager = managerService.selectByPrimaryKey(managerUuid);
 		
-		//取出所有角色
-		List<Role> allRole = roleService.selectAll();
+		//取出所有除系统角色外的普通角色
+		List<Role> allRole = roleService.selectCommon();
 		
-		//取出该用户已经拥有的角色
+		//取出该用户已经拥有的非系统角色
 		List<UserRole> userRoles = null;
-		try {
-			userRoles = userRoleService.selectRolesByUserUuid(managerUuid);
-		} catch (UserRoleException e) {
-			e.printStackTrace();
-		}
+		//userRoles = userRoleService.selectRolesByUserUuid(managerUuid);
+		userRoles = userRoleService.selectCommonRolesByUserUuid(managerUuid);
 		
 		//把所有角色放在map中以便快速定位
 		HashMap<String, Role> map = new HashMap<String, Role>();
@@ -346,5 +350,4 @@ public class ManagerController {
 		
 		return "redirect:/manager/manage";
 	}
-	
 }

@@ -1,4 +1,7 @@
 $(function() {
+	/*导航颜色*/
+	$("#navi_admin_family").addClass('active');
+	
 	//绑定点击家庭成员详情按钮事件
 	$('.btn-residentDetail').on('click',function(){
 		onShowResident($(this).attr('uuid'));

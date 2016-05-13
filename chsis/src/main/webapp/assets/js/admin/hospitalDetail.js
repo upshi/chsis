@@ -1,4 +1,6 @@
 $(function() {
+	/*导航颜色*/
+	$("#navi_admin_hospital").addClass('active');
 	
 	//绑定点击添加医院管理员按钮事件
 	$('.btn-add-manager').on('click', function(){

@@ -1,4 +1,7 @@
 $(function() {
+	/*导航颜色*/
+	$("#navi_hospitalManager_department").addClass('active');
+	
 	//绑定点击添加科室按钮事件
 	$('.btn-add-department').on('click', function(){
 		onAddDepartment();

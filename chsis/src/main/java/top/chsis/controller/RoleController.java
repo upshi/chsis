@@ -44,10 +44,10 @@ public class RoleController {
 	private IRoleResourceService roleResourceService;
 	
 	@RequestMapping("/manager")
-	public String toRoleManager(Model model, HttpSession session, @RequestParam(defaultValue = "1") int pageNo_mine, @RequestParam(defaultValue = "4") int len_mine) {
+	public String toRoleManager(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		PageInfo<Role> pageInfo = null;
 		try {
-			pageInfo = roleService.selectByConditionAndPaging(null, pageNo_mine, len_mine);
+			pageInfo = roleService.selectByConditionAndPaging(null, page, size);
 		} catch (RoleException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -56,9 +56,9 @@ public class RoleController {
 
 		List<Role> roleList = pageInfo.getList();
 		model.addAttribute("roleList", roleList);
-		model.addAttribute("total_mine", pageInfo.getTotal());
-		model.addAttribute("pageTotal", pageInfo.getPages());
-		model.addAttribute("pageIndex", pageNo_mine);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "role/manager?");
 		return "role/roleManager";
 	}
@@ -77,8 +77,8 @@ public class RoleController {
 
 		List<Role> roleList = pageInfo.getList();
 		model.addAttribute("roleList", roleList);
-		model.addAttribute("total_mine", pageInfo.getTotal());
-		model.addAttribute("pageTotal", pageInfo.getPages());
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", pageNo_mine);
 		model.addAttribute("url", "role/search?cName=" + cName + "&cName=" + eName + "&");
 		return "role/roleManager";

@@ -29,10 +29,10 @@ public class ResourceController {
 	private IResourceService resourceService;
 	
 	@RequestMapping("/manager")
-	public String toResourceManager(Model model, HttpSession session, @RequestParam(defaultValue = "1") int pageNo_mine, @RequestParam(defaultValue = "4") int len_mine) {
+	public String toResourceManager(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		PageInfo<Resource> pageInfo = null;
 		try {
-			pageInfo = resourceService.selectByConditionAndPaging(null, pageNo_mine, len_mine);
+			pageInfo = resourceService.selectByConditionAndPaging(null, page, size);
 		} catch (ResourceException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -41,9 +41,9 @@ public class ResourceController {
 
 		List<Resource> resourceList = pageInfo.getList();
 		model.addAttribute("resourceList", resourceList);
-		model.addAttribute("total_mine", pageInfo.getTotal());
-		model.addAttribute("pageTotal", pageInfo.getPages());
-		model.addAttribute("pageIndex", pageNo_mine);
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
+		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "resource/manager?");
 		return "resource/resourceManager";
 	}
@@ -62,8 +62,8 @@ public class ResourceController {
 
 		List<Resource> resourceList = pageInfo.getList();
 		model.addAttribute("resourceList", resourceList);
-		model.addAttribute("total_mine", pageInfo.getTotal());
-		model.addAttribute("pageTotal", pageInfo.getPages());
+		model.addAttribute("totals", pageInfo.getTotal());
+		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", pageNo_mine);
 		model.addAttribute("url", "resource/search?url=" + url + "&name=" + name + "&");
 		return "resource/resourceManager";

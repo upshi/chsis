@@ -36,10 +36,6 @@
 			<!-- header start -->
 			<%@ include file="/include/header.jsp"%>
 			<!-- header end -->
-
-			<div class="page-heading"> 
-				<button class="btn btn-warning btn-add-doctor">添加医生</button> 
-			</div>
 			
 			<!--body wrapper start-->
 			<div class="wrapper">
@@ -49,6 +45,7 @@
 						<h3 class="panel-title">
 							医生管理
 						 	<span class="tools pull-right"> 
+						 		<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button> 
 						 		<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>

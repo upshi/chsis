@@ -196,5 +196,12 @@
 	<script src="assets/js/file.js"></script>
 	<script src="assets/adminex/js/scripts.js"></script>
 	<script src="assets/js/doctor/medicalRecordDetail.js"></script>
+	
+	<script>
+		$(function(){
+			/* 导航颜色 */
+			$("#navi_doctor_finished").addClass('active');
+		});	
+	</script>
 </body>
 </html>

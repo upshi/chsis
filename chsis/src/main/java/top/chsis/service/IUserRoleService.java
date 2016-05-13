@@ -25,5 +25,6 @@ public interface IUserRoleService {
     
     int deleteBatchByUuid(List<String> list);
 
-    
+	List<UserRole> selectCommonRolesByUserUuid(String managerUuid);
+
 }

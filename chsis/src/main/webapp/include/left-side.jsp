@@ -35,40 +35,40 @@
 
 		<!--sidebar nav start-->
 		<ul class="nav nav-pills nav-stacked custom-nav">
+			<li id="navi_index"><a href="index.jsp"><i class="fa fa-home"></i> <span>首页</span></a></li>
 			<!-- resident start -->
-			<li><a href="index.jsp"><i class="fa fa-home"></i> <span>首页</span></a></li>
-			<li><a href="resident/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
-			<li><a href="resident/healthInfo"><i class="fa fa-home"></i> <span>健康信息</span></a></li>
-			<li><a href="resident/medicalRecord"><i class="fa fa-home"></i> <span>就诊记录</span></a></li>
-			<li><a href="resident/immuneRecord"><i class="fa fa-home"></i> <span>免疫记录</span></a></li>
-			<li><a href="resident/healthRecord"><i class="fa fa-home"></i> <span>体检记录</span></a></li>
-			<li><a href="family/familyInfo"><i class="fa fa-home"></i> <span>家庭信息</span></a></li>
+			<li id="navi_resident_baseInfo"><a href="resident/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
+			<li id="navi_resident_healthInfo"><a href="resident/healthInfo"><i class="fa fa-home"></i> <span>健康信息</span></a></li>
+			<li id="navi_resident_medicalRecord"><a href="resident/medicalRecord"><i class="fa fa-home"></i> <span>就诊记录</span></a></li>
+			<li id="navi_resident_immuneRecord"><a href="resident/immuneRecord"><i class="fa fa-home"></i> <span>免疫记录</span></a></li>
+			<li id="navi_resident_healthRecord"><a href="resident/healthRecord"><i class="fa fa-home"></i> <span>体检记录</span></a></li>
+			<li id="navi_resident_familyInfo"><a href="family/familyInfo"><i class="fa fa-home"></i> <span>家庭信息</span></a></li>
 			<!-- resident end -->
 			<hr>
 			
 			<!-- admin start -->
-			<li><a href="hospital/list"><i class="fa fa-home"></i> <span>医院管理</span></a></li>
-			<li><a href="family/manage"><i class="fa fa-home"></i> <span>家庭管理</span></a></li>
-			<li><a href="resident/manage"><i class="fa fa-home"></i> <span>居民管理</span></a></li>
-			<li><a href="manager/manage"><i class="fa fa-home"></i> <span>管理员管理</span></a></li>
-			<li><a href="resource/manager"><i class="fa fa-home"></i> <span>资源管理</span></a></li>
-			<li><a href="role/manager"><i class="fa fa-home"></i> <span>角色管理</span></a></li>
-			<li><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
+			<li id="navi_admin_hospital"><a href="hospital/list"><i class="fa fa-home"></i> <span>医院管理</span></a></li>
+			<li id="navi_admin_family"><a href="family/manage"><i class="fa fa-home"></i> <span>家庭管理</span></a></li>
+			<li id="navi_admin_resident"><a href="resident/manage"><i class="fa fa-home"></i> <span>居民管理</span></a></li>
+			<li id="navi_admin_manager"><a href="manager/manage"><i class="fa fa-home"></i> <span>管理员管理</span></a></li>
+			<li id="navi_admin_resource"><a href="resource/manager"><i class="fa fa-home"></i> <span>资源管理</span></a></li>
+			<li id="navi_admin_role"><a href="role/manager"><i class="fa fa-home"></i> <span>角色管理</span></a></li>
+			<li id="navi_admin_publishNews"><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- admin end -->
 			<hr>
 			
 			<!-- doctor start -->
-			<li><a href="doctor/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
-			<li><a href="medicalRecord/toCreate"><i class="fa fa-home"></i> <span>新建记录</span></a></li>
-			<li><a href="medicalRecord/finished"><i class="fa fa-home"></i> <span>已完成就诊记录</span></a></li>
-			<li><a href="medicalRecord/unfinished"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
-			<li><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i><span>发布新闻</span></a></li>
+			<li id="navi_doctor_baseInfo"><a href="doctor/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>
+			<li id="navi_doctor_toCreate"><a href="medicalRecord/toCreate"><i class="fa fa-home"></i> <span>新建记录</span></a></li>
+			<li id="navi_doctor_finished"><a href="medicalRecord/finished"><i class="fa fa-home"></i> <span>已完成就诊记录</span></a></li>
+			<li id="navi_doctor_unfinished"><a href="medicalRecord/unfinished"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
+			<li id="navi_doctor_publishNews"><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i><span>发布新闻</span></a></li>
 			<!-- doctor end -->
 			<hr>
 			
 			<!-- hospitalManager start -->
-			<li><a href="department/manage"><i class="fa fa-home"></i> <span>科室管理</span></a></li>
-			<li><a href="doctor/manage"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
+			<li id="navi_hospitalManager_department"><a href="department/manage"><i class="fa fa-home"></i> <span>科室管理</span></a></li>
+			<li id="navi_hospitalManager_doctor"><a href="doctor/manage"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
 			<li><a href="hospitalManager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- hospitalManager end -->
 			<hr>

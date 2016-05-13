@@ -1,5 +1,8 @@
 var flag = false;
 $(function() {
+	/*导航颜色*/
+	$("#navi_hospitalManager_doctor").addClass('active');
+	
 	//绑定点击添加医生按钮事件
 	$('.btn-add-doctor').on('click', function(){
 		var hospitalUuid = $('#hospitalUuid').val();

@@ -164,5 +164,12 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	
+	<script>
+		$(function(){
+			/* 导航颜色 */
+			$("#navi_admin_family").addClass('active');
+		});	
+	</script>
 </body>
 </html>

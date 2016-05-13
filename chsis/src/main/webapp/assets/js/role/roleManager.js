@@ -1,4 +1,7 @@
 $(function(){
+	/*导航颜色*/
+	$("#navi_admin_role").addClass('active');
+	
 	$("#navi_role").addClass('active');
 })
 

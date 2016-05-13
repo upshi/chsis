@@ -165,12 +165,20 @@
 					<div id="div-hide" class="row">
 						<div class="col-sm-3 col-sm-offset-3">
 							<h5>
-								<b>所在医院：</b>
+								<b>其所在医院：</b>
 							</h5>
 						</div>
 						<div class="col-sm-3 text-left">
 							<h5 id="hospital-name"></h5>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 col-sm-offset-3">
+							<h5>
+								<b>拥有的角色：</b>
+							</h5>
+						</div>
+						<div id="role" class="col-sm-3 text-left"></div>
 					</div>
 				</div>
 				<div class="modal-footer"></div>

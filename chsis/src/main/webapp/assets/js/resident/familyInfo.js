@@ -1,4 +1,7 @@
 $(function(){
+	/* 导航颜色 */
+	$("#navi_resident_familyInfo").addClass('active');
+	
 	//绑定点击疾病史的事件
 	$('.a-diseaseHistory').on('click',function(){
 		onShowDiseaseHistory($(this).attr('residentUuid'));

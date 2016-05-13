@@ -1,5 +1,6 @@
 $(function(){
-	$("#navi_resource").addClass('active');
+	/*导航颜色*/
+	$("#navi_admin_resource").addClass('active');
 })
 
 function deleteResource(resourceUuid) {

@@ -1,4 +1,7 @@
 $(function() {
+	/*导航颜色*/
+	$("#navi_admin_hospital").addClass('active');
+	
 	//绑定点击添加医院按钮事件
 	$('.btn-add-hospital').on('click', function(){
 		onAddHospital();
