@@ -9,7 +9,7 @@ public class News implements Serializable {
 	private String title;//新闻标题
 	private String author;//作者
 	private Integer type;//类型：新闻的板块 0医生板块、1系统管理员板块、2医院管理员板块
-	private String Content;//新闻内容
+	private String content;//新闻内容
 	private String commitTime;//提交时间
 	private String checkTime;//审核时间
 	private String publishTime;//发布时间
@@ -53,11 +53,11 @@ public class News implements Serializable {
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 
 	public String getCommitTime() {
@@ -110,7 +110,7 @@ public class News implements Serializable {
 
 	@Override
 	public String toString() {
-		return "News [uuid=" + uuid + ", title=" + title + ", author=" + author + ", type=" + type + ", Content=" + Content + ", commitTime=" + commitTime + ", checkTime=" + checkTime + ", publishTime=" + publishTime + ", state=" + state + ", publisherUUID=" + publisherUUID + ", publisherType=" + publisherType + "]";
+		return "News [uuid=" + uuid + ", title=" + title + ", author=" + author + ", type=" + type + ", content=" + content + ", commitTime=" + commitTime + ", checkTime=" + checkTime + ", publishTime=" + publishTime + ", state=" + state + ", publisherUUID=" + publisherUUID + ", publisherType=" + publisherType + "]";
 	}
 
 }

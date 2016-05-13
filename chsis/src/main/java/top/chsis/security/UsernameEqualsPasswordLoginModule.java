@@ -52,12 +52,11 @@ public class UsernameEqualsPasswordLoginModule implements LoginModule {
 
 			callbackHandler.handle(new Callback[] { nameCallback, passwordCallback});
 
-			String temp = new String(passwordCallback.getPassword());
-			//Base64解码
-			temp = new String(Base64.decodeFast(temp));
-			password = temp.split("%")[0];
+			password = new String(passwordCallback.getPassword());
+			
+			String temp = nameCallback.getName();
+			userName = temp.split("%")[0];
 			type = temp.split("%")[1];
-			userName = nameCallback.getName();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

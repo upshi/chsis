@@ -53,7 +53,7 @@
 			<li id="navi_admin_manager"><a href="manager/manage"><i class="fa fa-home"></i> <span>管理员管理</span></a></li>
 			<li id="navi_admin_resource"><a href="resource/manager"><i class="fa fa-home"></i> <span>资源管理</span></a></li>
 			<li id="navi_admin_role"><a href="role/manager"><i class="fa fa-home"></i> <span>角色管理</span></a></li>
-			<li id="navi_admin_publishNews"><a href="manager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
+			<li id="navi_newsManage"><a href="news/manage"><i class="fa fa-home"></i> <span>新闻管理</span></a></li>
 			<!-- admin end -->
 			<hr>
 			
@@ -62,14 +62,12 @@
 			<li id="navi_doctor_toCreate"><a href="medicalRecord/toCreate"><i class="fa fa-home"></i> <span>新建记录</span></a></li>
 			<li id="navi_doctor_finished"><a href="medicalRecord/finished"><i class="fa fa-home"></i> <span>已完成就诊记录</span></a></li>
 			<li id="navi_doctor_unfinished"><a href="medicalRecord/unfinished"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
-			<li id="navi_doctor_publishNews"><a href="doctor/publishNews.jsp"><i class="fa fa-home"></i><span>发布新闻</span></a></li>
 			<!-- doctor end -->
 			<hr>
 			
 			<!-- hospitalManager start -->
 			<li id="navi_hospitalManager_department"><a href="department/manage"><i class="fa fa-home"></i> <span>科室管理</span></a></li>
 			<li id="navi_hospitalManager_doctor"><a href="doctor/manage"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
-			<li><a href="hospitalManager/publishNews.jsp"><i class="fa fa-home"></i> <span>发布新闻</span></a></li>
 			<!-- hospitalManager end -->
 			<hr>
 		</ul>

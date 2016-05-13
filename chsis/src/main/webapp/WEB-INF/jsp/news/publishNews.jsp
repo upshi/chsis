@@ -15,9 +15,10 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
+<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
-<!--你自己的样式文件 -->
-<link href="assets/css/doctor/index.css" rel="stylesheet">
+<!-- summernote -->
+<link href="assets/summernote/summernote.css" rel="stylesheet" />
 
 </head>
 <body class="sticky-header">
@@ -40,32 +41,14 @@
 						<h3 class="panel-title">
 							发布新闻
 							<span class="tools pull-right"> 
+								<button class="btn btn-warning pull-left btn-submitNews">提交新闻</button> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>
 					<div class="panel-body">
-		                <!-- pagination start -->
-		                <nav class="col-sm-4 col-sm-offset-4">
-							<ul class="pagination ">
-								<li>
-									<a href="#" aria-label="Previous"> 
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li>
-									<a href="#" aria-label="Next"> 
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
-						<!-- pagination end -->
+						<input id="title" class="form-control" type="text" placeholder="请输入新闻标题"/><br/>
+		                <div id="summernote"></div>
 			        </div>
 				</div>
 				<!-- panel end -->
@@ -86,8 +69,13 @@
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-
-	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
+	
+	<!-- summernote -->
+	<script src="assets/summernote/summernote.min.js"></script>
+	<script src="assets/summernote/lang/summernote-zh-CN.min.js"></script>
+	<script src="assets/js/news/publishNews.js"></script>
+	
 </body>
 </html>
