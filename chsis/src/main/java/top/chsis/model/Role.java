@@ -4,11 +4,11 @@ public class Role {
 	
 	private String uuid;
 	
-	private String cName;
+	private String cName;//中文角色名
 	
-	private String eName;
+	private String eName;//英文角色名
 	
-	private String description;
+	private String description;//角色描述
 
 	public Role() {}
 

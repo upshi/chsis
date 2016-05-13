@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.exception.RoleException;
 import top.chsis.model.CheckReport;
 import top.chsis.model.Community;
 import top.chsis.model.DiseaseHistory;
@@ -25,12 +26,14 @@ import top.chsis.model.Family;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
+import top.chsis.model.Role;
 import top.chsis.service.ICheckReportService;
 import top.chsis.service.IDiseaseHistoryService;
 import top.chsis.service.IFamilyService;
 import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
+import top.chsis.service.IRoleService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
 
@@ -58,6 +61,9 @@ public class ResidentController {
 	
 	@Autowired
 	private IImmuneRecordService immuneRecordService;
+	
+	@Autowired
+	private IRoleService roleService;
 
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -130,6 +136,23 @@ public class ResidentController {
 			map.put("result", "failure");
 		} else {
 			int result = residentService.deleteByPrimaryKey(uuid);
+			if(result == 1) {
+				map.put("result", "success");
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
+	@RequestMapping("/remove/{uuid}")
+	@ResponseBody
+	public Map<String, Object> remove(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			int result = residentService.removeMemberByPrimaryKey(uuid);
 			if(result == 1) {
 				map.put("result", "success");
 			} else {
@@ -414,8 +437,15 @@ public class ResidentController {
 		Family family = familyService.selectByNumber(familyNumber);
 		resident.setFamily(family);;
 
-		int insert = residentService.insertSelective(resident);
-		if(insert == 1) {
+		Role role = null;
+		try {
+			role = roleService.selectByPrimaryKey("4");
+		} catch (RoleException e) {
+			e.printStackTrace();
+		}
+		
+		int insert = residentService.insertResidentAndRole(resident, role);
+		if(insert == 2) {
 			map.put("result", "success");
 		} else {
 			map.put("result", "failure");
@@ -452,11 +482,17 @@ public class ResidentController {
 		family.setHouseholderUUID(resident.getUuid());
 		family.setAddress(familyAddress);
 		family.setCommunity(community);
+		resident.setFamily(family);
 		
-		resident.setFamily(family);;
+		Role role = null;
+		try {
+			role = roleService.selectByPrimaryKey("4");//查出系统角色：居民，居民对应的uuid为"4"
+		} catch (RoleException e) {
+			e.printStackTrace();
+		}
 		
-		int insert = residentService.insertResidentAndFamily(resident, family);
-		if(insert == 2) {
+		int insert = residentService.insertResidentAndFamilyAndRole(resident, family, role);
+		if(insert == 3) {
 			map.put("result", "success");
 		} else {
 			map.put("result", "failure");

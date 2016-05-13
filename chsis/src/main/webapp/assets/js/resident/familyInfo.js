@@ -225,9 +225,16 @@ function onShowResident(uuid) {
 					$('#resident-period').html(getPeriod(data.resident.period));
 					$('#resident-phone').html(data.resident.phone);
 					$('#resident-marriage').html(getMarriage(data.resident.marriage));
-					$('#resident-height').html(data.resident.height);
-					$('#resident-weight').html(data.resident.weight);
-					$('#resident-eyesight').html(data.resident.eyesight);
+					$('#resident-height').html(data.resident.height + 'cm');
+					$('#resident-weight').html(data.resident.weight + 'kg');
+					
+					var beforeEye = data.resident.eyesight;
+					var eye = beforeEye.split(',');
+					var left_eye = eye[0];
+					var right_eye = eye[1];
+					
+					$('#resident-eyesight').html('左眼' + left_eye + '，右眼' + right_eye);
+					/*$('#resident-eyesight').html(data.resident.eyesight);*/
 					$('#resident-bloodType').html(getBloodType(data.resident.bloodType));
 					
 					$('#residentDetail').modal();
@@ -244,16 +251,16 @@ function onShowResident(uuid) {
 }
 
 //删除居民的操作
-function deleteResident(uuid) {
+function removeResident(uuid) {
 	$.confirm({
 		keyboardEnabled : true,
-			title : '删除用户',
-			content : '此操作会删除该居民，而且操作不可撤销，确定删除？',
+			title : '移除用户',
+			content : '此操作会将该居民移除本家庭，而且操作不可撤销，确定移除？',
 			confirmButtonClass : 'btn-info',
 			cancelButtonClass : 'btn-danger',
 			confirm : function() {
 				$.ajax({
-					url : "resident/delete/" + uuid,
+					url : "resident/remove/" + uuid,
 					type : "GET",
 					cache : false,
 					dataType : "json",
@@ -261,8 +268,8 @@ function deleteResident(uuid) {
 						if (data.result == "success") {
 							$.confirm({
 										keyboardEnabled : true,
-										title : '删除成功',
-										content : '成功删除该居民！',
+										title : '移除成功',
+										content : '成功移除该居民！',
 										confirmButtonClass : 'btn-info',
 										cancelButtonClass : 'btn-danger',
 										autoClose : 'confirm|3000'

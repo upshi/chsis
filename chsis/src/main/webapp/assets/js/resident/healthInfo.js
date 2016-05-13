@@ -23,10 +23,13 @@ function onloadModal(){
     });
     
 	var eyesightCode = $('#eyesightCode').attr('eyesightCode');
-	var eye = eyesightCode.split(',');
-	$('#editdis-leftEyesight').val(eye[0]);
-	$('#editdis-rightEyesight').val(eye[1]);
-	
+	if(eyesightCode == null || eyesightCode==''){
+		$('#eyesightCode').html("未填");
+	} else {
+		var eye = eyesightCode.split(',');
+		$('#editdis-leftEyesight').val(eye[0]);
+		$('#editdis-rightEyesight').val(eye[1]);
+	}
 	//绑定点击修改基本信息按钮事件
 	$('.btn-edit-commonHealthInfo').on('click', function(){
 		onEditCommonHealthInfo();

@@ -64,7 +64,7 @@
 									<td><a class="a-healthRecord" residentUuid="${resident.uuid }">体检记录</a></td>
 									<td><a class="a-immuneRecord" residentUuid="${resident.uuid }">免疫记录</a></td>
 									<td>
-										<button class="btn btn-danger btn-sm deleteMember" onclick="deleteResident('${resident.uuid}')">删除</button> 
+										<button class="btn btn-danger btn-sm deleteMember" onclick="removeResident('${resident.uuid}')">移除</button> 
 										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
 									</td>
 								</tr>
@@ -319,21 +319,21 @@
 						</div>
 						<div class="col-sm-3 text-right col-sm-offset-1">
 							<h5>
-								<b>居民视力：</b>
-							</h5>
-						</div>
-						<div class="col-sm-2 text-left">
-							<h5 id="resident-eyesight"></h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 text-right">
-							<h5>
 								<b>居民血型：</b>
 							</h5>
 						</div>
 						<div class="col-sm-2 text-left">
 							<h5 id="resident-bloodType"></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 text-right">
+							<h5>
+								<b>居民视力：</b>
+							</h5>
+						</div>
+						<div class="col-sm-3 text-left">
+							<h5 id="resident-eyesight"></h5>
 						</div>
 					</div>
 				</div>

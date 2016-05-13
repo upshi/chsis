@@ -10,10 +10,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.FamilyMapper;
+import top.chsis.dao.IUserRoleMapper;
 import top.chsis.dao.ResidentMapper;
 import top.chsis.model.Family;
 import top.chsis.model.Resident;
+import top.chsis.model.Role;
+import top.chsis.model.UserRole;
 import top.chsis.service.IResidentService;
+import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
 
 @Service("residentService")
@@ -24,6 +28,9 @@ public class ResidentServiceImpl implements IResidentService {
 	
 	@Autowired
 	private FamilyMapper familyMapper;
+	
+	@Autowired
+	private IUserRoleMapper userRoleMapper;
 	
 	public int deleteByPrimaryKey(String uuid) {
 		int result = residentMapper.deleteByPrimaryKey(uuid);
@@ -78,9 +85,25 @@ public class ResidentServiceImpl implements IResidentService {
 		return residentMapper.selectByIdNo(idNo);
 	}
 
-	public int insertResidentAndFamily(Resident resident, Family family) {
-		int insert = residentMapper.insertSelective(resident) + familyMapper.insert(family);
+	public int insertResidentAndRole(Resident resident,Role role) {
+		//新建居民时，把用户和角色的资源表也插进去
+		UserRole userRole = new UserRole(StringUtil.getUUID(), resident.getUuid(), role);
+		
+		//插入居民时，为居民赋予系统角色-居民：ROLE_resident
+		int insert = residentMapper.insertSelective(resident) + userRoleMapper.insert(userRole);
 		return insert;
 	}
 
+	public int insertResidentAndFamilyAndRole(Resident resident, Family family,Role role) {
+		//新建居民时，把用户和角色的资源表也插进去
+		UserRole userRole = new UserRole(StringUtil.getUUID(), resident.getUuid(), role);
+		
+		//插入居民时，为居民赋予系统角色-居民：ROLE_resident，同时插入家庭表
+		int insert = residentMapper.insert(resident) + familyMapper.insert(family) + userRoleMapper.insert(userRole);;
+		return insert;
+	}
+
+	public int removeMemberByPrimaryKey(String uuid) {
+		return residentMapper.removeMemberByPrimaryKey(uuid);
+	}
 }

@@ -300,4 +300,9 @@
       family_uuid = #{family.uuid,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
+  <update id="removeMemberByPrimaryKey" parameterType="java.lang.String" >
+    update t_resident
+    set family_uuid = ''
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
 </mapper>

@@ -29,4 +29,6 @@ public interface ResidentMapper {
 	List<ResidentVO> selectByDimIdNo(String idNo);
 	
 	Resident selectByIdNo(String idNo);
+
+	int removeMemberByPrimaryKey(String uuid);
 }
