@@ -41,7 +41,7 @@ public class FamilyController {
 	public String FamilyInfo(Model model){
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		
 		//根据登陆的用户查到家庭id，然后根据家庭id查到该家庭下的所有成员
 		String familyUuid = resident.getFamily().getUuid();

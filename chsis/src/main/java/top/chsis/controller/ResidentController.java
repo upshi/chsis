@@ -70,7 +70,7 @@ public class ResidentController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		model.addAttribute("resident", resident);
 		return "resident/baseInfo";
 	}
@@ -80,7 +80,7 @@ public class ResidentController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		
 		//获得居民的疾病史信息
 		List<DiseaseHistory> diseaseHistories = diseaseHistoryService.selectDiseaseHistoriesByPatientUUID(resident.getUuid());
@@ -256,7 +256,7 @@ public class ResidentController {
 	public String medicalRecord(MedicalRecord medicalRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		medicalRecord.setPatient(resident);
 		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
 		List<MedicalRecord> medicalRecords = pageInfo.getList();
@@ -277,7 +277,7 @@ public class ResidentController {
 									  @RequestParam(defaultValue = "") String state) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		Integer realState = null;
 		if(state != null && !state.equals("")){
 			realState = Integer.parseInt(state);
@@ -309,7 +309,7 @@ public class ResidentController {
 	public String immuneRecord(ImmuneRecord immuneRecord, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		immuneRecord.setPatient(resident);
 		PageInfo<ImmuneRecord> pageInfo = immuneRecordService.selectByConditionAndPagingInResident(immuneRecord, page, size);
 		List<ImmuneRecord> immuneRecords = pageInfo.getList();
@@ -329,7 +329,7 @@ public class ResidentController {
 									  @RequestParam(defaultValue = "") String immuneTime) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		ImmuneRecord immuneRecord = new ImmuneRecord(null, resident, immuneTime, null, vaccine);
 		
 		PageInfo<ImmuneRecord> pageInfo = immuneRecordService.selectByConditionAndPagingInResident(immuneRecord, page, size);
@@ -347,7 +347,7 @@ public class ResidentController {
 	public String healthRecord(CheckReport checkReport, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		checkReport.setPatient(resident);
 		PageInfo<CheckReport> pageInfo = checkReportService.selectByConditionAndPagingInResident(checkReport, page, size);
 		List<CheckReport> checkReports = pageInfo.getList();
@@ -366,7 +366,7 @@ public class ResidentController {
 			@RequestParam(defaultValue = "") String time) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Resident resident = residentService.selectByUserName(userName);
+		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
 		CheckReport checkReport = new CheckReport(null, null, null, time, resident, null, null, 1, null);
 		
 		PageInfo<CheckReport> pageInfo = checkReportService.selectByConditionAndPagingInResident(checkReport, page, size);

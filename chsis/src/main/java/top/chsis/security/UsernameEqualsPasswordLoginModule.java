@@ -15,8 +15,6 @@ import javax.security.auth.spi.LoginModule;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.alibaba.fastjson.util.Base64;
-
 import top.chsis.model.User;
 import top.chsis.util.DBUtil;
 

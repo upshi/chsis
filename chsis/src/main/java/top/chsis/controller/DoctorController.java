@@ -54,7 +54,7 @@ public class DoctorController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Doctor doctor = doctorService.selectByUserName(userName);
+		Doctor doctor = doctorService.selectByUserName(userName.split("%")[0]);
 		model.addAttribute("doctor", doctor);
 		return "doctor/baseInfo";
 	}

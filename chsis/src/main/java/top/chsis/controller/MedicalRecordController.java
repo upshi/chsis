@@ -57,7 +57,7 @@ public class MedicalRecordController {
 		Resident patient = residentService.selectByPrimaryKey(patientUuid);
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Doctor doctor = doctorService.selectByUserName(userName);
+		Doctor doctor = doctorService.selectByUserName(userName.split("%")[0]);
 		
 		MedicalRecord medicalRecord = new MedicalRecord();
 		medicalRecord.setUuid(StringUtil.getUUID());
@@ -130,7 +130,7 @@ public class MedicalRecordController {
 	public String unfinished(MedicalRecordVO medicalRecordVO, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Doctor doctor = doctorService.selectByUserName(userName);
+		Doctor doctor = doctorService.selectByUserName(userName.split("%")[0]);
 		medicalRecordVO.setDoctorUuid(doctor.getUuid());
 		medicalRecordVO.setState("0");//state:0待完成就诊记录，1已完成就诊记录
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
@@ -148,7 +148,7 @@ public class MedicalRecordController {
 	public String finished(MedicalRecordVO medicalRecordVO, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Doctor doctor = doctorService.selectByUserName(userName);
+		Doctor doctor = doctorService.selectByUserName(userName.split("%")[0]);
 		medicalRecordVO.setDoctorUuid(doctor.getUuid());
 		medicalRecordVO.setState("1");//state:0待完成就诊记录，1已完成就诊记录
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);
@@ -171,7 +171,7 @@ public class MedicalRecordController {
 									  @RequestParam(defaultValue = "") String sex) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Doctor doctor = doctorService.selectByUserName(userName);
+		Doctor doctor = doctorService.selectByUserName(userName.split("%")[0]);
 		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, name, sex, idNo, time, null, doctor.getUuid(), state, null);
 		
 		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPaging(medicalRecordVO, page, size);

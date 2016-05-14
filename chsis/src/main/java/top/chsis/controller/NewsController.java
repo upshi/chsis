@@ -3,26 +3,16 @@ package top.chsis.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.chsis.model.News;
-import top.chsis.service.IDoctorService;
-import top.chsis.service.IManagerService;
 
 @Controller
 @RequestMapping("/news")
 public class NewsController {
-	
-	@Autowired
-	private IDoctorService doctorService;
-	
-	@Autowired
-	private IManagerService managerService;
-	
 	
 	@RequestMapping("/manage")
 	public String manage(){
