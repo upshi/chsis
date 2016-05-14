@@ -1,5 +1,7 @@
 package top.chsis.dao;
 
+import java.util.List;
+
 import top.chsis.model.News;
 
 public interface NewsMapper {
@@ -13,5 +15,9 @@ public interface NewsMapper {
 
     int updateByPrimaryKeySelective(News record);
 
+    int updateByPrimaryKeyWithBLOBs(News record);
+
     int updateByPrimaryKey(News record);
+
+	List<News> selectByCondition(News news);
 }

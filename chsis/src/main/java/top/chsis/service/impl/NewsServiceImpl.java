@@ -1,7 +1,13 @@
 package top.chsis.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.NewsMapper;
 import top.chsis.model.News;
@@ -34,6 +40,14 @@ public class NewsServiceImpl implements INewsService {
 
 	public int updateByPrimaryKey(News record) {
 		return newsMapper.updateByPrimaryKey(record);
+	}
+
+	public PageInfo<News> selectByCondition(News news, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<News> list = new ArrayList<News>();
+		list = newsMapper.selectByCondition(news);
+		PageInfo<News> pageInfo = new PageInfo<News>(list);
+		return pageInfo;
 	}
 
 }

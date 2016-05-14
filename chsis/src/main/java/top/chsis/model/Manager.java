@@ -6,7 +6,7 @@ public class Manager implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public static final int HOSPITAL_MANAGER = 0;
-	public static final int CONTENT_MANAGER = 1;
+	public static final int CHECKER_MANAGER = 1;
 	public static final int SYSTEM_MANAGER = 2;
 	
 	private String uuid;//唯一标识一个管理员

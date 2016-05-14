@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -46,8 +47,19 @@
 							</span>
 						</h3>
 					</div>
-					<div class="panel-body">
-						<input id="title" class="form-control" type="text" placeholder="请输入新闻标题"/><br/>
+					<div class="panel-body" id="news" role="${role }">
+						<input id="title" class="form-control" type="text" placeholder="请输入新闻标题" /><br/>
+						<c:if test="${role == 'doctor' }">
+							<div class="form-group">
+								<label class="control-label" style="margin-top:10px;">新闻类型:</label>
+								<label class="radio-inline">
+									<input type="radio" name="type" value="1" checked>每日健康
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="type" value="0">医生寄语		
+								</label>
+							</div>	
+						</c:if>
 		                <div id="summernote"></div>
 			        </div>
 				</div>

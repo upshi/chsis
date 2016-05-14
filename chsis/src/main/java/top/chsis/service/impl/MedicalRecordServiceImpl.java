@@ -13,7 +13,6 @@ import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.MedicalRecord;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.vo.MedicalRecordVO;
-import top.chsis.vo.ResidentVO;
 
 @Service("medicalRecordService")
 public class MedicalRecordServiceImpl implements IMedicalRecordService {

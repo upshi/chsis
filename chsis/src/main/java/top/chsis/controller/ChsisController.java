@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/chsis")
 public class ChsisController {
 	
 	@RequestMapping("/index")
@@ -46,6 +45,11 @@ public class ChsisController {
 	@RequestMapping("/register")
 	public String register(Model model) {
 		return "chsis/register";
+	}
+	
+	@RequestMapping("/newslist")
+	public String newslist(Model model) {
+		return "chsis/newslist";
 	}
 	
 }

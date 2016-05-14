@@ -1,5 +1,7 @@
 package top.chsis.service;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.News;
 
 public interface INewsService {
@@ -14,4 +16,7 @@ public interface INewsService {
     int updateByPrimaryKeySelective(News record);
 
     int updateByPrimaryKey(News record);
+
+	PageInfo<News> selectByCondition(News news, int page, int size);
+
 }

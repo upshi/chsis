@@ -12,7 +12,6 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.CheckReportMapper;
 import top.chsis.model.CheckReport;
-import top.chsis.model.ImmuneRecord;
 import top.chsis.model.UploadObject;
 import top.chsis.service.ICheckReportService;
 import top.chsis.util.UploadUtil;

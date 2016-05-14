@@ -1,4 +1,3 @@
-
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}
 ul, ol {margin: 0;}
@@ -8,75 +7,7 @@ html, body{
    font-size: 100%;
    background:#fff; 
 }
-/*--header start here--*/
-.header {
-	background: url(../../image/chsis/header-back.JPG);
-	min-height: 120px;
-}
-.head-nav-back{
-	background: url(../../image/chsis/header-container.PNG) no-repeat;
-	background-size:100%;
-	-webkit-background-size:100%;
-	height:120px;
-}
-.header-main {
-	padding: 3em 0px;
-}
-.navg ul {
-	list-style: none;
-}
-.navg ul li {
-	display: inline-block;
-	margin: 0px 5px 0px 0px;
-}
-.navg ul li a {
-	font-size: 1em;
-	font-weight: 400;
-	color: #999;
-	padding: 4em 1.6em;
-	text-decoration:none;
-}
-a.intro.active {
-	padding: 4em .9em;
-}
-.solu.active {
-	padding: 4em .9em;
-}
-a.ser.active {
-	padding: 4em .9em;
-}
-a.proj.active {
-	padding: 4em .9em;
-}
-a.cont.active {
-	padding: 4em .9em;
-}
-.navg ul li a:hover{
-	color:#fff;
-}
-.navg ul li a.active{
-	text-decoration:none;
-	color:#fff;
-	background: url(../../image/chsis/nav-back.png)no-repeat 0px 2px;
-	background-size:initial;
-	transition: 0.5s all;
-	-webkit-transition: 0.5s all;
-	-moz-transition:  0.5s all;
-	-o-transition:  0.5s all;
-}
-span.menu{
-	display: none;
-}
-.logo {
-	float: left;
-	text-align:center;
-}
-.navg {
-	float: right;
-	text-align: center;
-}
-.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
-/*--header end here--*/
+
 /*--banner start here--*/
 .banner {
 	padding: 2em 0px 0px 0px;
@@ -608,36 +539,7 @@ ul.img-sprit li a.t:hover{
 }
 /*--footer end here--*/
 
-/*--copyright start here--*/
-.copyright {
-	background: url(../../image/chsis/copyrt-bg.jpg);
-	padding: 2em 0px;
-	text-align:center;
-	background-size: cover;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	-ms-background-size:cove;
-}
-.copyright-main p {
-	font-size: 1em;
-	font-weight: 600;
-	color: #2E383F;
-}
-.copyright-main p a {
-	font-size: 1em;
-	font-weight: 600;
-	color: #2E383F;
-}
-.copyright-main p a:hover{
-	text-decoration:none;
-	color:#0B81BB;
-	transition: 0.5s all;
- -webkit-transition: 0.5s all;
- -moz-transition:  0.5s all;
- -o-transition:  0.5s all;
-}
-/*--copyright end here--*/ 
+
 /*--about start here--*/
 .about {
 	padding: 3em 0px;
@@ -1831,8 +1733,8 @@ input[type="submit"] {
 .back-img {
 	background: url(../../image/chsis/info-bg.jpg)0px 0px;
     padding: 1em 1em;
-    height: 50px;
-    line-height:50px;
+    height: 100px;
+    line-height:100px;
     overflow: hidden;
 	color: #fff;
     text-align: center;
@@ -1842,9 +1744,6 @@ input[type="submit"] {
 	letter-spacing:.11em;
 	line-height: 30px;
 	padding: 20px 30px;
-	background:url(../../image/chsis/d-top.jpg);
-	border-radius: 0 0 15px 15px;
-	border:1px solid #A9A9A9;
 }
 .news-text ul {
 	list-style-image: url(../../image/chsis/list.png);

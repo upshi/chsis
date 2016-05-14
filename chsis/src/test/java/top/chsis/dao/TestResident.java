@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import top.chsis.model.Family;
-import top.chsis.model.News;
 import top.chsis.model.Resident;
 import top.chsis.util.StringUtil;
 

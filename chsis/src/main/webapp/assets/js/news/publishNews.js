@@ -62,14 +62,21 @@ function submitNews() {
 			autoClose : 'confirm|3000'
 		});
 	} else {
+		var data = {"title": title, "content":content};
+		var role = $('#news').attr('role');
+		if(role == 'doctor') {
+			var type = $('input[name="type"]:checked').val();
+			data.type = type;
+		}
+		
 		$.ajax({
 			url : "news/add" ,
 			type : "POST" ,
 			cache : false , 
-			data : {"title": title, "content":content} ,
+			data : data ,
 			dataType : "json" ,
 			success : function(data) {
-				if(data.result == "exist") {
+				if(data.result == "success") {
 					$.confirm({
 						keyboardEnabled : true,
 						title : '提交成功',
@@ -78,6 +85,7 @@ function submitNews() {
 						cancelButtonClass : 'btn-danger',
 						autoClose : 'confirm|3000'
 					});
+					window.location.href = 'news/manage';
 				} else {
 					$.confirm({
 						keyboardEnabled : true,

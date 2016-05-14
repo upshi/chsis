@@ -11,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.ImmuneRecordMapper;
 import top.chsis.model.ImmuneRecord;
-import top.chsis.model.MedicalRecord;
 import top.chsis.service.IImmuneRecordService;
 
 @Service("immuneRecordService")

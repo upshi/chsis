@@ -13,7 +13,6 @@ import top.chsis.dao.DepartmentMapper;
 import top.chsis.dao.DoctorMapper;
 import top.chsis.model.Department;
 import top.chsis.model.Doctor;
-import top.chsis.model.HospitalManager;
 import top.chsis.service.IDepartmentService;
 
 @Service("departmentService")

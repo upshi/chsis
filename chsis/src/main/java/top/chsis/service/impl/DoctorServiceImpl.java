@@ -19,7 +19,6 @@ import top.chsis.model.UploadObject;
 import top.chsis.service.IDoctorService;
 import top.chsis.util.UploadUtil;
 import top.chsis.vo.DoctorVO;
-import top.chsis.vo.ResidentVO;
 
 @Service("doctorService")
 public class DoctorServiceImpl implements IDoctorService {

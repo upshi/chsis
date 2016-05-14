@@ -28,13 +28,10 @@ public class TestNews {
 
 		news.setUuid(StringUtil.getUUID());
 		news.setTitle("外科新闻");
-		news.setAuthor("ranran");
 		news.setCheckTime("2016.03.16");
-		news.setCommitTime("2016.03.15");
+		news.setSubmitTime("2016.03.15");
 		news.setContent("坚实的房间开");
-		news.setPublisherUUID("1");
 		news.setPublishTime("20150318");
-		news.setPublisherType(0);
 		news.setState(2);
 		news.setType(2);
 		
@@ -47,13 +44,10 @@ public class TestNews {
 		
 		news.setUuid(StringUtil.getUUID());
 		news.setTitle("外科新闻");
-		news.setAuthor("ranran");
 		news.setCheckTime("2016.03.16");
-		news.setCommitTime("2016.03.15");
+		news.setSubmitTime("2016.03.15");
 		news.setContent("坚实的房间开");
-		news.setPublisherUUID("1");
 		news.setPublishTime("20150318");
-		news.setPublisherType(0);
 		news.setState(2);
 		news.setType(2);
 		
@@ -64,12 +58,9 @@ public class TestNews {
 	@Test
 	public void testUpdate() {
 		News news = newsMapper.selectByPrimaryKey("1");
-		news.setAuthor("王文静");
 		news.setCheckTime("2015.5");
-		news.setCommitTime("2015.4");
+		news.setSubmitTime("2015.4");
 		news.setContent("么有大事");
-		news.setPublisherType(1);
-		news.setPublisherUUID("1");
 		news.setPublishTime("2015.6");
 		news.setState(1);
 		news.setTitle("妇产科");
@@ -79,12 +70,9 @@ public class TestNews {
 	@Test
 	public void testupdateByPrimaryKeySelective() {
 		News news = newsMapper.selectByPrimaryKey("967ca9c416ee4c16ba9f473a18b8210e");
-		news.setAuthor("王文静");
 		news.setCheckTime("2015.5");
-		news.setCommitTime("2015.4");
+		news.setSubmitTime("2015.4");
 		news.setContent("么有大事");
-		news.setPublisherType(1);
-		news.setPublisherUUID("1");
 		news.setPublishTime("2015.6");
 		news.setState(1);
 		news.setTitle("妇产科");

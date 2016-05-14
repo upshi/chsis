@@ -46,29 +46,44 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="family/search">
-		                    <input class="form-control" name="number" type="text" placeholder="请输入家庭编号">
-		                    <input class="form-control" name="householderName" type="text" placeholder="请输入户主姓名">
-		                    <input class="form-control" name="communityName" type="text" placeholder="请输入社区名称">
+						<form class="form-inline" action="news/search">
+		                    <input class="form-control" name="title" type="text" placeholder="请输入新闻标题">
+		                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
+	                    	<select name="state" class="form-control">
+	                    		<option value="">新闻状态</option>
+	                    		<option value="0">已提交</option>
+	                    		<option value="1">审核中</option>
+	                    		<option value="2">审核通过</option>
+	                    		<option value="3">审核未通过</option>
+	                    	</select>
 		                    <button class="btn btn-info">搜索</button>
 	                    </form><br/>
 	                    <div class="blank"></div>
-	                    <table class="table table-bordered table-responsive table-hover">
+	                    <table class="table table-bordered table-responsive table-hover text-center">
 		                    <tr class="info">
-		                        <th>家庭编号</th>
-		                        <th>户主</th>
-		                        <th>家庭电话</th>
-		                        <th>所在社区</th>
-		                        <th>操作</th>
+		                        <th class="text-center">新闻标题</th>
+		                        <th class="text-center">新闻类型</th>
+		                        <th class="text-center">提交时间</th>
+		                        <th class="text-center">新闻状态</th>
+		                        <th class="text-center">操作</th>
 		                    </tr>
-		                    <c:forEach items="${families}" var="familyVO">
+		                    <c:forEach items="${newsList}" var="news">
 			                    <tr>
-			                        <td>${familyVO.number }</td>
-			                        <td>${familyVO.householderName }</td>
-			                        <td>${familyVO.phone }</td>
-			                        <td>${familyVO.communityName }</td>
+			                        <td>${news.title }</td>
 			                        <td>
-			                        	<a href="family/detail/${familyVO.uuid }" class="btn btn-primary btn-sm">详情</a>
+			                        	<c:if test="${news.type == 0 }">医生寄语</c:if>
+			                        	<c:if test="${news.type == 1 }">每日健康</c:if>
+			                        	<c:if test="${news.type == 2 }">医院通知</c:if>
+			                        	<c:if test="${news.type == 3 }">社区公告</c:if>
+			                        </td>
+			                        <td>${news.submitTime }</td>
+			                        <td>
+			                        	<c:if test="${news.state == 0 }">审核中</c:if>
+			                        	<c:if test="${news.state == 1 }">审核未通过</c:if>
+			                        	<c:if test="${news.state == 2 }">审核通过</c:if>
+			                        </td>
+			                        <td>
+			                        	<a href="" class="btn btn-primary btn-sm">详情</a>
 			                        </td>
 			                    </tr>
 		                    </c:forEach>
@@ -90,72 +105,6 @@
 		<!-- main content end-->
 	</section>
 	
-	<!-- Modal Start -->
-	<div class="modal fade" id="addHospital" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">添加医院</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" method="POST" action="hospital/addHospital">
-						<div class="row container">
-							<div class="form-group" id="addh-numberGroup">
-								<label class="col-sm-2 control-label">医院编号</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-number" class="form-control" name="number" type="text" placeholder="医院编号">
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="addh-nameGroup">
-								<label class="col-sm-2 control-label">医院名称</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-name" class="form-control" name="name" type="text" placeholder="医院名称">
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="addh-addressGroup">
-								<label class="col-sm-2 control-label">医院地址</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="addh-address" class="form-control" name="address" type="text" placeholder="医院地址">
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row container">
-							<div class="form-group" id="addh-descriptionGroup">
-								<label class="col-sm-2 control-label">医院描述</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<textarea id="addh-description" class="form-control" name="description" rows="5"></textarea>
-										<p class="help-block"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-offset-5">
-							<button class="btn btn-success" id="addh-submit">保存</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal End -->
 
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
