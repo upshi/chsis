@@ -47,6 +47,10 @@
 						<h3 class="panel-title">
 							新闻详情
 							<span class="tools pull-right"> 
+								<c:if test="${news.state == 0 }">
+									<button class="btn btn-default pull-left btn-pass" newsUuid="${news.uuid }" style="margin-right:5px;">审核通过</button>
+									<button class="btn btn-warning pull-left btn-notPass" newsUuid="${news.uuid }">审核不通过</button>
+								</c:if>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -71,21 +75,19 @@
 			        </div>
 				</div>
 				<!-- panel end -->
-				<c:if test="${news.state == 1 }">
-					<c:forEach items="${checkRecords }" var="checkRecord">
-						<ul class="chats cool-chat">
-							<li class="in">
-								<img class="avatar" alt="" src="assets/adminex/images/photos/checker.png">
-								<div class="message">
-									<span class="arrow"></span>
-									<a class="name" href="#">${checkRecord.checker.name }</a>
-									<span class="datetime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${checkRecord.time }</span>
-									<span class="body"> ${checkRecord.reason } </span>
-								</div>
-							</li>
-						</ul>
-					</c:forEach>
-				</c:if>		
+				<c:forEach items="${checkRecords }" var="checkRecord">
+					<ul class="chats cool-chat">
+						<li class="in">
+							<img class="avatar" alt="" src="assets/adminex/images/photos/checker.png">
+							<div class="message">
+								<span class="arrow"></span>
+								<a class="name" href="#">${checkRecord.checker.name }</a>
+								<span class="datetime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${checkRecord.time }</span>
+								<span class="body"> ${checkRecord.reason } </span>
+							</div>
+						</li>
+					</ul>
+				</c:forEach>
 			</div>
 			<!--body wrapper end-->
 
@@ -95,6 +97,41 @@
 		</div>
 		<!-- main content end-->
 	</section>
+    
+    <!-- Modal Start -->
+	<div class="modal fade" id="notPassModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">审核不通过原因</h4>
+				</div>
+				<div class="modal-body">
+					<form id="notPassForm" class="form-horizontal" method="POST">
+						<input id="newsUuid" name="newsUuid" type="hidden" />
+						<div class="row container">
+							<div class="form-group" id="reasonGroup">
+								<label class="col-sm-1 control-label">原因</label>
+								<div class="col-sm-5">
+									<div class="iconic-input right">
+										<textarea id="reason" class="form-control" row="3" name="reason" placeholder="请输入审核不通过原因"></textarea>
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-4">
+							<button class="btn btn-info" id="reason-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
     
     <!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
@@ -109,6 +146,9 @@
 	<!-- summernote -->
 	<script src="assets/summernote/summernote.min.js"></script>
 	<script src="assets/summernote/lang/summernote-zh-CN.min.js"></script>
+	
+	<!-- Custome Javascript -->
+	<script src="assets/js/news/newsDetailChecker.js"></script> 
 	
 </body>
 </html>

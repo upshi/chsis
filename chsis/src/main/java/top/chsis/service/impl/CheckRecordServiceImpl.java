@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import top.chsis.dao.CheckRecordMapper;
+import top.chsis.dao.NewsMapper;
 import top.chsis.model.CheckRecord;
+import top.chsis.model.News;
 import top.chsis.service.ICheckRecordService;
 
 @Service("checkRecordService")
@@ -14,6 +16,9 @@ public class CheckRecordServiceImpl implements ICheckRecordService {
 	
 	@Autowired
 	private CheckRecordMapper checkRecordMapper;
+	
+	@Autowired
+	private NewsMapper newsMapper;
 
 	public int deleteByPrimaryKey(String uuid) {
 		return checkRecordMapper.deleteByPrimaryKey(uuid);
@@ -41,6 +46,23 @@ public class CheckRecordServiceImpl implements ICheckRecordService {
 
 	public List<CheckRecord> selectByNewsUuid(String newsUuid) {
 		return checkRecordMapper.selectByNewsUuid(newsUuid);
+	}
+
+	public int check(CheckRecord checkRecord, boolean pass) {
+		checkRecordMapper.insert(checkRecord);
+		News news = new News();
+		news.setUuid(checkRecord.getNewsUuid());
+		news.setCheckTime(checkRecord.getTime());
+		news.setChecker(checkRecord.getChecker());
+		if(pass) {
+			news.setState(News.STATE_PASS);
+		} else {
+			news.setState(News.STATE_NOT_PASS);
+		}
+		
+		newsMapper.updateByPrimaryKeySelective(news);
+		
+		return 2;
 	}
 	
 }

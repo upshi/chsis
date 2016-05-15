@@ -4,7 +4,6 @@ public class CheckRecord {
 	public static final int PASS = 0;
 	public static final int NOTPASS = 1;
 	
-	
 	private String uuid;//审核记录的uuid，唯一标识一条审核记录
 	private String newsUuid;//新闻
 	private Manager checker;//审核员
@@ -72,17 +71,8 @@ public class CheckRecord {
 		this.time = time;
 	}
 
-	public static int getPass() {
-		return PASS;
-	}
-
-	public static int getNotpass() {
-		return NOTPASS;
-	}
-
-	@Override
 	public String toString() {
 		return "CheckRecord [uuid=" + uuid + ", newsUuid=" + newsUuid + ", checker=" + checker + ", result=" + result + ", reason=" + reason + ", time=" + time + "]";
 	}
-	
+
 }

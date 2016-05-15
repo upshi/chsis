@@ -18,4 +18,6 @@ public interface ICheckRecordService {
     int updateByPrimaryKey(CheckRecord record);
 
     List<CheckRecord> selectByNewsUuid(String newsUuid);
+
+	int check(CheckRecord checkRecord, boolean pass);
 }

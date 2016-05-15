@@ -54,6 +54,13 @@
 						<form class="form-inline" action="news/search">
 		                    <input class="form-control" name="title" type="text" placeholder="请输入新闻标题">
 		                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
+	                    	<select name="type" class="form-control">
+	                    		<option value="">新闻类型</option>
+	                    		<option value="0">医生寄语</option>
+	                    		<option value="1">每日健康</option>
+	                    		<option value="2">医院通知</option>
+	                    		<option value="3">社区公告</option>
+	                    	</select>
 	                    	<select name="state" class="form-control">
 	                    		<option value="">新闻状态</option>
 	                    		<option value="0">审核中</option>
@@ -81,7 +88,7 @@
 			                        	<c:if test="${news.type == 3 }">社区公告</c:if>
 			                        </td>
 			                        <td>${news.submitTime }</td>
-			                        <td>
+			                        <td class="td-state" newsUuid='${news.uuid }'>
 			                        	<c:if test="${news.state == 0 }">审核中</c:if>
 			                        	<c:if test="${news.state == 1 }">审核未通过</c:if>
 			                        	<c:if test="${news.state == 2 }">审核通过</c:if>
@@ -93,11 +100,9 @@
 											</button>
 											<ul class="dropdown-menu" style="min-width: 60px">
 												<li><a href="news/detail/${news.uuid }">详情</a></li>
-												<c:if test="${news.state == 1 }">
-													<li><a href="news/toEdit/${news.uuid }">编辑</a></li>
-												</c:if>
-												<c:if test="${news.state == 1 }">
-													<li><a onclick="deleteNews('${news.uuid}')">删除</a></li>
+												<c:if test="${news.state == 0 }">
+													<li><a class="btn-pass" newsUuid="${news.uuid }">审核通过</a></li>
+													<li><a class="btn-notPass" newsUuid="${news.uuid }">审核不通过</a></li>
 												</c:if>
 											</ul>
 										</div>
@@ -122,6 +127,40 @@
 		<!-- main content end-->
 	</section>
 	
+	<!-- Modal Start -->
+	<div class="modal fade" id="notPassModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">审核不通过原因</h4>
+				</div>
+				<div class="modal-body">
+					<form id="notPassForm" class="form-horizontal" method="POST">
+						<input id="newsUuid" name="newsUuid" type="hidden" />
+						<div class="row container">
+							<div class="form-group" id="reasonGroup">
+								<label class="col-sm-1 control-label">原因</label>
+								<div class="col-sm-5">
+									<div class="iconic-input right">
+										<textarea id="reason" class="form-control" row="3" name="reason" placeholder="请输入审核不通过原因"></textarea>
+										<p class="help-block"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-offset-4">
+							<button class="btn btn-info" id="reason-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
 
 	<!-- Placed js at the end of the document so the pages load faster -->
 	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
@@ -136,7 +175,7 @@
     <script src="assets/js/jquery-confirm.js"></script>
     
     <!-- Custome Javascript -->
-	<script src="assets/js/news/newsManage.js"></script>    
+	<script src="assets/js/news/newsManageChecker.js"></script> 
 	
 </body>
 </html>

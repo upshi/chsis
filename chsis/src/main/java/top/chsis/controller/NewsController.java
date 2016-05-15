@@ -48,6 +48,8 @@ public class NewsController {
 	@RequestMapping("/manage")
 	public String doctorManage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size){
 		News news = new News();
+		//返回页面,默认是新闻提交者看到的页面
+		String returnPage = "news/newsManage";
 		//获取当前登录的用户
 		String temp = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = temp.split("%")[0];
@@ -56,6 +58,9 @@ public class NewsController {
 			Manager manager = managerService.selectByUserName(userName);
 			if(manager.getType() != Manager.CHECKER_MANAGER) {
 				news.setAuthorUuid(manager.getUuid());
+			} else {
+				returnPage = "news/newsManageChecker";
+				news.setState(News.STATE_CHECKING);
 			}
 		} else {
 			Doctor doctor = doctorService.selectByUserName(userName);
@@ -70,32 +75,48 @@ public class NewsController {
 		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "news/doctorManage?");
 		
-		return "news/newsManage";
+		return returnPage;
 	}
 	
 	@RequestMapping("/search")
 	public String doctorSearch(Model model, @RequestParam(defaultValue = "1") int page,
 									  @RequestParam(defaultValue = "5") int size,
 									  @RequestParam(defaultValue = "") String title,
+									  @RequestParam(defaultValue = "") String type,
 									  @RequestParam(defaultValue = "") String submitTime,
 									  @RequestParam(defaultValue = "") String state) {
-		int realState = Integer.parseInt(state);
+		//返回页面,默认是新闻提交者看到的页面
+		String returnPage = "news/newsManage";
 		//获取当前登录的用户
 		String temp = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userName = temp.split("%")[0];
-		String type = temp.split("%")[1];
+		String userType = temp.split("%")[1];
 		String authorUuid = null;
-		if(type.equals("admin")) {
+		if(userType.equals("admin")) {
 			Manager manager = managerService.selectByUserName(userName);
 			if(manager.getType() != Manager.CHECKER_MANAGER) {
 				authorUuid = manager.getUuid();
+			} else {
+				returnPage = "news/newsManageChecker";
+				//审核员默认查审核中的新闻
+				if(StringUtil.isNoE(state)) {
+					state = "0";
+				}
 			}
 		} else {
 			Doctor doctor = doctorService.selectByUserName(userName);
 			authorUuid = doctor.getUuid();
 		}
-		
-		News news = new News(null, title, authorUuid, null, submitTime, realState);
+		News news = null;
+		Integer realState = null;
+		Integer realType = null;
+		if(!StringUtil.isNoE(state)){
+			realState = Integer.parseInt(state);
+		} 
+		if(!StringUtil.isNoE(type)){
+			realType = Integer.parseInt(type);
+		} 
+		news = new News(null, title, authorUuid, realType, submitTime, realState);
 		
 		PageInfo<News> pageInfo = newsService.selectByCondition(news, page, size);
 		List<News> newsList = pageInfo.getList();
@@ -105,9 +126,10 @@ public class NewsController {
 		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "news/search?title=" + title + 
 									"&submitTime=" + submitTime+
+									"&type=" + type+
 									"&state" + state + "&" );
 		
-		return "news/newsManage";
+		return returnPage;
 	}
 	
 	@RequestMapping("/toPublish")
@@ -173,6 +195,19 @@ public class NewsController {
 			model.addAttribute("checkRecords", checkRecords);
 		}
 		model.addAttribute("news", news);
+		
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String realUserName = userName.split("%")[0];
+		String type = userName.split("%")[1];
+		//判断如果当前用户是审核员，跳转到审核员管理的详情页
+		if(type.equals("admin")) {
+			Manager manager = managerService.selectByUserName(realUserName);
+			if(manager.getType() == Manager.CHECKER_MANAGER){
+				return "news/newsDetailChecker";
+			}
+		}
+		//默认跳转到发布者看到的新闻详情页
 		return "news/newsDetail";
 	}
 	
@@ -198,12 +233,56 @@ public class NewsController {
 		return map;
 	}
 	
-	@RequestMapping("/delete/{uuid}")
+	@RequestMapping("/delete/{newsUuid}")
 	@ResponseBody
-	public Map<String, Object> resourceDelte(@PathVariable(value = "uuid") String uuid) {
+	public Map<String, Object> delete(@PathVariable(value = "newsUuid") String newsUuid) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		newsService.deleteByPrimaryKey(uuid);
-		map.put("result", "success");
+		int result = newsService.deleteByPrimaryKey(newsUuid);
+		if(result == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
+	
+	@RequestMapping("/pass")
+	@ResponseBody
+	public Map<String, Object> pass(CheckRecord checkRecord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Manager checker = managerService.selectByUserName(userName.split("%")[0]);
+		checkRecord.setUuid(StringUtil.getUUID());
+		checkRecord.setResult(CheckRecord.PASS);
+		checkRecord.setTime(sdf.format(new Date()));
+		checkRecord.setChecker(checker);
+		int result = checkRecordService.check(checkRecord, true);
+		if(result == 2) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
+	
+	@RequestMapping("/notPass")
+	@ResponseBody
+	public Map<String, Object> notPass(CheckRecord checkRecord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//获取当前登录的用户
+		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Manager checker = managerService.selectByUserName(userName.split("%")[0]);
+		checkRecord.setUuid(StringUtil.getUUID());
+		checkRecord.setResult(CheckRecord.NOTPASS);
+		checkRecord.setTime(sdf.format(new Date()));
+		checkRecord.setChecker(checker);
+		int result = checkRecordService.check(checkRecord, false);
+		if(result == 2) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
 		return map;
 	}
 }
