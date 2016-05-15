@@ -24,4 +24,8 @@ public interface NewsMapper {
 	List<News> selectByCondition(News news);
 	
 	PageInfo<News> selectByConditionWithType(News news, int page, int size);
+
+	List<News> selectByType(int type);
+
+	List<News> selectByClick();
 }

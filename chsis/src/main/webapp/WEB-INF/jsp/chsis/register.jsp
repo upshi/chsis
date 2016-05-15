@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" href="assets/image/favicon.ico">
 
     <title>居民健康服务信息系统</title>
 
@@ -28,9 +28,6 @@
 </head>
 
 <body class="login-body">
-	<div class="text-center">
-        <h1 style="color:#fff;">居民健康服务信息系统注册</h1>
-    </div>
 	<!--body wrapper start-->
     <div class="wrapper">
     	<div class="row">
@@ -53,6 +50,9 @@
 				        </ul>
 				    </header>
 				    <div class="panel-body">
+					    <div class="form-signin-heading text-center">
+					        <img src="assets/image/logo_login.png" alt="" style="margin-left:-15px;"/>
+					    </div>
 				        <div class="tab-content">
 				            <div id="joinFamily" class="tab-pane active">
 				            	<form class="form-signin" id="joinForm" method="POST" style="margin:0 auto;">

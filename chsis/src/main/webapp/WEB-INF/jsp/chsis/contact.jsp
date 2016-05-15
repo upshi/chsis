@@ -49,11 +49,7 @@
 </div>
 <!--contact end here-->
 <!--map start here-->
-<div class="map">
-	<div class="container">
-	 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387144.007583421!2d-73.97800349999999!3d40.7056308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1415253431785"  frameborder="0" style="border:0"> </iframe>
-	</div>
-</div>
+<div id="map" style="width:100%;height:400px;"></div>
 <!--map end here-->
 
 <!--footer start here-->
@@ -61,4 +57,32 @@
 <!--footer end here-->
 
 </body>
+
+<script src="assets/js/chsis/jquery.min.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=c05f5d7fa9800dbf0de169ac8ecd9a4f"></script>
+<script type="text/javascript">
+	$(function(){
+		/* 导航颜色 */
+		$("#navi_contact").addClass('ser active');
+	});	
+	
+	var map = new AMap.Map('map',{
+	    zoom: 12,
+	    center: [103.776693,36.055021]
+	});
+	var marker = new AMap.Marker({
+        position: [103.776693,36.055021],
+        map:map
+    });
+	
+	var infowindow = new AMap.InfoWindow({
+		content : '<h3>阳光社区</h3><div>社区开始为居民和单位提供送餐、存车、物业管理等后勤社会化服务，开辟了社区服务业发展的新领域。</div>',
+		offset : new AMap.Pixel(0, -30),
+		size : new AMap.Size(230, 0)
+	})
+	
+	var clickHandle = AMap.event.addListener(marker, 'click', function() {
+	    infowindow.open(map, marker.getPosition())
+	})
+</script>
 </html>

@@ -90,7 +90,7 @@ html, body{
 	text-align:center;
 }
 .info-bott {
-	background: url(../../image/chsis/d-middle.jpg)0px 0px;
+	background: #fff;
 	padding: 1em 1em;
 	height: 335px;
 	overflow: hidden;
@@ -98,35 +98,37 @@ html, body{
 }
 .info-bott ul {
 	list-style: none;
-	font-size: 0.885em;
+	font-size: 1.0em;
 	font-weight: 550;
 	padding: 1.5em 0 0 1em;
-	line-height: 1.5em;
+	line-height: 2em;
 	text-align: left;
 }
 .info-bott ul li {
 	text-align: left;
-	color: #828D94;
+	color: #000;
+	line-height:2em;
+	border-bottom:1px dotted #ccc;
 }
 .info-bott ul li a {
 	font-size: 0.94em;
     font-weight: 500;
     background: url(../../image/chsis/list.png)no-repeat 0px 7px;
     padding: 1px 0px 0px 15px;
-	color: #828D94;
+	color: #000;
 }
 .info-bott ul li a:hover{
 	text-decoration:none;
-	color:#fff;
+	color:#1c92f2;
 	transition: 0.5s all;
  	-webkit-transition: 0.5s all;
  	-moz-transition:  0.5s all;
  	-o-transition:  0.5s all;
 }
 .infogrid-bwn {
-	background: #1F262C;
-	padding: 0.6em 1em;
-	min-height: 50px;
+	background: url(../../image/chsis/d-top.jpg);
+	padding: 1em 1em;
+	min-height: 40px;
 	text-align: center;
 }
 span.gd-clr {
@@ -177,7 +179,6 @@ span.gd-clr {
 .flex-slider{
 	min-height: 300px;
 	padding: 3em 0em;
-	background: url(../../image/chsis/slid-bg.jpg);
 }
 .grid{
 	text-align:left;
@@ -994,14 +995,6 @@ a.comme:hover {
  -moz-transition:  0.5s all;
  -o-transition:  0.5s all;
 }
-.map iframe {
-	width: 100%;
-	height: 300px;
-}
-.map {
-	padding-bottom: 2em;
-	background: url(../../image/chsis/banner.jpg);
-}
 /*--contact end here--*/
 /*--media quries start here--*/
 @media(max-width:1440px){
@@ -1516,9 +1509,7 @@ textarea {
 .service {
 	padding: 1em 0px 1em 0px;
 }
-.logo img {
-	width: 60%;
-}	
+
 .logo {
 	text-align: left;
 }

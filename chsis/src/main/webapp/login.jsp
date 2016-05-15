@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" href="assets/image/favicon.ico">
 
     <title>居民健康信息管理系统</title>
 
@@ -31,8 +31,7 @@
 <div class="container">
     <form class="form-signin" method="POST" action="login">
         <div class="form-signin-heading text-center">
-            <h1 class="sign-title">居民健康信息管理系统登录</h1>
-            <img src="assets/images/logo_login.png" alt=""/>
+            <img src="assets/image/logo_login.png" alt="" style="margin-left:-15px;"/>
         </div>
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="请输入用户名" autofocus name="username" id="username"/>

@@ -115,6 +115,9 @@
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
 			});
+			
+			/* 导航颜色 */
+			$("#navi_introduce").addClass('ser active');
 	</script>
 </body>
 </html>

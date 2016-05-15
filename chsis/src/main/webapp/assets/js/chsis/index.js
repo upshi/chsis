@@ -1,4 +1,7 @@
 $(function(){
+	/*导航颜色*/
+	$("#navi_index").addClass('ser active');
+	
 	new WOW().init();
 	
 	$(".scroll").click(function(event){		

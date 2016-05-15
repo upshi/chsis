@@ -49,7 +49,25 @@
   
   <select id="selectByConditionWithType" resultMap="BaseResultMap" parameterType="top.chsis.model.News" >
     select * from t_news 
+    where 1=1
+    <if test="type!=null">
+		and type = #{type}
+	</if>
+    <if test="state!=null">
+		and state = #{state}
+	</if>
+	
+  </select>
+  
+  <select id="selectByClick" resultMap="BaseResultMap" parameterType="top.chsis.model.News" >
+    select * from t_news 
+    order by click desc limit 3
+  </select>
+  
+  <select id="selectByType" resultMap="BaseResultMap" parameterType="top.chsis.model.News" >
+    select * from t_news 
     where type = #{type}
+    limit 6
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

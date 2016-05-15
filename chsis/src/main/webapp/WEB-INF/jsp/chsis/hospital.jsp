@@ -168,6 +168,9 @@
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
 			});
+			
+			/* 导航颜色 */
+			$("#navi_hospital").addClass('ser active');
 	</script>
 </body>
 </html>

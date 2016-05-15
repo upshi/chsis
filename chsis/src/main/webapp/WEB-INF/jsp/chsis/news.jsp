@@ -12,7 +12,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="shortcut icon" href="assets/image/favicon.ico" type="image/png">
-	<link href="assets/css/chsis/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+	<!-- Bootstrap -->
+	<link href="assets/adminex/css/style.css" rel="stylesheet">
+	<link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 	<link href="assets/css/chsis/animate.css" rel="stylesheet" type="text/css" media="all">
 	<link href="assets/css/chsis/header-footer.css" rel="stylesheet" type="text/css" media="all"/>
 	<link href="assets/css/chsis/news.css" rel="stylesheet" type="text/css" media="all"/>
@@ -30,7 +32,7 @@
 		<ul class="breadcrumb panel">
 			<li><a href="index"> <i class="fa fa-home"></i>社区首页</a></li>
 			<li>
-				<a href="newslist/${news.type }">
+				<a href="newsList?type=${news.type }">
 					<c:if test="${news.type == 0 }">医生寄语</c:if>
                    	<c:if test="${news.type == 1 }">每日健康</c:if>
                    	<c:if test="${news.type == 2 }">医院通知</c:if>
@@ -44,13 +46,13 @@
 		<div id="newstitle" class="title">${news.title }</div>
 		
 		<div id="newsinfo" class="newsinfo">
-			作者:${news.authorName } &nbsp;&nbsp;&nbsp; &nbsp; 
+			作者:${news.authorName } &nbsp;&nbsp; 
 			类型:<c:if test="${news.type == 0 }">医生寄语</c:if>
                	<c:if test="${news.type == 1 }">每日健康</c:if>
                	<c:if test="${news.type == 2 }">医院通知</c:if>
                	<c:if test="${news.type == 3 }">社区公告</c:if>
-               	&nbsp;&nbsp;&nbsp; &nbsp;
-                              发布时间:${news.publishTime }&nbsp;&nbsp;&nbsp; &nbsp;
+               	&nbsp;&nbsp;
+                              发布时间:${news.publishTime }&nbsp;&nbsp;
                               点击量:${news.click }
 		</div>
 		
@@ -69,6 +71,7 @@
 	
 	<script src="assets/js/chsis/jquery.min.js"></script>
 	<script src="assets/js/chsis/wow.min.js"></script>
+	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script type="application/x-javascript"> 
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 	</script>
@@ -82,6 +85,9 @@
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
 			});
+			
+			/* 导航颜色 */
+			$("#navi_news").addClass('ser active');
 	</script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.News;
 import top.chsis.service.INewsService;
+import top.chsis.util.StringUtil;
 
 @Controller
 public class ChsisController {
@@ -21,7 +22,15 @@ public class ChsisController {
 	private INewsService newsService;
 	
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model) {
+		List<News> hospitalNotice = newsService.selectByType(News.TYPE_HOSPITAL_NOTICE);
+		List<News> doctorWords = newsService.selectByType(News.TYPE_DOCTOR_WORDS);
+		List<News> dailyHealth = newsService.selectByType(News.TYPE_DAILY_HEALTH);
+		List<News> announcements = newsService.selectByType(News.TYPE_COMMUNITY_ANNOCEMNET);
+		model.addAttribute("hospitalNotice", hospitalNotice);
+		model.addAttribute("doctorWords", doctorWords);
+		model.addAttribute("dailyHealth", dailyHealth);
+		model.addAttribute("announcements", announcements);
 		return "chsis/index";
 	}
 	
@@ -60,10 +69,13 @@ public class ChsisController {
 		return "chsis/register";
 	}
 	
-	@RequestMapping("/newslist/{type}")
-	public String newslist(@PathVariable("type") String type, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size){
+	@RequestMapping("/newsList")
+	public String newsList(String type, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size){
 		News news = new News();
-		news.setType(Integer.parseInt(type));
+		news.setState(News.STATE_PASS);
+		if(!StringUtil.isNoE(type)) {
+			news.setType(Integer.parseInt(type));
+		}
 		PageInfo<News> pageInfo = newsService.selectByConditionWithType(news, page, size);
 		List<News> newsList = pageInfo.getList();
 		model.addAttribute("type", type);
@@ -71,9 +83,9 @@ public class ChsisController {
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", page);
-		model.addAttribute("url", "news/newslist?");
+		model.addAttribute("url", "newsList?type=" + type + "&");
 		
-		return "chsis/newslist";
+		return "chsis/newsList";
 	}
 	@RequestMapping("/detail/{uuid}")
 	public String detail(@PathVariable("uuid") String uuid, Model model) {

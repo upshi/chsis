@@ -31,7 +31,12 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	public News selectByPrimaryKey(String uuid) {
-		return newsMapper.selectByPrimaryKey(uuid);
+		News select = newsMapper.selectByPrimaryKey(uuid);
+		News news = new News();
+		news.setUuid(uuid);
+		news.setClick(select.getClick() + 1);
+		newsMapper.updateByPrimaryKeySelective(news);
+		return select;
 	}
 
 	public int updateByPrimaryKeySelective(News record) {
@@ -56,6 +61,14 @@ public class NewsServiceImpl implements INewsService {
 		List<News> list = newsMapper.selectByCondition(news);
 		PageInfo<News> pageInfo = new PageInfo<News>(list);
 		return pageInfo;
+	}
+
+	public List<News> selectByType(int type) {
+		return newsMapper.selectByType(type);
+	}
+
+	public List<News> selectByClick() {
+		return newsMapper.selectByClick();
 	}
 
 }

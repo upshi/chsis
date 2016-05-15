@@ -1,5 +1,7 @@
 package top.chsis.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class CheckRecordServiceImpl implements ICheckRecordService {
 	
 	@Autowired
 	private NewsMapper newsMapper;
+	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public int deleteByPrimaryKey(String uuid) {
 		return checkRecordMapper.deleteByPrimaryKey(uuid);
@@ -56,6 +60,7 @@ public class CheckRecordServiceImpl implements ICheckRecordService {
 		news.setChecker(checkRecord.getChecker());
 		if(pass) {
 			news.setState(News.STATE_PASS);
+			news.setPublishTime(sdf.format(new Date()));
 		} else {
 			news.setState(News.STATE_NOT_PASS);
 		}

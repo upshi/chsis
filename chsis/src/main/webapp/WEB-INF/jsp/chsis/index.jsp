@@ -56,60 +56,45 @@
 						<h3>医院通知 <span class="gd-clr">(Hospital Notice)</span> </h3>
 					</div>
 					<div class="info-bott">
-						<img src="assets/image/chsis/c1.jpg" alt=""/>
 						<ul>
-							<li><a href="detail/2123">社区医院举行义诊</a></li>
-							<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
-							<li><a href="#">s大奖是的哈时间段a大家都卡</a></li>
-							<li><a href="#">sa的撒健的上课的话康的哈市大大</a></li>
-							<li><a href="#">sa大会的骄傲的打瞌睡的骄傲</a></li>
-							<li><a href="#">d进度可是看电视剧的大神带敬爱是</a></li>
+							<c:forEach items="${hospitalNotice }" var="news">
+								<li><a href="detail/${news.uuid }">${news.title }</a></li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="newslist/2">READ MORE</a>
+						<a href="newsList?type=2">READ MORE</a>
 					</div>
-					<div class="gd-tl-tip"> </div>
 				</div>
 				<div class="col-md-4 info-grids-cr wow bounceIn" data-wow-delay="0.4s">
 					<div class="info-top">
-						<h3>医生寄语 <span class="gd-clr">(Doctor Caution)</h3></span>
+						<h3>医生寄语 <span class="gd-clr">(Doctor Words)</h3></span>
 					</div>
 					<div class="info-bott">
-						<img src="assets/image/chsis/c2.jpg" alt=""/>
 					    <ul>
-							<li><a href="#">sd你好多喝水接电话大家的挥洒</a></li>
-							<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
-							<li><a href="#">s大奖是的哈时间段a大家都卡</a></li>
-							<li><a href="#">sa的撒健的上课的话康的哈市大大</a></li>
-							<li><a href="#">sa大会的骄傲的打瞌睡的骄傲</a></li>
-							<li><a href="#">d进度可是看电视剧的大神带敬爱是</a></li>
+							<c:forEach items="${doctorWords }" var="news">
+								<li><a href="detail/${news.uuid }">${news.title }</a></li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="newslist/0">READ MORE</a>
+						<a href="newsList?type=0">READ MORE</a>
 					</div>
-					<div class="gd-tl-tip"> </div>
 				</div>
 				<div class="col-md-4 info-grids-cr wow bounceIn" data-wow-delay="0.4s">
 					<div class="info-top">
-						<h3>每日健康 <span class="gd-clr">(Everyday Health)</h3></span>
+						<h3>每日健康 <span class="gd-clr">(Daily Health)</h3></span>
 					</div>
 					<div class="info-bott">
-						<img src="assets/image/chsis/c3.jpg" alt=""/>
 						<ul>
-							<li><a href="#">sd你好多喝水接电话大家的挥洒</a></li>
-							<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
-							<li><a href="#">s大奖是的哈时间段a大家都卡</a></li>
-							<li><a href="#">sa的撒健的上课的话康的哈市大大</a></li>
-							<li><a href="#">sa大会的骄傲的打瞌睡的骄傲</a></li>
-							<li><a href="#">d进度可是看电视剧的大神带敬爱是</a></li>
+							<c:forEach items="${dailyHealth }" var="news">
+								<li><a href="detail/${news.uuid }">${news.title }</a></li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="newslist/1">READ MORE</a>
+						<a href="newsList?type=1">READ MORE</a>
 					</div>
-					<div class="gd-tl-tip"> </div>
 				</div>
 			  <div class="clearfix"> </div>
 			</div>
@@ -119,103 +104,27 @@
 	
 	<!--movergrid start here-->
 	<div class="flex-slider wow bounceInLeft" data-wow-delay="0.4s">
-		<div class="container">
-		<ul id="flexiselDemo4">
-					<li>
-					    <div class="grid">
-							<h3>热点新闻1</h3>
-									<div class="mov-bwn">
-										<a href="#">03-31-2016</a>
-									</div>
-									<p>这个是点击率很高的新闻哦....</p>
-							</div>
-					</li>
-					<li>
-					    <div class="grid">
-							<h3>热点新闻2</h3>
-									<div class="mov-bwn">
-										<a href="#">04-01-2016</a>
-									</div>
-									<p>这个是点击率很高的新闻哦....</p>
-							</div>
-					</li>
-					<li>
-					   <div class="grid">
-							<h3>热点新闻3</h3>
-									<div class="mov-bwn">
-										<a href="#">04-02-2016</a>
-									</div>
-									<p>这个是点击率很高的新闻哦....</p>
-							</div>
-					</li>
-		</ul>
+		<div class="wow bounceInLeft star-department" data-wow-delay="0.6s">
+			<span class="h3">社区公告<span class="wrapText">(Community Announcement)</span></span>
 		</div>
-		
-	
+		<div class="container">
+			<ul id="flexiselDemo4">
+				<c:forEach items="${announcements }" var="news">
+					<li>
+					    <div class="grid">
+							<a href="detail/${news.uuid }">
+								<h3>${news.title }</h3>
+								<div class="mov-bwn">
+									<a href="">${news.publishTime }</a>
+								</div>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 	<!--movegrid end here-->
-	
-	<!--department-grid start here-->
-	<div class="department-grid wow bounce" data-wow-delay="0.1s">
-		<div class="wow bounceInLeft star-department" data-wow-delay="0.6s">
-			<span class="h3">明星科室<span class="wrapText">(Star Department)</span></span>
-		</div>
-		<div class="container">
-			<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-				<div class="department-top">
-					<h4>外科 <span class="gd-clr">(Surgery)</span> </h4>
-				</div>
-				<div class="department-bott">
-					<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
-					<div class="wrapper">
-						<div class="text"> 
-							<h4>外科是以手术切除、修补为主要治病手段的专业科室。分类：创伤，感染，肿瘤，畸形和功能障碍。</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-				<div class="department-top">
-					<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
-				</div>
-				<div class="department-bott">
-					<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
-					<div class="wrapper">
-						<div class="text">
-							<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-				<div class="department-top">
-					<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
-				</div>
-				<div class="department-bott">
-					<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
-					<div class="wrapper">
-						<div class="text">
-							<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 wow bounceIn" data-wow-delay="0.4s">
-				<div class="department-top">
-					<h4>内科 <span class="gd-clr">(Internal Medicine)</span> </h4>
-				</div>
-				<div class="department-bott">
-					<img src="assets/image/chsis/c1.jpg" alt="" style="width:230px;height:230px;"/>
-					<div class="wrapper">
-						<div class="text">
-							<h4>包括呼吸内科，消化内科，心血管内科，神经内科，肿瘤科，内分泌科，血液内科，传染病科，小儿科等等。</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--department-bott end here-->
 	
 	<!--footer start here-->
 	<%@ include file="/include/chsis/footer.jsp"%>
