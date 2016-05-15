@@ -1,11 +1,11 @@
-package top.chsis.dao;
+package top.chsis.service;
 
 import java.util.List;
 
 import top.chsis.model.CheckRecord;
 
-public interface CheckRecordMapper {
-    int deleteByPrimaryKey(String uuid);
+public interface ICheckRecordService {
+	int deleteByPrimaryKey(String uuid);
 
     int insert(CheckRecord record);
 

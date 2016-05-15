@@ -38,7 +38,7 @@ a {
 }
 .news_list {
     margin: 0 auto;
-    min-height:300px;
+    min-height:330px;
 }
 .news_list ul {
     list-style: outside none none;

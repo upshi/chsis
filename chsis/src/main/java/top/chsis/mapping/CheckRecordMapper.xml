@@ -20,6 +20,13 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByNewsUuid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_checkrecord
+    where newsUuid = #{newsUuid,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_checkrecord
     where uuid = #{uuid,jdbcType=VARCHAR}

@@ -35,14 +35,14 @@
 		<!--存放新闻列表的层开始-->
 		<div class="news_list">
 			<ul id="list">
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">jjdsadasd</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
 			</ul>
 		</div>
 		<!--存放新闻列表的层结束-->

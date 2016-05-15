@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import top.chsis.model.CheckRecord;
 import top.chsis.model.Doctor;
 import top.chsis.model.Manager;
 import top.chsis.model.News;
+import top.chsis.service.ICheckRecordService;
 import top.chsis.service.IDoctorService;
 import top.chsis.service.IManagerService;
 import top.chsis.service.INewsService;
@@ -37,6 +39,9 @@ public class NewsController {
 	
 	@Autowired
 	private INewsService newsService;
+	
+	@Autowired
+	private ICheckRecordService checkRecordService;
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -160,10 +165,45 @@ public class NewsController {
 	@RequestMapping("/detail/{uuid}")
 	public String detail(@PathVariable("uuid") String uuid, Model model) {
 		News news = newsService.selectByPrimaryKey(uuid);
+		List<CheckRecord> checkRecords = checkRecordService.selectByNewsUuid(uuid);
 		if(news == null) {
 			return "redirect:/index";
 		}
+		if(checkRecords != null) {
+			model.addAttribute("checkRecords", checkRecords);
+		}
 		model.addAttribute("news", news);
-		return "chsis/news";
+		return "news/newsDetail";
+	}
+	
+	@RequestMapping("/toEdit/{uuid}")
+	public String toEdit(@PathVariable("uuid") String uuid, Model model) {
+		News news = null;
+		news = newsService.selectByPrimaryKey(uuid);
+		model.addAttribute("news", news);
+		return "news/editNews";
+	}
+	
+	@RequestMapping("/edit")
+	@ResponseBody
+	public Map<String, Object> edit(News news) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		news.setState(News.STATE_CHECKING);
+		int update = newsService.updateByPrimaryKeySelective(news);
+		if(update == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
+	
+	@RequestMapping("/delete/{uuid}")
+	@ResponseBody
+	public Map<String, Object> resourceDelte(@PathVariable(value = "uuid") String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		newsService.deleteByPrimaryKey(uuid);
+		map.put("result", "success");
+		return map;
 	}
 }

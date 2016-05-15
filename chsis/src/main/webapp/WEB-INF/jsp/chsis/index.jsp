@@ -53,12 +53,12 @@
 			<div class="info-grid-main">
 				<div class="col-md-4 info-grids-cr wow bounceIn" data-wow-delay="0.4s">
 					<div class="info-top">
-						<h3>重要通知 <span class="gd-clr">(Important Notice)</span> </h3>
+						<h3>医院通知 <span class="gd-clr">(Hospital Notice)</span> </h3>
 					</div>
 					<div class="info-bott">
 						<img src="assets/image/chsis/c1.jpg" alt=""/>
 						<ul>
-							<li><a href="news/detail/2123">社区医院举行义诊</a></li>
+							<li><a href="detail/2123">社区医院举行义诊</a></li>
 							<li><a href="#">sas厚度啥的哈酒的大神带把手</a></li>
 							<li><a href="#">s大奖是的哈时间段a大家都卡</a></li>
 							<li><a href="#">sa的撒健的上课的话康的哈市大大</a></li>
@@ -67,7 +67,7 @@
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="chsis/newslist.jsp">READ MORE</a>
+						<a href="newslist">READ MORE</a>
 					</div>
 					<div class="gd-tl-tip"> </div>
 				</div>

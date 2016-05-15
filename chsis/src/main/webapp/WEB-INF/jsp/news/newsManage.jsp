@@ -34,11 +34,16 @@
 			
 			<!--body wrapper start-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="news/manage">新闻管理</a></li>
+					<li class="active">新闻列表</li>
+				</ul>
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							新闻信息 
+							新闻列表
 							<span class="tools pull-right"> 
 								<button class="btn btn-warning pull-left btn-toPublishNews">发布新闻</button> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
@@ -51,10 +56,9 @@
 		                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
 	                    	<select name="state" class="form-control">
 	                    		<option value="">新闻状态</option>
-	                    		<option value="0">已提交</option>
-	                    		<option value="1">审核中</option>
+	                    		<option value="0">审核中</option>
+	                    		<option value="1">审核未通过</option>
 	                    		<option value="2">审核通过</option>
-	                    		<option value="3">审核未通过</option>
 	                    	</select>
 		                    <button class="btn btn-info">搜索</button>
 	                    </form><br/>
@@ -83,8 +87,21 @@
 			                        	<c:if test="${news.state == 2 }">审核通过</c:if>
 			                        </td>
 			                        <td>
-			                        	<a href="" class="btn btn-primary btn-sm">详情</a>
-			                        </td>
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												操作 <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" style="min-width: 60px">
+												<li><a href="news/detail/${news.uuid }">详情</a></li>
+												<c:if test="${news.state == 1 }">
+													<li><a href="news/toEdit/${news.uuid }">编辑</a></li>
+												</c:if>
+												<c:if test="${news.state != 2 }">
+													<li><a onclick="deleteNews('${news.uuid}')">删除</a></li>
+												</c:if>
+											</ul>
+										</div>
+									</td>
 			                    </tr>
 		                    </c:forEach>
 		                </table>
