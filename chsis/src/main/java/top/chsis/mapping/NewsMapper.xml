@@ -47,6 +47,11 @@
 	</if>
   </select>
   
+  <select id="selectByConditionWithType" resultMap="BaseResultMap" parameterType="top.chsis.model.News" >
+    select * from t_news 
+    where type = #{type}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_news
     where uuid = #{uuid,jdbcType=VARCHAR}

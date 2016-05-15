@@ -27,22 +27,21 @@
 	<div class="main">
 		<!-- 展示当前所在位置的层开始 -->
 		<ul class="breadcrumb panel">
-			<li><a href="#"> <i class="fa fa-home"></i>社区首页</a></li>
-			<li><a href="#">Dashboard</a></li>
-			<li class="active">Current page</li>
+			<li><a href="index"> <i class="fa fa-home"></i>社区首页</a></li>
+			<li class="active">
+				<c:if test="${type == 0 }">医生寄语</c:if>
+               	<c:if test="${type == 1 }">每日健康</c:if>
+               	<c:if test="${type == 2 }">医院通知</c:if>
+               	<c:if test="${type == 3 }">社区公告</c:if>
+			</li>
 		</ul>
 		<!-- 展示当前所在位置的层结束 -->
 		<!--存放新闻列表的层开始-->
 		<div class="news_list">
 			<ul id="list">
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
-				<li><a href="" target="_blank">社区医院义诊</a><span>20150512</span></li>	
+				<c:forEach items="${newsList }" var="news">
+					<li><a href="detail/${news.uuid }" target="_blank">${news.title }</a><span>${news.publishTime }</span></li>	
+				</c:forEach>
 			</ul>
 		</div>
 		<!--存放新闻列表的层结束-->

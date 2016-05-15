@@ -50,4 +50,12 @@ public class NewsServiceImpl implements INewsService {
 		return pageInfo;
 	}
 
+	public PageInfo<News> selectByConditionWithType(News news, int page, int size) {
+		PageHelper.startPage(page, size);
+		PageHelper.orderBy("publishTime desc");
+		List<News> list = newsMapper.selectByCondition(news);
+		PageInfo<News> pageInfo = new PageInfo<News>(list);
+		return pageInfo;
+	}
+
 }

@@ -28,9 +28,16 @@
 	
 		<!-- 展示当前所在位置的层开始 -->
 		<ul class="breadcrumb panel">
-			<li><a href="#"> <i class="fa fa-home"></i>社区首页</a></li>
-			<li><a href="#">Dashboard</a></li>
-			<li class="active">Current page</li>
+			<li><a href="index"> <i class="fa fa-home"></i>社区首页</a></li>
+			<li>
+				<a href="newslist/${news.type }">
+					<c:if test="${news.type == 0 }">医生寄语</c:if>
+                   	<c:if test="${news.type == 1 }">每日健康</c:if>
+                   	<c:if test="${news.type == 2 }">医院通知</c:if>
+                   	<c:if test="${news.type == 3 }">社区公告</c:if>
+				</a>
+			</li>
+			<li class="active">新闻详情</li>
 		</ul>
 		<!-- 展示当前所在位置的层结束 -->
 		

@@ -46,7 +46,7 @@ public class NewsController {
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	@RequestMapping("/manage")
-	public String doctorManage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size){
+	public String manage(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size){
 		News news = new News();
 		//返回页面,默认是新闻提交者看到的页面
 		String returnPage = "news/newsManage";
@@ -73,7 +73,7 @@ public class NewsController {
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
 		model.addAttribute("pageIndex", page);
-		model.addAttribute("url", "news/doctorManage?");
+		model.addAttribute("url", "news/manage?");
 		
 		return returnPage;
 	}

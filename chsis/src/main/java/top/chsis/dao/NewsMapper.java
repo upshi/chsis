@@ -2,6 +2,8 @@ package top.chsis.dao;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import top.chsis.model.News;
 
 public interface NewsMapper {
@@ -20,4 +22,6 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
 
 	List<News> selectByCondition(News news);
+	
+	PageInfo<News> selectByConditionWithType(News news, int page, int size);
 }

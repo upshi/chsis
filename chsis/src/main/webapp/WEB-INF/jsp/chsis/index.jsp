@@ -67,7 +67,7 @@
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="newslist">READ MORE</a>
+						<a href="newslist/2">READ MORE</a>
 					</div>
 					<div class="gd-tl-tip"> </div>
 				</div>
@@ -87,7 +87,7 @@
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="#">READ MORE</a>
+						<a href="newslist/0">READ MORE</a>
 					</div>
 					<div class="gd-tl-tip"> </div>
 				</div>
@@ -107,7 +107,7 @@
 						</ul>
 					</div>
 					<div class="infogrid-bwn">
-						<a href="#">READ MORE</a>
+						<a href="newslist/1">READ MORE</a>
 					</div>
 					<div class="gd-tl-tip"> </div>
 				</div>

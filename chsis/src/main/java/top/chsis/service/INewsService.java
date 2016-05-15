@@ -19,4 +19,6 @@ public interface INewsService {
 
 	PageInfo<News> selectByCondition(News news, int page, int size);
 
+	PageInfo<News> selectByConditionWithType(News news, int page, int size);
+
 }
