@@ -12,7 +12,7 @@ $(function() {
 function onShowResident(uuid) {
 	//异步获取家庭成员信息
 	$.ajax({
-			url : "family/get/" + uuid ,
+			url : "resident/get/" + uuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,

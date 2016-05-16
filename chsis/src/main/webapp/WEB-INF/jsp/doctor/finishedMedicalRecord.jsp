@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -51,18 +52,20 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="medicalRecord/search">
-							<input name="state" class="form-control" type="hidden" value="1">
-		                    <input name="name" class="form-control" type="text" placeholder="请输入病人姓名">
-		                    <input name="idNo" class="form-control" type="text" placeholder="请输入病人身份证号">
-		                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
-	                    	<select name="sex" class="form-control">
-	                    		<option value="">性别</option>
-	                    		<option value="0">男</option>
-	                    		<option value="1">女</option>
-	                    	</select>
-	                    	<button class="btn btn-info">搜索</button>
-                		</form>
+						<sec:authorize access="hasRole('ROLE_4e16aa550a39474a86be01e9a1e26c03')">
+							<form class="form-inline" action="medicalRecord/search">
+								<input name="state" class="form-control" type="hidden" value="1">
+			                    <input name="name" class="form-control" type="text" placeholder="请输入病人姓名">
+			                    <input name="idNo" class="form-control" type="text" placeholder="请输入病人身份证号">
+			                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
+		                    	<select name="sex" class="form-control">
+		                    		<option value="">性别</option>
+		                    		<option value="0">男</option>
+		                    		<option value="1">女</option>
+		                    	</select>
+		                    	<button class="btn btn-info">搜索</button>
+	                		</form>
+						</sec:authorize>
 		                <div class="blank"></div>
 		                <table class="table table-bordered table-responsive table-hover">
 		                    <tr class="info">
@@ -85,7 +88,11 @@
 			                        <td>${medicalRecord.time }</td>
 			                        <td>${medicalRecord.disease }</td>
 			                        <td><span data-toggle="tooltip" data-placement="top" title="${medicalRecord.result }">查看病情描述</span></td>
-			                        <td><a class="btn btn-warning btn-sm" href="medicalRecord/finishedMedicalRecordDetail/${medicalRecord.uuid }">详情</a></td>
+			                        <td>
+			                        	<sec:authorize access="hasRole('ROLE_6eafda2b9d9e4f4e9ab0549b8986d3bb')">
+				                        	<a class="btn btn-warning btn-sm" href="medicalRecord/finishedMedicalRecordDetail/${medicalRecord.uuid }">详情</a>
+										</sec:authorize>
+			                        </td>
 			                    </tr>
 		                    </c:forEach>
 		                </table>

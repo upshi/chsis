@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -41,7 +42,9 @@
 						<h3 class="panel-title">
 							医院信息 
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-add-hospital">添加医院</button> 
+								<sec:authorize access="hasRole('ROLE_0f00e77ace3f4470b1a8b92513632b67')">	
+									<button class="btn btn-warning pull-left btn-add-hospital">添加医院</button> 
+								</sec:authorize>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -60,8 +63,12 @@
 									<td>${hospital.name }</td>
 									<td>${hospital.address }</td>
 									<td>
-										<button class="btn btn-danger btn-sm" onclick="deleteHospital('${hospital.uuid}')">删除</button> 
-										<a href="hospital/detail/${hospital.uuid}" class="btn btn-primary btn-sm">详情</a>
+										<sec:authorize access="hasRole('ROLE_0a4991bf50ec4330bb552300be758258')">	
+											<button class="btn btn-danger btn-sm" onclick="deleteHospital('${hospital.uuid}')">删除</button> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_2ef14fdc9a6f44ba9675d4822108d1d3')">	
+											<a href="hospital/detail/${hospital.uuid}" class="btn btn-primary btn-sm">详情</a>
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>

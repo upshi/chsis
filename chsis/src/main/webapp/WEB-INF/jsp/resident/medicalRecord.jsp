@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -50,16 +51,18 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="resident/searchMedicalRecord">
-		                    <input name="disease" class="form-control" type="text" placeholder="请输入疾病名称">
-		                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
-		                    <select name="state" class="form-control">
-	                    		<option value="">就诊状态</option>
-	                    		<option value="0">未完成就诊</option>
-	                    		<option value="1">已完成就诊</option>
-	                    	</select>
-	                    	<button class="btn btn-info">搜索</button>
-                		</form>
+						<sec:authorize access="hasRole('ROLE_24cb1f69f5ad4ee2911943050eea8526')">
+							<form class="form-inline" action="resident/searchMedicalRecord">
+			                    <input name="disease" class="form-control" type="text" placeholder="请输入疾病名称">
+			                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
+			                    <select name="state" class="form-control">
+		                    		<option value="">就诊状态</option>
+		                    		<option value="0">未完成就诊</option>
+		                    		<option value="1">已完成就诊</option>
+		                    	</select>
+		                    	<button class="btn btn-info">搜索</button>
+	                		</form>
+						</sec:authorize>
 		                <div class="blank"></div>
 		                <table class="table table-bordered table-responsive table-hover">
 		                    <tr class="info">
@@ -80,7 +83,11 @@
 			                        	<c:if test="${medicalRecord.state==1 }"><span style="color:green;">已完成就诊</span></c:if>
 			                        </td>
 			                        <td><span data-toggle="tooltip" data-placement="top" title="${medicalRecord.result }">查看病情描述</span></td>
-			                        <td><a class="btn btn-warning btn-sm" href="resident/medicalRecordDetail/${medicalRecord.uuid }">详情</a></td>
+			                        <td>
+			                        	<sec:authorize access="hasRole('ROLE_c461fbe667074d8ab1e517a48de71546')">
+				                        	<a class="btn btn-warning btn-sm" href="resident/medicalRecordDetail/${medicalRecord.uuid }">详情</a>
+										</sec:authorize>
+			                        </td>
 			                    </tr>
 		                    </c:forEach>
 		                </table>

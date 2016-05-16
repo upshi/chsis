@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -48,8 +49,12 @@
 							新闻详情
 							<span class="tools pull-right"> 
 								<c:if test="${news.state == 0 }">
-									<button class="btn btn-default pull-left btn-pass" newsUuid="${news.uuid }" style="margin-right:5px;">审核通过</button>
-									<button class="btn btn-warning pull-left btn-notPass" newsUuid="${news.uuid }">审核不通过</button>
+									<sec:authorize access="hasRole('ROLE_3141bd0792f04d88b4ccc1a6619c6d25')">
+										<button class="btn btn-default pull-left btn-pass" newsUuid="${news.uuid }" style="margin-right:5px;">审核通过</button>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_05e78782d11b4e44b5ab9ea5a813c029')">
+										<button class="btn btn-warning pull-left btn-notPass" newsUuid="${news.uuid }">审核不通过</button>
+									</sec:authorize>
 								</c:if>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>

@@ -42,9 +42,9 @@ public class DiseaseHistoryController {
 		return map;
 	}
 	
-	@RequestMapping("/getDiseaseHistoryByUuid/{uuid}")
+	@RequestMapping("/diseaseHistoryDetail/{uuid}")
 	@ResponseBody
-	public Map<String, Object> getDiseaseHistoryByUuid(@PathVariable String uuid) {
+	public Map<String, Object> diseaseHistoryDetail(@PathVariable String uuid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(StringUtil.isNoE(uuid)) {
 			map.put("result", "failure");
@@ -69,7 +69,5 @@ public class DiseaseHistoryController {
 		diseaseHistoryService.insert(diseaseHistory);
 		return "redirect:/resident/healthInfo";
 	}
-	
-	
 	
 }

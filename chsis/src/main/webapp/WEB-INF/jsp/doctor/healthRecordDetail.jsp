@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -49,7 +50,9 @@
 						<h3 class="panel-title">
 							体检记录
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-edit">编辑</button>
+								<sec:authorize access="hasRole('ROLE_18302a123c6e4075a64d368920fd69fc')">
+									<button class="btn btn-warning pull-left btn-edit">编辑</button>
+								</sec:authorize>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>

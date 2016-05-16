@@ -41,6 +41,7 @@ public class HealthRecordController {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+	//新建体检记录
 	@RequestMapping("/create/{patientUuid}")
 	public String create(@PathVariable String patientUuid, Model model) {
 		Resident patient = residentService.selectByPrimaryKey(patientUuid);

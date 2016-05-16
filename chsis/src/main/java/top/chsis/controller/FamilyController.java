@@ -104,40 +104,12 @@ public class FamilyController {
 		return "admin/familyDetail";
 	}
 	
-	@RequestMapping("/get/{uuid}")
-	@ResponseBody
-	public Map<String, Object> get(@PathVariable String uuid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(uuid)) {
-			map.put("result", "failure");
-		} else {
-			Resident resident = residentService.selectByPrimaryKey(uuid);
-			if(resident != null) {
-				map.put("result", "success");
-				map.put("resident", resident);
-			} else {
-				map.put("result", "failure");
-			}
-		}
-		return map;
-	}
-	
 	@RequestMapping("/editFamily")
 	public String editFamily(Family family, String communityUuid){
-		System.out.println(communityUuid);
 		Community community = new Community(communityUuid);
 		family.setCommunity(community);
 		familyService.updateByPrimaryKeySelective(family);
 		return "redirect:/family/familyInfo";
-	}
-	
-	@RequestMapping("/addFamily")
-	public String addFamily(Family family, String communityUuid, Model model) {
-		Community community = communityService.selectByPrimaryKey(communityUuid);
-		family.setUuid(StringUtil.getUUID());
-		family.setCommunity(community);
-		familyService.insert(family);
-		return "redirect:/family/detail/" + family.getUuid();
 	}
 	
 	@RequestMapping("/checkNumberUnique/{number}")

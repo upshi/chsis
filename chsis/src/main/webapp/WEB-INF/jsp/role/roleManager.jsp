@@ -45,24 +45,28 @@
 						<!-- 员工查询 -->
 						<div class="row">
 							<br>
-							<div class="col-lg-2" >
-								<a href="role/toAddRole" class="btn btn-warning" type="button">+添加新角色</a>
-							</div>
-							<form class="form-inline" action="role/search">
-								<div class="col-lg-2">
-									<div class="form-group">
-										<input type="text" class="form-control" name="cName" placeholder="请输入中文角色名">&nbsp;&nbsp;&nbsp;&nbsp;
+							<sec:authorize access="hasRole('ROLE_a1e00ec329a74bfeb6bbc719d718f911')">
+								<div class="col-lg-2" >
+									<a href="role/toAddRole" class="btn btn-warning" type="button">+添加新角色</a>
+								</div>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_5aef36ca7e8143f7938c41a35ce004c6')">
+								<form class="form-inline" action="role/search">
+									<div class="col-lg-2">
+										<div class="form-group">
+											<input type="text" class="form-control" name="cName" placeholder="请输入中文角色名">&nbsp;&nbsp;&nbsp;&nbsp;
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-2">
-									<div class="form-group">
-										<input type="text" class="form-control" name="eName" placeholder="请输入英文角色名">&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="col-lg-2">
+										<div class="form-group">
+											<input type="text" class="form-control" name="eName" placeholder="请输入英文角色名">&nbsp;&nbsp;&nbsp;&nbsp;
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-2">
-									<button type="submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;搜 &nbsp; 索&nbsp;&nbsp;&nbsp;</button>
-								</div>
-							</form>
+									<div class="col-lg-2">
+										<button type="submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;搜 &nbsp; 索&nbsp;&nbsp;&nbsp;</button>
+									</div>
+								</form>
+							</sec:authorize>
 						</div>
 	
 						<div class="row">
@@ -90,10 +94,18 @@
 																操作 <span class="caret"></span>
 															</button>
 															<ul class="dropdown-menu" style="min-width: 60px">
-																<li><a href="role/detail/${role.uuid }">详情</a></li>
-																<li><a href="role/toUpdate/${role.uuid }">编辑</a></li>
-																<li><a href="role/toAllocateResource/${role.uuid }">分配资源</a></li>
-																<li><a onclick="deleteRole('${role.uuid}')">删除</a></li>
+																<sec:authorize access="hasRole('ROLE_bf5f545551724ce9b75e33b8cdd6348b')">
+																	<li><a href="role/detail/${role.uuid }">详情</a></li>
+																</sec:authorize>
+																<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
+																	<li><a href="role/toUpdate/${role.uuid }">编辑</a></li>
+																</sec:authorize>
+																<sec:authorize access="hasRole('ROLE_5888fb0706114603b6a18e052c39c8c3')">
+																	<li><a href="role/toAllocateResource/${role.uuid }">分配资源</a></li>
+																</sec:authorize>
+																<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
+																	<li><a onclick="deleteRole('${role.uuid}')">删除</a></li>
+																</sec:authorize>
 															</ul>
 														</div>
 													</td>

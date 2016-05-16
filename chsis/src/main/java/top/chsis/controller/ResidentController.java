@@ -213,6 +213,7 @@ public class ResidentController {
 			return "redirect:/resident/baseInfo";
 		}	
 	}
+	
 	@RequestMapping("/complete")
 	public String completeResident(Resident resident,String leftEyesight, String rightEyesight, Model model) {
 		//接收前台的leftEyesight，rightEyesight，拼接成完整字符串eyesight，传给后台
@@ -397,7 +398,7 @@ public class ResidentController {
 		return map;
 	}
 	
-	//检查用户名是否重复
+	//检查身份证号是否重复
 	@RequestMapping("/checkIdNoUnique/{idNo}")
 	@ResponseBody
 	public Map<String, Object> checkIdNoUnique(@PathVariable String idNo) {

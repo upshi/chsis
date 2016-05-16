@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -68,7 +69,9 @@
 								<c:if test="${resident.bloodType==3 }">O-型</c:if>
 								<c:if test="${resident.bloodType==null }">未填 </c:if>
 							</span>
-							<button class="btn btn-success btn-edit-commonHealthInfo">修改</button>
+							<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">
+								<button class="btn btn-success btn-edit-commonHealthInfo">修改</button>
+							</sec:authorize>
 						</div>
 					</div>
 				</div>
@@ -105,12 +108,16 @@
 									<td>${diseaseHistory.startTime }</td>
 									<td>${diseaseHistory.endTime }</td>
 									<td>
-										<button class="btn btn-primary btn-sm btn-diseaseHistoryDetail" uuid="${diseaseHistory.uuid }">详情</button> 
+										<sec:authorize access="hasRole('ROLE_d12fc2d7bc534a628aff3e3ddf5102fd')">
+											<button class="btn btn-primary btn-sm btn-diseaseHistoryDetail" uuid="${diseaseHistory.uuid }">详情</button> 
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>	
 						</table>
-						<button class="btn btn-warning btn-add-diseaseHistory">添加疾病史</button>
+						<sec:authorize access="hasRole('ROLE_aec14cab2bba410785fcf7ee9af198bc')">
+							<button class="btn btn-warning btn-add-diseaseHistory">添加疾病史</button>
+						</sec:authorize>
 					</div>
 				</div>
 				<!-- panel end -->

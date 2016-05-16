@@ -65,7 +65,9 @@
 								</div>
 								<div class="panel-body">
 									<label class="col-sm-5 control-label"></label>
-									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+									<sec:authorize access="hasRole('ROLE_a88629b29e904acb92f01c4430c04028')">	
+										<button class="btn btn-primary" type="submit" id="submit">保存</button>
+									</sec:authorize>
 								</div>
 							</form>
 						</div>

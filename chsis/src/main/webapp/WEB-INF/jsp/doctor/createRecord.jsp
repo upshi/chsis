@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -53,9 +54,15 @@
 								</div>	
 							</div>
 							<button id="btn-clear" class="btn btn-default">清空</button>
-							<button class="btn btn-danger btn-createMedicalRecord">新建就诊记录</button>
-							<button class="btn btn-success btn-createHealthRecord">新建体检记录</button>
-							<button class="btn btn-warning btn-createImmuneRecord">新建预防免疫记录</button>
+							<sec:authorize access="hasRole('ROLE_f1ac35ed65c04140b5d4b50410f2fffa')">
+								<button class="btn btn-danger btn-createMedicalRecord">新建就诊记录</button>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_0bafaf6024924aa18c5bcbe728c75b02')">
+								<button class="btn btn-success btn-createHealthRecord">新建体检记录</button>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_e88511afa07d41df8d6e62d546f4f055')">
+								<button class="btn btn-warning btn-createImmuneRecord">新建预防免疫记录</button>
+							</sec:authorize>
 						</div>
 						<div class="blank"></div>
 						<div id="detail" class="col-sm-12" hidden>

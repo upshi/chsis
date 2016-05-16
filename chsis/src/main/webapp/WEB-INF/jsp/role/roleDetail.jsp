@@ -58,17 +58,25 @@
 								<div class="row">
 									<c:if test="${id.index+1 == 1 }"><label class="col-sm-2 text-right">资源列表:</label></c:if>
 									<c:if test="${id.index+1 != 1 }"><label class="col-sm-2 text-right"></label></c:if>
-									<label class="col-sm-4">${roleResource.resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${roleResource.resource.url }</label><br>
+									<label class="col-sm-8">${roleResource.resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${roleResource.resource.url }</label><br>
 								</div>
 							</c:forEach>
 					
 							<div class="row">
 								<br>
 								<div class="col-sm-offset-3  col-sm-20">
-									<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
+									<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
+										<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_5888fb0706114603b6a18e052c39c8c3')">
+										<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
+										<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">
+										<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
+									</sec:authorize>
 								</div>
 							</div>
 						</div>

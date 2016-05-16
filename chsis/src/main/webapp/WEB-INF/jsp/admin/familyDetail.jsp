@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -116,9 +117,15 @@
 									<td>${resident.idNo }</td>
 									<td>${resident.phone }</td>
 									<td>
-										<button class="btn btn-danger btn-sm deleteResident" onclick="deleteResident('${resident.uuid}')">删除</button> 
-										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
-										<button class="btn btn-info btn-sm btn-edit-resident" uuid="${resident.uuid }">修改</button>
+										<sec:authorize access="hasRole('ROLE_2b5cfbe32aff47eaaa93074950c6b75b')">	
+											<button class="btn btn-danger btn-sm deleteResident" onclick="deleteResident('${resident.uuid}')">删除</button> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_ef36fad1e3774a11b233067b3bf5f6a1')">	
+											<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">	
+											<button class="btn btn-info btn-sm btn-edit-resident" uuid="${resident.uuid }">修改</button>
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>
@@ -356,8 +363,12 @@
 						</div>
 						<div class="row container">
 							<div class="col-sm-offset-2">
-								<button class="btn btn-info">保存</button>
-								<button class="btn btn-default">取消</button>
+								<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">	
+									<button class="btn btn-info">保存</button>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">	
+									<button class="btn btn-default">取消</button>
+								</sec:authorize>
 							</div>
 						</div>
 					</form>

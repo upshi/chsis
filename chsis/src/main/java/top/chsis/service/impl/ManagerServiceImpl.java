@@ -10,10 +10,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.HospitalManagerMapper;
+import top.chsis.dao.IUserRoleMapper;
 import top.chsis.dao.ManagerMapper;
 import top.chsis.model.HospitalManager;
 import top.chsis.model.Manager;
+import top.chsis.model.Role;
+import top.chsis.model.UserRole;
 import top.chsis.service.IManagerService;
+import top.chsis.util.StringUtil;
 
 @Service("managerService")
 public class ManagerServiceImpl implements IManagerService {
@@ -24,11 +28,21 @@ public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	private HospitalManagerMapper hospitalManagerMapper;
 	
+	@Autowired
+	private IUserRoleMapper userRoleMapper;
+	
 	public int deleteByPrimaryKey(String uuid) {
 		return managerMapper.deleteByPrimaryKey(uuid);
 	}
 
 	public int insert(Manager record) {
+		UserRole ur = new UserRole();
+		ur.setUuid(StringUtil.getUUID());
+		ur.setUserUuid(record.getUuid());
+		Integer type = record.getType();
+		ur.setRole(new Role(String.valueOf(type)));
+		userRoleMapper.insert(ur);
+		
 		return managerMapper.insert(record);
 	}
 
@@ -52,7 +66,13 @@ public class ManagerServiceImpl implements IManagerService {
 		int insert = managerMapper.insert(manager);
 		int insert2 = hospitalManagerMapper.insert(hospitalManager);
 		
-		return insert + insert2;
+		UserRole ur = new UserRole();
+		ur.setUuid(StringUtil.getUUID());
+		ur.setUserUuid(manager.getUuid());
+		ur.setRole(new Role("0"));
+		int insert3 = userRoleMapper.insert(ur);
+		
+		return insert + insert2 + insert3;
 	}
 
 	public Manager selectByUserName(String userName) {

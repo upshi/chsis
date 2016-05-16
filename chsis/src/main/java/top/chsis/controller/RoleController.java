@@ -162,12 +162,7 @@ public class RoleController {
 			return "error";
 		}
 		
-		//取出最新的资源的集合
-		List<RoleResource> roleResourceList = roleResourceService.selectByRoleUuid(role.getUuid());
-		model.addAttribute("role", role);
-		model.addAttribute("roleResourceList", roleResourceList);
-		
-		return "role/roleDetail";
+		return "redirect:/role/detail/" + role.getUuid();
 	}
 	
 	@RequestMapping("/toAllocateResource/{roleUuid}")
@@ -256,12 +251,7 @@ public class RoleController {
 			roleResourceService.deleteBatchByUuid(deleteRoleResourceList);
 		}
 		
-		//取出最新的资源的集合
-		roleResources = roleResourceService.selectByRoleUuid(roleUuid);
-		model.addAttribute("role", role);
-		model.addAttribute("roleResourceList", roleResources);
-		
-		return "role/roleDetail";
+		return "redirect:/role/detail/" + roleUuid;
 	}
 
 	

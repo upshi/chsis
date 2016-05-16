@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -41,18 +42,22 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							科室管理
-							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-add-department">添加科室</button>
-								<a class="fa fa-chevron-down" href="javascript:;"></a>
-							</span>
+							<sec:authorize access="hasRole('ROLE_790d5474983c47e08cd7fabb35dbd20c')">
+								<span class="tools pull-right"> 
+									<button class="btn btn-warning pull-left btn-add-department">添加科室</button>
+									<a class="fa fa-chevron-down" href="javascript:;"></a>
+								</span>
+							</sec:authorize>
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="department/search">
-							<input class="form-control" name="number" type="text" placeholder="请输入科室编号"> 
-							<input class="form-control" name="name" type="text" placeholder="请输入科室名称">
-							<button class="btn btn-info">搜索</button>
-						</form>
+						<sec:authorize access="hasRole('ROLE_5b71d03556c946e09acd9c7416d9b9d9')">
+							<form class="form-inline" action="department/search">
+								<input class="form-control" name="number" type="text" placeholder="请输入科室编号"> 
+								<input class="form-control" name="name" type="text" placeholder="请输入科室名称">
+								<button class="btn btn-info">搜索</button>
+							</form>
+						</sec:authorize>
 						<div class="blank"></div>
 						<table class="table table-bordered table-responsive table-hover">
 							<tr>
@@ -70,8 +75,12 @@
 									<td>${department.name }</td>
 									<td>${department.hospital.name }</td>
 									<td>
-										<buttun class="btn btn-danger btn-sm" onclick="deleteDepartment('${department.uuid}','${url }')">删除</buttun> 
-										<a href="department/detail/${department.uuid }" class="btn btn-primary btn-sm">详情</a>
+										<sec:authorize access="hasRole('ROLE_61482f1e49f0491eab45e6af01d09fd9')">
+											<buttun class="btn btn-danger btn-sm" onclick="deleteDepartment('${department.uuid}','${url }')">删除</buttun> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_58b78211eb6b40cc85ee7eab5f84335a')">
+											<a href="department/detail/${department.uuid }" class="btn btn-primary btn-sm">详情</a>
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>

@@ -12,11 +12,15 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.dao.DoctorMapper;
+import top.chsis.dao.IUserRoleMapper;
 import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.Doctor;
 import top.chsis.model.MedicalRecord;
+import top.chsis.model.Role;
 import top.chsis.model.UploadObject;
+import top.chsis.model.UserRole;
 import top.chsis.service.IDoctorService;
+import top.chsis.util.StringUtil;
 import top.chsis.util.UploadUtil;
 import top.chsis.vo.DoctorVO;
 
@@ -27,6 +31,9 @@ public class DoctorServiceImpl implements IDoctorService {
 	
 	@Autowired
 	private MedicalRecordMapper medicalRecordMapper;
+	
+	@Autowired
+	private IUserRoleMapper userRoleMapper;
 	
 	public int deleteByPrimaryKey(String uuid) {
 		List<MedicalRecord> medicalRecords = medicalRecordMapper.selectMedicalRecordsByDoctorUUID(uuid);
@@ -50,6 +57,13 @@ public class DoctorServiceImpl implements IDoctorService {
 		if(code != 0) {
 			throw new Exception("文件上传失败");
 		}
+		
+		UserRole ur = new UserRole();
+		ur.setUuid(StringUtil.getUUID());
+		ur.setUserUuid(doctor.getUuid());
+		ur.setRole(new Role("3"));
+		userRoleMapper.insert(ur);
+		
 		return result;
 	}
 

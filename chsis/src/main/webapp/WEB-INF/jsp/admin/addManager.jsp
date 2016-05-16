@@ -106,7 +106,9 @@
 							</div>
 							<div class="panel-body">
 								<label class="col-sm-3 control-label"></label>
-								<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								<sec:authorize access="hasRole('ROLE_e3669d837bab4fdaad327ea096303005')">	
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
 							</div>
 						</form>
 					</div>

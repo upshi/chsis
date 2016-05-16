@@ -40,14 +40,18 @@
   <select id="selectByCondition" resultMap="FamilyVOResultMap" parameterType="top.chsis.vo.FamilyVO" >
     select f.uuid, f.number, f.phone, r.name householderName, c.name communityName from t_family f, t_resident r, t_community c
     where 1=1
+	<if test="number!=null and number!=''">
+		and f.number LIKE CONCAT('%', #{number},'%' )
+	</if>
 	<if test="householderName!=null and householderName!=''">
-		and householderName LIKE CONCAT('%', #{householderName},'%' )
+		and r.name LIKE CONCAT('%', #{householderName},'%' )
 	</if>
 	<if test="communityName!=null and communityName!=''">
-		and communityName LIKE CONCAT('%', #{communityName},'%' )
+		and c.name LIKE CONCAT('%', #{communityName},'%' )
 	</if>
 	and f.uuid = r.family_uuid
 	and f.community_uuid = c.uuid
+	and r.uuid = f.householder_uuid
   </select>
   
   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >

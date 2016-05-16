@@ -131,7 +131,7 @@ public class DepartmentContrller {
 	}
 	
 	
-	//页面跳转至科室详情，并获取科室详情信息
+	//获取科室详情
 	@RequestMapping("/detail/{uuid}")
 	public String detail(@PathVariable String uuid,Model model){
 		Department department = departmentService.selectByPrimaryKey(uuid);
@@ -141,10 +141,10 @@ public class DepartmentContrller {
 		return "hospitalManager/departmentDetail";
 	}
 	
-	//获取该医院下的所有科室的名称
-	@RequestMapping("/getDepartmentType/{hospitalUuid}")
+	//获取该医院下的所有科室
+	@RequestMapping("/getDepartment/{hospitalUuid}")
 	@ResponseBody
-	public Map<String, Object> getDepartmentType(@PathVariable String hospitalUuid){
+	public Map<String, Object> getDepartment(@PathVariable String hospitalUuid){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(StringUtil.isNoE(hospitalUuid)) {

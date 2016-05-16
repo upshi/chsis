@@ -29,7 +29,7 @@ $(function() {
 function onShowManager(uuid) {
 	//异步获取管理员信息
 	$.ajax({
-			url : "manager/get/" + uuid ,
+			url : "manager/detail/" + uuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -71,7 +71,7 @@ function onShowManager(uuid) {
 function onEditManager(uuid) {
 	//异步获取管理员信息
 	$.ajax({
-			url : "manager/get/" + uuid ,
+			url : "manager/detail/" + uuid ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,

@@ -57,9 +57,15 @@
 							<div class="row">
 								<br>
 								<div class="col-sm-offset-3  col-sm-20">
-									<a href="resource/toUpdate/${resource.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="btn btn-danger" onclick="deleteResource('${resource.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="resource/manager" class="btn btn-primary"  type="button">查看资源列表</a>
+									<sec:authorize access="hasRole('ROLE_b7a6f4539d82457aae13b0667bd523eb')">
+										<a href="resource/toUpdate/${resource.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_0ace598e0bd24b528e2fe7136e6f68d7')">
+										<a class="btn btn-danger" onclick="deleteResource('${resource.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ada7dc08b7b440d4a83249062c065a20')">
+										<a href="resource/manager" class="btn btn-primary"  type="button">查看资源列表</a>
+									</sec:authorize>
 								</div>
 							</div>
 						</div>

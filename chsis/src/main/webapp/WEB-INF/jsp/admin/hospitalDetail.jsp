@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -70,7 +71,9 @@
 								<h3 class="panel-title">
 									医院管理员信息
 									<span class="tools pull-right">
-										<button class="btn btn-warning pull-left btn-add-manager" uuid="${hospital.uuid }">添加医院管理员</button>
+										<sec:authorize access="hasRole('ROLE_a4b660ea18fd43ac8d509b390abc117f')">	
+											<button class="btn btn-warning pull-left btn-add-manager" uuid="${hospital.uuid }">添加医院管理员</button>
+										</sec:authorize>
 										<a class="fa fa-chevron-down" href="javascript:;"></a>
 									</span>
 								</h3>
@@ -89,8 +92,12 @@
 											<td>${hospitalManager.manager.name }</td>
 											<td>${hospitalManager.manager.phone }</td>
 											<td>
-												<button class="btn btn-danger btn-sm deleteHospitalManager" onclick="deleteHospitalManager('${hospitalManager.manager.uuid}','${hospital.uuid}')">删除</button>
-												<button class="btn btn-info btn-sm btn-edit-hospitalManager" uuid="${hospitalManager.manager.uuid }">修改</button>
+												<sec:authorize access="hasRole('ROLE_37af9c88f43a4015b0570f8d9429b918')">	
+													<button class="btn btn-danger btn-sm deleteHospitalManager" onclick="deleteHospitalManager('${hospitalManager.manager.uuid}','${hospital.uuid}')">删除</button>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_54fc88ee4ed542d182c943d2137978c8')">	
+													<button class="btn btn-info btn-sm btn-edit-hospitalManager" uuid="${hospitalManager.manager.uuid }">修改</button>
+												</sec:authorize>
 											</td>
 										</tr>
 									</c:forEach>
@@ -169,8 +176,12 @@
 						</div>
 						<div class="row container">
 							<div class="col-sm-offset-2">
-								<input id="addm-submit" type="submit" class="btn btn-success" value="保存" />
-								<button class="btn btn-default" data-dismiss="modal">取消</button>
+								<sec:authorize access="hasRole('ROLE_a4b660ea18fd43ac8d509b390abc117f')">	
+									<input id="addm-submit" type="submit" class="btn btn-success" value="保存" />
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_a4b660ea18fd43ac8d509b390abc117f')">	
+									<button class="btn btn-default" data-dismiss="modal">取消</button>
+								</sec:authorize>
 							</div>
 						</div>
 					</form>
@@ -229,8 +240,10 @@
 						</div>
 						<div class="row container">
 							<div class="col-sm-offset-2">
-								<input id="editm-submit" type="submit" class="btn btn-success" value="保存" />
-								<button class="btn btn-default" data-dismiss="modal">取消</button>
+								<sec:authorize access="hasRole('ROLE_54fc88ee4ed542d182c943d2137978c8')">	
+									<input id="editm-submit" type="submit" class="btn btn-success" value="保存" />
+									<button class="btn btn-default" data-dismiss="modal">取消</button>
+								</sec:authorize>
 							</div>
 						</div>
 					</form>

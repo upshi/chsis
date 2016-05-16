@@ -150,6 +150,7 @@ public class DoctorController {
 		return map;
 	}
 	
+	//获取医生详情
 	@RequestMapping("/get/{uuid}")
 	@ResponseBody
 	public Map<String, Object> get(@PathVariable String uuid) {
@@ -185,6 +186,7 @@ public class DoctorController {
 		}
 		return map;
 	}
+	
 	//检查医生用户名是否重复
 	@RequestMapping("/checkUserNameUnique/{userName}")
 	@ResponseBody
@@ -218,7 +220,7 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("/edit")
-	public String editResident(Doctor doctor) {
+	public String edit(Doctor doctor) {
 		doctorService.updateByPrimaryKeySelective(doctor);
 		return "redirect:/doctor/baseInfo";
 	}

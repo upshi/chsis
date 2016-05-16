@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -50,10 +51,12 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="resident/searchHealthRecord">
-		                    <input name="time" class="form-control" type="text" placeholder="请输入体检时间">
-	                    	<button class="btn btn-info">搜索</button>
-                		</form>
+						<sec:authorize access="hasRole('ROLE_b01acd3af35545d38c5098c649a518a0')">
+							<form class="form-inline" action="resident/searchHealthRecord">
+			                    <input name="time" class="form-control" type="text" placeholder="请输入体检时间">
+		                    	<button class="btn btn-info">搜索</button>
+	                		</form>
+						</sec:authorize>
 		                <div class="blank"></div>
 		                <table class="table table-bordered table-responsive table-hover">
 		                    <tr class="info">

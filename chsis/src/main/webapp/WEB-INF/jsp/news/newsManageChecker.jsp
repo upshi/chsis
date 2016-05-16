@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -45,30 +46,31 @@
 						<h3 class="panel-title">
 							新闻列表
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-toPublishNews">发布新闻</button> 
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="news/search">
-		                    <input class="form-control" name="title" type="text" placeholder="请输入新闻标题">
-		                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
-	                    	<select name="type" class="form-control">
-	                    		<option value="">新闻类型</option>
-	                    		<option value="0">医生寄语</option>
-	                    		<option value="1">每日健康</option>
-	                    		<option value="2">医院通知</option>
-	                    		<option value="3">社区公告</option>
-	                    	</select>
-	                    	<select name="state" class="form-control">
-	                    		<option value="">新闻状态</option>
-	                    		<option value="0">审核中</option>
-	                    		<option value="1">审核未通过</option>
-	                    		<option value="2">审核通过</option>
-	                    	</select>
-		                    <button class="btn btn-info">搜索</button>
-	                    </form><br/>
+						<sec:authorize access="hasRole('ROLE_98c19dcc1db740418a2bf02bbd0ce0e1')">
+							<form class="form-inline" action="news/search">
+			                    <input class="form-control" name="title" type="text" placeholder="请输入新闻标题">
+			                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
+		                    	<select name="type" class="form-control">
+		                    		<option value="">新闻类型</option>
+		                    		<option value="0">医生寄语</option>
+		                    		<option value="1">每日健康</option>
+		                    		<option value="2">医院通知</option>
+		                    		<option value="3">社区公告</option>
+		                    	</select>
+		                    	<select name="state" class="form-control">
+		                    		<option value="">新闻状态</option>
+		                    		<option value="0">审核中</option>
+		                    		<option value="1">审核未通过</option>
+		                    		<option value="2">审核通过</option>
+		                    	</select>
+			                    <button class="btn btn-info">搜索</button>
+		                    </form><br/>
+						</sec:authorize>
 	                    <div class="blank"></div>
 	                    <table class="table table-bordered table-responsive table-hover text-center">
 		                    <tr class="info">
@@ -99,11 +101,19 @@
 												操作 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" style="min-width: 60px">
-												<li><a href="news/detail/${news.uuid }">详情</a></li>
-												<c:if test="${news.state == 0 }">
-													<li><a class="btn-pass" newsUuid="${news.uuid }">审核通过</a></li>
-													<li><a class="btn-notPass" newsUuid="${news.uuid }">审核不通过</a></li>
-												</c:if>
+												<sec:authorize access="hasRole('ROLE_e2ceb979e1ec42b8beee4c072546c38f')">
+													<li><a href="news/detail/${news.uuid }">详情</a></li>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_3141bd0792f04d88b4ccc1a6619c6d25')">
+													<c:if test="${news.state == 0 }">
+														<li><a class="btn-pass" newsUuid="${news.uuid }">审核通过</a></li>
+													</c:if>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_05e78782d11b4e44b5ab9ea5a813c029')">
+													<c:if test="${news.state == 0 }">
+														<li><a class="btn-notPass" newsUuid="${news.uuid }">审核不通过</a></li>
+													</c:if>
+												</sec:authorize>
 											</ul>
 										</div>
 									</td>

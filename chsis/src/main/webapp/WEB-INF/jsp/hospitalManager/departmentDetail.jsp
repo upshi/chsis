@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -72,9 +73,11 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">
 										医生信息 
-										<span class="tools pull-right"> 
-											<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button>
-										</span>
+										<sec:authorize access="hasRole('ROLE_a4e1e6643411452ebaf5d0730108800e')">
+											<span class="tools pull-right"> 
+												<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button>
+											</span>
+										</sec:authorize>
 									</h3>
 								</div>
 								<div class="panel-body">
@@ -107,8 +110,12 @@
 													<c:if test="${doctor.title == 4}">主任医师</c:if>
 												</td>
 												<td>
-													<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${department.uuid }')">删除</button> 
-													<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
+													<sec:authorize access="hasRole('ROLE_0a4991bf50ec4330bb552300be758258')">
+														<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${department.uuid }')">删除</button> 
+													</sec:authorize>
+													<sec:authorize access="hasRole('ROLE_484f2fba719f45a1b58a7a876e9f7b2e')">
+														<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
+													</sec:authorize>
 												</td>
 										</tr>
 										</c:forEach>

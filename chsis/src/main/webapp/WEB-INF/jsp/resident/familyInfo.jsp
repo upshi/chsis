@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -64,8 +65,12 @@
 									<td><a class="a-healthRecord" residentUuid="${resident.uuid }">体检记录</a></td>
 									<td><a class="a-immuneRecord" residentUuid="${resident.uuid }">免疫记录</a></td>
 									<td>
-										<button class="btn btn-danger btn-sm deleteMember" onclick="removeResident('${resident.uuid}')">移除</button> 
-										<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
+										<sec:authorize access="hasRole('ROLE_64dd9241f6f14444bb25bbdd63d9091e')">
+											<button class="btn btn-danger btn-sm deleteMember" onclick="removeResident('${resident.uuid}')">移除</button> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_ef36fad1e3774a11b233067b3bf5f6a1')">
+											<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>
@@ -100,7 +105,9 @@
 								<td>${family.address }</td>
 								<td>${family.community.name }</td>
 								<td>
-									<button class="btn btn-success btn-sm btn-edit-family">修改</button> 
+									<sec:authorize access="hasRole('ROLE_defce548a8664d42a425628e112fbe09')">
+										<button class="btn btn-success btn-sm btn-edit-family">修改</button> 
+									</sec:authorize>
 								</td>
 							</tr>
 						</table>

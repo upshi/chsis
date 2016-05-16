@@ -153,26 +153,9 @@ public class ManagerController {
 		return map;
 	}
 	
-	@RequestMapping("/detail/{managerUuid}")
-	public String managerDetail(@PathVariable(value = "managerUuid") String managerUuid, Model model) {
-		Manager manager = new Manager();
-		Hospital hospital = new Hospital();
-		HospitalManager hospitalManager = new HospitalManager();
-		
-		manager = managerService.selectByPrimaryKey(managerUuid);
-		
-		hospitalManager = hospitalManagerService.selectByManagerUuid(managerUuid);
-		if(hospitalManager != null && !hospitalManager.equals("")){
-			hospital = hospitalManager.getHospital();
-			model.addAttribute("hospitalName", hospital.getName());
-		}
-		model.addAttribute("manager", manager);
-		return "admin/managerDetail";
-	}
-	
-	@RequestMapping("/get/{uuid}")
+	@RequestMapping("/detail/{uuid}")
 	@ResponseBody
-	public Map<String, Object> get(@PathVariable String uuid) {
+	public Map<String, Object> detail(@PathVariable String uuid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(StringUtil.isNoE(uuid)) {
 			map.put("result", "failure");

@@ -39,23 +39,27 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						管理员管理
-						<span class="tools pull-right"> 
-							<button id="btn-add" class="btn btn-warning pull-left">添加管理员</button>
+						<span class="tools pull-right">
+							<sec:authorize access="hasRole('ROLE_c7422de1780647d6921d75ade9c11180')">
+								<button id="btn-add" class="btn btn-warning pull-left">添加管理员</button>
+							</sec:authorize> 
 							<a class="fa fa-chevron-down" href="javascript:;"></a>
 						</span>
 					</h3>
 				</div>
 				<div class="panel-body">
-					<!-- 员工查询 -->
-					<form class="form-inline" action="manager/search">
-						<div class="form-group">
-							<input type="text" class="form-control" name="userName" placeholder="请输入用户名">
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" name="name" placeholder="请输入姓名">
-						</div>
-						<button type="submit" class="btn btn-info">搜索</button>
-					</form>
+					<sec:authorize access="hasRole('ROLE_e7717d1a09c0480faddc26d97c0c13b3')">
+						<!-- 管理员查询 -->
+						<form class="form-inline" action="manager/search">
+							<div class="form-group">
+								<input type="text" class="form-control" name="userName" placeholder="请输入用户名">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="name" placeholder="请输入姓名">
+							</div>
+							<button type="submit" class="btn btn-info">搜索</button>
+						</form>
+					</sec:authorize>
 					
 					<div class="blank"></div>
 
@@ -88,14 +92,18 @@
 												操作 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" style="min-width: 60px">
-												<li>
-													<a class="btn btn-default btn-sm btn-managerDetail" uuid="${manager.uuid }" style="border:none;">详情</a> 
-												</li>
-												<li>
-													<a class="btn btn-default btn-sm btn-editManager" uuid="${manager.uuid }" style="border:none;">编辑</a> 
-												</li>
-												<li><a href="manager/toAllocateRole/${manager.uuid }">分配角色</a></li>
-												<li><a onclick="deleteManager('${manager.uuid}')">删除</a></li>
+												<sec:authorize access="hasRole('ROLE_54fc88ee4ed542d182c943d2137978c8')">
+													<li><a class="btn btn-default btn-sm btn-managerDetail" uuid="${manager.uuid }" style="border:none;">详情</a></li>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_df058fe97463410285200ca37cee019f')">
+													<li><a class="btn btn-default btn-sm btn-editManager" uuid="${manager.uuid }" style="border:none;">编辑</a></li>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_a88629b29e904acb92f01c4430c04028')">
+													<li><a href="manager/toAllocateRole/${manager.uuid }">分配角色</a></li>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_37af9c88f43a4015b0570f8d9429b918')">
+													<li><a onclick="deleteManager('${manager.uuid}')">删除</a></li>
+												</sec:authorize>
 											</ul>
 										</div>
 									</td>

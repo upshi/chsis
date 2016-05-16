@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -44,19 +45,23 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							医生管理
-						 	<span class="tools pull-right"> 
-						 		<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button> 
-						 		<a class="fa fa-chevron-down" href="javascript:;"></a>
-							</span>
+							<sec:authorize access="hasRole('ROLE_a4e1e6643411452ebaf5d0730108800e')">
+							 	<span class="tools pull-right"> 
+							 		<button class="btn btn-warning pull-left btn-add-doctor">添加医生</button> 
+							 		<a class="fa fa-chevron-down" href="javascript:;"></a>
+								</span>
+							</sec:authorize>
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="doctor/search">
-		                    <input name="number" class="form-control" type="text" placeholder="请输入医生编号">
-		                    <input name="name" class="form-control" type="text" placeholder="请输入医生姓名">
-		                    <input name="departmentName" class="form-control" type="text" placeholder="请输入科室名称">
-		                    <button class="btn btn-info">搜索</button>
-		                </form>
+						<sec:authorize access="hasRole('ROLE_a13642e5764c4575b9742c3267002576')">
+							<form class="form-inline" action="doctor/search">
+			                    <input name="number" class="form-control" type="text" placeholder="请输入医生编号">
+			                    <input name="name" class="form-control" type="text" placeholder="请输入医生姓名">
+			                    <input name="departmentName" class="form-control" type="text" placeholder="请输入科室名称">
+			                    <button class="btn btn-info">搜索</button>
+			                </form>
+						</sec:authorize>
 		                <div class="blank"></div>
 		                <table class="table table-bordered table-responsive table-hover">
 		                    <tr class="info">
@@ -89,8 +94,12 @@
 			                        	<c:if test="${doctor.title==4}">主任医师</c:if>
 			                        </td>
 			                        <td>
-			                        	<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${url }')">删除</button> 
-										<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
+			                        	<sec:authorize access="hasRole('ROLE_0a4991bf50ec4330bb552300be758258')">
+				                        	<button class="btn btn-danger btn-sm" onclick="deleteDoctor('${doctor.uuid}','${url }')">删除</button> 
+										</sec:authorize>
+			                        	<sec:authorize access="hasRole('ROLE_484f2fba719f45a1b58a7a876e9f7b2e')">
+											<button class="btn btn-primary btn-sm btn-doctorDetail" uuid="${doctor.uuid }">详情</button>
+										</sec:authorize>
 			                        </td>
 			                    </tr>
 		                    </c:forEach>

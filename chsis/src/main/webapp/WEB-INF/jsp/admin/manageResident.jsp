@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -46,18 +47,20 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" action="resident/search">
-	                    	<input name="userName" class="form-control" type="text" placeholder="请输入用户名">
-	                    	<input name="name" class="form-control" type="text" placeholder="请输入姓名">
-	                    	<select name="sex" class="form-control">
-	                    		<option value="">性别</option>
-	                    		<option value="0">男</option>
-	                    		<option value="1">女</option>
-	                    	</select>
-	                   	 	<input name="idNo" class="form-control" type="text" placeholder="请输入身份证号">
-	                   	 	<input name="familyNumber" class="form-control" type="text" placeholder="请输入家庭编号">
-	                    	<button class="btn btn-info">搜索</button>
-                		</form>
+						<sec:authorize access="hasRole('ROLE_2d783fa1f7404e479d73686b80f8a706')">
+							<form class="form-inline" action="resident/search">
+		                    	<input name="userName" class="form-control" type="text" placeholder="请输入用户名">
+		                    	<input name="name" class="form-control" type="text" placeholder="请输入姓名">
+		                    	<select name="sex" class="form-control">
+		                    		<option value="">性别</option>
+		                    		<option value="0">男</option>
+		                    		<option value="1">女</option>
+		                    	</select>
+		                   	 	<input name="idNo" class="form-control" type="text" placeholder="请输入身份证号">
+		                   	 	<input name="familyNumber" class="form-control" type="text" placeholder="请输入家庭编号">
+		                    	<button class="btn btn-info">搜索</button>
+	                		</form>
+                		</sec:authorize>
                			<div class="blank"></div>
 
 						<table class="table table-bordered table-responsive table-hover">
@@ -82,9 +85,15 @@
 									<td>${residentVO.phone }</td>
 									<td>${residentVO.familyNumber }</td>
 									<td>
-										<button class="btn btn-danger btn-sm" onclick="deleteResident('${residentVO.uuid}','${url }')">删除</button>
-										<button class="btn btn-primary btn-sm btn-residentDetail"  uuid="${residentVO.uuid }">详情</button>
-										<button class="btn btn-info btn-sm btn-edit-resident" uuid="${residentVO.uuid }">修改</button>
+										<sec:authorize access="hasRole('ROLE_2b5cfbe32aff47eaaa93074950c6b75b')">
+											<button class="btn btn-danger btn-sm" onclick="deleteResident('${residentVO.uuid}','${url }')">删除</button>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_ef36fad1e3774a11b233067b3bf5f6a1')">
+											<button class="btn btn-primary btn-sm btn-residentDetail"  uuid="${residentVO.uuid }">详情</button>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">
+											<button class="btn btn-info btn-sm btn-edit-resident" uuid="${residentVO.uuid }">修改</button>
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>

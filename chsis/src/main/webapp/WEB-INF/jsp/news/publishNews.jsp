@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -41,10 +42,12 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							发布新闻
-							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-submitNews">提交新闻</button> 
-								<a class="fa fa-chevron-down" href="javascript:;"></a>
-							</span>
+							<sec:authorize access="hasRole('ROLE_6494e120066045bd98ba615d23b7e5a8')">
+								<span class="tools pull-right"> 
+									<button class="btn btn-warning pull-left btn-submitNews">提交新闻</button> 
+									<a class="fa fa-chevron-down" href="javascript:;"></a>
+								</span>
+							</sec:authorize>
 						</h3>
 					</div>
 					<div class="panel-body" id="news" role="${role }">
