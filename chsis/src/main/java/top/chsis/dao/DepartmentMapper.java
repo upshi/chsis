@@ -3,7 +3,6 @@ package top.chsis.dao;
 import java.util.List;
 
 import top.chsis.model.Department;
-import top.chsis.vo.FamilyVO;
 
 public interface DepartmentMapper {
     int deleteByPrimaryKey(String uuid);

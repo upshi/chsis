@@ -75,7 +75,11 @@ public class MedicalRecordController {
 	public String edit(MedicalRecord medicalRecord, Model model) {
 		medicalRecordService.updateByPrimaryKeySelective(medicalRecord);
 		model.addAttribute("medicalRecord", medicalRecord);
-		return "redirect:/medicalRecord/unfinishedMedicalRecordDetail/" + medicalRecord.getUuid();
+		if(medicalRecord.getState() == MedicalRecord.VISITED) {
+			return "redirect:/medicalRecord/finishedMedicalRecordDetail/" + medicalRecord.getUuid();
+		} else {
+			return "redirect:/medicalRecord/unfinishedMedicalRecordDetail/" + medicalRecord.getUuid();
+		}
 	}
 	
 	@RequestMapping("/unfinishedMedicalRecordDetail/{uuid}")

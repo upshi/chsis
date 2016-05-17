@@ -35,7 +35,9 @@
 
 		<!--sidebar nav start-->
 		<ul class="nav nav-pills nav-stacked custom-nav">
-			<li id="navi_index"><a href="index.jsp"><i class="fa fa-home"></i> <span>首页</span></a></li>
+			<sec:authorize access="hasRole('ROLE_0604e260e1964c099bcdc0c87dad42c5')">	
+				<li id="navi_index"><a href="userIndex"><i class="fa fa-home"></i> <span>首页</span></a></li>
+			</sec:authorize>	
 			<!-- resident start -->
 			<sec:authorize access="hasRole('ROLE_9020fe55a21f487480bce4840b42f433')">	
 				<li id="navi_resident_baseInfo"><a href="resident/baseInfo"><i class="fa fa-home"></i> <span>基本信息</span></a></li>

@@ -29,7 +29,7 @@ function onEdit(){
 		}
 		return false;
 	});
-	$('#editMedicalReport').modal();
+	$('#editMedicalRecord').modal();
 }
 
 //表单校验

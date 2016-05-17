@@ -63,6 +63,9 @@ public class DiseaseHistoryController {
 	//添加疾病史
 	@RequestMapping("/addDiseaseHistory")
 	public String addDiseaseHistory(DiseaseHistory diseaseHistory, Model model, String patientUuid) {
+		if(StringUtil.isNoE(diseaseHistory.getEndTime())) {
+			diseaseHistory.setEndTime("--");
+		}
 		diseaseHistory.setUuid(StringUtil.getUUID());
 		Resident resident = new Resident(patientUuid);
 		diseaseHistory.setPatient(resident);

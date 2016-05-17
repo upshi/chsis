@@ -161,8 +161,8 @@
 									<div class="iconic-input right input-group">
 										<input id="editdis-height" class="form-control" name="height" type="text" placeholder="身高(cm)" value="${resident.height }">
 										<span class="input-group-addon">cm</span>
-										<p class="help-block"></p>
 									</div>
+									<p class="help-block"></p>
 								</div>
 							</div>
 						</div>
@@ -173,8 +173,8 @@
 									<div class="iconic-input right input-group">
 										<input id="editdis-weight" class="form-control" name="weight" type="text" placeholder="体重(kg)" value="${resident.weight }">
 										<span class="input-group-addon">kg</span>
-										<p class="help-block"></p>
 									</div>
+									<p class="help-block"></p>
 								</div>
 							</div>
 						</div>

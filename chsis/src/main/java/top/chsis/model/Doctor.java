@@ -2,8 +2,6 @@ package top.chsis.model;
 
 import java.io.Serializable;
 
-import com.alibaba.fastjson.parser.deserializer.StringFieldDeserializer;
-
 public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 1L;

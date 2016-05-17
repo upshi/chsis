@@ -290,7 +290,7 @@ function checkFamilyNumber() {
 		return false;
 	} else {
 		$.ajax({
-			url : "family/checkNumberUnique/" + familyNumber ,
+			url : "checkNumberUnique/" + familyNumber ,
 			type : "GET" ,
 			cache : false , 
 			async : false , 
