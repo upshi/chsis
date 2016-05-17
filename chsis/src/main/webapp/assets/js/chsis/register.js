@@ -29,7 +29,6 @@ $(function(){
 	$('#c-name').on('blur',c_checkName);
 	$('#c-idNo').on('blur',c_checkIdNo);
 	$('#c-phone').on('blur',c_checkPhone);
-	$('#c-familyNumber').on('blur',c_checkFamilyNumber);
 	$('#c-familyPhone').on('blur',c_checkFamilyPhoneGroup);
 	$('#c-familyAddress').on('blur',c_checkFamilyAddressGroup);
 	
@@ -49,7 +48,7 @@ $(function(){
 		//表单校验
 		var c_pass = c_validate();
 		if(c_pass) {
-			handleBeforeSubmit();
+			c_handleBeforeSubmit();
 			createSubmit();
 		}
 		return false;
@@ -59,7 +58,7 @@ $(function(){
 //异步加入家庭注册，若成功跳转到登陆界面
 function joinSubmit(){
 	$.ajax({
-			url : "resident/register_joinFamily" ,
+			url : "register_joinFamily" ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -67,22 +66,24 @@ function joinSubmit(){
 			success : function(data) {
 				if (data.result == "success") {
 					$.confirm({
-								keyboardEnabled : true,
-								title : '注册成功',
-								content : '您已注册成功，请登陆！',
-								confirmButtonClass : 'btn-info',
-								cancelButtonClass : 'btn-danger',
-								autoClose : 'confirm|5000'
+						keyboardEnabled : true,
+						title : '注册成功',
+						content : '您已注册成功，请登陆！',
+						confirmButtonClass : 'btn-info',
+						cancelButtonClass : 'btn-danger',
+						autoClose : 'confirm|3000'
 					});
-					window.location.href = 'chsis/login' ;
-					} else {
+					setTimeout(function(){
+						window.location.href = 'login' ;
+					},3000);
+				} else {
 						$.confirm({
-									keyboardEnabled : true,
-									title : '注册失败，请重新注册',
-									content : data.result,
-									confirmButtonClass : 'btn-info',
-									cancelButtonClass : 'btn-danger',
-									autoClose : 'confirm|3000'
+							keyboardEnabled : true,
+							title : '注册失败，请重新注册',
+							content : data.result,
+							confirmButtonClass : 'btn-info',
+							cancelButtonClass : 'btn-danger',
+							autoClose : 'confirm|3000'
 						});
 					}
 			} 
@@ -92,7 +93,7 @@ function joinSubmit(){
 //异步创建家庭注册，若成功跳转到登陆界面
 function createSubmit(){
 	$.ajax({
-			url : "resident/register_createFamily" ,
+			url : "register_createFamily" ,
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
@@ -100,22 +101,24 @@ function createSubmit(){
 			success : function(data) {
 				if (data.result == "success") {
 					$.confirm({
-								keyboardEnabled : true,
-								title : '注册成功',
-								content : '您已注册成功，请登陆！',
-								confirmButtonClass : 'btn-info',
-								cancelButtonClass : 'btn-danger',
-								autoClose : 'confirm|5000'
+						keyboardEnabled : true,
+						title : '注册成功',
+						content : '您已注册成功，请登陆！',
+						confirmButtonClass : 'btn-info',
+						cancelButtonClass : 'btn-danger',
+						autoClose : 'confirm|3000'
 					});
-					window.location.href = 'chsis/login' ;
-					} else {
+					setTimeout(function(){
+						window.location.href = 'login' ;
+					},3000);
+				} else {
 						$.confirm({
-									keyboardEnabled : true,
-									title : '注册失败，请重新注册',
-									content : data.result,
-									confirmButtonClass : 'btn-info',
-									cancelButtonClass : 'btn-danger',
-									autoClose : 'confirm|3000'
+							keyboardEnabled : true,
+							title : '注册失败，请重新注册',
+							content : data.result,
+							confirmButtonClass : 'btn-info',
+							cancelButtonClass : 'btn-danger',
+							autoClose : 'confirm|3000'
 						});
 					}
 			} 
@@ -133,7 +136,7 @@ function validate() {
 
 //表单校验
 function c_validate() {
-	if(c_checkUserName() && c_checkPassword() && c_checkRePassword() && c_checkName() && c_checkIdNo() &&　c_checkFamilyNumber() && c_checkFamilyPhoneGroup && c_checkFamilyAddressGroup) {
+	if(c_checkUserName() && c_checkPassword() && c_checkRePassword() && c_checkName() && c_checkIdNo() && c_checkFamilyPhoneGroup && c_checkFamilyAddressGroup) {
 		return true;
 	} else {
 		return false;
@@ -147,6 +150,13 @@ function handleBeforeSubmit() {
 	$password.val( $.base64('encode', $password.val()) );
 }
 
+//提交前处理
+function c_handleBeforeSubmit() {
+	$.base64.utf8encode = true;
+	var $password = $('#c-password');
+	$password.val( $.base64('encode', $password.val()) );
+}
+
 function checkUserName() {
 	var flag = false;
 	var userName = $('#userName').val();
@@ -157,7 +167,7 @@ function checkUserName() {
 		return false;
 	} else {
 		$.ajax({
-			url : "resident/checkUserNameUnique/" + userName ,
+			url : "checkUserNameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
 			async : false , 
@@ -247,7 +257,7 @@ function checkIdNo() {
 			return false;
 		} else {
 			$.ajax({
-				url : "resident/checkIdNoUnique/" + idNo ,
+				url : "checkIdNoUnique/" + idNo ,
 				type : "GET" ,
 				cache : false , 
 				async : false , 
@@ -311,7 +321,7 @@ function c_checkUserName() {
 		return false;
 	} else {
 		$.ajax({
-			url : "resident/checkUserNameUnique/" + userName ,
+			url : "checkUserNameUnique/" + userName ,
 			type : "GET" ,
 			cache : false , 
 			async : false , 
@@ -405,7 +415,7 @@ function c_checkIdNo() {
 			return false;
 		} else {
 			$.ajax({
-				url : "resident/checkIdNoUnique/" + idNo ,
+				url : "checkIdNoUnique/" + idNo ,
 				type : "GET" ,
 				cache : false , 
 				async : false , 
@@ -452,38 +462,6 @@ function c_checkPhone() {
 	}
 }
 
-//校验家庭编号是否存在
-function c_checkFamilyNumber() {
-	var flag = false;
-	var familyNumber = $('#c-familyNumber').val();
-	if(familyNumber == null || $.trim(familyNumber) == '') {
-		$('#c-familyNumberGroup').removeClass('has-success');
-		$('#c-familyNumberGroup').addClass('has-error');
-		$('#c-familyNumberGroup .help-block').html('请输入您的家庭编号');
-		return false;
-	} else {
-		$.ajax({
-			url : "family/checkNumberUnique/" + familyNumber ,
-			type : "GET" ,
-			cache : false , 
-			async : false , 
-			dataType : "json" ,
-			success : function(data) {
-				if(data.result == "exist") {
-					$('#c-familyNumberGroup').removeClass('has-success');
-					$('#c-familyNumberGroup').addClass('has-error');
-					$('#c-familyNumberGroup .help-block').html('您输入的家庭编号已存在');
-				} else {
-					$('#c-familyNumberGroup').removeClass('has-error');
-					$('#c-familyNumberGroup').addClass('has-success');
-					$('#c-familyNumberGroup .help-block').html('');
-					flag = true;
-				}
-			} 
-		});
-	}
-	return flag;
-}
 
 //校验家庭电话
 function c_checkFamilyPhoneGroup() {

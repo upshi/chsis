@@ -70,4 +70,22 @@ public class DiseaseHistoryController {
 		return "redirect:/resident/healthInfo";
 	}
 	
+	//删除疾病史
+	@RequestMapping("/delete/{uuid}")
+	@ResponseBody
+	public Map<String, Object> delete(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(uuid)) {
+			map.put("result", "failure");
+		} else {
+			int result = diseaseHistoryService.deleteByPrimaryKey(uuid);
+			if(result == 1) {
+				map.put("result", "success");
+			} else {
+				map.put("result", "failure");
+			}
+		}
+		return map;
+	}
+	
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,25 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
-import top.chsis.exception.RoleException;
 import top.chsis.model.CheckReport;
-import top.chsis.model.Community;
 import top.chsis.model.DiseaseHistory;
-import top.chsis.model.Family;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
-import top.chsis.model.Role;
 import top.chsis.service.ICheckReportService;
 import top.chsis.service.IDiseaseHistoryService;
-import top.chsis.service.IFamilyService;
 import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
-import top.chsis.service.IRoleService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.ResidentVO;
 
@@ -45,16 +37,10 @@ public class ResidentController {
 	private IResidentService residentService;
 	
 	@Autowired
-	private IFamilyService familyService;
-	
-	@Autowired
 	private IDiseaseHistoryService diseaseHistoryService;
 	
 	@Autowired
 	private IMedicalRecordService medicalRecordService;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private ICheckReportService checkReportService;
@@ -62,8 +48,6 @@ public class ResidentController {
 	@Autowired
 	private IImmuneRecordService immuneRecordService;
 	
-	@Autowired
-	private IRoleService roleService;
 
 	@RequestMapping("/baseInfo")
 	public String baseInfo(Model model) {
@@ -378,127 +362,6 @@ public class ResidentController {
 		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "resident/searchHealthRecord?time=" + time + "&" );
 		return "resident/healthRecord";
-	}
-	
-	//检查用户名是否重复
-	@RequestMapping("/checkUserNameUnique/{userName}")
-	@ResponseBody
-	public Map<String, Object> checkUserNameUnique(@PathVariable String userName) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(userName)) {
-			map.put("result", "exist");
-		} else {
-			Resident resident = residentService.selectByUserName(userName);
-			if(resident == null) {
-				map.put("result", "inexistence");
-			} else {
-				map.put("result", "exist");
-			}
-		}
-		return map;
-	}
-	
-	//检查身份证号是否重复
-	@RequestMapping("/checkIdNoUnique/{idNo}")
-	@ResponseBody
-	public Map<String, Object> checkIdNoUnique(@PathVariable String idNo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(idNo)) {
-			map.put("result", "exist");
-		} else {
-			Resident resident = residentService.selectByIdNo(idNo);
-			if(resident == null) {
-				map.put("result", "inexistence");
-			} else {
-				map.put("result", "exist");
-			}
-		}
-		return map;
-	}
-	
-	@RequestMapping("/register_joinFamily")
-	@ResponseBody
-	public Map<String, Object> register_joinFamily(Resident resident, String familyNumber){
-		Map<String, Object> map = new HashMap<String, Object>();
-		//Base64解码得到原始密码
-		String rawPassword = new String(Base64.decodeFast(resident.getPassword()));
-		//BCrypt加密密码
-		String encodedPassword = passwordEncoder.encode(rawPassword);
-		String idNo = resident.getIdNo();
-		String birth = idNo.substring(6, 14);
-		int sex = idNo.charAt(16) - 48;//身份证上第17位代表性别,下标从0开始
-		resident.setUuid(StringUtil.getUUID());
-		resident.setPassword(encodedPassword);
-		if(sex % 2 == 0){
-			resident.setSex(1);//身份证上第17位为偶数代表女，数据库中1代表女
-		}else {
-			resident.setSex(0);//身份证上第17位为奇数代表男，数据库中0代表男
-		}
-		resident.setBirth(birth);
-		Family family = familyService.selectByNumber(familyNumber);
-		resident.setFamily(family);;
-
-		Role role = null;
-		try {
-			role = roleService.selectByPrimaryKey("4");
-		} catch (RoleException e) {
-			e.printStackTrace();
-		}
-		
-		int insert = residentService.insertResidentAndRole(resident, role);
-		if(insert == 2) {
-			map.put("result", "success");
-		} else {
-			map.put("result", "failure");
-		}
-		return map;
-	}
-	
-	@RequestMapping("/register_createFamily")
-	@ResponseBody
-	public Map<String, Object> register_createFamily(Resident resident, String familyNumber, String familyPhone, String familyAddress, String communityUuid){
-		Map<String, Object> map = new HashMap<String, Object>();
-		//Base64解码得到原始密码
-		String rawPassword = new String(Base64.decodeFast(resident.getPassword()));
-		//BCrypt加密密码
-		String encodedPassword = passwordEncoder.encode(rawPassword);
-		String idNo = resident.getIdNo();
-		String birth = idNo.substring(6, 14);
-		int sex = idNo.charAt(16) - 48;//身份证上第17位代表性别,下标从0开始
-		resident.setUuid(StringUtil.getUUID());
-		resident.setPassword(encodedPassword);
-		if(sex % 2 == 0){
-			resident.setSex(1);//身份证上第17位为偶数代表女，数据库中1代表女
-		}else {
-			resident.setSex(0);//身份证上第17位为奇数代表男，数据库中0代表男
-		}
-		resident.setBirth(birth);
-	
-		//为家庭赋值
-		Family family = new Family();
-		Community community = new Community(communityUuid);
-		family.setUuid(StringUtil.getUUID());
-		family.setNumber(familyNumber);
-		family.setPhone(familyPhone);
-		family.setHouseholderUUID(resident.getUuid());
-		family.setAddress(familyAddress);
-		family.setCommunity(community);
-		resident.setFamily(family);
-		
-		Role role = null;
-		try {
-			role = roleService.selectByPrimaryKey("4");//查出系统角色：居民，居民对应的uuid为"4"
-		} catch (RoleException e) {
-			e.printStackTrace();
-		}
-		
-		int insert = residentService.insertResidentAndFamilyAndRole(resident, family, role);
-		if(insert == 3) {
-			map.put("result", "success");
-		} else {
-			map.put("result", "failure");
-		}
-		return map;
 	}
 	
 }

@@ -17,6 +17,10 @@
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
+<link href="assets/css/jquery-confirm.css" rel="stylesheet" type="text/css"/>
+<!--pickers css-->
+<link rel="stylesheet" type="text/css" href="assets/adminex/js/bootstrap-datepicker/css/datepicker-custom.css" />
+
 <!--你自己的样式文件 -->
 <link href="assets/css/resident/index.css" rel="stylesheet">
 </head>
@@ -82,9 +86,12 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							疾病史信息 
-							<span class="tools pull-right"> 
-								<a class="fa fa-chevron-down" href="javascript:;"></a>
-							</span>
+							<sec:authorize access="hasRole('ROLE_aec14cab2bba410785fcf7ee9af198bc')">
+								<span class="tools pull-right"> 
+									<button class="btn btn-warning pull-left btn-add-diseaseHistory">添加疾病史</button>
+									<a class="fa fa-chevron-down" href="javascript:;"></a>
+								</span>
+							</sec:authorize>
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -109,15 +116,15 @@
 									<td>${diseaseHistory.endTime }</td>
 									<td>
 										<sec:authorize access="hasRole('ROLE_d12fc2d7bc534a628aff3e3ddf5102fd')">
+											<button class="btn btn-danger btn-sm" uuid="${diseaseHistory.uuid}" onclick="deleteDiseaseHistory(this)">删除</button> 
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_d12fc2d7bc534a628aff3e3ddf5102fd')">
 											<button class="btn btn-primary btn-sm btn-diseaseHistoryDetail" uuid="${diseaseHistory.uuid }">详情</button> 
 										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>	
 						</table>
-						<sec:authorize access="hasRole('ROLE_aec14cab2bba410785fcf7ee9af198bc')">
-							<button class="btn btn-warning btn-add-diseaseHistory">添加疾病史</button>
-						</sec:authorize>
 					</div>
 				</div>
 				<!-- panel end -->
@@ -323,7 +330,7 @@
 								<label class="col-sm-2 control-label">开始时间</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<input id="adddis-startTime" class="form-control" name="startTime" type="text" placeholder="开始时间:如：2015-12-01">
+										<input id="adddis-startTime" class="form-control default-date-picker" type="text" name="startTime" value="" readonly="readonly" />
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -334,7 +341,7 @@
 								<label class="col-sm-2 control-label">痊愈时间</label>
 								<div class="col-sm-3">
 									<div class="iconic-input right">
-										<input id="adddis-endTime" class="form-control" name="endTime" type="text" placeholder="痊愈时间，如：2016-12-01">
+										<input id="adddis-endTime" class="form-control default-date-picker" type="text" name="endTime" value="" readonly="readonly" />
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -353,7 +360,7 @@
 						</div>
 						<div class="col-sm-offset-5">
 							<button class="btn btn-info" id="adddis-submit">保存</button>
-							<button class="btn btn-default">取消</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>
@@ -370,7 +377,10 @@
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	
+	<!--pickers plugins-->
+	<script type="text/javascript" src="assets/adminex/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="assets/adminex/js/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+	<script src="assets/js/jquery-confirm.js"></script>
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
 	<script src="assets/js/resident/dropDownList.js"></script>

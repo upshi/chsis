@@ -56,7 +56,6 @@
 				<li id="navi_resident_familyInfo"><a href="family/familyInfo"><i class="fa fa-home"></i> <span>家庭信息</span></a></li>
 			</sec:authorize>
 			<!-- resident end -->
-			<hr>
 			
 			<!-- admin start -->
 			<sec:authorize access="hasRole('ROLE_33593600ece148d8b897a443d3192279')">	
@@ -77,11 +76,7 @@
 			<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">	
 				<li id="navi_admin_role"><a href="role/manager"><i class="fa fa-home"></i> <span>角色管理</span></a></li>
 			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_1d3a4457d5a94b188e9916ba1474296c')">	
-				<li id="navi_newsManage"><a href="news/manage"><i class="fa fa-home"></i> <span>新闻管理</span></a></li>
-			</sec:authorize>
 			<!-- admin end -->
-			<hr>
 			
 			<!-- doctor start -->
 			<sec:authorize access="hasRole('ROLE_26861743a0d641c696437a1d929a0c29')">	
@@ -97,7 +92,6 @@
 				<li id="navi_doctor_unfinished"><a href="medicalRecord/unfinished"><i class="fa fa-home"></i> <span>待完成就诊记录</span></a></li>
 			</sec:authorize>
 			<!-- doctor end -->
-			<hr>
 			
 			<!-- hospitalManager start -->
 			<sec:authorize access="hasRole('ROLE_0984ce00a6ca4c79ad5cd69e05772c4b')">	
@@ -107,7 +101,10 @@
 				<li id="navi_hospitalManager_doctor"><a href="doctor/manage"><i class="fa fa-home"></i> <span>医生管理</span></a></li>
 			</sec:authorize>
 			<!-- hospitalManager end -->
-			<hr>
+			
+			<sec:authorize access="hasRole('ROLE_1d3a4457d5a94b188e9916ba1474296c')">	
+				<li id="navi_newsManage"><a href="news/manage"><i class="fa fa-home"></i> <span>新闻管理</span></a></li>
+			</sec:authorize>
 		</ul>
 		<!--sidebar nav end-->
 	</div>

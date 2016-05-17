@@ -8,7 +8,7 @@
 	<!-- use-expressions="false":使用RoleVoter进行投票,否则使用WebExpressionVoter进行投票 -->
 	<sec:http auto-config="true" use-expressions="false" jaas-api-provision="true">
 		<!-- <sec:form-login login-page='/login.jsp' default-target-url='/login/success' /> -->
-		<sec:form-login login-page='/login.jsp' default-target-url='/index.jsp' />
+		<sec:form-login login-page='/login' default-target-url='/userIndex' />
 		<sec:csrf disabled="true" />
 	</sec:http>
 	

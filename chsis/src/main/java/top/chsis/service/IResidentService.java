@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.Family;
 import top.chsis.model.Resident;
-import top.chsis.model.Role;
 import top.chsis.vo.ResidentVO;
 
 public interface IResidentService {
@@ -35,9 +34,9 @@ public interface IResidentService {
 
 	Resident selectByIdNo(String idNo);
 
-	int insertResidentAndRole(Resident resident, Role role);
+	int insertResident(Resident resident);
 
-	int insertResidentAndFamilyAndRole(Resident resident, Family family, Role role);
+	int insertResidentAndFamily(Resident resident, Family family);
 
 	int removeMemberByPrimaryKey(String uuid);
 

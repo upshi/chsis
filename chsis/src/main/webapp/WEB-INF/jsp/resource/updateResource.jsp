@@ -42,14 +42,13 @@
 						<div class="panel-body">
 							<form id="form" class="form-horizontal" method="post" action="resource/update" role="form">
 								<input type="hidden" class="form-control" id="uuid" name="uuid" value="${resource.uuid}">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<br>
 								
 								<div class="form-group" id="nameGroup">
 									<label for="name" class="col-sm-3 control-label">资源名称&nbsp;*</label>
 									<div class="col-sm-4">
 										<div class="iconic-input right">
-											<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称" value="${resource.name }">
+											<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称" original="${resource.name }" value="${resource.name }">
 	                                        <p class="help-block"></p>
 	                                    </div>
 									</div>
@@ -59,7 +58,7 @@
 									<label for="sn" class="col-sm-3 control-label">资源URL&nbsp;*</label>
 									<div class="col-sm-4">
 										<div class="iconic-input right">
-											<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL" value="${resource.url }">
+											<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL" original="${resource.url }" value="${resource.url }">
 	                                        <p class="help-block"></p>
 	                                    </div>
 									</div>

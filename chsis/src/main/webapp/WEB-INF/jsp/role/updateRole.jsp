@@ -42,12 +42,11 @@
 						<div class="panel-body">
 							<form id="form" class="form-horizontal" method="post" action="role/update" role="form">
 								<input type="hidden" class="form-control" id="uuid" name="uuid" value="${role.uuid}">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<br>
 								<div class="form-group" id="cNameGroup">
 									<label for="cName" class="col-sm-3 control-label">角色中文名&nbsp;*</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名" value="${role.cName }"/>
+										<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名" original="${role.cName }" value="${role.cName }"/>
 										<p class="help-block"></p>
 									</div>
 								</div>
@@ -55,7 +54,7 @@
 								<div class="form-group" id="eNameGroup">
 									<label for="sn" class="col-sm-3 control-label">角色英文名&nbsp;*</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" value="${role.eName }"/>
+										<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" original="${role.eName }" value="${role.eName }"/>
 										<p class="help-block"></p>
 									</div>
 								</div>

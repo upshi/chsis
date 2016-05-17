@@ -65,9 +65,11 @@
 									<td><a class="a-healthRecord" residentUuid="${resident.uuid }">体检记录</a></td>
 									<td><a class="a-immuneRecord" residentUuid="${resident.uuid }">免疫记录</a></td>
 									<td>
-										<sec:authorize access="hasRole('ROLE_64dd9241f6f14444bb25bbdd63d9091e')">
-											<button class="btn btn-danger btn-sm deleteMember" onclick="removeResident('${resident.uuid}')">移除</button> 
-										</sec:authorize>
+										<c:if test="${householderName != resident.name }">
+											<sec:authorize access="hasRole('ROLE_64dd9241f6f14444bb25bbdd63d9091e')">
+												<button class="btn btn-danger btn-sm deleteMember" onclick="removeResident('${resident.uuid}')">移除</button> 
+											</sec:authorize>
+										</c:if>
 										<sec:authorize access="hasRole('ROLE_ef36fad1e3774a11b233067b3bf5f6a1')">
 											<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
 										</sec:authorize>

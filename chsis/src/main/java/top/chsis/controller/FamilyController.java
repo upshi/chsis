@@ -1,8 +1,6 @@
 package top.chsis.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
@@ -21,7 +18,6 @@ import top.chsis.model.Resident;
 import top.chsis.service.ICommunityService;
 import top.chsis.service.IFamilyService;
 import top.chsis.service.IResidentService;
-import top.chsis.util.StringUtil;
 import top.chsis.vo.FamilyVO;
 
 @Controller
@@ -110,22 +106,5 @@ public class FamilyController {
 		family.setCommunity(community);
 		familyService.updateByPrimaryKeySelective(family);
 		return "redirect:/family/familyInfo";
-	}
-	
-	@RequestMapping("/checkNumberUnique/{number}")
-	@ResponseBody
-	public Map<String, Object> checkNumberUnique(@PathVariable String number) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtil.isNoE(number)) {
-			map.put("result", "exist");
-		} else {
-			Family family = familyService.selectByNumber(number);
-			if(family == null) {
-				map.put("result", "inexistence");
-			} else {
-				map.put("result", "exist");
-			}
-		}
-		return map;
 	}
 }

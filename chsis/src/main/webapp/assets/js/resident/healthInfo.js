@@ -16,6 +16,15 @@ $(function(){
 	$('.btn-add-diseaseHistory').on('click', function(){
 		onAddDiseaseHistory();
 	});
+	
+	//日期选框
+	$(".default-date-picker").datepicker({
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        clearBtn: true,
+        language: "zh-CN",
+        todayHighlight: true
+    });
 })
 
 function onloadModal(){
@@ -161,14 +170,53 @@ function onShowDiseaseHistory(uuid) {
 			} 
 	});
 }
+//删除疾病史
+function deleteDiseaseHistory(btn) {
+	$.confirm({
+		keyboardEnabled : true,
+			title : '删除疾病史',
+			content : '此操作会删除该疾病史，而且操作不可撤销，确定删除？',
+			confirmButtonClass : 'btn-info',
+			cancelButtonClass : 'btn-danger',
+			confirm : function() {
+				$.ajax({
+					url : "diseaseHistory/delete/" + $(btn).attr('uuid'),
+					type : "GET",
+					cache : false,
+					dataType : "json",
+					success : function(data) {
+						if (data.result == "success") {
+							$.confirm({
+										keyboardEnabled : true,
+										title : '删除成功',
+										content : '成功删除该疾病史！',
+										confirmButtonClass : 'btn-info',
+										cancelButtonClass : 'btn-danger',
+										autoClose : 'confirm|3000'
+							});
+							$(btn).parent().parent().remove();
+						} else {
+							$.confirm({
+										keyboardEnabled : true,
+										title : '操作失败',
+										content : data.result,
+										confirmButtonClass : 'btn-info',
+										cancelButtonClass : 'btn-danger',
+										autoClose : 'confirm|3000'
+							});
+						}
+					}
+				});
+			}
+	});
+}
+
 
 //打开添加疾病史模态框
 function onAddDiseaseHistory() {
 	//绑定input元素失去焦点事件
 	$('#adddis-name').on('blur', checkName_add);
 	$('#adddis-startTime').on('blur', checkStartTime_add);
-	$('#adddis-endTime').on('blur', checkEndTime_add);
-	$('#adddis-description').on('blur', checkDescription_add);
 	
 	//绑定保存按钮点击事件
 	$('#adddis-submit').on('click', function(){
@@ -185,7 +233,7 @@ function onAddDiseaseHistory() {
 
 //表单校验
 function validate_adddis() {
-	if(checkName_add() && checkStartTime_add() && checkEndTime_add() && checkDescription_add()) {
+	if(checkName_add() && checkStartTime_add()) {
 		return true;
 	} else {
 		return false;
@@ -212,7 +260,7 @@ function checkStartTime_add() {
 	if(startTime == null || $.trim(startTime) == '') {
 		$('#adddis-startTimeGroup').removeClass('has-success');
 		$('#adddis-startTimeGroup').addClass('has-error');
-		$('#adddis-startTimeGroup .help-block').html('请输入疾病开始时间');
+		$('#adddis-startTimeGroup .help-block').html('请选择疾病开始时间');
 		return false;
 	} else {
 		$('#adddis-startTimeGroup').removeClass('has-error');
@@ -221,37 +269,6 @@ function checkStartTime_add() {
 		return true;
 	}
 }
-
-function checkEndTime_add() {
-	var endTime = $('#adddis-endTime').val();
-	if(endTime == null || $.trim(endTime) == '') {
-		$('#adddis-endTimeGroup').removeClass('has-success');
-		$('#adddis-endTimeGroup').addClass('has-error');
-		$('#adddis-endTimeGroup .help-block').html('请输入疾病痊愈时间');
-		return false;
-	} else {
-		$('#adddis-endTimeGroup').removeClass('has-error');
-		$('#adddis-endTimeGroup').addClass('has-success');
-		$('#adddis-endTimeGroup .help-block').html('');
-		return true;
-	}
-}
-
-function checkDescription_add() {
-	var description = $('#adddis-description').val();
-	if(description == null || $.trim(description) == '') {
-		$('#adddis-descriptionGroup').removeClass('has-success');
-		$('#adddis-descriptionGroup').addClass('has-error');
-		$('#adddis-descriptionGroup .help-block').html('请输入病情描述');
-		return false;
-	} else {
-		$('#adddis-descriptionGroup').removeClass('has-error');
-		$('#adddis-descriptionGroup').addClass('has-success');
-		$('#adddis-descriptionGroup .help-block').html('');
-		return true;
-	}
-}
-
 
 function getType(num) {
 	switch(num) {

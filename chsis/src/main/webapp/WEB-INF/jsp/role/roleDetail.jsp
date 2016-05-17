@@ -65,15 +65,19 @@
 							<div class="row">
 								<br>
 								<div class="col-sm-offset-3  col-sm-20">
-									<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
-										<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
+									<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
+										<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
+											<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										</sec:authorize>
+									</c:if>
 									<sec:authorize access="hasRole('ROLE_5888fb0706114603b6a18e052c39c8c3')">
 										<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
 									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
-										<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
+									<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
+										<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
+											<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										</sec:authorize>
+									</c:if>
 									<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">
 										<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
 									</sec:authorize>

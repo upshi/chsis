@@ -85,21 +85,25 @@ public class ResidentServiceImpl implements IResidentService {
 		return residentMapper.selectByIdNo(idNo);
 	}
 
-	public int insertResidentAndRole(Resident resident,Role role) {
+	public int insertResident(Resident resident) {
 		//新建居民时，把用户和角色的资源表也插进去
-		UserRole userRole = new UserRole(StringUtil.getUUID(), resident.getUuid(), role);
+		UserRole userRole = new UserRole(StringUtil.getUUID(), resident.getUuid(), new Role("4"));
 		
 		//插入居民时，为居民赋予系统角色-居民：ROLE_resident
 		int insert = residentMapper.insertSelective(resident) + userRoleMapper.insert(userRole);
 		return insert;
 	}
 
-	public int insertResidentAndFamilyAndRole(Resident resident, Family family,Role role) {
+	public int insertResidentAndFamily(Resident resident, Family family) {
 		//新建居民时，把用户和角色的资源表也插进去
-		UserRole userRole = new UserRole(StringUtil.getUUID(), resident.getUuid(), role);
+		UserRole role_resident = new UserRole(StringUtil.getUUID(), resident.getUuid(), new Role("4"));
+		UserRole role_householder = new UserRole(StringUtil.getUUID(), resident.getUuid(), new Role("5"));
 		
 		//插入居民时，为居民赋予系统角色-居民：ROLE_resident，同时插入家庭表
-		int insert = residentMapper.insert(resident) + familyMapper.insert(family) + userRoleMapper.insert(userRole);;
+		int insert = residentMapper.insert(resident) + 
+					 familyMapper.insert(family) + 
+					 userRoleMapper.insert(role_resident) +
+					 userRoleMapper.insert(role_householder);
 		return insert;
 	}
 

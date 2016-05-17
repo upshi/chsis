@@ -187,16 +187,6 @@
 											</div>
 										</div>
 										<div class="row container">
-											<div class="form-group" id="c-familyNumberGroup">
-												<div class="col-sm-3">
-													<div class="iconic-input right">
-														<input id="c-familyNumber" class="form-control" name="familyNumber" type="text" placeholder="请输入家庭编号">
-														<p class="help-block"></p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row container">
 											<div class="form-group" id="c-familyPhoneGroup">
 												<div class="col-sm-3">
 													<div class="iconic-input right">
