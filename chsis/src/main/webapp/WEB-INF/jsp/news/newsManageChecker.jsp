@@ -57,16 +57,16 @@
 			                    <input class="form-control" name="submitTime" type="text" placeholder="请输入提交时间">
 		                    	<select name="type" class="form-control">
 		                    		<option value="">新闻类型</option>
-		                    		<option value="0">医生寄语</option>
-		                    		<option value="1">每日健康</option>
-		                    		<option value="2">医院通知</option>
-		                    		<option value="3">社区公告</option>
+		                    		<option value="0" <c:if test="${type==0 }">selected</c:if>>医生寄语</option>
+		                    		<option value="1" <c:if test="${type==1 }">selected</c:if>>每日健康</option>
+		                    		<option value="2" <c:if test="${type==2 }">selected</c:if>>医院通知</option>
+		                    		<option value="3" <c:if test="${type==3 }">selected</c:if>>社区公告</option>
 		                    	</select>
 		                    	<select name="state" class="form-control">
-		                    		<option value="">新闻状态</option>
-		                    		<option value="0">审核中</option>
-		                    		<option value="1">审核未通过</option>
-		                    		<option value="2">审核通过</option>
+		                    		<option value="-1">新闻状态</option>
+		                    		<option value="0" <c:if test="${state==0 }">selected</c:if>>审核中</option>
+		                    		<option value="1" <c:if test="${state==1 }">selected</c:if>>审核未通过</option>
+		                    		<option value="2" <c:if test="${state==2 }">selected</c:if>>审核通过</option>
 		                    	</select>
 			                    <button class="btn btn-info">搜索</button>
 		                    </form><br/>

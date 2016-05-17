@@ -1,7 +1,5 @@
 package top.chsis.vo;
 
-import java.util.Date;
-
 /**
  * 
  * @ClassName: UserVO

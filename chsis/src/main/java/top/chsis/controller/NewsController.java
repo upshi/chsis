@@ -111,10 +111,14 @@ public class NewsController {
 		Integer realState = null;
 		Integer realType = null;
 		if(!StringUtil.isNoE(state)){
-			realState = Integer.parseInt(state);
+			if(!state.equals("-1")) {
+				realState = Integer.parseInt(state);
+				model.addAttribute("state", state);
+			}
 		} 
 		if(!StringUtil.isNoE(type)){
 			realType = Integer.parseInt(type);
+			model.addAttribute("type", type);
 		} 
 		news = new News(null, title, authorUuid, realType, submitTime, realState);
 		

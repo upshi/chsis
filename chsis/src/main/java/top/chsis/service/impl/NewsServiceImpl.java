@@ -34,7 +34,11 @@ public class NewsServiceImpl implements INewsService {
 		News select = newsMapper.selectByPrimaryKey(uuid);
 		News news = new News();
 		news.setUuid(uuid);
-		news.setClick(select.getClick() + 1);
+		int click = 0;
+		if(select.getClick() != null && !select.getClick().equals("")) {
+			click = select.getClick();
+		}
+		news.setClick(click + 1);
 		newsMapper.updateByPrimaryKeySelective(news);
 		return select;
 	}
