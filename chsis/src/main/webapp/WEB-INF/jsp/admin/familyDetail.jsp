@@ -117,15 +117,15 @@
 									<td>${resident.idNo }</td>
 									<td>${resident.phone }</td>
 									<td>
-										<sec:authorize access="hasRole('ROLE_2b5cfbe32aff47eaaa93074950c6b75b')">	
+										<%-- <sec:authorize access="hasRole('ROLE_2b5cfbe32aff47eaaa93074950c6b75b')">	
 											<button class="btn btn-danger btn-sm deleteResident" onclick="deleteResident('${resident.uuid}')">删除</button> 
-										</sec:authorize>
+										</sec:authorize> --%>
 										<sec:authorize access="hasRole('ROLE_ef36fad1e3774a11b233067b3bf5f6a1')">	
 											<button class="btn btn-primary btn-sm btn-residentDetail" uuid="${resident.uuid }">详情</button> 
 										</sec:authorize>
-										<sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">	
+										<%-- <sec:authorize access="hasRole('ROLE_4989828159714b6c83e6943f7c3b5c94')">	
 											<button class="btn btn-info btn-sm btn-edit-resident" uuid="${resident.uuid }">修改</button>
-										</sec:authorize>
+										</sec:authorize> --%>
 									</td>
 								</tr>
 							</c:forEach>
