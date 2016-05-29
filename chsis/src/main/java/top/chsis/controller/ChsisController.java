@@ -143,7 +143,7 @@ public class ChsisController {
 		}
 		resident.setBirth(birth);
 		Family family = familyService.selectByNumber(familyNumber);
-		resident.setFamily(family);;
+		resident.setFamily(family);
 
 		int insert = residentService.insertResident(resident);
 		if(insert == 2) {

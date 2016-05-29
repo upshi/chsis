@@ -306,7 +306,6 @@ public class ManagerController {
 			userRoleService.insertBatchByUserRoleVO(newUserRoleList);
 		}
 		
-		
 		//原有资源Set减去交集部分,得到删除的资源
 		oldRoleSet.removeAll(mixedRoleSet);
 		List<String> deleteUserRoleList = new ArrayList<String>();

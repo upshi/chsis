@@ -61,7 +61,7 @@ public class DoctorController {
 	
 	@RequestMapping("/manage")
 	public String manage(HttpSession session, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-		//得到所管理的医院
+		//得到医生所属于的医院
 		Hospital hospital = getManagedHospital(session);
 		String hospitalUuid = hospital.getUuid();
 		DoctorVO doctorVO = new DoctorVO(null, null, null, null, hospitalUuid);

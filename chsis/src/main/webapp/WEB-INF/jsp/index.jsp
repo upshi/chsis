@@ -34,7 +34,38 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							首页
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="col-sm-6">
+							<br/><br/><br/>
+							<img src="assets/image/school.jpg" alt="美丽工大"/>
+						</div>
+						<div class="col-sm-6">
+							<br/><br/>		
+							<h1 class="text-success">社区</h1><br/>
+							<div class="col-sm-offset-3">
+								<h4 class="text-warning">健康服务是城市卫生工作的重要组成部分，</h4><br/>
+							</div>	
+							<div class="col-sm-offset-2">
+								<h4 class="text-info">是实现人人享有初级卫生保健目标的基础环节，</h4><br/>
+							</div>	
+							<div class="col-sm-offset-1">
+								<h4 class="text-danger">社区健康服务的基本任务是使居民在社区可以享受</h4><br/>
+							</div>
+							<h4 class="text-success">
+								公共卫生服务和一般常见病、多发病的基本医疗服务。
+							</h4>	
+						</div>
+					</div>
+				</div>
 			</div>
 			<!--body wrapper end-->
 
