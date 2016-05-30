@@ -17,7 +17,6 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
-<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!-- fileinput组件样式 -->
 <link href="assets/fileinput/fileinput.min.css" rel="stylesheet">
@@ -325,7 +324,6 @@
 
 
 	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
 	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
@@ -334,7 +332,6 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/jquery-confirm.js"></script>
 	
 	<!-- fileinput组件 -->
 	<script type="text/javascript" src="assets/fileinput/fileinput.min.js"></script>
@@ -342,7 +339,6 @@
 	
 	<!-- Custom JS -->
 	<script src="assets/js/file.js"></script>
-	<script src="assets/js/jquery.base64.js"></script>
 	<script src="assets/js/hospitalManager/dropDownList.js"></script>
 	<script src="assets/js/hospitalManager/doctor.js"></script>
 	

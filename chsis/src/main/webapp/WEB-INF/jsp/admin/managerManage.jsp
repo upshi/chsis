@@ -234,7 +234,7 @@
 						</div>
 						<div class="col-sm-offset-4">
 							<div class="blank"></div>
-							<button class="btn btn-info" id="editm-submit">保存</button>
+							<button class="btn btn-info" id="submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
@@ -246,13 +246,11 @@
 	<!-- Modal End -->
 
 	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
 	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
 	<script src="assets/adminex/js/modernizr.min.js"></script>
 	<script src="assets/adminex/js/jquery.nicescroll.js"></script>
-	<script src="assets/js/jquery-confirm.js"></script>
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>

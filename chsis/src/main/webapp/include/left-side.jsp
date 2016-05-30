@@ -18,7 +18,7 @@
 				<img alt="" src="assets/adminex/images/photos/user-avatar.png" class="media-object">
 				<div class="media-body">
 					<h4>
-						<a href="#">John Doe</a>
+						<a href="#">${loginUser.userName }</a>
 					</h4>
 					<span>"欢迎您的登陆！"</span>
 				</div>
@@ -26,7 +26,7 @@
 
 			<h5 class="left-nav-title">用户信息</h5>
 			<ul class="nav nav-pills nav-stacked custom-nav">
-				<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+				<li><a><i class="fa fa-user"></i> ${loginUser.name }</a></li>
 				<li><a href="#"><i class="fa fa-cog"></i> 修改密码</a></li>
 				<li><a href="logout"><i class="fa fa-sign-out"></i> 登 出</a></li>
 			</ul>

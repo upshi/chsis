@@ -17,7 +17,6 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
-<link href="assets/css/jquery-confirm.css" rel="stylesheet">
 
 <!--你自己的样式文件 -->
 <link href="assets/css/hospitalManager/index.css" rel="stylesheet">
@@ -160,7 +159,6 @@
 	<!-- Modal End -->
 	
 	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="assets/adminex/js/jquery-1.10.2.min.js"></script>
 	<script src="assets/adminex/js/jquery-ui-1.9.2.custom.min.js"></script>
 	<script src="assets/adminex/js/jquery-migrate-1.2.1.min.js"></script>
 	<script src="assets/adminex/js/bootstrap.min.js"></script>
@@ -169,7 +167,6 @@
 
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
-	<script src="assets/js/jquery-confirm.js"></script>
 	<script src="assets/js/hospitalManager/department.js"></script>
 
 </body>

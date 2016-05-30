@@ -58,18 +58,18 @@ function onloadModal() {
 //打开修改居民基本信息的模态框
 function onEditBaseInfo(){
 	/*绑定失焦事件*/
-		$('#birth').on('blur',checkBirth);
-		$('#phone').on('blur',checkPhone);
-		
-		/*绑定提交按钮事件*/
-		$('#submit').on('click', function(){
-			//表单校验
-			var pass = checkBirth() && checkPhone();
-			if(pass) {
-				return true;
-			}
-			return false;
-		});
+	$('#birth').on('blur',checkBirth);
+	$('#phone').on('blur',checkPhone);
+	
+	/*绑定提交按钮事件*/
+	$('#submit').on('click', function(){
+		//表单校验
+		var pass = checkBirth() && checkPhone();
+		if(pass) {
+			return true;
+		}
+		return false;
+	});
 	$('#editBaseInfo').modal();
 }
 

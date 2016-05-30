@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,15 @@ import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.Community;
+import top.chsis.model.Doctor;
 import top.chsis.model.Family;
+import top.chsis.model.Manager;
 import top.chsis.model.News;
 import top.chsis.model.Resident;
+import top.chsis.model.User;
+import top.chsis.service.IDoctorService;
 import top.chsis.service.IFamilyService;
+import top.chsis.service.IManagerService;
 import top.chsis.service.INewsService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.RandomCodeUtil;
@@ -40,6 +47,12 @@ public class ChsisController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private IDoctorService doctorService;
+	
+	@Autowired
+	private IManagerService managerService;
 	
 	@RequestMapping("/userIndex")
 	public String userIndex() {
@@ -256,4 +269,70 @@ public class ChsisController {
 		return map;
 	}
 
+	//修改密码时检查原密码输入是否正确
+	@RequestMapping("/checkOldPassword/{password}")
+	@ResponseBody
+	public Map<String, Object> checkOldPassword(@PathVariable String password, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//获得当前用户
+		User loginUser = (User)session.getAttribute("loginUser");
+		String type = loginUser.getType();
+		String encodedPassword = null;
+		if(type.equals("admin")) {
+			Manager manager = managerService.selectByPrimaryKey(loginUser.getUuid());
+			encodedPassword = manager.getPassword();
+		} else if(type.equals("doctor")) {
+			Doctor doctor = doctorService.selectByPrimaryKey(loginUser.getUuid());
+			encodedPassword = doctor.getPassword();
+		} else {
+			Resident resident = residentService.selectByPrimaryKey(loginUser.getUuid());
+			encodedPassword = resident.getPassword();
+		}
+		
+		if(passwordEncoder.matches(password, encodedPassword)) {
+			map.put("result", "yes");
+		} else {
+			map.put("result", "no");
+		}
+		return map;
+	}
+	
+	//修改密码，修改密码前先判断用户类型
+	@RequestMapping("/changePassword")
+	@ResponseBody
+	public Map<String, Object> changePassword(User user, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		//Base64解码得到原始密码
+		String rawPassword = new String(Base64.decodeFast(user.getPassword()));
+		//BCrypt加密密码
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		
+		//获得当前用户
+		User loginUser = (User)session.getAttribute("loginUser");
+		String type = loginUser.getType();
+		
+		int update = 0;
+		if(type.equals("admin")) {
+			Manager manager = new Manager();
+			manager.setUuid(loginUser.getUuid());
+			manager.setPassword(encodedPassword);
+			update = managerService.updateByPrimaryKeySelective(manager);
+		} else if(type.equals("doctor")) {
+			Doctor doctor = new Doctor();
+			doctor.setUuid(loginUser.getUuid());
+			doctor.setPassword(encodedPassword);
+			update = doctorService.updateByPrimaryKeySelective(doctor);
+		} else {
+			Resident resident = new Resident();
+			resident.setUuid(loginUser.getUuid());
+			resident.setPassword(encodedPassword);
+			update = residentService.updateByPrimaryKeySelective(resident);
+		}
+		if(update == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
 }
