@@ -250,7 +250,6 @@ public class ChsisController {
 		return map;
 	}
 	
-	
 	//居民注册时，选择加入家庭，输入家庭编号后校验该家庭是否存在
 	@RequestMapping("/checkNumberUnique/{number}")
 	@ResponseBody
