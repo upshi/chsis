@@ -65,6 +65,9 @@ public class DiseaseTypeController {
 			diseaseType.setParentTypeUuid("1");
 		}
 		diseaseTypeService.insert(diseaseType);
+		if(diseaseType.getParentTypeUuid().equals("1")) {
+			return "redirect:/diseaseType/manage";
+		}
 		return "redirect:/diseaseType/list/" + diseaseType.getParentTypeUuid();
 	}
 	
