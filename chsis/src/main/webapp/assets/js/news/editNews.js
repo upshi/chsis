@@ -53,7 +53,7 @@ function submitNews() {
 	var title = $('#title').val();
 	var newsUuid = $('#newsUuid').val();
 	var content = $('#summernote').summernote('code');
-	if($.trim(title) == '' ||　$.trim(content) == '') {
+	if($.trim(title) == '' || $.trim(content) == '') {
 		$.confirm({
 			keyboardEnabled : true,
 			title : '提醒',

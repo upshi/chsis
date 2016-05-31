@@ -127,7 +127,7 @@ function createSubmit(){
 
 //表单校验
 function validate() {
-	if(checkUserName() && checkPassword() && checkRePassword() && checkName() && checkIdNo() &&　checkFamilyNumber()) {
+	if(checkUserName() && checkPassword() && checkRePassword() && checkName() && checkIdNo() && checkFamilyNumber()) {
 		return true;
 	} else {
 		return false;

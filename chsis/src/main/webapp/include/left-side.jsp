@@ -77,6 +77,7 @@
 			<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">	
 				<li id="navi_admin_role"><a href="role/manager"><i class="fa fa-users"></i> <span>角色管理</span></a></li>
 			</sec:authorize>
+			<li id="navi_diseaseType"><a href="diseaseType/manage"><i class="fa fa-users"></i> <span>疾病类型管理</span></a></li>
 			<!-- admin end -->
 			
 			<!-- doctor start -->
