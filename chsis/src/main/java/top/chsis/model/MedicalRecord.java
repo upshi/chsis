@@ -13,13 +13,13 @@ public class MedicalRecord implements Serializable {
 	private Resident patient;//就诊病人
 	private String time;//就诊时间
 	private Doctor doctor;//主诊医生
-	private String disease;//疾病名称
+	private Disease disease;//疾病名称
 	private String result;//就诊结果：描述，开了啥药~
 	private Integer state;//就诊记录的状态：0就诊中、1已就诊
 	
 	public MedicalRecord() {}
 	
-	public MedicalRecord(String uuid, Resident patient, String time, Doctor doctor, String disease, String result, Integer state) {
+	public MedicalRecord(String uuid, Resident patient, String time, Doctor doctor, Disease disease, String result, Integer state) {
 		super();
 		this.uuid = uuid;
 		this.patient = patient;
@@ -65,11 +65,11 @@ public class MedicalRecord implements Serializable {
 		this.doctor = doctor;
 	}
 
-	public String getDisease() {
+	public Disease getDisease() {
 		return disease;
 	}
 
-	public void setDisease(String disease) {
+	public void setDisease(Disease disease) {
 		this.disease = disease;
 	}
 

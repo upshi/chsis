@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import top.chsis.model.Community;
-import top.chsis.model.Family;
 import top.chsis.model.Hospital;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.Resident;

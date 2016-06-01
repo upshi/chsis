@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import top.chsis.model.CheckReport;
+import top.chsis.model.Disease;
 import top.chsis.model.DiseaseHistory;
 import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
@@ -267,7 +268,9 @@ public class ResidentController {
 		if(state != null && !state.equals("")){
 			realState = Integer.parseInt(state);
 		}
-		MedicalRecord medicalRecord = new MedicalRecord(null, resident, time, null, disease, null, realState);
+		Disease disease2 = new Disease();
+		disease2.setName(disease);
+		MedicalRecord medicalRecord = new MedicalRecord(null, resident, time, null, disease2, null, realState);
 		
 		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
 		List<MedicalRecord> medicalRecords = pageInfo.getList();

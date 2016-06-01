@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import top.chsis.model.Department;
 import top.chsis.model.Doctor;
-import top.chsis.model.Hospital;
 import top.chsis.util.StringUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,6 +41,7 @@ public class TestDoctor {
 		department.setUuid("1");
 		String uuid = StringUtil.getUUID();
 		Doctor doctor = new Doctor();
+		doctor.setUuid(uuid);
 		doctor.setDepartment(department);
 		doctor.setName("22222");
 		doctor.setNumber("22222");

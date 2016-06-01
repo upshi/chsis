@@ -1,22 +1,14 @@
 package top.chsis.dao;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
-import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import top.chsis.model.CheckReport;
-import top.chsis.model.Community;
-import top.chsis.model.Department;
 import top.chsis.model.DiseaseHistory;
-import top.chsis.model.Family;
-import top.chsis.model.Hospital;
 import top.chsis.model.Resident;
 import top.chsis.util.StringUtil;
 
@@ -75,6 +67,7 @@ public class TestDisease {
 		diseaseHistory.setName("精神科");
 		diseaseHistory.setType(4);
 		int update = diseaseHistoryMapper.updateByPrimaryKey(diseaseHistory);
+		System.out.println(update);
 		System.out.println(diseaseHistory);
 	}
 	@Test
@@ -82,6 +75,7 @@ public class TestDisease {
 		DiseaseHistory diseaseHistory = diseaseHistoryMapper.selectByPrimaryKey("1");
 		diseaseHistory.setName("精神科");
 		int update = diseaseHistoryMapper.updateByPrimaryKey(diseaseHistory);
+		System.out.println(update);
 		System.out.println(diseaseHistory);
 	}
 	@Test

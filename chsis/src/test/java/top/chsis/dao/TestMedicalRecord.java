@@ -9,8 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import top.chsis.model.Doctor;
-import top.chsis.model.Hospital;
-import top.chsis.model.ImmuneRecord;
 import top.chsis.model.MedicalRecord;
 import top.chsis.model.Resident;
 import top.chsis.util.StringUtil;
@@ -40,7 +38,6 @@ public class TestMedicalRecord {
 	@Test
 	public void testInsert() {
 		MedicalRecord medicalRecord = new MedicalRecord();
-		medicalRecord.setDisease("无");
 		Doctor doctor = new Doctor();
 		doctor.setUuid("2");
 		medicalRecord.setDoctor(doctor);
@@ -57,7 +54,6 @@ public class TestMedicalRecord {
 	@Test
 	public void testInsertSelective() {
 		MedicalRecord medicalRecord = new MedicalRecord();
-		medicalRecord.setDisease("无");
 		Doctor doctor = new Doctor();
 		doctor.setUuid("2");
 		medicalRecord.setDoctor(doctor);
@@ -75,7 +71,6 @@ public class TestMedicalRecord {
 	@Test
 	public void testUpdate() {
 		MedicalRecord medicalRecord = medicalRecordMapper.selectByPrimaryKey("1");
-		medicalRecord.setDisease("没有");
 		Doctor doctor = new Doctor();
 		doctor.setUuid("2");
 		medicalRecord.setDoctor(doctor);
@@ -92,7 +87,6 @@ public class TestMedicalRecord {
 	@Test
 	public void testUpdateByPrimaryKeySelective() {
 		MedicalRecord medicalRecord = medicalRecordMapper.selectByPrimaryKey("745127948a834ec7b520b9fb56551a0a");
-		medicalRecord.setDisease("没有");
 		medicalRecord.setResult("没有");
 		medicalRecord.setState(2);
 		medicalRecord.setTime("2016");

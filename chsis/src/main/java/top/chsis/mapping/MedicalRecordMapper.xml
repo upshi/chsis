@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="top.chsis.model.MedicalRecord" >
     <id column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
-    <result column="disease" property="disease" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="result" property="result" jdbcType="LONGVARCHAR" />
     <association column="patient_uuid" property="patient" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
     <association column="doctor_uuid" property="doctor" select="top.chsis.dao.DoctorMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
+    <association column="disease" property="disease" select="top.chsis.dao.DiseaseMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
   </resultMap>
   
    <resultMap id="MedicalRecordVOResultMap" type="top.chsis.vo.MedicalRecordVO" >
@@ -17,9 +17,9 @@
     <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="idNo" property="idNo" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
-    <result column="disease" property="disease" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="result" property="result" jdbcType="VARCHAR" />
+    <association column="disease" property="disease" select="top.chsis.dao.DiseaseMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
@@ -80,7 +80,7 @@
     select * from t_medicalrecord
     where 1=1
     <if test="disease!=null and disease!=''">
-		and disease LIKE CONCAT('%', #{disease},'%' )
+		and disease in (select uuid from t_disease where t_disease.name LIKE #{disease})
 	</if>
     <if test="time!=null and time!=''">
 		and time LIKE CONCAT('%', #{time},'%' )
@@ -101,7 +101,7 @@
       doctor_uuid, disease, state, 
       result)
     values (#{uuid,jdbcType=VARCHAR}, #{patient.uuid,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
-      #{doctor.uuid,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{doctor.uuid,jdbcType=VARCHAR}, #{disease.uuid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{result,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.chsis.model.MedicalRecord" >
@@ -111,13 +111,13 @@
         uuid,
       </if>
       <if test="patient != null" >
-        patient.uuid,
+        patient_uuid,
       </if>
       <if test="time != null" >
         time,
       </if>
       <if test="doctor != null" >
-        doctor.uuid,
+        doctor_uuid,
       </if>
       <if test="disease != null" >
         disease,
@@ -143,7 +143,7 @@
         #{doctor.uuid,jdbcType=VARCHAR},
       </if>
       <if test="disease != null" >
-        #{disease,jdbcType=VARCHAR},
+        #{disease.uuid,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
@@ -157,16 +157,16 @@
     update t_medicalrecord
     <set >
       <if test="patient != null" >
-        patient.uuid = #{patient_uuid,jdbcType=VARCHAR},
+        patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         time = #{time,jdbcType=VARCHAR},
       </if>
       <if test="doctor != null" >
-        doctor.uuid = #{doctor_uuid,jdbcType=VARCHAR},
+        doctor_uuid = #{doctor.uuid,jdbcType=VARCHAR},
       </if>
       <if test="disease != null" >
-        disease = #{disease,jdbcType=VARCHAR},
+        disease = #{disease.uuid,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
@@ -182,7 +182,7 @@
     set patient_uuid = #{patient.uuid,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR},
       doctor_uuid = #{doctor.uuid,jdbcType=VARCHAR},
-      disease = #{disease,jdbcType=VARCHAR},
+      disease = #{disease.uuid,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       result = #{result,jdbcType=LONGVARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
