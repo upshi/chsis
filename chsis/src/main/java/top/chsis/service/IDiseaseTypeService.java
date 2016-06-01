@@ -21,5 +21,7 @@ public interface IDiseaseTypeService {
     List<DiseaseType> selectByLevel(Integer level);
 
 	List<DiseaseType> selectByParentDiseaseType(String uuid);
+
+	DiseaseType selectByName(String name);
 	
 }

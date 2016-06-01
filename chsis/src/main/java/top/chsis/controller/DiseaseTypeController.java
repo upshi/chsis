@@ -71,4 +71,21 @@ public class DiseaseTypeController {
 		return "redirect:/diseaseType/list/" + diseaseType.getParentTypeUuid();
 	}
 	
+	//检查疾病类型名称是否重复
+	@RequestMapping("/checkDiseaseTypeNameUnique/{name}")
+	@ResponseBody
+	public Map<String, Object> checkDiseaseTypeNameUnique(@PathVariable String name) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(name)) {
+			map.put("result", "exist");
+		} else {
+			DiseaseType diseaseType = diseaseTypeService.selectByName(name);
+			if(diseaseType == null) {
+				map.put("result", "inexistence");
+			} else {
+				map.put("result", "exist");
+			}
+		}
+		return map;
+	}
 }

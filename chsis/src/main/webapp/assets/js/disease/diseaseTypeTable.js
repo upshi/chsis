@@ -21,16 +21,33 @@ $(function(){
 
 function checkDiseaseTypeName_add() {
 	var name = $('#addDiseaseType-name').val();
+	var flag = false;
 	if(name == null || $.trim(name) == '') {
 		$('#addDiseaseTypeNameGroup').removeClass('has-success');
 		$('#addDiseaseTypeNameGroup').addClass('has-error');
 		$('#addDiseaseTypeNameGroup .help-block').html('请输入疾病类型名称');
 		return false;
 	} else {
-		$('#addDiseaseTypeNameGroup').removeClass('has-error');
-		$('#addDiseaseTypeNameGroup').addClass('has-success');
-		$('#addDiseaseTypeNameGroup .help-block').html('');
-		return true;
+			$.ajax({
+				url : "diseaseType/checkDiseaseTypeNameUnique/" + name ,
+				type : "GET" ,
+				cache : false , 
+				async : false , 
+				dataType : "json" ,
+				success : function(data) {
+					if(data.result == "exist") {
+						$('#addDiseaseTypeNameGroup').removeClass('has-success');
+						$('#addDiseaseTypeNameGroup').addClass('has-error');
+						$('#addDiseaseTypeNameGroup .help-block').html('您输入的疾病类型名称已存在！');
+					} else {
+						$('#addDiseaseTypeNameGroup').removeClass('has-error');
+						$('#addDiseaseTypeNameGroup').addClass('has-success');
+						$('#addDiseaseTypeNameGroup .help-block').html('');
+						flag = true;
+					}
+				}
+			});	
+			return flag;
 	}
 }
 

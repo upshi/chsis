@@ -43,4 +43,8 @@ public class DiseaseServiceImpl implements IDiseaseService {
 		return diseaseMapper.selectByDiseaseType(uuid);
 	}
 
+	public Disease selectByName(String name) {
+		return diseaseMapper.selectByName(name);
+	}
+
 }

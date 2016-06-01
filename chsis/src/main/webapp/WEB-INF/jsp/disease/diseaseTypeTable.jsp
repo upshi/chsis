@@ -18,8 +18,6 @@
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
-<!--你自己的样式文件 -->
-<link href="assets/css/disease/diseaseTypeTable.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
 	<section>
@@ -52,10 +50,14 @@
 							<c:if test="${currentType != null}">${currentType.name}</c:if>
 							<c:if test="${currentType == null}">疾病类型</c:if>
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-add-diseaseType">添加类型</button>
-								<c:if test="${currentType != null}">
-									<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
-								</c:if>
+								<sec:authorize access="hasRole('ROLE_eb1d31a9abe84712a6410a7281f0b34e')">
+									<button class="btn btn-warning pull-left btn-add-diseaseType" style="margin-right:5px;">添加类型</button>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_d9584d4b35824d4890b5edc1d61d80ca')">
+									<c:if test="${currentType != null}">
+										<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
+									</c:if>
+								</sec:authorize>	
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -65,13 +67,17 @@
 							<c:forEach begin="0" end="${size / 5 + 1}" step="1" varStatus="id">
 								<tr>
 									<c:forEach begin="${id.index * 5 }" end="${id.index * 5 + 4}" step="1" items="${diseaseTypes }" var="diseaseType">
-										<!-- 如果是不是最终类型， 则链接去的是疾病类型 -->
-										<c:if test="${diseaseType.last == 0 }">
-											<td><a href="diseaseType/list/${diseaseType.uuid }">${diseaseType.name }</a></td>
-										</c:if>
-										<c:if test="${diseaseType.last == 1}">
-											<td><a href="disease/list/${diseaseType.uuid }">${diseaseType.name }</a></td>
-										</c:if>
+										<sec:authorize access="hasRole('ROLE_aeb205f1262d4c3bb8654db532ee5db5')">
+											<!-- 如果是不是最终类型， 则链接去的是疾病类型 -->
+											<c:if test="${diseaseType.last == 0 }">
+												<td><a href="diseaseType/list/${diseaseType.uuid }">${diseaseType.name }</a></td>
+											</c:if>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_8b94bb2f3f79436b9d2426e213a79133')">	
+											<c:if test="${diseaseType.last == 1}">
+												<td><a href="disease/list/${diseaseType.uuid }">${diseaseType.name }</a></td>
+											</c:if>
+										</sec:authorize>	
 									</c:forEach>
 								</tr>
 							</c:forEach>
@@ -137,7 +143,9 @@
 							<input type="hidden" name="last" value="1">
 						</c:if>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="addDiseaseType-submit">保存</button>
+							<sec:authorize access="hasRole('ROLE_eb1d31a9abe84712a6410a7281f0b34e')">
+								<button class="btn btn-info" id="addDiseaseType-submit">保存</button>
+							</sec:authorize>	
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

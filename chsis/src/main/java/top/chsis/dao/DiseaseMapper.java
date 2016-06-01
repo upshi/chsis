@@ -18,4 +18,6 @@ public interface DiseaseMapper {
     int updateByPrimaryKey(Disease record);
     
     List<Disease> selectByDiseaseType(String uuid);
+    
+    Disease selectByName(String name);
 }

@@ -24,6 +24,13 @@
     where diseaseTypeUuid = #{uuid,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_disease
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_disease
     where uuid = #{uuid,jdbcType=VARCHAR}

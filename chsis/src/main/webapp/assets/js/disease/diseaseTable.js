@@ -18,19 +18,35 @@ $(function(){
 	$('#addDisease-name').on('blur',checkDiseaseName_add);
 })
 
-
 function checkDiseaseName_add() {
 	var name = $('#addDisease-name').val();
+	var flag = false;
 	if(name == null || $.trim(name) == '') {
 		$('#addDiseaseNameGroup').removeClass('has-success');
 		$('#addDiseaseNameGroup').addClass('has-error');
 		$('#addDiseaseNameGroup .help-block').html('请输入疾病类型名称');
 		return false;
 	} else {
-		$('#addDiseaseNameGroup').removeClass('has-error');
-		$('#addDiseaseNameGroup').addClass('has-success');
-		$('#addDiseaseNameGroup .help-block').html('');
-		return true;
+			$.ajax({
+				url : "disease/checkDiseaseUnique/" + name ,
+				type : "GET" ,
+				cache : false , 
+				async : false , 
+				dataType : "json" ,
+				success : function(data) {
+					if(data.result == "exist") {
+						$('#addDiseaseNameGroup').removeClass('has-success');
+						$('#addDiseaseNameGroup').addClass('has-error');
+						$('#addDiseaseNameGroup .help-block').html('您输入的疾病名称已存在！');
+					} else {
+						$('#addDiseaseNameGroup').removeClass('has-error');
+						$('#addDiseaseNameGroup').addClass('has-success');
+						$('#addDiseaseNameGroup .help-block').html('');
+						flag = true;
+					}
+				}
+			});	
+			return flag;
 	}
 }
 
@@ -77,5 +93,46 @@ function ajaxDelete(uuid) {
 				});
 			}
 		} 
+	});
+}
+
+//删除疾病的操作
+function deleteDisease(uuid,currentTypeUuid) {
+	$.confirm({
+		keyboardEnabled : true,
+			title : '删除疾病',
+			content : '此操作将删除该疾病，而且操作不可撤销，确定删除？',
+			confirmButtonClass : 'btn-info',
+			cancelButtonClass : 'btn-danger',
+			confirm : function() {
+				$.ajax({
+					url : "disease/delete/" + uuid,
+					type : "GET",
+					cache : false,
+					dataType : "json",
+					success : function(data) {
+						if (data.result == "success") {
+							$.confirm({
+										keyboardEnabled : true,
+										title : '删除成功',
+										content : '成功删除该疾病！',
+										confirmButtonClass : 'btn-info',
+										cancelButtonClass : 'btn-danger',
+										autoClose : 'confirm|3000'
+							});
+							window.location.href = "disease/list/" + currentTypeUuid;
+						} else {
+							$.confirm({
+										keyboardEnabled : true,
+										title : '操作失败',
+										content : data.result,
+										confirmButtonClass : 'btn-info',
+										cancelButtonClass : 'btn-danger',
+										autoClose : 'confirm|3000'
+							});
+						}
+					}
+				});
+			}
 	});
 }

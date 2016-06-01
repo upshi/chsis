@@ -20,4 +20,6 @@ public interface IDiseaseService {
 
 	List<Disease> selectByDiseaseType(String uuid);
 
+	Disease selectByName(String name);
+
 }

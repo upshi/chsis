@@ -18,8 +18,6 @@
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
 
-<!--你自己的样式文件 -->
-<link href="assets/css/disease/diseaseTable.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
 	<section>
@@ -52,8 +50,12 @@
 							<c:if test="${currentType != null}">${currentType.name}</c:if>
 							<c:if test="${currentType == null}">疾病类型</c:if>
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-add-disease">添加疾病</button>
-								<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
+								<sec:authorize access="hasRole('ROLE_f0365f80b4e1484a8682b3a8f8e89251')">	
+									<button class="btn btn-warning pull-left btn-add-disease" style="margin-right:5px;">添加疾病</button>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_d9584d4b35824d4890b5edc1d61d80ca')">	
+									<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
+								</sec:authorize>	
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -63,7 +65,12 @@
 							<c:forEach begin="0" end="${size / 5 + 1}" step="1" varStatus="id">
 								<tr>
 									<c:forEach begin="${id.index * 5 }" end="${id.index * 5 + 4}" step="1" items="${diseases }" var="disease">
-										<td>${disease.name }</td>
+										<td>
+											${disease.name }
+											<sec:authorize access="hasRole('ROLE_cb3e9b91078a4458adda2aa4f716a2d4')">		
+												<span class="but btn-primary btn-sm" onclick="deleteDisease('${disease.uuid}','${currentType.uuid }')" style="margin-left:5px;">删除</span>
+											</sec:authorize>	
+										</td>
 									</c:forEach>
 								</tr>
 							</c:forEach>
@@ -106,7 +113,9 @@
 						</div>
 						
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="addDisease-submit">保存</button>
+							<sec:authorize access="hasRole('ROLE_f0365f80b4e1484a8682b3a8f8e89251')">
+								<button class="btn btn-info" id="addDisease-submit">保存</button>
+							</sec:authorize>	
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>
