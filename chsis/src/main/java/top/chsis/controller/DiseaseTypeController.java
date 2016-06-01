@@ -88,4 +88,21 @@ public class DiseaseTypeController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("/getDiseaseType")
+	@ResponseBody
+	public Map<String, Object> getDiseaseType() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<DiseaseType> diseaseTypes = diseaseTypeService.selectByLevel(1);
+		
+		if(diseaseTypes != null) {
+			map.put("result", "success");
+			map.put("diseaseTypes", diseaseTypes);
+		} else {
+			map.put("result", "failure");
+		}
+	
+		return map;
+	}
 }

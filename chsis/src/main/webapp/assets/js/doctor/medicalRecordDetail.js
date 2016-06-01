@@ -1,64 +1,82 @@
 $(function(){
+	//页面加载时把疾病的级联下拉框加载出来
+	$('select').on('change', onSelect);
+	
+	$.ajax({
+			url : "diseaseType/getDiseaseType",
+			type : "GET" ,
+			cache : false , 
+			dataType : "json" ,
+			success : function(data) {
+				if(data.result == "success") {
+					for(var i in data.diseaseTypes) {
+	           			$('.diseaseType').append('<option value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
+			        }
+				} else {
+					alert('失败');
+				}
+			} 		
+		});
+	
 	var flag = false;
-	$('.btn-edit').on('click', function() {
-		onEdit();
-	})
+	$('.btn-editDiseaseName').on('click', function() {
+		$('#editDiseaseName').modal();
+	});
+	
+	$('.btn-editResult').on('click', function() {
+		onEditResult();
+	});
+	
+	//确认完成本次就诊按钮
+	$('.btn-editState').on('click', function(){
+		var uuid = $(this).attr('uuid');
+		onEditState(uuid);
+	});
+	
 	$('.btn-add-checkReport').on('click', function() {
 		onAddCheckReport();
-	})
+	});
 	
 	$('#checkReportPhoto').on('click', function() {
 		var urlImg = $('#checkReportPhoto').attr('urlImg');
 		$('#urlImg').attr('src',urlImg);
 		$('#checkReportPhotoDetail').modal();
-	})
+	});
+	
 })
 
-//打开编辑就诊信息的模态框
-function onEdit(){
+//级联查询疾病，放在select里
+function onSelect() {
+	$(this).nextAll('select').remove();
+	var value = $(this).attr('value');
+	var text = $(this).html();
+	var newSelect = '<select class="form-control">';
+	newSelect += '<option value="'+ value + '>'+ text +'</option>';
+	newSelect += '</select>';
+	$('#selectDiv').append(newSelect);
+	$('select').on('change', onSelect);
+}
+
+//打开添加疾病描述的模态框
+function onEditResult(){
 	//绑定input元素失去焦点事件
-	$('#editm-disease').on('blur', checkDisease_edit);
 	$('#editm-result').on('blur', checkResult_edit);
 	
 	//绑定保存按钮点击事件
-	$('#editm-submit').on('click', function(){
+	$('#editmr-submit').on('click', function(){
 		//表单校验
-		var pass = validate_editm();
+		var pass = checkResult_edit();
 		if(pass) {
 			return true;
 		}
 		return false;
 	});
-	$('#editMedicalRecord').modal();
-}
-
-//表单校验
-function validate_editm() {
-	if(checkDisease_edit() && checkResult_edit()) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function checkDisease_edit() {
-	var disease = $('#editm-disease').val();
-	if(disease == null || $.trim(disease) == '') {
-		$('#editm-diseaseGroup').removeClass('has-success');
-		$('#editm-diseaseGroup').addClass('has-error');
-		$('#editm-diseaseGroup .help-block').html('请输入疾病名称');
-		return false;
-	} else {
-		$('#editm-diseaseGroup').removeClass('has-error');
-		$('#editm-diseaseGroup').addClass('has-success');
-		$('#editm-diseaseGroup .help-block').html('');
-		return true;
-	}
+	$('#editResult').modal();
 }
 
 function checkResult_edit() {
-	var disease = $('#editm-result').val();
-	if(disease == null || $.trim(disease) == '') {
+	var result = $('#editm-result').val();
+	if(result == null || $.trim(result) == '') {
 		$('#editm-resultGroup').removeClass('has-success');
 		$('#editm-resultGroup').addClass('has-error');
 		$('#editm-resultGroup .help-block').html('请输入就诊结果描述');
@@ -69,6 +87,48 @@ function checkResult_edit() {
 		$('#editm-resultGroup .help-block').html('');
 		return true;
 	}
+}
+
+//更改就诊状态为已完成本次就诊
+function onEditState(uuid) {
+	$.confirm({
+		keyboardEnabled : true,
+		title : '确定完成本次就诊',
+		content : '此操作会将本次就诊状态改为已完成状态，请确认是否更改？',
+		confirmButtonClass : 'btn-info',
+		cancelButtonClass : 'btn-danger',
+		confirm : function() {
+			$.ajax({
+				url : "medicalRecord/editState/" + uuid ,
+				type : "GET" ,
+				cache : false , 
+				async : false , 
+				dataType : "json" ,
+				success : function(data) {
+					if(data.result == "success") {
+						$.confirm({
+							keyboardEnabled : true,
+							title : '更改成功',
+							content : '就诊状态已变为已完成本次就诊！',
+							confirmButtonClass : 'btn-info',
+							cancelButtonClass : 'btn-danger',
+							autoClose : 'confirm|3000'
+						});
+						window.location.href = "medicalRecord/finishedMedicalRecordDetail/" + uuid;
+					} else {
+						$.confirm({
+							keyboardEnabled : true,
+							title : '操作失败',
+							content : data.result,
+							confirmButtonClass : 'btn-info',
+							cancelButtonClass : 'btn-danger',
+							autoClose : 'confirm|3000'
+						});
+					}
+				} 
+			});
+		}
+	});
 }
 
 function onAddCheckReport() {

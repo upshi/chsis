@@ -23,4 +23,5 @@ public interface DiseaseTypeMapper {
     DiseaseType selectByName(String name);
     
     List<DiseaseType> selectByParentDiseaseType(String uuid);
+    
 }

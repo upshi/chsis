@@ -23,6 +23,7 @@
 
 <!--你自己的样式文件 -->
 <link href="assets/css/doctor/index.css" rel="stylesheet">
+<link href="assets/css/doctor/index.css" rel="stylesheet">
 </head>
 <body class="sticky-header">
 	<section>
@@ -51,7 +52,9 @@
 						<h3 class="panel-title">
 							就诊记录
 							<span class="tools pull-right"> 
-								<button class="btn btn-warning pull-left btn-edit">编辑</button>
+								<button class="btn btn-success pull-left btn-editDiseaseName">选择疾病名称</button>
+								<button class="btn btn-warning pull-left btn-editResult">编辑疾病描述</button>
+								<button class="btn btn-info pull-left btn-danger btn-editState" uuid="${medicalRecord.uuid }">完成本次就诊</button>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>
@@ -92,7 +95,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>疾病名称：</b></label>
 									<div class="col-sm-10">
-										<div style="margin-top:7px;">${medicalRecord.disease }</div>
+										<div style="margin-top:7px;">${medicalRecord.disease.name }</div>
 									</div>
 								</div>
 							</div>
@@ -163,7 +166,7 @@
 	</section>
 
 	<!-- Modal Start -->
-	<div class="modal fade" id="editMedicalRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editDiseaseName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -178,16 +181,40 @@
 					<form class="form-horizontal" method="post" action="medicalRecord/edit">
 						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
 						<div class="row container">
-							<div class="form-group" id="editm-diseaseGroup">
-								<label class="col-sm-2 control-label">疾病名称：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<input id="editm-disease" class="form-control" type="text" name="disease" placeholder="请输入疾病名称" value="${medicalRecord.disease }">
-										<p class="help-block"></p>
+							<div class="form-group">
+								<div class="col-sm-2">
+									<div id="selectDiv">
+										<select class="form-control diseaseType" name="Uuid"></select>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="col-sm-offset-4">
+							<button class="btn btn-info" id="editm-submit">保存</button>
+							<button class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+	
+	<!-- Modal Start -->
+	<div class="modal fade" id="editResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h5 class="modal-title text-left">
+						<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 就诊记录
+					</h5>
+				</div>
+				<div class="modal-body row">
+					<form class="form-horizontal" method="post" action="medicalRecord/edit">
+						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
 						<div class="row container">
 							<div class="form-group" id="editm-resultGroup">
 								<label class="col-sm-2 control-label">就诊结果：</label>
@@ -199,33 +226,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="row container">
-							<div class="form-group" id="editm-diseaseGroup">
-								<label class="col-sm-2 control-label">就诊状态：</label>
-								<div class="col-sm-3">
-									<div class="iconic-input right">
-										<c:if test="${medicalRecord.state==0 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0" checked> 未完成就诊
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1"> 已完成就诊
-											</label>
-										</c:if>
-										<c:if test="${medicalRecord.state==1 }">
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="0"> 未完成本次就诊
-											</label> 
-											<label class="radio-inline"> 
-												<input type="radio" name="state" value="1" checked> 已完成本次就诊
-											</label>
-										</c:if>
-									</div>
-								</div>
-							</div>
-						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="editm-submit">保存</button>
+							<button class="btn btn-info" id="editmr-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

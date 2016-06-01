@@ -2,7 +2,9 @@ package top.chsis.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -74,6 +77,7 @@ public class MedicalRecordController {
 	@RequestMapping("/edit")
 	public String edit(MedicalRecord medicalRecord, Model model) {
 		medicalRecordService.updateByPrimaryKeySelective(medicalRecord);
+		medicalRecord = medicalRecordService.selectByPrimaryKey(medicalRecord.getUuid());
 		model.addAttribute("medicalRecord", medicalRecord);
 		if(medicalRecord.getState() == MedicalRecord.VISITED) {
 			return "redirect:/medicalRecord/finishedMedicalRecordDetail/" + medicalRecord.getUuid();
@@ -193,5 +197,20 @@ public class MedicalRecordController {
 		}else {
 			return "doctor/finishedMedicalRecord";
 		}
+	}
+	
+	@RequestMapping("/editState/{uuid}")
+	@ResponseBody
+	public Map<String, String> editState(Model model, @PathVariable String uuid) {
+		Map<String, String> map = new HashMap<String, String>();
+		MedicalRecord medicalRecord = medicalRecordService.selectByPrimaryKey(uuid);
+		medicalRecord.setState(MedicalRecord.VISITED);
+		int i = medicalRecordService.updateByPrimaryKeySelective(medicalRecord);
+		if(i == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
 	}
 }

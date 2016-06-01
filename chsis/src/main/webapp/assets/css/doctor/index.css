@@ -87,3 +87,10 @@ table .detail {
 .blank{
     height: 10px;
 }
+
+.btn-editDiseaseName {
+	margin-right:5px;
+}
+.btn-editResult {
+	margin-right:5px;
+}

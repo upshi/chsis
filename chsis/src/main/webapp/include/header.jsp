@@ -75,7 +75,7 @@
 					</div>
 					<div class="row container">
 						<div class="form-group">
-							<div class="col-sm-offset-2">
+							<div class="col-sm-3 col-sm-offset-2">
 								<button class="btn btn-default" data-dismiss="modal">取消</button>
 								<button class="btn btn-primary header-btn-submit">保存</button>
 							</div>
