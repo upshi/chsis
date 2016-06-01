@@ -53,7 +53,7 @@
 							<c:if test="${currentType == null}">疾病类型</c:if>
 							<span class="tools pull-right"> 
 								<button class="btn btn-warning pull-left btn-add-disease">添加疾病</button>
-								<button class="btn btn-warning pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
+								<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>

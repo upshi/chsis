@@ -54,7 +54,7 @@
 							<span class="tools pull-right"> 
 								<button class="btn btn-warning pull-left btn-add-diseaseType">添加类型</button>
 								<c:if test="${currentType != null}">
-									<button class="btn btn-warning pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
+									<button class="btn btn-danger pull-left btn-delete-diseaseType" uuid="${currentType.uuid }">删除类型</button>
 								</c:if>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
