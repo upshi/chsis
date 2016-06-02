@@ -28,5 +28,4 @@ public interface IMedicalRecordService {
 
 	PageInfo<MedicalRecord> selectByConditionAndPagingInResident(MedicalRecord medicalRecord, int page, int size);
 	
-	PageInfo<MedicalRecordVO> selectByConditionAndPagingInResidentVO(MedicalRecordVO medicalRecordVO, int page, int size);
 }

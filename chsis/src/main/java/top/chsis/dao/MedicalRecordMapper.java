@@ -26,5 +26,4 @@ public interface MedicalRecordMapper {
 	
 	List<MedicalRecord> selectByConditionInResident(MedicalRecord medicalRecord);
 	
-	List<MedicalRecordVO> selectByConditionInResidentVO(MedicalRecordVO medicalRecordVO);
 }

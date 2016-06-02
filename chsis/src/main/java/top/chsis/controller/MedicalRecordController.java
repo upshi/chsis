@@ -86,6 +86,20 @@ public class MedicalRecordController {
 		}
 	}
 	
+	@RequestMapping("/editDiseaseName")
+	@ResponseBody
+	public Map<String, String> editDiseaseName(MedicalRecord medicalRecord, Model model) {
+		Map<String, String> map = new HashMap<String, String>();
+		int result = medicalRecordService.updateByPrimaryKeySelective(medicalRecord);
+		medicalRecord = medicalRecordService.selectByPrimaryKey(medicalRecord.getUuid());
+		if(result == 1) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "failure");
+		}
+		return map;
+	}
+	
 	@RequestMapping("/unfinishedMedicalRecordDetail/{uuid}")
 	public String unfinishedMedicalRecordDetail(@PathVariable String uuid, Model model) {
 		MedicalRecord medicalRecord = medicalRecordService.selectByPrimaryKey(uuid);

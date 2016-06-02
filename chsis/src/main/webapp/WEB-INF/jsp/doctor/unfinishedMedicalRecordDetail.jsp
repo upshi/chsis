@@ -95,7 +95,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>疾病名称：</b></label>
 									<div class="col-sm-10">
-										<div style="margin-top:7px;">${medicalRecord.disease.name }</div>
+										<div id="diseaseName" style="margin-top:7px;">${medicalRecord.disease.name }</div>
 									</div>
 								</div>
 							</div>
@@ -178,7 +178,7 @@
 					</h5>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" method="post" action="medicalRecord/edit">
+					<form class="form-horizontal" method="post" >
 						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
 						<div class="row container">
 							<div class="form-group">
@@ -190,7 +190,7 @@
 							</div>
 						</div>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="editm-submit">保存</button>
+							<button uuid="${medicalRecord.uuid }" class="btn btn-info" id="editm-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

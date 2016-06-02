@@ -265,20 +265,21 @@ public class ResidentController {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
-		/*Integer realState = null;
+		Integer realState = null;
 		if(state != null && !state.equals("")){
 			realState = Integer.parseInt(state);
-		}*/
+		}
 		
 		//构建Disease对象
 		Disease disease = new Disease();
 		disease.setName(diseaseName);
 		
 		//构建MedicalRecordVO对象
-		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, time, disease, state, resident);
+		//MedicalRecord medicalRecord = new MedicalRecord(null, time, disease, state, resident);
+		MedicalRecord medicalRecord = new MedicalRecord(null, resident, time, null, disease, null, realState);
 		
-		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPagingInResidentVO(medicalRecordVO, page, size);
-		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
+		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
+		List<MedicalRecord> medicalRecords = pageInfo.getList();
 		model.addAttribute("medicalRecords", medicalRecords);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());

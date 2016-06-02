@@ -83,22 +83,10 @@
     <if test="time!=null and time!=''">
 		and time LIKE CONCAT('%', #{time},'%' )
 	</if>
-	<if test="state!=null and state!=''">
-		and state = #{state}
+	<if test="disease !=null and disease.name !=''">
+		and disease in (select uuid from t_disease where name LIKE CONCAT('%', #{disease.name},'%' ) ) 
 	</if>
-	and patient_uuid = #{patient.uuid}
-  </select>
-  
-  <select id="selectByConditionInResidentVO" resultMap="MedicalRecordVOResultMap" parameterType="top.chsis.model.MedicalRecord" >
-    select m.uuid, m.patient_uuid, m.time, m.doctor_uuid, m.disease, m.state, m.result, d.name from t_medicalrecord m, t_disease d
-    where 1=1
-    <if test="disease!=null and disease!=''">
-		and d.name LIKE CONCAT('%', #{disease.name},'%' )
-	</if>
-    <if test="time!=null and time!=''">
-		and time LIKE CONCAT('%', #{time},'%' )
-	</if>
-	<if test="state!=null and state!=''">
+	<if test="state!=null">
 		and state = #{state}
 	</if>
 	and patient_uuid = #{patient.uuid}

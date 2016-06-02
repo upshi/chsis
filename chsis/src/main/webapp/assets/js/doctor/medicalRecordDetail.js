@@ -43,7 +43,47 @@ $(function(){
 		$('#checkReportPhotoDetail').modal();
 	});
 	
+	//选择疾病名称确定时的点击事件
+	$('#editm-submit').on('click', function() {
+		selectDisease($(this).attr('uuid'));
+		return false;
+	});
+	
 })
+
+function selectDisease(uuid) {
+	//取到最后一个select框的选中的 option
+	var option = $('#selectDiv').find('select').last().find('option:selected');
+	//判断有没有last属性，如果有且last属性是0或1,说明选择的是疾病类型而非疾病，提醒。
+	var last = $(option).attr('last');
+	if(last == '0' || last== '1') {
+		$.confirm({
+			keyboardEnabled : true,
+			title : '选择错误',
+			content : '请选择具体疾病',
+			confirmButtonClass : 'btn-info',
+			cancelButtonClass : 'btn-danger',
+			autoClose : 'confirm|3000'
+		});
+	}
+	
+	//如果选择的是疾病，则获取疾病的uuid，更改就诊记录的疾病属性。
+	var diseaseUuid = $(option).attr('value');
+	var diseaseName = $(option).text();
+	$.ajax({
+		url : "medicalRecord/editDiseaseName" ,
+		type : "POST" ,
+		data : {'uuid' : uuid, 'disease.uuid' : diseaseUuid},
+		cache : false , 
+		async : false , 
+		dataType : "json" ,
+		success : function(data) {
+			$('#diseaseName').text(diseaseName);
+			$('#editDiseaseName').modal('hide');
+		} 
+	});
+	
+}
 
 //级联查询疾病，放在select里
 function onSelect() {
@@ -66,16 +106,16 @@ function onSelectDiseaseType(diseaseTypeUuid) {
 		dataType : "json" ,
 		success : function(data) {
 			if(data.result == "success") {
-				var newSelect = '<select class="form-control diseaseTypeSelect">';
-				for(var i in data.diseaseTypes) {
-					newSelect += '<option last="'+ data.diseaseTypes[i].last + '" value="'+ data.diseaseTypes[i].uuid + '">'+ data.diseaseTypes[i].name +'</option>';
+				if(data.diseaseTypes.length != 0) {
+					var newSelect = '<select class="form-control diseaseTypeSelect">';
+					for(var i in data.diseaseTypes) {
+						newSelect += '<option last="'+ data.diseaseTypes[i].last + '" value="'+ data.diseaseTypes[i].uuid + '">'+ data.diseaseTypes[i].name +'</option>';
+					}
+					newSelect += '</select>';
+					$('#selectDiv').append(newSelect);
+					$('.diseaseTypeSelect').on('change', onSelect);
 				}
-				newSelect += '</select>';
-				$('#selectDiv').append(newSelect);
-				$('.diseaseTypeSelect').on('change', onSelect);
-			} else {
-				
-			}
+			} 
 		} 
 	});
 }
@@ -89,15 +129,15 @@ function onSelectDisease(diseaseTypeUuid) {
 		dataType : "json" ,
 		success : function(data) {
 			if(data.result == "success") {
-				var newSelect = '<select class="form-control">';
-				for(var i in data.diseases) {
-					newSelect += '<option value="'+ data.diseases[i].uuid + '">'+ data.diseases[i].name +'</option>';
+				if(data.diseases.length != 0) {
+					var newSelect = '<select class="form-control">';
+					for(var i in data.diseases) {
+						newSelect += '<option value="'+ data.diseases[i].uuid + '">'+ data.diseases[i].name +'</option>';
+					}
+					newSelect += '</select>';
+					$('#selectDiv').append(newSelect);
 				}
-				newSelect += '</select>';
-				$('#selectDiv').append(newSelect);
-			} else {
-				
-			}
+			} 
 		} 
 	});
 }
