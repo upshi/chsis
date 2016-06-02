@@ -184,7 +184,7 @@
 							<div class="form-group">
 								<div class="col-sm-2">
 									<div id="selectDiv">
-										<select class="form-control diseaseType" name="Uuid"></select>
+										<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
 									</div>
 								</div>
 							</div>

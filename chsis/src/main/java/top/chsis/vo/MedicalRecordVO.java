@@ -1,5 +1,7 @@
 package top.chsis.vo;
 
+import top.chsis.model.Disease;
+
 public class MedicalRecordVO {
 	
 	private String uuid;
@@ -7,14 +9,14 @@ public class MedicalRecordVO {
 	private String sex;//性别：0男、1女
 	private String idNo;//身份证号
 	private String time;//就诊时间
-	private String disease;//疾病名称
+	private Disease disease;//疾病名称
 	private String doctorUuid;//医生的id
 	private String state;//就诊记录的状态：0就诊中、1已就诊
 	private String result;//就诊结果
 	
 	public MedicalRecordVO() {}
 
-	public MedicalRecordVO(String uuid, String name, String sex, String idNo, String time, String disease, String doctorUuid, String state, String result) {
+	public MedicalRecordVO(String uuid, String name, String sex, String idNo, String time, Disease disease, String doctorUuid, String state, String result) {
 		super();
 		this.uuid = uuid;
 		this.name = name;
@@ -67,11 +69,11 @@ public class MedicalRecordVO {
 		this.time = time;
 	}
 
-	public String getDisease() {
+	public Disease getDisease() {
 		return disease;
 	}
 
-	public void setDisease(String disease) {
+	public void setDisease(Disease disease) {
 		this.disease = disease;
 	}
 

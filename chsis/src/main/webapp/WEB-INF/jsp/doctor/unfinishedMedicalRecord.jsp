@@ -83,7 +83,7 @@
 			                        </td>
 			                        <td>${medicalRecord.idNo }</td>
 			                        <td>${medicalRecord.time }</td>
-			                        <td>${medicalRecord.disease }</td>
+			                        <td>${medicalRecord.disease.name }</td>
 			                        <td>
 			                        	<sec:authorize access="hasRole('ROLE_c8d62d803d364b819a04800644ecbc83')">
 				                        	<a class="btn btn-warning btn-sm" href="medicalRecord/unfinishedMedicalRecordDetail/${medicalRecord.uuid }">完善</a>

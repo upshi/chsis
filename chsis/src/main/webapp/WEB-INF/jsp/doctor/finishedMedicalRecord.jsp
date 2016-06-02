@@ -86,7 +86,7 @@
 			                        </td>
 			                        <td>${medicalRecord.idNo }</td>
 			                        <td>${medicalRecord.time }</td>
-			                        <td>${medicalRecord.disease }</td>
+			                        <td>${medicalRecord.disease.name }</td>
 			                        <td><span data-toggle="tooltip" data-placement="top" title="${medicalRecord.result }">查看病情描述</span></td>
 			                        <td>
 			                        	<sec:authorize access="hasRole('ROLE_6eafda2b9d9e4f4e9ab0549b8986d3bb')">

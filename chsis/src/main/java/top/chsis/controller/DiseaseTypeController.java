@@ -89,13 +89,29 @@ public class DiseaseTypeController {
 		return map;
 	}
 	
-	@RequestMapping("/getDiseaseType")
+	@RequestMapping("/getDiseaseType/{level}")
 	@ResponseBody
-	public Map<String, Object> getDiseaseType() {
+	public Map<String, Object> getDiseaseType(@PathVariable String level) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<DiseaseType> diseaseTypes = diseaseTypeService.selectByLevel(1);
-		
+		List<DiseaseType> diseaseTypes = null;
+		if(level.equals("one")) {
+			diseaseTypes = diseaseTypeService.selectByLevel(1);
+		}
+		if(diseaseTypes != null) {
+			map.put("result", "success");
+			map.put("diseaseTypes", diseaseTypes);
+		} else {
+			map.put("result", "failure");
+		}
+	
+		return map;
+	}
+	
+	@RequestMapping("/getByParent/{uuid}")
+	@ResponseBody
+	public Map<String, Object> getByParent(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<DiseaseType> diseaseTypes = diseaseTypeService.selectByParentDiseaseType(uuid);
 		if(diseaseTypes != null) {
 			map.put("result", "success");
 			map.put("diseaseTypes", diseaseTypes);

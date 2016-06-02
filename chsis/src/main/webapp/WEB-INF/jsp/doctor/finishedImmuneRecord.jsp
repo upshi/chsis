@@ -68,7 +68,7 @@
 							</div>
 							<div class="row container">
 								<div class="form-group">
-									<label class="col-sm-2 control-label"><b>接种人：</b></label>
+									<label class="col-sm-2 control-label"><b>接种病人：</b></label>
 									<div class="col-sm-10">
 										<label class="control-label">
 											${immuneRecord.patient.name }

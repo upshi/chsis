@@ -76,7 +76,7 @@
 		                    <c:forEach items="${medicalRecords }" var="medicalRecord">
 			                    <tr>
 			                        <td>${medicalRecord.doctor.name }</td>
-			                        <td>${medicalRecord.disease }</td>
+			                        <td>${medicalRecord.disease.name }</td>
 			                        <td>${medicalRecord.time }</td>
 			                        <td>
 			                        	<c:if test="${medicalRecord.state==0 }"><span style="color:red;">未完成就诊</span></c:if>

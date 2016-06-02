@@ -1,22 +1,22 @@
 $(function(){
-	//页面加载时把疾病的级联下拉框加载出来
-	$('select').on('change', onSelect);
-	
+	//页面加载时先把一级疾病加载出来
 	$.ajax({
-			url : "diseaseType/getDiseaseType",
+			url : "diseaseType/getDiseaseType/one",
 			type : "GET" ,
 			cache : false , 
 			dataType : "json" ,
 			success : function(data) {
 				if(data.result == "success") {
 					for(var i in data.diseaseTypes) {
-	           			$('.diseaseType').append('<option value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
+	           			$('#initSelect').append('<option last="'+ data.diseaseTypes[i].last + '" value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
 			        }
 				} else {
 					alert('失败');
 				}
 			} 		
 		});
+		
+	$('select').on('change', onSelect);
 	
 	var flag = false;
 	$('.btn-editDiseaseName').on('click', function() {
@@ -48,13 +48,58 @@ $(function(){
 //级联查询疾病，放在select里
 function onSelect() {
 	$(this).nextAll('select').remove();
+	var last = $(this).find('option:selected').attr('last');
 	var value = $(this).attr('value');
-	var text = $(this).html();
-	var newSelect = '<select class="form-control">';
-	newSelect += '<option value="'+ value + '>'+ text +'</option>';
-	newSelect += '</select>';
-	$('#selectDiv').append(newSelect);
-	$('select').on('change', onSelect);
+	if(last == '0') {
+		onSelectDiseaseType(value);
+	} else {
+		onSelectDisease(value);
+	}
+}
+
+function onSelectDiseaseType(diseaseTypeUuid) {
+	$.ajax({
+		url : "diseaseType/getByParent/" + diseaseTypeUuid ,
+		type : "GET" ,
+		cache : false , 
+		async : false , 
+		dataType : "json" ,
+		success : function(data) {
+			if(data.result == "success") {
+				var newSelect = '<select class="form-control diseaseTypeSelect">';
+				for(var i in data.diseaseTypes) {
+					newSelect += '<option last="'+ data.diseaseTypes[i].last + '" value="'+ data.diseaseTypes[i].uuid + '">'+ data.diseaseTypes[i].name +'</option>';
+				}
+				newSelect += '</select>';
+				$('#selectDiv').append(newSelect);
+				$('.diseaseTypeSelect').on('change', onSelect);
+			} else {
+				
+			}
+		} 
+	});
+}
+
+function onSelectDisease(diseaseTypeUuid) {
+	$.ajax({
+		url : "disease/getByDiseaseType/" + diseaseTypeUuid ,
+		type : "GET" ,
+		cache : false , 
+		async : false , 
+		dataType : "json" ,
+		success : function(data) {
+			if(data.result == "success") {
+				var newSelect = '<select class="form-control">';
+				for(var i in data.diseases) {
+					newSelect += '<option value="'+ data.diseases[i].uuid + '">'+ data.diseases[i].name +'</option>';
+				}
+				newSelect += '</select>';
+				$('#selectDiv').append(newSelect);
+			} else {
+				
+			}
+		} 
+	});
 }
 
 //打开添加疾病描述的模态框

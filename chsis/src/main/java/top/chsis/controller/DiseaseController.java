@@ -86,4 +86,19 @@ public class DiseaseController {
 		}
 		return map;
 	}
+	
+	@RequestMapping("/getByDiseaseType/{uuid}")
+	@ResponseBody
+	public Map<String, Object> getByDiseaseType(@PathVariable String uuid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Disease> diseases = diseaseService.selectByDiseaseType(uuid);
+		if(diseases != null) {
+			map.put("result", "success");
+			map.put("diseases", diseases);
+		} else {
+			map.put("result", "failure");
+		}
+	
+		return map;
+	}
 }

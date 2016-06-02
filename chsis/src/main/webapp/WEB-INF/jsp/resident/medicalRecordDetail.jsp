@@ -90,7 +90,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label"><b>疾病名称：</b></label>
 									<div class="col-sm-10">
-										<div style="margin-top:7px;">${medicalRecord.disease }</div>
+										<div style="margin-top:7px;">${medicalRecord.disease.name }</div>
 									</div>
 								</div>
 							</div>
