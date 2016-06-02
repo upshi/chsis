@@ -20,6 +20,7 @@
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="result" property="result" jdbcType="VARCHAR" />
     <association column="disease" property="disease" select="top.chsis.dao.DiseaseMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
+    <association column="patient_uuid" property="patient" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
@@ -79,8 +80,20 @@
   <select id="selectByConditionInResident" resultMap="BaseResultMap" parameterType="top.chsis.model.MedicalRecord" >
     select * from t_medicalrecord
     where 1=1
+    <if test="time!=null and time!=''">
+		and time LIKE CONCAT('%', #{time},'%' )
+	</if>
+	<if test="state!=null and state!=''">
+		and state = #{state}
+	</if>
+	and patient_uuid = #{patient.uuid}
+  </select>
+  
+  <select id="selectByConditionInResidentVO" resultMap="MedicalRecordVOResultMap" parameterType="top.chsis.model.MedicalRecord" >
+    select m.uuid, m.patient_uuid, m.time, m.doctor_uuid, m.disease, m.state, m.result, d.name from t_medicalrecord m, t_disease d
+    where 1=1
     <if test="disease!=null and disease!=''">
-		and disease in (select uuid from t_disease where t_disease.name LIKE #{disease})
+		and d.name LIKE CONCAT('%', #{disease.name},'%' )
 	</if>
     <if test="time!=null and time!=''">
 		and time LIKE CONCAT('%', #{time},'%' )

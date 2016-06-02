@@ -1,6 +1,7 @@
 package top.chsis.vo;
 
 import top.chsis.model.Disease;
+import top.chsis.model.Resident;
 
 public class MedicalRecordVO {
 	
@@ -13,7 +14,7 @@ public class MedicalRecordVO {
 	private String doctorUuid;//医生的id
 	private String state;//就诊记录的状态：0就诊中、1已就诊
 	private String result;//就诊结果
-	
+	private Resident patient;//就诊病人
 	public MedicalRecordVO() {}
 
 	public MedicalRecordVO(String uuid, String name, String sex, String idNo, String time, Disease disease, String doctorUuid, String state, String result) {
@@ -27,6 +28,15 @@ public class MedicalRecordVO {
 		this.doctorUuid = doctorUuid;
 		this.state = state;
 		this.result = result;
+	}
+
+	public MedicalRecordVO(String uuid, String time, Disease disease, String state,Resident patient) {
+		super();
+		this.uuid = uuid;
+		this.time = time;
+		this.disease = disease;
+		this.state = state;
+		this.patient = patient;
 	}
 
 	public String getUuid() {
@@ -100,9 +110,18 @@ public class MedicalRecordVO {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	
+	public Resident getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Resident patient) {
+		this.patient = patient;
+	}
 
 	@Override
 	public String toString() {
-		return "MedicalRecordVO [uuid=" + uuid + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", time=" + time + ", disease=" + disease + ", doctorUuid=" + doctorUuid + ", state=" + state + ", result=" + result + "]";
+		return "MedicalRecordVO [uuid=" + uuid + ", name=" + name + ", sex=" + sex + ", idNo=" + idNo + ", time=" + time + ", disease=" + disease + ", doctorUuid=" + doctorUuid + ", state=" + state + ", result=" + result + ", patient=" + patient + "]";
 	}
+	
 }

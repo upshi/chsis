@@ -53,7 +53,7 @@
 					<div class="panel-body">
 						<sec:authorize access="hasRole('ROLE_24cb1f69f5ad4ee2911943050eea8526')">
 							<form class="form-inline" action="resident/searchMedicalRecord">
-			                    <input name="disease" class="form-control" type="text" placeholder="请输入疾病名称">
+			                    <input name="diseaseName" class="form-control" type="text" placeholder="请输入疾病名称">
 			                    <input name="time" class="form-control" type="text" placeholder="请输入就诊时间">
 			                    <select name="state" class="form-control">
 		                    		<option value="">就诊状态</option>

@@ -28,6 +28,7 @@ import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
+import top.chsis.vo.MedicalRecordVO;
 import top.chsis.vo.ResidentVO;
 
 @Controller
@@ -258,22 +259,26 @@ public class ResidentController {
 	@RequestMapping("/searchMedicalRecord")
 	public String searchMedicalRecord(Model model, @RequestParam(defaultValue = "1") int page,
 									  @RequestParam(defaultValue = "5") int size,
-									  @RequestParam(defaultValue = "") String disease,
+									  @RequestParam(defaultValue = "") String diseaseName,
 									  @RequestParam(defaultValue = "") String time,
 									  @RequestParam(defaultValue = "") String state) {
 		//获取当前登录的用户
 		String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Resident resident = residentService.selectByUserName(userName.split("%")[0]);
-		Integer realState = null;
+		/*Integer realState = null;
 		if(state != null && !state.equals("")){
 			realState = Integer.parseInt(state);
-		}
-		Disease disease2 = new Disease();
-		disease2.setName(disease);
-		MedicalRecord medicalRecord = new MedicalRecord(null, resident, time, null, disease2, null, realState);
+		}*/
 		
-		PageInfo<MedicalRecord> pageInfo = medicalRecordService.selectByConditionAndPagingInResident(medicalRecord, page, size);
-		List<MedicalRecord> medicalRecords = pageInfo.getList();
+		//构建Disease对象
+		Disease disease = new Disease();
+		disease.setName(diseaseName);
+		
+		//构建MedicalRecordVO对象
+		MedicalRecordVO medicalRecordVO = new MedicalRecordVO(null, time, disease, state, resident);
+		
+		PageInfo<MedicalRecordVO> pageInfo = medicalRecordService.selectByConditionAndPagingInResidentVO(medicalRecordVO, page, size);
+		List<MedicalRecordVO> medicalRecords = pageInfo.getList();
 		model.addAttribute("medicalRecords", medicalRecords);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());

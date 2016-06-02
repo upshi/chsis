@@ -67,5 +67,13 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 		PageInfo<MedicalRecord> pageInfo = new PageInfo<MedicalRecord>(list);
 		return pageInfo;
 	}
+	
+	public PageInfo<MedicalRecordVO> selectByConditionAndPagingInResidentVO(MedicalRecordVO medicalRecordVO, int page, int size) {
+		PageHelper.startPage(page, size);
+		List<MedicalRecordVO> list = new ArrayList<MedicalRecordVO>();
+		list = medicalRecordMapper.selectByConditionInResidentVO(medicalRecordVO);
+		PageInfo<MedicalRecordVO> pageInfo = new PageInfo<MedicalRecordVO>(list);
+		return pageInfo;
+	}
 
 }
