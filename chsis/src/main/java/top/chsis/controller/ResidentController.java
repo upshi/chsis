@@ -28,7 +28,6 @@ import top.chsis.service.IImmuneRecordService;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.StringUtil;
-import top.chsis.vo.MedicalRecordVO;
 import top.chsis.vo.ResidentVO;
 
 @Controller

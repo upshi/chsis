@@ -10,13 +10,11 @@ $(function(){
 					for(var i in data.diseaseTypes) {
 	           			$('#initSelect').append('<option last="'+ data.diseaseTypes[i].last + '" value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
 			        }
-				} else {
-					alert('失败');
 				}
 			} 		
 		});
 		
-	$('select').on('change', onSelect);
+	$('.diseaseTypeSelect').on('change', onSelect);
 	
 	var flag = false;
 	$('.btn-editDiseaseName').on('click', function() {
