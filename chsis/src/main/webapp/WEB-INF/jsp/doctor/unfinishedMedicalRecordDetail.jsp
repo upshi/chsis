@@ -148,7 +148,7 @@
 									<td>${checkReport.name }</td>
 									<td>${checkReport.time }</td>
 									<td><span data-toggle="tooltip" data-placement="top" title="${checkReport.description }">查看病情描述</span></td>
-									<td><a id="checkReportPhoto" urlImg="${checkReport.url }">检查报告</a></td>
+									<td><a class="checkReportPhoto" urlImg="${checkReport.url }">检查报告</a></td>
 								</tr>
 							</c:forEach>	
 						</table>
@@ -310,7 +310,7 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-12 container-fluid">
-						<img id="urlImg" src="" alt="检查报告单" style="height: 100%; width: 100%;" />
+						<img class="urlImg" src="" alt="检查报告单" style="height: 100%; width: 100%;" />
 					</div>
 				</div>
 			</div>
