@@ -310,7 +310,7 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-sm-12 container-fluid">
-						<img id="urlImg" src="" alt="检查报告单" style="height: 100%; width: 100%;" />
+						<img class="urlImg" src="" alt="检查报告单" style="height: 100%; width: 100%;" />
 					</div>
 				</div>
 			</div>
