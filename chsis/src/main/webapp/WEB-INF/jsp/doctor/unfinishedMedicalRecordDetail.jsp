@@ -148,7 +148,7 @@
 									<td>${checkReport.name }</td>
 									<td>${checkReport.time }</td>
 									<td><span data-toggle="tooltip" data-placement="top" title="${checkReport.description }">查看病情描述</span></td>
-									<td><a id="checkReportPhoto" urlImg="${checkReport.url }">检查报告</a></td>
+									<td><a class="checkReportPhoto" urlImg="${checkReport.url }">检查报告</a></td>
 								</tr>
 							</c:forEach>	
 						</table>
