@@ -182,7 +182,7 @@
 						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
 						<div class="row container">
 							<div class="form-group">
-								<div class="col-sm-2">
+								<div class="col-sm-2 col-sm-offset-2">
 									<div id="selectDiv">
 										<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
 									</div>

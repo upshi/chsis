@@ -105,7 +105,7 @@ function onSelectDiseaseType(diseaseTypeUuid) {
 		success : function(data) {
 			if(data.result == "success") {
 				if(data.diseaseTypes.length != 0) {
-					var newSelect = '<select class="form-control diseaseTypeSelect">';
+					var newSelect = '<select class="form-control diseaseTypeSelect" style="margin-left:20px;margin-top:5px;">';
 					for(var i in data.diseaseTypes) {
 						newSelect += '<option last="'+ data.diseaseTypes[i].last + '" value="'+ data.diseaseTypes[i].uuid + '">'+ data.diseaseTypes[i].name +'</option>';
 					}
@@ -128,7 +128,7 @@ function onSelectDisease(diseaseTypeUuid) {
 		success : function(data) {
 			if(data.result == "success") {
 				if(data.diseases.length != 0) {
-					var newSelect = '<select class="form-control">';
+					var newSelect = '<select class="form-control" style="margin-left:50px;margin-top:5px;">';
 					for(var i in data.diseases) {
 						newSelect += '<option value="'+ data.diseases[i].uuid + '">'+ data.diseases[i].name +'</option>';
 					}
