@@ -26,4 +26,5 @@ public interface MedicalRecordMapper {
 	
 	List<MedicalRecord> selectByConditionInResident(MedicalRecord medicalRecord);
 	
+	List<MedicalRecord> selectByDiseaseUuidAndYear(String diseaseUuid, String year);
 }

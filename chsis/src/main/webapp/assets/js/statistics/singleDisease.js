@@ -1,15 +1,5 @@
 $(function() {
 	
-	//日期选框
-	$(".default-date-picker").datepicker({
-        format: "yyyy-mm",
-        todayBtn: "linked",
-        clearBtn: true,
-        todayHighlight: true,
-        language: 'zh-CN',
-        startView : 1
-    });
-	
 	//路径配置
 	require.config({
 		paths : {
@@ -17,14 +7,6 @@ $(function() {
 		}
 	});
 
-	// 使用
-	require(
-		[ 'echarts',
-		  'echarts/chart/bar', 
-		  'echarts/chart/line', 
-		  'echarts/chart/pie' 
-		], draw);
-	
 	//页面加载时先把一级疾病加载出来
 	$.ajax({
 			url : "diseaseType/getDiseaseType/one",
@@ -49,20 +31,34 @@ $(function() {
 
 });	
 	
-function draw(ec) {
+function draw(ec, diseaseUuid, diseaseName, year) {
 	// 基于准备好的dom，初始化echarts图表
 	var myChart = ec.init(document.getElementById('main'));
+	var returnData = null;
+	
+	$.ajax({
+		url : "statistics/singleDisease" ,
+		type : "POST" ,
+		data : {'diseaseUuid' : diseaseUuid, 'year' : year},
+		cache : false , 
+		async : false , 
+		dataType : "json" ,
+		success : function(data) {
+			console.log(data);
+			returnData = data;
+		} 
+	});
 
 	option = {
 			title : {
-				text : '某地区蒸发量和降水量',
-				subtext : '纯属虚构'
+				text : diseaseName + ' 疾病全年发病数量走势',
+				subtext : year + '年'
 			},
 			tooltip : {
 				trigger : 'axis'
 			},
 			legend : {
-				data : [ '蒸发量', '降水量' ]
+				data : [ diseaseName ]
 			},
 			toolbox : {
 				show : true,
@@ -97,10 +93,9 @@ function draw(ec) {
 			} ],
 			series : [
 					{
-						name : '蒸发量',
+						name : diseaseName,
 						type : 'bar',
-						data : [ 2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2,
-								32.6, 20.0, 6.4, 3.3 ],
+						data : returnData.data,
 						markPoint : {
 							data : [ {
 								type : 'max',
@@ -116,33 +111,8 @@ function draw(ec) {
 								name : '平均值'
 							} ]
 						}
-					},
-					{
-						name : '降水量',
-						type : 'bar',
-						data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2,
-								48.7, 18.8, 6.0, 2.3 ],
-						markPoint : {
-							data : [ {
-								name : '年最高',
-								value : 182.2,
-								xAxis : 7,
-								yAxis : 183,
-								symbolSize : 18
-							}, {
-								name : '年最低',
-								value : 2.3,
-								xAxis : 11,
-								yAxis : 3
-							} ]
-						},
-						markLine : {
-							data : [ {
-								type : 'average',
-								name : '平均值'
-							} ]
-						}
-					} ]
+					}
+				]
 		};
 
 	// 为echarts对象加载数据 
@@ -168,21 +138,17 @@ function selectDisease(uuid) {
 	//如果选择的是疾病，则获取疾病的uuid，更改就诊记录的疾病属性。
 	var diseaseUuid = $(option).attr('value');
 	var diseaseName = $(option).text();
-	/*
-	$.ajax({
-		url : "medicalRecord/editDiseaseName" ,
-		type : "POST" ,
-		data : {'uuid' : uuid, 'disease.uuid' : diseaseUuid},
-		cache : false , 
-		async : false , 
-		dataType : "json" ,
-		success : function(data) {
-			$('#diseaseName').text(diseaseName);
-			$('#editDiseaseName').modal('hide');
-		} 
-	});
-	*/
-	
+	var year = $('#yearSelect').val();
+	// 使用
+	require( [ 'echarts',
+	           'echarts/chart/bar', 
+	           'echarts/chart/line', 
+	           'echarts/chart/pie' 
+	    ] ,
+	    function(ec) {
+			draw(ec, diseaseUuid, diseaseName, year);
+		}
+	);
 }
 
 //级联查询疾病，放在select里

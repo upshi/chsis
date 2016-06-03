@@ -17,8 +17,6 @@
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
 <link href="assets/adminex/css/style-responsive.css" rel="stylesheet">
-<!--pickers css-->
-<link rel="stylesheet" type="text/css" href="assets/adminex/js/bootstrap-datepicker/css/datepicker-custom.css" />
 
 <!--你自己的样式文件 -->
 <link href="assets/css/doctor/index.css" rel="stylesheet">
@@ -43,7 +41,11 @@
 							<div id="selectDiv">
 								<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
 							</div>
-							<input id="adddis-startTime" class="form-control default-date-picker" type="text" name="startTime" value="" readonly="readonly" />
+							<select id="yearSelect" class="form-control" name="year">
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -72,9 +74,6 @@
 	<!--common scripts for all pages-->
 	<script src="assets/adminex/js/scripts.js"></script>
 	<script src="assets/echarts/echarts.js"></script>
-	<!--pickers plugins-->
-	<script type="text/javascript" src="assets/adminex/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="assets/adminex/js/bootstrap-datepicker/js/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 	
 	<script src="assets/js/statistics/singleDisease.js"></script>
 	

@@ -27,5 +27,7 @@ public interface IMedicalRecordService {
 	PageInfo<MedicalRecordVO> selectByConditionAndPaging(MedicalRecordVO medicalRecordVO, int page, int size);
 
 	PageInfo<MedicalRecord> selectByConditionAndPagingInResident(MedicalRecord medicalRecord, int page, int size);
+
+	int[] singleDiseaseStatistics(String diseaseUuid, String year);
 	
 }
