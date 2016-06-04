@@ -28,6 +28,8 @@ public interface IMedicalRecordService {
 
 	PageInfo<MedicalRecord> selectByConditionAndPagingInResident(MedicalRecord medicalRecord, int page, int size);
 
-	int[] singleDiseaseStatistics(String diseaseUuid, String year);
+	Integer[] singleDiseaseStatistics(String diseaseUuid, String year);
+
+	List<Integer[]> multipleDiseaseStatistics(List<String> diseaseUuids, String year);
 	
 }

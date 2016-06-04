@@ -44,7 +44,6 @@ function draw(ec, diseaseUuid, diseaseName, year) {
 		async : false , 
 		dataType : "json" ,
 		success : function(data) {
-			console.log(data);
 			returnData = data;
 		} 
 	});
@@ -133,6 +132,7 @@ function selectDisease(uuid) {
 			cancelButtonClass : 'btn-danger',
 			autoClose : 'confirm|3000'
 		});
+		return;
 	}
 	
 	//如果选择的是疾病，则获取疾病的uuid，更改就诊记录的疾病属性。

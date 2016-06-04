@@ -1,6 +1,7 @@
 package top.chsis.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import top.chsis.model.MedicalRecord;
 import top.chsis.vo.MedicalRecordVO;
@@ -27,4 +28,6 @@ public interface MedicalRecordMapper {
 	List<MedicalRecord> selectByConditionInResident(MedicalRecord medicalRecord);
 	
 	List<MedicalRecord> selectByDiseaseUuidAndYear(String diseaseUuid, String year);
+
+	List<MedicalRecord> selectByMultipleDiseaseUuidAndYear(Map<String, Object> map);
 }

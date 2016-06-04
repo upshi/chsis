@@ -1,6 +1,7 @@
 package top.chsis.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,37 @@ public class StatisticsController {
 	@ResponseBody
 	public Map<String, Object> singleDisease(StatisticsVO statisticsVO) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int[] data = medicalRecordService.singleDiseaseStatistics(statisticsVO.getDiseaseUuid(), statisticsVO.getYear());
+		Integer[] data = medicalRecordService.singleDiseaseStatistics(statisticsVO.getDiseaseUuid(), statisticsVO.getYear());
 		if(data != null && data.length == 12) {
 			map.put("result", "success");
 			map.put("data", data);
 		} else {
 			map.put("result", "failure");
 		}
+		return map;
+	}
+	
+	@RequestMapping("/toMultipleDisease")
+	public String toMultipleDiseaseStatistics() {
+		return "statistics/multipleDisease";
+	}
+	
+	@RequestMapping("/multipleDisease")
+	@ResponseBody
+	public Map<String, Object> multipleDisease(StatisticsVO statisticsVO) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(statisticsVO.getDiseaseUuids() == null || statisticsVO.getDiseaseUuids().size() == 0) {
+			map.put("result", "failure");
+			return map;
+		}
+		List<Integer[]> data = medicalRecordService.multipleDiseaseStatistics(statisticsVO.getDiseaseUuids(), statisticsVO.getYear());
+		if(data != null) {
+			map.put("result", "success");
+			map.put("data", data);
+		} else {
+			map.put("result", "failure");
+		}
+		
 		return map;
 	}
 	
