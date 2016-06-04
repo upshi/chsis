@@ -178,17 +178,14 @@
 					</h5>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" method="post" >
+					<form class="form-inline" method="post" >
 						<input type="hidden" name="uuid" value="${medicalRecord.uuid }">
-						<div class="row container">
-							<div class="form-group">
-								<div class="col-sm-2">
-									<div id="selectDiv">
-										<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
-									</div>
-								</div>
+						<div class="form-group container">
+							<div id="selectDiv">
+								<select id="initSelect" name="disease" class="form-control diseaseTypeSelect"></select>
 							</div>
 						</div>
+						<div class="blank"></div>
 						<div class="col-sm-offset-4">
 							<button uuid="${medicalRecord.uuid }" class="btn btn-info" id="editm-submit">保存</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
