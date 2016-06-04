@@ -34,45 +34,51 @@
 			<div><%@ include file="/include/header.jsp"%></div>
 			<!-- 头部  结束 -->
 	
-			<!-- 页面标题	开始 -->
-			<div class="page-heading"></div>
-			<!-- 页面标题	结束-->
-	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 分配资源 </header>
-						<div class="panel-body">
-							<form action="role/allocateResource" class="form-horizontal" method="POST">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								<input type="hidden" name="roleUuid" value="${role.uuid}"/>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">角色名:&nbsp;</label>
-									<label class="col-sm-4 control-label" style="text-align:left">${role.cName }&nbsp;&nbsp;|&nbsp;&nbsp;${role.eName }</label>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="role/manager">角色管理</a></li>
+					<li class="active">分配资源</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							分配资源
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form action="role/allocateResource" class="form-horizontal" method="POST">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<input type="hidden" name="roleUuid" value="${role.uuid}"/>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">角色名:&nbsp;</label>
+								<label class="col-sm-4 control-label" style="text-align:left">${role.cName }&nbsp;&nbsp;|&nbsp;&nbsp;${role.eName }</label>
+							</div>
+							
+							<div class="form-group last">
+								<label class="control-label col-md-2"> 资源列表</label>
+								<div class="col-md-9">
+									<select name="resourceUuid" class="multi-select" multiple="" id="multi_select">
+										<c:forEach items="${resourceList}" var="resource" varStatus="id">
+											<option value="${resource.uuid }" <c:if test="${resource.description == '%SELECTED%@' }">selected</c:if> >
+												${resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${resource.url }
+											</option>
+										</c:forEach>
+									</select>
 								</div>
-								
-								<div class="form-group last">
-									<label class="control-label col-md-2"> 资源列表</label>
-									<div class="col-md-9">
-										<select name="resourceUuid" class="multi-select" multiple="" id="multi_select">
-											<c:forEach items="${resourceList}" var="resource" varStatus="id">
-												<option value="${resource.uuid }" <c:if test="${resource.description == '%SELECTED%@' }">selected</c:if> >
-													${resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${resource.url }
-												</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="panel-body">
-									<label class="col-sm-5 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_092318e7b69a4292a3c2ff9d868fee03')">
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
+							</div>
+							<div class="panel-body">
+								<label class="col-sm-5 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_092318e7b69a4292a3c2ff9d868fee03')">
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 	

@@ -30,10 +30,6 @@
 			<div><%@ include file="/include/header.jsp"%></div>
 			<!-- 头部  结束 -->
 	
-			<!-- 页面标题	开始 -->
-			<div class="page-heading"></div>
-			<!-- 页面标题	结束-->
-	
 			<!--页面主体  开始-->
 			<div class="wrapper">
 				<ul class="breadcrumb">
@@ -41,8 +37,15 @@
 					<li><a href="resource/manager">资源管理</a></li>
 					<li class="active">添加新资源</li>
 				</ul>
-				<section class="panel">
-					<header class="panel-heading"> 添加新资源 </header>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							添加新资源
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
 					<div class="panel-body">
 						<form id="form" class="form-horizontal" method="post" action="resource/addResource" role="form">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -82,7 +85,7 @@
 							</div>
 						</form>
 					</div>
-				</section>
+				</div>
 			</div>
 	
 			<!--页脚区域  开始-->

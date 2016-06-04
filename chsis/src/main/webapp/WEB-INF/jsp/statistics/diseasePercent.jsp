@@ -35,22 +35,21 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="row container">
+				<div class="form-inline">	
 					<div class="form-group">
-						<div class="col-sm-2">
-							<select id="period" class="form-control" name="period">
-								<option value="thisMonth">本月</option>
-								<option value="lastMonth">上月</option>
-								<option value="thisQuarter">本季度</option>
-								<option value="halfYear">半年内</option>
-								<option value="thisYear">今年</option>
-								<option value="lastYear">去年</option>
-							</select>
-						</div>
+						<label>请选择您要统计的时间段</label>
+						<select id="period" class="form-control" name="period">
+							<option value="thisMonth">本月</option>
+							<option value="lastMonth">上月</option>
+							<option value="thisQuarter">本季度</option>
+							<option value="halfYear">半年内</option>
+							<option value="thisYear">今年</option>
+							<option value="lastYear">去年</option>
+						</select>
 					</div>
-				</div>
-				<div class="col-sm-offset-4">
-					<button class="btn btn-info" id="submit">确定</button>
+					<div class="form-group">
+						<button class="btn btn-primary" id="submit">确定</button>
+					</div>
 				</div>
 				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 			</div>

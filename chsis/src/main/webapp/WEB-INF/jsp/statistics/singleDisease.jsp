@@ -35,23 +35,24 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="row container">
+				<div class="form-inline">
 					<div class="form-group">
-						<div class="col-sm-2">
-							<div id="selectDiv">
-								<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
-							</div>
-							<select id="yearSelect" class="form-control" name="year">
-								<option value="2014">2014</option>
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-							</select>
+						<div id="selectDiv">
+							<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
 						</div>
 					</div>
+					<div class="form-group">	
+						<select id="yearSelect" class="form-control" name="year">
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button uuid="${medicalRecord.uuid }" class="btn btn-primary" id="submit">确定</button>
+					</div>
 				</div>
-				<div class="col-sm-offset-4">
-					<button uuid="${medicalRecord.uuid }" class="btn btn-info" id="submit">确定</button>
-				</div>
+				<br/>
 				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 			</div>
 			<!--body wrapper end-->
