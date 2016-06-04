@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.chsis.service.IMedicalRecordService;
+import top.chsis.util.StringUtil;
+import top.chsis.vo.PieObject;
 import top.chsis.vo.StatisticsVO;
 
 @Controller
@@ -59,6 +61,30 @@ public class StatisticsController {
 			map.put("result", "failure");
 		}
 		
+		return map;
+	}
+	
+	@RequestMapping("/toDiseasePercent")
+	public String toDiseasePercentStatistics() {
+		return "statistics/diseasePercent";
+	}
+	
+	@RequestMapping("/diseasePercent")
+	@ResponseBody
+	public Map<String, Object> diseasePercent(StatisticsVO statisticsVO) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(StringUtil.isNoE(statisticsVO.getPeriod())) {
+			map.put("result", "failure");
+			return map;
+		}
+		PieObject pieObject = medicalRecordService.diseasePercentStatistics(statisticsVO.getPeriod());
+		if(pieObject != null) {
+			map.put("result", "success");
+			map.put("diseaseNames", pieObject.getDiseaseNames());
+			map.put("piePairs", pieObject.getPiePairs());
+		} else {
+			map.put("result", "failure");
+		}
 		return map;
 	}
 	

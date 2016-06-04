@@ -12,6 +12,8 @@ import top.chsis.dao.MedicalRecordMapper;
 import top.chsis.model.MedicalRecord;
 import top.chsis.service.IMedicalRecordService;
 import top.chsis.vo.MedicalRecordVO;
+import top.chsis.vo.PieObject;
+import top.chsis.vo.PiePair;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -104,6 +106,29 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 		return list;
 	}
 	
+	public PieObject diseasePercentStatistics(String period) {
+		PieObject pieObject = null;
+		//查出时间段内的前5中疾病数量
+		List<PiePair> mostFive = medicalRecordMapper.selectMostFiveByPeriod(period);
+		//查出这段时间内的所有疾病总数
+		int count = medicalRecordMapper.selectCountByPeriod(period);
+		int five = 0;
+		for(PiePair p : mostFive) {
+			five += p.getValue();
+		}
+		if(count != five) {
+			//构建一个新的pair
+			PiePair pair = new PiePair("其它", count - five);
+			mostFive.add(pair);
+		}
+		String[] diseaseNames = new String[mostFive.size()];
+		for(int i=0; i < mostFive.size(); i++) {
+			diseaseNames[i] = mostFive.get(i).getName();
+		}
+		pieObject = new PieObject(diseaseNames, mostFive);
+		return pieObject;
+	}
+	
 	private static Integer[] handleMonth(String month, Integer[] arr) {
 		if(month.equals("01")) {
 			arr[0] = arr[0] + 1;
@@ -143,5 +168,5 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
 		}
 		return arr;
 	}
-	
+
 }

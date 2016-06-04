@@ -8,14 +8,17 @@ public class StatisticsVO {
 	
 	private String year;
 	
+	private String period;
+	
 	private List<String> diseaseUuids;
 	
 	
 	public StatisticsVO() {}
 
-	public StatisticsVO(String diseaseUuid, String year, List<String> diseaseUuids) {
+	public StatisticsVO(String diseaseUuid, String year, String period, List<String> diseaseUuids) {
 		this.diseaseUuid = diseaseUuid;
 		this.year = year;
+		this.period = period;
 		this.diseaseUuids = diseaseUuids;
 	}
 
@@ -35,6 +38,14 @@ public class StatisticsVO {
 		this.year = year;
 	}
 
+	public String getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+
 	public List<String> getDiseaseUuids() {
 		return diseaseUuids;
 	}
@@ -45,6 +56,7 @@ public class StatisticsVO {
 
 	@Override
 	public String toString() {
-		return "StatisticsVO [" + (diseaseUuid != null ? "diseaseUuid=" + diseaseUuid + ", " : "") + (year != null ? "year=" + year + ", " : "") + (diseaseUuids != null ? "diseaseUuids=" + diseaseUuids : "") + "]";
+		return "StatisticsVO [" + (diseaseUuid != null ? "diseaseUuid=" + diseaseUuid + ", " : "") + (year != null ? "year=" + year + ", " : "") + (period != null ? "period=" + period + ", " : "") + (diseaseUuids != null ? "diseaseUuids=" + diseaseUuids : "") + "]";
 	}
+
 }

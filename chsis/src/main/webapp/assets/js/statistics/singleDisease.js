@@ -142,8 +142,7 @@ function selectDisease(uuid) {
 	// 使用
 	require( [ 'echarts',
 	           'echarts/chart/bar', 
-	           'echarts/chart/line', 
-	           'echarts/chart/pie' 
+	           'echarts/chart/line'
 	    ] ,
 	    function(ec) {
 			draw(ec, diseaseUuid, diseaseName, year);

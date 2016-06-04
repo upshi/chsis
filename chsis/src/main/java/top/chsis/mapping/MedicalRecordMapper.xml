@@ -23,6 +23,11 @@
     <association column="patient_uuid" property="patient" select="top.chsis.dao.ResidentMapper.selectByPrimaryKey" jdbcType="VARCHAR" />
   </resultMap>
   
+  <resultMap id="PieResultMap" type="top.chsis.vo.PiePair" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     uuid, patient_uuid, time, doctor_uuid, disease, state
   </sql>
@@ -71,6 +76,54 @@
 		    #{diseaseUuid,jdbcType=VARCHAR}
 	</foreach>
     and DATE_FORMAT(time,'%Y') = #{year}
+  </select>
+  
+  <select id="selectMostFiveByPeriod" resultMap="PieResultMap" parameterType="java.lang.String" >
+  	select name, count(disease) as value from t_disease, t_medicalrecord 
+    where t_medicalrecord.disease = t_disease.uuid 
+    <if test="_parameter == 'thisMonth'">
+	    and DATE_FORMAT(time, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+    </if>
+    <if test="_parameter == 'lastMonth'">
+	    and PERIOD_DIFF( DATE_FORMAT(now(), '%Y%m') , DATE_FORMAT(time, '%Y%m') ) =1
+    </if>
+    <if test="_parameter == 'thisQuarter'">
+	    and QUARTER(time) = QUARTER(CURDATE()) and DATE_FORMAT(time, '%Y') = DATE_FORMAT(CURDATE(), '%Y')
+    </if>
+    <if test="_parameter == 'halfYear'">
+	    and time between date_sub(now(),interval 6 month) and now()
+    </if>
+    <if test="_parameter == 'thisYear'">
+	    and YEAR(time)=YEAR(NOW())
+    </if>
+    <if test="_parameter == 'lastYear'">
+	    and year(time) = year(date_sub(now(),interval 1 year))
+    </if>
+    
+	group by disease order by value desc limit 0,5
+    
+  </select>
+  
+  <select id="selectCountByPeriod" resultType="java.lang.Integer" parameterType="java.lang.String" >
+  	select count(disease) from t_medicalrecord where
+    <if test="_parameter == 'thisMonth'">
+	    DATE_FORMAT(time, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+    </if>
+    <if test="_parameter == 'lastMonth'">
+	    PERIOD_DIFF( DATE_FORMAT(now(), '%Y%m') , DATE_FORMAT(time, '%Y%m') ) =1
+    </if>
+    <if test="_parameter == 'thisQuarter'">
+	    QUARTER(time) = QUARTER(CURDATE()) and DATE_FORMAT(time, '%Y') = DATE_FORMAT(CURDATE(), '%Y')
+    </if>
+    <if test="_parameter == 'halfYear'">
+	    time between date_sub(now(),interval 6 month) and now()
+    </if>
+    <if test="_parameter == 'thisYear'">
+	    YEAR(time)=YEAR(NOW())
+    </if>
+    <if test="_parameter == 'lastYear'">
+	    year(time) = year(date_sub(now(),interval 1 year))
+    </if>
   </select>
   
   <select id="selectByCondition" resultMap="MedicalRecordVOResultMap" parameterType="top.chsis.vo.MedicalRecordVO" >
