@@ -90,6 +90,7 @@
 						</div>
 						<div class="col-sm-offset-4">
 							<button class="btn btn-info" id="confirmSelectBtn">确定</button>
+							<button class="btn btn-info" id="removeSelectBtn">清除</button>
 							<button class="btn btn-default" data-dismiss="modal">取消</button>
 						</div>
 					</form>

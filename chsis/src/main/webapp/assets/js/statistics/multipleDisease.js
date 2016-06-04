@@ -22,6 +22,13 @@ $(function() {
 		return false;
 	});
 	
+	//清除选择疾病按钮的点击事件
+	$('#removeSelectBtn').on('click', function() {
+		removeSelect();
+		return false;
+	});
+	
+	//三个请选择疾病按钮点击事件
 	$('.diseaseNameBtn').on('click', function(){
 		$('#selectDiseaseModal').modal();
 		targetBtn = $(this);
@@ -41,6 +48,12 @@ $(function() {
 	});
 
 });	
+
+function removeSelect() {
+	targetBtn.removeAttr('diseaseUuid');
+	targetBtn.text('请选择疾病');
+	$('#selectDiseaseModal').modal('hide');
+}
 
 function onSubmit() {
 	//拿到用户选择的疾病
