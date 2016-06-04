@@ -69,7 +69,7 @@ function draw(ec, period, periodCN) {
 		                        x: '25%',
 		                        width: '50%',
 		                        funnelAlign: 'left',
-		                        max: 1548
+		                        max: returnData.piePairs[0].value
 		                    }
 		                }
 		            },
