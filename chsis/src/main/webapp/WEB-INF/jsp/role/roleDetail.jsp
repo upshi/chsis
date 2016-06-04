@@ -37,54 +37,64 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading">角色信息详情 </header>
-						<div class="panel-body">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="role/manager">角色管理</a></li>
+					<li class="active">角色信息详情</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							角色信息详情
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<br>
+						<div class="row">
+							<label class="col-sm-2 text-right">角色中文名:</label> <label class="col-sm-8 text-left">${role.cName}</label>
+						</div>
+						
+						<div class="row">
+							<label class="col-sm-2 text-right">角色英文名:</label> <label class="col-sm-8 text-left">${role.eName}</label>
+						</div>
+				
+						<div class="row">
+							<label class="col-sm-2 text-right">角色描述:</label> <label class="col-sm-8">${role.description}</label>
+						</div>
+						
+						<c:forEach items="${roleResourceList}" var="roleResource" varStatus="id">
+							<div class="row">
+								<c:if test="${id.index+1 == 1 }"><label class="col-sm-2 text-right">资源列表:</label></c:if>
+								<c:if test="${id.index+1 != 1 }"><label class="col-sm-2 text-right"></label></c:if>
+								<label class="col-sm-8">${roleResource.resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${roleResource.resource.url }</label><br>
+							</div>
+						</c:forEach>
+				
+						<div class="row">
 							<br>
-							<div class="row">
-								<label class="col-sm-2 text-right">角色中文名:</label> <label class="col-sm-8 text-left">${role.cName}</label>
-							</div>
-							
-							<div class="row">
-								<label class="col-sm-2 text-right">角色英文名:</label> <label class="col-sm-8 text-left">${role.eName}</label>
-							</div>
-					
-							<div class="row">
-								<label class="col-sm-2 text-right">角色描述:</label> <label class="col-sm-8">${role.description}</label>
-							</div>
-							
-							<c:forEach items="${roleResourceList}" var="roleResource" varStatus="id">
-								<div class="row">
-									<c:if test="${id.index+1 == 1 }"><label class="col-sm-2 text-right">资源列表:</label></c:if>
-									<c:if test="${id.index+1 != 1 }"><label class="col-sm-2 text-right"></label></c:if>
-									<label class="col-sm-8">${roleResource.resource.name }&nbsp;&nbsp;|&nbsp;&nbsp;${roleResource.resource.url }</label><br>
-								</div>
-							</c:forEach>
-					
-							<div class="row">
-								<br>
-								<div class="col-sm-offset-3  col-sm-20">
-									<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
-										<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
-											<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										</sec:authorize>
-									</c:if>
-									<sec:authorize access="hasRole('ROLE_5888fb0706114603b6a18e052c39c8c3')">
-										<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="col-sm-offset-3  col-sm-20">
+								<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
+									<sec:authorize access="hasRole('ROLE_a9278833f99f44eda6eb5dc12f954a0f')">
+										<a href="role/toUpdate/${role.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
 									</sec:authorize>
-									<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
-										<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
-											<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										</sec:authorize>
-									</c:if>
-									<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">
-										<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
+								</c:if>
+								<sec:authorize access="hasRole('ROLE_5888fb0706114603b6a18e052c39c8c3')">
+									<a href="role/toAllocateResource/${role.uuid}"  class="btn btn-info" type="button">分配资源</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								</sec:authorize>
+								<c:if test="${role.uuid !=0 && role.uuid !=1 && role.uuid !=2 && role.uuid !=3 && role.uuid !=4 && role.uuid !=5}">
+									<sec:authorize access="hasRole('ROLE_d9b4cebbad0a456189612e79111e6626')">
+										<a class="btn btn-danger" onclick="deleteRole('${role.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
 									</sec:authorize>
-								</div>
+								</c:if>
+								<sec:authorize access="hasRole('ROLE_c698654dd2254608920cdb3d7f1bbe9d')">
+									<a href="role/manager" class="btn btn-primary"  type="button">查看角色列表</a>
+								</sec:authorize>
 							</div>
 						</div>
-					</section>
+					</div>
 				</div>
 			</div>
 	

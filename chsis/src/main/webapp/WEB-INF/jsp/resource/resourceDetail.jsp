@@ -36,40 +36,50 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 资源信息详情 </header>
-						<div class="panel-body">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="resource/manager">资源管理</a></li>
+					<li class="active">资源信息详情</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							资源信息详情
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<br>
+						<div class="row">
+							<label class="col-sm-2 text-right">资源名称:</label> <label class="col-sm-8 text-left">${resource.name}</label>
+						</div>
+						
+						<div class="row">
+							<label class="col-sm-2 text-right">资源URL:</label> <label class="col-sm-8 text-left">${resource.url}</label>
+						</div>
+				
+						<div class="row">
+							<label class="col-sm-2 text-right">资源描述:</label> <label class="col-sm-8">${resource.description}</label>
+						</div>
+				
+						<br><br><br>
+						<div class="row">
 							<br>
-							<div class="row">
-								<label class="col-sm-2 text-right">资源名称:</label> <label class="col-sm-8 text-left">${resource.name}</label>
-							</div>
-							
-							<div class="row">
-								<label class="col-sm-2 text-right">资源URL:</label> <label class="col-sm-8 text-left">${resource.url}</label>
-							</div>
-					
-							<div class="row">
-								<label class="col-sm-2 text-right">资源描述:</label> <label class="col-sm-8">${resource.description}</label>
-							</div>
-					
-							<br><br><br>
-							<div class="row">
-								<br>
-								<div class="col-sm-offset-3  col-sm-20">
-									<sec:authorize access="hasRole('ROLE_b7a6f4539d82457aae13b0667bd523eb')">
-										<a href="resource/toUpdate/${resource.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_0ace598e0bd24b528e2fe7136e6f68d7')">
-										<a class="btn btn-danger" onclick="deleteResource('${resource.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_ada7dc08b7b440d4a83249062c065a20')">
-										<a href="resource/manager" class="btn btn-primary"  type="button">查看资源列表</a>
-									</sec:authorize>
-								</div>
+							<div class="col-sm-offset-1">
+								<sec:authorize access="hasRole('ROLE_b7a6f4539d82457aae13b0667bd523eb')">
+									<a href="resource/toUpdate/${resource.uuid}"  class="btn btn-warning" type="button">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_0ace598e0bd24b528e2fe7136e6f68d7')">
+									<a class="btn btn-danger" onclick="deleteResource('${resource.uuid}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_ada7dc08b7b440d4a83249062c065a20')">
+									<a href="resource/manager" class="btn btn-primary"  type="button">查看资源列表</a>
+								</sec:authorize>
 							</div>
 						</div>
-					</section>
+					</div>
 				</div>
 			</div>
 	

@@ -36,50 +36,60 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 编辑资源信息 </header>
-						<div class="panel-body">
-							<form id="form" class="form-horizontal" method="post" action="resource/update" role="form">
-								<input type="hidden" class="form-control" id="uuid" name="uuid" value="${resource.uuid}">
-								<br>
-								
-								<div class="form-group" id="nameGroup">
-									<label for="name" class="col-sm-3 control-label">资源名称&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称" original="${resource.name }" value="${resource.name }">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="resource/manager">资源管理</a></li>
+					<li class="active">编辑资源信息</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							编辑资源信息
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form id="form" class="form-horizontal" method="post" action="resource/update" role="form">
+							<input type="hidden" class="form-control" id="uuid" name="uuid" value="${resource.uuid}">
+							<br>
+							
+							<div class="form-group" id="nameGroup">
+								<label for="name" class="col-sm-3 control-label">资源名称&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称" original="${resource.name }" value="${resource.name }">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-								
-								<div class="form-group" id="urlGroup">
-									<label for="sn" class="col-sm-3 control-label">资源URL&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL" original="${resource.url }" value="${resource.url }">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+							</div>
+							
+							<div class="form-group" id="urlGroup">
+								<label for="sn" class="col-sm-3 control-label">资源URL&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL" original="${resource.url }" value="${resource.url }">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-					
-								<div class="form-group">
-									<label for="description" class="col-sm-3 control-label">资源描述</label>
-									<div class="col-sm-4">
-										<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入资源描述">${resource.description }</textarea>
-									</div>
+							</div>
+				
+							<div class="form-group">
+								<label for="description" class="col-sm-3 control-label">资源描述</label>
+								<div class="col-sm-4">
+									<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入资源描述">${resource.description }</textarea>
 								</div>
-								<br>
-								<div class="panel-body">
-									<label class="col-sm-3 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_4a01246436634e47b903514e95365040')">
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
+							</div>
+							<br>
+							<div class="panel-body">
+								<label class="col-sm-3 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_4a01246436634e47b903514e95365040')">
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 	

@@ -174,7 +174,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h5 class="modal-title text-left">
-						<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 就诊记录
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 就诊记录
 					</h5>
 				</div>
 				<div class="modal-body row">

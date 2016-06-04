@@ -124,7 +124,10 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">添加医院管理员</h4>
+					<h4 class="modal-title text-left">
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" />
+						添加医院管理员
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="manager/addHospitalManager">
@@ -198,7 +201,10 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">修改医院管理员信息</h4>
+					<h4 class="modal-title text-left">
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" />
+						修改医院管理员信息
+					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="manager/editHospitalManager">

@@ -40,38 +40,48 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 分配角色 </header>
-						<div class="panel-body">
-							<form action="manager/allocateRole" class="form-horizontal" method="POST">
-								<input type="hidden" name="managerUuid" value="${manager.uuid}"/>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">管理员姓名：</label>
-									<label class="col-sm-4 control-label" style="text-align:left">${manager.name }</label>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="manager/manage">管理员管理</a></li>
+					<li class="active">分配角色</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							分配角色
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form action="manager/allocateRole" class="form-horizontal" method="POST">
+							<input type="hidden" name="managerUuid" value="${manager.uuid}"/>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">管理员姓名：</label>
+								<label class="col-sm-4 control-label" style="text-align:left">${manager.name }</label>
+							</div>
+							
+							<div class="form-group last">
+								<label class="control-label col-md-2"> 角色列表</label>
+								<div class="col-md-9">
+									<select name="roleUuid" class="multi-select" multiple="" id="multi_select">
+										<c:forEach items="${roleList}" var="role" varStatus="id">
+											<option value="${role.uuid }" <c:if test="${role.description == '%SELECTED%@' }">selected</c:if> >
+												${role.cName }&nbsp;&nbsp;|&nbsp;&nbsp;${role.eName }
+											</option>
+										</c:forEach>
+									</select>
 								</div>
-								
-								<div class="form-group last">
-									<label class="control-label col-md-2"> 角色列表</label>
-									<div class="col-md-9">
-										<select name="roleUuid" class="multi-select" multiple="" id="multi_select">
-											<c:forEach items="${roleList}" var="role" varStatus="id">
-												<option value="${role.uuid }" <c:if test="${role.description == '%SELECTED%@' }">selected</c:if> >
-													${role.cName }&nbsp;&nbsp;|&nbsp;&nbsp;${role.eName }
-												</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="panel-body">
-									<label class="col-sm-5 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_a88629b29e904acb92f01c4430c04028')">	
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
+							</div>
+							<div class="panel-body">
+								<label class="col-sm-5 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_a88629b29e904acb92f01c4430c04028')">	
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 	

@@ -151,7 +151,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 查看家庭成员信息
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 查看家庭成员信息
 					</h4>
 				</div>
 				<div class="modal-body container col-sm-12">
@@ -254,7 +254,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title text-left">
-						<img src="assets/image/doctor.png" alt="医生图标" style="height: 20px; width: 20px;" /> 修改家庭成员信息
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;" /> 修改家庭成员信息
 					</h4>
 				</div>
 				<div class="modal-body">

@@ -36,50 +36,53 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 添加新资源 </header>
-						<div class="panel-body">
-							<form id="form" class="form-horizontal" method="post" action="resource/addResource" role="form">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								<br>
-								<div class="form-group" id="nameGroup">
-									<label for="name" class="col-sm-3 control-label">资源名称&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="resource/manager">资源管理</a></li>
+					<li class="active">添加新资源</li>
+				</ul>
+				<section class="panel">
+					<header class="panel-heading"> 添加新资源 </header>
+					<div class="panel-body">
+						<form id="form" class="form-horizontal" method="post" action="resource/addResource" role="form">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<br>
+							<div class="form-group" id="nameGroup">
+								<label for="name" class="col-sm-3 control-label">资源名称&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="name" name="name" placeholder="请输入资源名称">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-								
-								<div class="form-group" id="urlGroup">
-									<label for="sn" class="col-sm-3 control-label">资源URL&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+							</div>
+							
+							<div class="form-group" id="urlGroup">
+								<label for="sn" class="col-sm-3 control-label">资源URL&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="url" name="url" placeholder="请输入资源URL">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-					
-								<div class="form-group">
-									<label for="description" class="col-sm-3 control-label">资源描述</label>
-									<div class="col-sm-4">
-										<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入资源描述"></textarea>
-									</div>
+							</div>
+				
+							<div class="form-group">
+								<label for="description" class="col-sm-3 control-label">资源描述</label>
+								<div class="col-sm-4">
+									<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入资源描述"></textarea>
 								</div>
-								<br>
-								<div class="panel-body">
-									<label class="col-sm-3 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_095aedd6e4ab4e3b99f0cf6f8902c037')">
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
-				</div>
+							</div>
+							<br>
+							<div class="panel-body">
+								<label class="col-sm-3 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_095aedd6e4ab4e3b99f0cf6f8902c037')">
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
+				</section>
 			</div>
 	
 			<!--页脚区域  开始-->

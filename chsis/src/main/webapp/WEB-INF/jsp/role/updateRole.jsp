@@ -30,51 +30,56 @@
 			<div><%@ include file="/include/header.jsp"%></div>
 			<!-- 头部  结束 -->
 	
-			<!-- 页面标题	开始 -->
-			<div class="page-heading"></div>
-			<!-- 页面标题	结束-->
-	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 编辑角色信息 </header>
-						<div class="panel-body">
-							<form id="form" class="form-horizontal" method="post" action="role/update" role="form">
-								<input type="hidden" class="form-control" id="uuid" name="uuid" value="${role.uuid}">
-								<br>
-								<div class="form-group" id="cNameGroup">
-									<label for="cName" class="col-sm-3 control-label">角色中文名&nbsp;*</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名" original="${role.cName }" value="${role.cName }"/>
-										<p class="help-block"></p>
-									</div>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="role/manager">角色管理</a></li>
+					<li class="active">编辑角色信息</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							编辑角色信息
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form id="form" class="form-horizontal" method="post" action="role/update" role="form">
+							<input type="hidden" class="form-control" id="uuid" name="uuid" value="${role.uuid}">
+							<div class="form-group" id="cNameGroup">
+								<label for="cName" class="col-sm-3 control-label">角色中文名&nbsp;*</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名" original="${role.cName }" value="${role.cName }"/>
+									<p class="help-block"></p>
 								</div>
-								
-								<div class="form-group" id="eNameGroup">
-									<label for="sn" class="col-sm-3 control-label">角色英文名&nbsp;*</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" original="${role.eName }" value="${role.eName }"/>
-										<p class="help-block"></p>
-									</div>
+							</div>
+							
+							<div class="form-group" id="eNameGroup">
+								<label for="sn" class="col-sm-3 control-label">角色英文名&nbsp;*</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" original="${role.eName }" value="${role.eName }"/>
+									<p class="help-block"></p>
 								</div>
-					
-								<div class="form-group">
-									<label for="description" class="col-sm-3 control-label">公司简介</label>
-									<div class="col-sm-4">
-										<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入角色描述">${role.description }</textarea>
-									</div>
+							</div>
+				
+							<div class="form-group">
+								<label for="description" class="col-sm-3 control-label">角色描述</label>
+								<div class="col-sm-4">
+									<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入角色描述">${role.description }</textarea>
 								</div>
-								<br>
-								<div class="panel-body">
-									<label class="col-sm-3 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_d31da12a2be24b67bfcc6e53ad7edc01')">
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
+							</div>
+							<br>
+							<div class="panel-body">
+								<label class="col-sm-3 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_d31da12a2be24b67bfcc6e53ad7edc01')">
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 	

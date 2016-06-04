@@ -32,6 +32,11 @@
 	
 			<!--页面主体  开始-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="manager/manage">管理员管理</a></li>
+					<li class="active">添加管理员</li>
+				</ul>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">

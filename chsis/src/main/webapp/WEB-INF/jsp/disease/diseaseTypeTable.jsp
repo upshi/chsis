@@ -101,7 +101,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h5 class="modal-title text-left">
-						<img src="assets/image/hospital.png" alt="医院图标" style="height: 20px; width: 20px;" /> 添加疾病类型
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;" /> 添加疾病类型
 					</h5>
 				</div>
 				<div class="modal-body row">

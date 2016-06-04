@@ -30,55 +30,60 @@
 			<div><%@ include file="/include/header.jsp"%></div>
 			<!-- 头部  结束 -->
 	
-			<!-- 页面标题	开始 -->
-			<div class="page-heading"></div>
-			<!-- 页面标题	结束-->
-	
 			<!--页面主体  开始-->
 			<div class="wrapper">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header class="panel-heading"> 添加新角色 </header>
-						<div class="panel-body">
-							<form id="form" class="form-horizontal" method="post" action="role/addRole" role="form">
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								<br>
-								<div class="form-group" id="cNameGroup">
-									<label for="name" class="col-sm-3 control-label">角色中文名&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="role/manager">角色管理</a></li>
+					<li class="active">添加新角色</li>
+				</ul>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							添加新角色
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form id="form" class="form-horizontal" method="post" action="role/addRole" role="form">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<br>
+							<div class="form-group" id="cNameGroup">
+								<label for="name" class="col-sm-3 control-label">角色中文名&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="cName" name="cName" placeholder="请输入角色中文名">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-								
-								<div class="form-group" id="eNameGroup">
-									<label for="sn" class="col-sm-3 control-label">角色英文名&nbsp;*</label>
-									<div class="col-sm-4">
-										<div class="iconic-input right">
-											<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" value="ROLE_">
-	                                        <p class="help-block"></p>
-	                                    </div>
-									</div>
+							</div>
+							
+							<div class="form-group" id="eNameGroup">
+								<label for="sn" class="col-sm-3 control-label">角色英文名&nbsp;*</label>
+								<div class="col-sm-4">
+									<div class="iconic-input right">
+										<input type="text" class="form-control" id="eName" name="eName" placeholder="请输入角色英文名" value="ROLE_">
+                                        <p class="help-block"></p>
+                                    </div>
 								</div>
-					
-								<div class="form-group">
-									<label for="description" class="col-sm-3 control-label">角色描述</label>
-									<div class="col-sm-4">
-										<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入角色描述"></textarea>
-									</div>
+							</div>
+				
+							<div class="form-group">
+								<label for="description" class="col-sm-3 control-label">角色描述</label>
+								<div class="col-sm-4">
+									<textarea class="form-control" rows="4" id="description" name="description" placeholder="请输入角色描述"></textarea>
 								</div>
-								<br>
-								<div class="panel-body">
-									<label class="col-sm-3 control-label"></label>
-									<sec:authorize access="hasRole('ROLE_887609d9f191424b995a830ca6058d0f')">
-										<button class="btn btn-primary" type="submit" id="submit">保存</button>
-									</sec:authorize>
-								</div>
-							</form>
-						</div>
-					</section>
+							</div>
+							<div class="panel-body">
+								<label class="col-sm-3 control-label"></label>
+								<sec:authorize access="hasRole('ROLE_887609d9f191424b995a830ca6058d0f')">
+									<button class="btn btn-primary" type="submit" id="submit">保存</button>
+								</sec:authorize>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 	

@@ -36,7 +36,10 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">修改密码</h4>
+				<h4 class="modal-title text-left" id="myModalLabel">
+					<img src="assets/image/settings.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" />
+					修改密码
+				</h4>
 			</div>
 			<div class="modal-body">
 				<form class="form-horizontal" method="post" id="changePasswordForm">
