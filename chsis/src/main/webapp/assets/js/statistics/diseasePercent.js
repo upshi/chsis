@@ -68,7 +68,7 @@ function draw(ec, period, periodCN) {
 		                    funnel: {
 		                        x: '25%',
 		                        width: '50%',
-		                        funnelAlign: 'left',
+		                        funnelAlign: 'center',
 		                        max: returnData.piePairs[0].value
 		                    }
 		                }

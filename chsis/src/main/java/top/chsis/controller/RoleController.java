@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageInfo;
-
 import top.chsis.exception.RoleException;
 import top.chsis.model.Resource;
 import top.chsis.model.Role;
@@ -29,6 +27,8 @@ import top.chsis.service.IRoleResourceService;
 import top.chsis.service.IRoleService;
 import top.chsis.util.StringUtil;
 import top.chsis.vo.RoleResourceVO;
+
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/role")
@@ -64,11 +64,11 @@ public class RoleController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(defaultValue = "1") int pageNo_mine, @RequestParam(defaultValue = "4") int len_mine, @RequestParam(defaultValue = "") String cName, @RequestParam(defaultValue = "") String eName) {
+	public String search(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size, @RequestParam(defaultValue = "") String cName, @RequestParam(defaultValue = "") String eName) {
 		Role role = new Role(null, cName, eName, null);
 		PageInfo<Role> pageInfo = null;
 		try {
-			pageInfo = roleService.selectByConditionAndPaging(role, pageNo_mine, len_mine);
+			pageInfo = roleService.selectByConditionAndPaging(role, page, size);
 		} catch (RoleException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -79,7 +79,7 @@ public class RoleController {
 		model.addAttribute("roleList", roleList);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
-		model.addAttribute("pageIndex", pageNo_mine);
+		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "role/search?cName=" + cName + "&cName=" + eName + "&");
 		return "role/roleManager";
 	}

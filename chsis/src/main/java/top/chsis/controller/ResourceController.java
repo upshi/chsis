@@ -49,11 +49,11 @@ public class ResourceController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(defaultValue = "1") int pageNo_mine, @RequestParam(defaultValue = "4") int len_mine, @RequestParam(defaultValue = "") String url, @RequestParam(defaultValue = "") String name) {
+	public String search(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size, @RequestParam(defaultValue = "") String url, @RequestParam(defaultValue = "") String name) {
 		Resource resource = new Resource(null, name, url, null);
 		PageInfo<Resource> pageInfo = null;
 		try {
-			pageInfo = resourceService.selectByConditionAndPaging(resource, pageNo_mine, len_mine);
+			pageInfo = resourceService.selectByConditionAndPaging(resource, page, size);
 		} catch (ResourceException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -64,7 +64,7 @@ public class ResourceController {
 		model.addAttribute("resourceList", resourceList);
 		model.addAttribute("totals", pageInfo.getTotal());
 		model.addAttribute("totalPages", pageInfo.getPages());
-		model.addAttribute("pageIndex", pageNo_mine);
+		model.addAttribute("pageIndex", page);
 		model.addAttribute("url", "resource/search?url=" + url + "&name=" + name + "&");
 		return "resource/resourceManager";
 	}

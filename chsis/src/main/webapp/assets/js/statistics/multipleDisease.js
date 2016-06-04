@@ -174,7 +174,7 @@ function onSelectDisease(diseaseTypeUuid) {
 		success : function(data) {
 			if(data.result == "success") {
 				if(data.diseases.length != 0) {
-					var newSelect = '<select class="form-control">';
+					var newSelect = '<select class="form-control" style="margin-left:5px;">';
 					for(var i in data.diseases) {
 						newSelect += '<option value="'+ data.diseases[i].uuid + '">'+ data.diseases[i].name +'</option>';
 					}

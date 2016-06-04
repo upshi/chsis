@@ -53,8 +53,12 @@
 							就诊记录
 							<span class="tools pull-right"> 
 								<button class="btn btn-success pull-left btn-editDiseaseName">选择疾病名称</button>
-								<button class="btn btn-warning pull-left btn-editResult">编辑疾病描述</button>
-								<button class="btn btn-info pull-left btn-danger btn-editState" uuid="${medicalRecord.uuid }">完成本次就诊</button>
+								<sec:authorize access="hasRole('ROLE_f933dcf78539497bb52d33912089f979')">
+									<button class="btn btn-warning pull-left btn-editResult">编辑疾病描述</button>
+								</sec:authorize>	
+								<sec:authorize access="hasRole('ROLE_1c1f6600aa4c42648d50c475bc630cd2')">
+									<button class="btn btn-info pull-left btn-danger btn-editState" uuid="${medicalRecord.uuid }">完成本次就诊</button>
+								</sec:authorize>
 								<a class="fa fa-chevron-down" href="javascript:;"></a>
 							</span>
 						</h3>

@@ -35,25 +35,24 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="row container">
+				<div class="form-inline">
 					<div class="form-group">
-						<div class="col-sm-4">
-							<div>
-								<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
-								<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
-								<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
-							</div>
-							<select id="yearSelect" class="form-control" name="year">
-								<option value="2014">2014</option>
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-							</select>
-						</div>
+						<button class="btn btn-success diseaseNameBtn">请选择疾病</button>
+						<button class="btn btn-warning diseaseNameBtn">请选择疾病</button>
+						<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
+					</div>
+					<div class="form-group">
+						<select id="yearSelect" class="form-control" name="year">
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary" id="submit">确定</button>
 					</div>
 				</div>
-				<div class="col-sm-offset-4">
-					<button class="btn btn-info" id="submit">确定</button>
-				</div>
+				<br/>
 				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 			</div>
 			<!--body wrapper end-->
@@ -78,20 +77,17 @@
 					</h5>
 				</div>
 				<div class="modal-body row">
-					<form class="form-horizontal" method="post" >
-						<div class="row container">
-							<div class="form-group">
-								<div class="col-sm-2">
-									<div id="selectDiv">
-										<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
-									</div>
-								</div>
+					<form class="form-inline" method="post" >
+						<div class="form-group col-sm-offset-1">
+							<div id="selectDiv">
+								<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
 							</div>
 						</div>
+						<br/><br/>
 						<div class="col-sm-offset-4">
-							<button class="btn btn-info" id="confirmSelectBtn">确定</button>
-							<button class="btn btn-info" id="removeSelectBtn">清除</button>
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
+							<button class="btn btn-success" id="confirmSelectBtn">确定</button>
+							<button class="btn btn-warning" id="removeSelectBtn">清除</button>
+							<button class="btn btn-info" data-dismiss="modal">取消</button>
 						</div>
 					</form>
 				</div>

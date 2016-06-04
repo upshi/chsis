@@ -40,6 +40,7 @@ function checkName() {
 				type : "GET" ,
 				cache : false , 
 				dataType : "json" ,
+				async : false, 
 				success : function(data) {
 					if(data.result == "exist") {
 						$('#nameGroup').removeClass('has-success');
@@ -56,6 +57,7 @@ function checkName() {
 		} else {
 			flag = true;
 		}
+		alert(flag);
 		return flag;
 	}
 }
@@ -76,6 +78,7 @@ function checkUrl() {
 				type : "POST" ,
 				data : {url : url} ,
 				cache : false , 
+				async: false,
 				dataType : "json" ,
 				success : function(data) {
 					if(data.result == "exist") {
@@ -93,6 +96,7 @@ function checkUrl() {
 		} else {
 			flag = true;
 		}
+		alert(flag);
 		return flag;
 	}
 }
