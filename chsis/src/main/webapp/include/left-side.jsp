@@ -82,8 +82,8 @@
 			</sec:authorize>	
 			<li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>疾病类型管理</span></a>
                 <ul class="sub-menu-list">
-                    <li id="navi_singleDisease"><a href="statistics/toSingleDiease"> 单一疾病发病率走势统计</a></li>
-                    <li id="navi_mutilpleDisease"><a href="statistics/toMutilpleDisease"> 多疾病发病率走势统计</a></li>
+                    <li id="navi_singleDisease"><a href="statistics/toSingleDisease"> 单一疾病发病率走势统计</a></li>
+                    <li id="navi_multipleDisease"><a href="statistics/toMultipleDisease"> 多疾病发病率走势统计</a></li>
                     <li id="navi_diseasePercent"><a href="statistics/toDiseasePercent"> 发病率比率统计</a></li>
                 </ul>
 			</li>

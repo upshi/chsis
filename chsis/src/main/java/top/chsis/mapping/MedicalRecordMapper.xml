@@ -57,6 +57,22 @@
     where doctor_uuid = #{doctorUUID,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByDiseaseUuidAndYear" resultMap="BaseResultMap" >
+    select DATE_FORMAT(time,'%m') as time
+    from t_medicalrecord
+    where disease = #{0} and DATE_FORMAT(time,'%Y') = #{1}
+  </select>
+  
+  <select id="selectByMultipleDiseaseUuidAndYear" resultMap="BaseResultMap" >
+    select disease, DATE_FORMAT(time,'%m') as time
+    from t_medicalrecord
+    where disease in
+    <foreach collection="diseaseUuids" item="diseaseUuid" index="index" open="(" close=")" separator="," >  
+		    #{diseaseUuid,jdbcType=VARCHAR}
+	</foreach>
+    and DATE_FORMAT(time,'%Y') = #{year}
+  </select>
+  
   <select id="selectByCondition" resultMap="MedicalRecordVOResultMap" parameterType="top.chsis.vo.MedicalRecordVO" >
     select m.uuid, m.state, m.disease, m.result, r.name, r.sex, m.time, r.idNo from t_resident r, t_medicalrecord m
     where 1=1

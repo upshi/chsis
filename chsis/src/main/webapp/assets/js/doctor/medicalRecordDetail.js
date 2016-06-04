@@ -1,18 +1,18 @@
 $(function(){
 	//页面加载时先把一级疾病加载出来
 	$.ajax({
-			url : "diseaseType/getDiseaseType/one",
-			type : "GET" ,
-			cache : false , 
-			dataType : "json" ,
-			success : function(data) {
-				if(data.result == "success") {
-					for(var i in data.diseaseTypes) {
-	           			$('#initSelect').append('<option last="'+ data.diseaseTypes[i].last + '" value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
-			        }
-				}
-			} 		
-		});
+		url : "diseaseType/getDiseaseType/one",
+		type : "GET" ,
+		cache : false , 
+		dataType : "json" ,
+		success : function(data) {
+			if(data.result == "success") {
+				for(var i in data.diseaseTypes) {
+           			$('#initSelect').append('<option last="'+ data.diseaseTypes[i].last + '" value="' + data.diseaseTypes[i].uuid + '">' + data.diseaseTypes[i].name + '</option>');
+		        }
+			}
+		} 		
+	});
 		
 	$('.diseaseTypeSelect').on('change', onSelect);
 	
