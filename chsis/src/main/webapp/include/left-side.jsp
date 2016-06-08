@@ -78,10 +78,10 @@
 				<li id="navi_admin_role"><a href="role/manager"><i class="fa fa-users"></i> <span>角色管理</span></a></li>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_b5af00b6c8604b1cb0036df26bdc52ff')">
-				<li id="navi_diseaseType"><a href="diseaseType/manage"><i class="fa fa-users"></i> <span>疾病类型管理</span></a></li>
+				<li id="navi_diseaseType"><a href="diseaseType/manage"><i class="fa fa-calendar"></i> <span>疾病类型管理</span></a></li>
 			</sec:authorize>	
 			<sec:authorize access="hasRole('ROLE_b15ed26f7a31445693d3d26c67be3583')">
-				<li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>疾病类型统计</span></a>
+				<li class="menu-list"><a href=""><i class="fa fa-fire"></i> <span>疾病类型统计</span></a>
 	                <ul class="sub-menu-list">
 	                    <li id="navi_singleDisease"><a href="statistics/toSingleDisease"> 单一疾病发病率走势统计</a></li>
 	                    <li id="navi_multipleDisease"><a href="statistics/toMultipleDisease"> 多疾病发病率走势统计</a></li>
