@@ -35,25 +35,37 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="form-inline">
-					<div class="form-group">
-						<div id="selectDiv">
-							<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							单一疾病发病率走势分析
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="form-inline">
+							<div class="form-group">
+								<div id="selectDiv">
+									<select id="initSelect" class="form-control diseaseTypeSelect" name="disease"></select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<select id="yearSelect" class="form-control" name="year">
+									<option value="2014">2014</option>
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<button uuid="${medicalRecord.uuid }" class="btn btn-primary" id="submit">确定</button>
+							</div>
 						</div>
+						<br/>
+						<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 					</div>
-					<div class="form-group">	
-						<select id="yearSelect" class="form-control" name="year">
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<button uuid="${medicalRecord.uuid }" class="btn btn-primary" id="submit">确定</button>
-					</div>
-				</div>
-				<br/>
-				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
+				</div>	
 			</div>
 			<!--body wrapper end-->
 
@@ -82,6 +94,8 @@
 		$(function(){
 			/* 导航颜色 */
 			$("#navi_singleDisease").addClass('active');
+			$("#navi_singleDisease").parent('ul').show();
+			$("#navi_singleDisease").parent().parent('li').addClass('nav-active');
 		});	
 	</script>
 </body>

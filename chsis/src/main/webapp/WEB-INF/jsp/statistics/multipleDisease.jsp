@@ -35,25 +35,37 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="form-inline">
-					<div class="form-group">
-						<button class="btn btn-success diseaseNameBtn">请选择疾病</button>
-						<button class="btn btn-warning diseaseNameBtn">请选择疾病</button>
-						<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							多疾病发病率走势分析
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
 					</div>
-					<div class="form-group">
-						<select id="yearSelect" class="form-control" name="year">
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
-						</select>
+					<div class="panel-body">
+						<div class="form-inline">
+							<div class="form-group">
+								<button class="btn btn-success diseaseNameBtn">请选择疾病</button>
+								<button class="btn btn-warning diseaseNameBtn">请选择疾病</button>
+								<button class="btn btn-info diseaseNameBtn">请选择疾病</button>
+							</div>
+							<div class="form-group">
+								<select id="yearSelect" class="form-control" name="year">
+									<option value="2014">2014</option>
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" id="submit">确定</button>
+							</div>
+						</div>
+						<br/>
+						<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 					</div>
-					<div class="form-group">
-						<button class="btn btn-primary" id="submit">确定</button>
-					</div>
-				</div>
-				<br/>
-				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
+				</div>		
 			</div>
 			<!--body wrapper end-->
 
@@ -73,7 +85,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h5 class="modal-title text-left">
-						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 就诊记录
+						<img src="assets/image/modal.png" alt="图标" style="height: 20px; width: 20px;margin-top:-5px;" /> 疾病统计
 					</h5>
 				</div>
 				<div class="modal-body row">
@@ -114,6 +126,8 @@
 		$(function(){
 			/* 导航颜色 */
 			$("#navi_multipleDisease").addClass('active');
+			$("#navi_multipleDisease").parent('ul').show();
+			$("#navi_multipleDisease").parent().parent('li').addClass('nav-active');
 		});	
 	</script>
 </body>

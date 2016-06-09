@@ -13,6 +13,7 @@ public class UploadObject {
 	public static final String DOMAIN;
 	public static final String DOCTOR_ACCOUNT_PHOTO_BASE_PATH;
 	public static final String REPORT_BASE_PATH;
+	public static final String NEWS_IMAGE;
 	
 	static {
 		Properties props = new Properties();
@@ -25,6 +26,7 @@ public class UploadObject {
 		DOMAIN = props.getProperty("DOMAIN");
 		DOCTOR_ACCOUNT_PHOTO_BASE_PATH = props.getProperty("DOCTOR_ACCOUNT_PHOTO_BASE_PATH");
 		REPORT_BASE_PATH = props.getProperty("REPORT_BASE_PATH");
+		NEWS_IMAGE = props.getProperty("NEWS_IMAGE");
 	}
 	
 	private String fileName;

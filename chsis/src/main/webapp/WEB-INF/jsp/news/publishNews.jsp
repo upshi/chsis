@@ -36,6 +36,11 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
+				<ul class="breadcrumb">
+					<li>当前位置：</li>
+					<li><a href="news/manage">新闻管理</a></li>
+					<li class="active">发布新闻</li>
+				</ul>
 				<!-- panel start -->
 				<div class="panel panel-default">
 					<div class="panel-heading">

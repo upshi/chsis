@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.util.Base64;
 import com.github.pagehelper.PageInfo;
 
@@ -24,6 +29,7 @@ import top.chsis.model.Family;
 import top.chsis.model.Manager;
 import top.chsis.model.News;
 import top.chsis.model.Resident;
+import top.chsis.model.UploadObject;
 import top.chsis.model.User;
 import top.chsis.service.IDoctorService;
 import top.chsis.service.IFamilyService;
@@ -32,6 +38,7 @@ import top.chsis.service.INewsService;
 import top.chsis.service.IResidentService;
 import top.chsis.util.RandomCodeUtil;
 import top.chsis.util.StringUtil;
+import top.chsis.util.UploadUtil;
 
 @Controller
 public class ChsisController {
@@ -332,6 +339,34 @@ public class ChsisController {
 		} else {
 			map.put("result", "failure");
 		}
+		return map;
+	}
+	
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> uploadImage(HttpServletResponse response, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		UploadObject uo = null;
+		if(file.getSize() > 0) {
+			String remoteBasePath = UploadObject.NEWS_IMAGE;
+			uo = new UploadObject(StringUtil.getUUID(), remoteBasePath, file);
+			String msg = null;
+			//先删除,再上传
+			try {
+				msg = UploadUtil.uploadImage(uo.getRemotePath(), uo.getInputStream());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			JSONObject json = JSONObject.parseObject(msg);
+			Integer code = (Integer) json.get("code");
+			if(code != 0) {
+				map.put("url", "");
+			} else {
+				map.put("url", UploadObject.DOMAIN + uo.getRemotePath());
+			}
+		}
+		
 		return map;
 	}
 }

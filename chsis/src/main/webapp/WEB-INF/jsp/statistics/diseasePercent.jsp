@@ -35,23 +35,35 @@
 
 			<!--body wrapper start-->
 			<div class="wrapper">
-				<div class="form-inline">	
-					<div class="form-group">
-						<label>请选择您要统计的时间段</label>
-						<select id="period" class="form-control" name="period">
-							<option value="thisMonth">本月</option>
-							<option value="lastMonth">上月</option>
-							<option value="thisQuarter">本季度</option>
-							<option value="halfYear">半年内</option>
-							<option value="thisYear">今年</option>
-							<option value="lastYear">去年</option>
-						</select>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							发病率比率统计
+							<span class="tools pull-right"> 
+								<a class="fa fa-chevron-down" href="javascript:;"></a>
+							</span>
+						</h3>
 					</div>
-					<div class="form-group">
-						<button class="btn btn-primary" id="submit">确定</button>
+					<div class="panel-body">
+						<div class="form-inline">	
+							<div class="form-group">
+								<label>请选择您要统计疾病的时间段:</label>
+								<select id="period" class="form-control" name="period">
+									<option value="thisMonth">本月</option>
+									<option value="lastMonth">上月</option>
+									<option value="thisQuarter">本季度</option>
+									<option value="halfYear">半年内</option>
+									<option value="thisYear">今年</option>
+									<option value="lastYear">去年</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" id="submit">确定</button>
+							</div>
+						</div>
+						<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
 					</div>
-				</div>
-				<div id="main" style="height: 400px"></div><div id="main" style="height: 400px"></div>
+				</div>		
 			</div>
 			<!--body wrapper end-->
 
@@ -80,6 +92,8 @@
 		$(function(){
 			/* 导航颜色 */
 			$("#navi_diseasePercent").addClass('active');
+			$("#navi_diseasePercent").parent('ul').show();
+			$("#navi_diseasePercent").parent().parent('li').addClass('nav-active');
 		});	
 	</script>
 </body>
