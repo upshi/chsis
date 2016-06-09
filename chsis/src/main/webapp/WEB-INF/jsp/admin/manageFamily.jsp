@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="assets/image/favicon.ico" type="image/png">
-<title>社区健康信息服务系统</title>
+<title>家庭管理</title>
 
 <!-- Bootstrap -->
 <link href="assets/adminex/css/style.css" rel="stylesheet">
