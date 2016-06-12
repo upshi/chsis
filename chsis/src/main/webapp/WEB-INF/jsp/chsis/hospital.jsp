@@ -55,7 +55,7 @@
 				<div class="service-right wow bounceIn" data-wow-delay="0.4s">
 				    <img src="assets/image/chsis/s4.jpg" alt=""/>
 				    <div class="ser-bwn">
-				   		<a class="hvr-grow-shadow">老年科</a>
+				   		<a class="hvr-grow-shadow">老年病科</a>
 				    </div>
 			   </div>
 			   <div class="service-right ser-midd wow bounceIn" data-wow-delay="0.4s">
