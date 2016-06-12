@@ -32,19 +32,19 @@
 			<li><a href="index"> <i class="fa fa-home"></i>社区首页</a></li>
 			<c:if test="${type != null}">
 				<li class="active">
-					<c:if test="${type == 0 }">医生寄语</c:if>
-	               	<c:if test="${type == 1 }">每日健康</c:if>
-	               	<c:if test="${type == 2 }">医院通知</c:if>
-	               	<c:if test="${type == 3 }">社区公告</c:if>
+					<c:if test="${type == '0' }">医生寄语</c:if>
+	               	<c:if test="${type == '1' }">每日健康</c:if>
+	               	<c:if test="${type == '2' }">医院通知</c:if>
+	               	<c:if test="${type == '3' }">社区公告</c:if>
 				</li>
 			</c:if>
 			<div class="pull-right">
 				<select id="select_type" class="form-control" style="height:26px;padding:0px;margin-top:-3px;">
 					<option value="newsList">社区新闻</option>
-					<option value="newsList?type=0" <c:if test='${type == 0 }'>selected</c:if> >医生寄语</option>
-					<option value="newsList?type=1" <c:if test='${type == 1 }'>selected</c:if> >每日健康</option>
-					<option value="newsList?type=2" <c:if test='${type == 2 }'>selected</c:if> >医院通知</option>
-					<option value="newsList?type=3" <c:if test='${type == 3 }'>selected</c:if> >社区公告</option>
+					<option value="newsList?type=0" <c:if test='${type == "0" }'>selected</c:if> >医生寄语</option>
+					<option value="newsList?type=1" <c:if test='${type == "1" }'>selected</c:if> >每日健康</option>
+					<option value="newsList?type=2" <c:if test='${type == "2" }'>selected</c:if> >医院通知</option>
+					<option value="newsList?type=3" <c:if test='${type == "3" }'>selected</c:if> >社区公告</option>
 				</select>
 			</div>
 		</ul>

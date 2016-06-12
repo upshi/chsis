@@ -118,7 +118,7 @@ public class ChsisController {
 	public String newsList(String type, Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size){
 		News news = new News();
 		news.setState(News.STATE_PASS);
-		if(!StringUtil.isNoE(type)) {
+		if(!StringUtil.isNoE(type) && !"null".equals(type)) {
 			news.setType(Integer.parseInt(type));
 		}
 		PageInfo<News> pageInfo = newsService.selectByConditionWithType(news, page, size);
