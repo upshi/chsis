@@ -80,12 +80,12 @@
 	<div class="team">
 		<div class="container">
 			<div class="team-main wow bounceIn" > 
-				<h3>社区总体概况</h3>
+				<h3>社区健康概况</h3>
 				 <div class="col-md-4 team-grids wow bounceIn" data-wow-delay="0.4s">
 				 	<img src="assets/image/chsis/p1.jpg" alt=""/>
 				 </div>
 				 <div class="col-md-4 team-grids wow bounceIn" data-wow-delay="0.4s">
-				 	<img src="assets/image/chsis/p4.jpg" alt=""/>
+				 	<img src="assets/image/chsis/p2.jpg" alt=""/>
 				 </div>
 				 <div class="col-md-4 team-grids wow bounceIn" data-wow-delay="0.4s">
 				 	<img src="assets/image/chsis/p3.jpg" alt=""/>

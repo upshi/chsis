@@ -28,22 +28,16 @@
 	<div class="container">
 		<div class="contact-main">
 			<div class="contact-top">
-				<h3>Contact Us</h3>
-				<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+				<h3>联系我们</h3>
+				<p>阳光社区自建立以来，坚持政府指导，充分发挥社区力量，合理配置社区资源，不断提高居民的素质和整个社区大的文明程度，努力建设管理有序、服务完善、环境优美、治安良好、生活便利、人际关系和谐的新型现代化社区。将整规活动作为一种长效机制纳入社区党建工作范畴之中。</p>
 			</div>
-			<div class="col-md-6 contact-left footer-grid wow bounceIn" data-wow-delay="0.4s">
-				<h3>Information</h3>
-				<h4>Cicero are also reproduced in their exact original</h4>
-				<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English </p>
+			<div class="col-md-12 contact-left footer-grid wow bounceIn" data-wow-delay="0.4s">
+				<h4>社区负责人:王文静 </h4>
+				<p>联系电话：0931-2970108&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				电子邮箱：admin@chsis.top&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				联系地址：甘肃省兰州市七里河区-阳光社区</p>
 			</div>
-			<div class="col-md-6 contact-right footer-grid wow bounceIn" data-wow-delay="0.4s">
-				<h3>Feed Back</h3>
-				<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"/>
-				<input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}"/>
-				<textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}"/>Message</textarea>
-				<input type="submit" value="send">
-			</div>
-		  <div class="clearfix"> </div>
+		  <div class="clearfix"></div>
 		</div>
 	</div>
 </div>

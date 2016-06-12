@@ -31,115 +31,43 @@
 				<p>本社区共拥有医院1所，医院共8个科室，30名医生，100名护士，其中副主任医师10名，主任医师3名，医疗设备充足，可满足居民日常的健康需求。同时社区医院可以提供常规体检，极大方便了居民的生活。</p>
 			</div>
 			<div class="wow bounceInLeft department" data-wow-delay="0.6s">
-				<span class="h3">科室详情<span class="wrapText">(Department Detail)</span></span>
+				<span class="h3">医院科室<span class="wrapText">(Department)</span></span>
 			</div>
 			<div class="service-left wow bounceIn" data-wow-delay="0.4s">
 			   <div class="service-right">
 				    <img src="assets/image/chsis/s1.jpg" alt=""/>
-				    <div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="chsis/doctor.jsp">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
 				    <div class="ser-bwn">
-				    	<a href="#" class="hvr-grow-shadow">Read More</a>
+				    	<a class="hvr-grow-shadow">外科</a>
 				    </div>
 			   </div>
 			    <div class="service-right ser-midd wow bounceIn" data-wow-delay="0.4s">
 				    <img src="assets/image/chsis/s2.jpg" alt=""/>
-				    <div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
 				    <div class="ser-bwn">
-				    	<a href="#" class="hvr-grow-shadow">Read More</a>
+				    	<a class="hvr-grow-shadow">内科</a>
 				    </div>
 			   </div>
 			    <div class="service-right wow bounceIn" data-wow-delay="0.4s">
 				    <img src="assets/image/chsis/s3.jpg" alt=""/>
-				    <div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
 				    <div class="ser-bwn">
-				    <a href="#" class="hvr-grow-shadow">Read More</a>
+				    	<a class="hvr-grow-shadow">五官科</a>
 				    </div>
 			   </div>
 				<div class="service-right wow bounceIn" data-wow-delay="0.4s">
 				    <img src="assets/image/chsis/s4.jpg" alt=""/>
-				    <div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
 				    <div class="ser-bwn">
-				   <a href="#" class="hvr-grow-shadow">Read More</a>
+				   		<a class="hvr-grow-shadow">老年科</a>
 				    </div>
 			   </div>
 			   <div class="service-right ser-midd wow bounceIn" data-wow-delay="0.4s">
-				    <img src="assets/image/chsis/s6.jpg" alt=""/>
-				    <div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
+				    <img src="assets/image/chsis/s5.jpg" alt=""/>
 				    <div class="ser-bwn">
-				    	<a href="#" class="hvr-grow-shadow">Read More</a>
+				    	<a class="hvr-grow-shadow">儿科</a>
 				    </div>
 			   </div>
 			   <div class="service-right wow bounceIn" data-wow-delay="0.4s">
-				    <img src="assets/image/chsis/s7.jpg" alt=""/>
-				   	<div class="wrapper">
-				    	<h3>医生信息</h3>
-						<div class="text">
-							<ul>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-								<li><a href="#">李医生</a></li>
-							</ul>
-						</div>
-					</div>
+				    <img src="assets/image/chsis/s6.jpg" alt=""/>
 				    <div class="ser-bwn">
-				    <a href="#" class="hvr-grow-shadow">Read More</a>
+				   	 	<a class="hvr-grow-shadow">精神心理科</a>
 				    </div>
 			   </div>
 			    <div class="clearfix"> </div>

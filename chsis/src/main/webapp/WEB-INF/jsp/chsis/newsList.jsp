@@ -38,13 +38,15 @@
 	               	<c:if test="${type == 3 }">社区公告</c:if>
 				</li>
 			</c:if>
-			<select id="select_type" class="pull-right">
-				<option value="newsList">社区新闻</option>
-				<option value="newsList?type=0" <c:if test='${type == 0 }'>selected</c:if> >医生寄语</option>
-				<option value="newsList?type=1" <c:if test='${type == 1 }'>selected</c:if> >每日健康</option>
-				<option value="newsList?type=2" <c:if test='${type == 2 }'>selected</c:if> >医院通知</option>
-				<option value="newsList?type=3" <c:if test='${type == 3 }'>selected</c:if> >社区公告</option>
-			</select>
+			<div class="pull-right">
+				<select id="select_type" class="form-control" style="height:26px;padding:0px;margin-top:-3px;">
+					<option value="newsList">社区新闻</option>
+					<option value="newsList?type=0" <c:if test='${type == 0 }'>selected</c:if> >医生寄语</option>
+					<option value="newsList?type=1" <c:if test='${type == 1 }'>selected</c:if> >每日健康</option>
+					<option value="newsList?type=2" <c:if test='${type == 2 }'>selected</c:if> >医院通知</option>
+					<option value="newsList?type=3" <c:if test='${type == 3 }'>selected</c:if> >社区公告</option>
+				</select>
+			</div>
 		</ul>
 		<!-- 展示当前所在位置的层结束 -->
 		<!--存放新闻列表的层开始-->
